@@ -106,7 +106,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 6.082,
+        "ageHours": 2.922,
         "breakEvenProbability": 0.53271,
         "decimalOdds": 1.877193,
         "eligibleForAlphaEstimate": true,
@@ -127,10 +127,10 @@
         "startTime": "2026-09-08T01:10Z",
         "tier": "A",
         "tierLabel": "certified_executable",
-        "timestamp": "2026-09-07T19:05:05.708703Z",
+        "timestamp": "2026-09-07T22:14:39.241894Z",
         "timestampField": "pick.market_updated_at",
         "twoSided": true,
-        "updatedAt": "2026-09-07T19:05:05.708703Z"
+        "updatedAt": "2026-09-07T22:14:39.241894Z"
       },
       "rawModelProbabilityIgnored": 0.5706,
       "result": "pending",
@@ -1173,7 +1173,7 @@
   "date": "2026-09-07",
   "engineVersion": "profit_desk_v2_live",
   "firstLiveDate": "2026-07-11",
-  "generatedAt": "2026-09-07T19:39:24.790650Z",
+  "generatedAt": "2026-09-07T22:46:31.416338Z",
   "notices": [
     "Qualified picks carry real flat stakes: EDGE 1.0u, VALUE 0.5u; everything else stays 0u.",
     "The market price is the baseline; historical residual alpha is shrunk and uncertainty-adjusted.",
