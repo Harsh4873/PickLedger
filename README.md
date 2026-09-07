@@ -14,6 +14,26 @@ PickLedger is a public, automated sports-pick viewer deployed on GitHub Pages. T
 | Certified team-model evidence | `data/calibration/team_prop_pregame_ledger.json` |
 | Live refresh | Client-side ESPN scoreboard grading, stored locally until Actions commits an authoritative grade |
 
+## Published Picks and Research
+
+NFL and CFB are primary sports on the Home board. Tracked picks remain separate
+from published research: external provider passes and the CFB model's evaluation
+forecasts appear in Research with no suggested stake. They do not enter Best
+Bets, parlays, or tracked profit. Missing market prices are never invented to
+produce a forecast.
+
+Source status shows each feed's published date, coverage, and latest refresh
+failure. A successful workflow can still contain a partial source outage.
+Scraped feeds can also be hidden by a saved viewer filter; Home shows a notice
+and a Show feeds button when that filter is enabled.
+
+SportyTrader and SportsGambler refresh through External Feed Refresh. Scores24
+depends on a working local publisher because hosted runners can be blocked by
+the provider. A stale feed remains on its original date until a successful
+refresh; it must never be relabeled as today's picks. Failed model refreshes
+retain already published same-day rows while health checks continue reporting
+the failure.
+
 ## Local Checks
 
 ```bash
@@ -34,7 +54,7 @@ The frontend bundle is written to `dist/`. GitHub Pages copies the committed `da
    dedicated queues plus resync/retry publishing so they cannot evict a queued
    daily refresh.
 4. The auto-grader checks ESPN every 15 minutes and commits completed results.
-5. In-house MLB, FIFA, and NBA Summer team forecasts receive immutable pregame snapshots; assumed or proxy prices are excluded from financial evaluation.
+5. In-house MLB and CFB team forecasts receive immutable pregame snapshots; assumed or proxy prices are excluded from financial evaluation.
 6. Every push to `main` checks whether today's data is ready; incomplete refreshes defer deployment without failing.
 
 ## Repository Notes

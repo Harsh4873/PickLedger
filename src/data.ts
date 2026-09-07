@@ -27,6 +27,7 @@ export interface Pick {
   // in-house model. Display-only: it drives the header's feed toggle and
   // nothing else.
   scraped?: boolean;
+  research?: boolean;
   edge?: number | null;
   market_edge?: number | null;
   line?: number | null;
@@ -68,7 +69,22 @@ interface ModelCachePayload {
   generatedAt?: string;
   updatedAt?: string;
   models?: Record<string, ModelBucket>;
+  external_feeds?: Record<string, ModelBucket>;
   [key: string]: unknown;
+}
+
+export interface SourceStatus {
+  key: string;
+  label: string;
+  filterLabels: string[];
+  sport: string;
+  scraped: boolean;
+  date: string;
+  updatedAt: string | null;
+  pickCount: number;
+  researchCount: number;
+  state: 'ready' | 'empty' | 'stale' | 'error' | 'missing';
+  detail: string;
 }
 
 interface CacheManifest {
@@ -534,6 +550,7 @@ function playerPropSourceLabel(modelKey: string, raw: unknown): string {
 
 let activePickMode: PickMode = 'team';
 let teamPicks: Pick[] = [];
+let researchPicks: Pick[] = [];
 let playerPicks: Pick[] = [];
 let resultOverrides: Record<string, PickResult> = {};
 let gameTimes: Record<string, string> = {};
@@ -720,39 +737,98 @@ function isMlEraPlayerProp(pick: Pick): boolean {
   return Number.isFinite(timestamp) && timestamp >= PLAYER_PROPS_ML_FIRST_SNAPSHOT_AT;
 }
 
-function picksFromCache(payload: ModelCachePayload): Pick[] {
-  const date = String(payload.date || '').trim();
-  const models = payload.models && typeof payload.models === 'object' ? payload.models : {};
-  const picks: Pick[] = [];
+function recordValue(value: unknown): Record<string, unknown> {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? value as Record<string, unknown> : {};
+}
 
-  for (const [modelKey, bucket] of Object.entries(models)) {
-    if (isRetiredBucket(modelKey)) continue;
-    if (!bucket || typeof bucket !== 'object' || bucket.ok === false) continue;
-    if (bucket.shadow_mode === true) continue;
-    const scraped = isScrapedBucket(modelKey);
-    const gameByMatchup = new Map<string, Record<string, unknown>>();
-    if (Array.isArray(bucket.games)) {
-      for (const item of bucket.games) {
-        if (!item || typeof item !== 'object') continue;
-        const game = item as Record<string, unknown>;
-        const matchup = String(game.matchup || game.game || '').trim();
-        if (matchup) gameByMatchup.set(matchup, game);
-      }
+function bucketDate(bucket: ModelBucket, fallbackDate: string): string {
+  const meta = recordValue(bucket.meta);
+  return String(bucket.date || bucket.cache_date || meta.date || fallbackDate || '').trim();
+}
+
+function bucketUpdatedAt(bucket: ModelBucket, payload?: ModelCachePayload): string | null {
+  const meta = recordValue(bucket.meta);
+  const value = String(bucket.updatedAt || bucket.generatedAt || meta.updatedAt
+    || payload?.updatedAt || payload?.generatedAt || '').trim();
+  return value && Number.isFinite(Date.parse(value)) ? value : null;
+}
+
+function cacheBuckets(payload: ModelCachePayload): Record<string, ModelBucket> {
+  const models = recordValue(payload.models) as Record<string, ModelBucket>;
+  const feeds = recordValue(payload.external_feeds) as Record<string, ModelBucket>;
+  const buckets: Record<string, ModelBucket> = { ...feeds };
+  for (const [key, model] of Object.entries(models)) {
+    const feed = feeds[key];
+    if (!model || typeof model !== 'object') continue;
+    if (!feed || typeof feed !== 'object') {
+      buckets[key] = model;
+      continue;
     }
-    for (const raw of Array.isArray(bucket.picks) ? bucket.picks : []) {
-      if (!raw || typeof raw !== 'object') continue;
-      const rawRecord = raw as Record<string, unknown>;
-      if (rawRecord.shadow_mode === true) continue;
-      const source = teamSourceLabel(modelKey, rawRecord);
-      // Committed rows carry their own legacy source label ("MLB Model"),
-      // which normalizePick would prefer — override it so the per-market
-      // split actually lands.
-      const input = MARKET_SOURCE_LABELS[modelKey] ? { ...rawRecord, source } : rawRecord;
-      const pick = normalizePick(input, date, source, gameByMatchup);
-      if (pick && isTrackedPick(pick)) {
-        if (scraped) pick.scraped = true;
-        picks.push(pick);
-      }
+    const modelDate = bucketDate(model, String(payload.date || ''));
+    const feedDate = bucketDate(feed, String(payload.date || ''));
+    if (modelDate !== feedDate) {
+      buckets[key] = modelDate > feedDate ? model : feed;
+      continue;
+    }
+    const modelTime = Date.parse(bucketUpdatedAt(model) || '') || 0;
+    const feedTime = Date.parse(bucketUpdatedAt(feed) || '') || 0;
+    const newer = feedTime > modelTime ? feed : model;
+    const older = newer === model ? feed : model;
+    buckets[key] = { ...older, ...newer, meta: { ...recordValue(older.meta), ...recordValue(newer.meta) } };
+  }
+  return buckets;
+}
+
+function normalizedBucketPicks(modelKey: string, bucket: ModelBucket, fallbackDate: string): Pick[] {
+  if (isRetiredBucket(modelKey) || !bucket || typeof bucket !== 'object') return [];
+  // The writer marks retained, previously successful same-day rows explicitly.
+  // An arbitrary failed bucket still cannot publish picks.
+  if (bucket.ok === false && bucket.preserved_after_refresh_error !== true) return [];
+  const date = bucketDate(bucket, fallbackDate);
+  const gameByMatchup = new Map<string, Record<string, unknown>>();
+  for (const item of Array.isArray(bucket.games) ? bucket.games : []) {
+    const game = recordValue(item);
+    const matchup = String(game.matchup || game.game || '').trim();
+    if (matchup) gameByMatchup.set(matchup, game);
+  }
+  const picks: Pick[] = [];
+  for (const raw of Array.isArray(bucket.picks) ? bucket.picks : []) {
+    if (!raw || typeof raw !== 'object') continue;
+    const rawRecord = raw as Record<string, unknown>;
+    const source = teamSourceLabel(modelKey, rawRecord);
+    const input = MARKET_SOURCE_LABELS[modelKey] ? { ...rawRecord, source } : rawRecord;
+    const pick = normalizePick(input, date, source, gameByMatchup);
+    // A carried-forward bucket retains its own date, and a mixed-date row
+    // cannot silently enter the selected slate.
+    if (!pick || pick.date !== date || ARCHIVED_SPORTS.has(pick.sport)) continue;
+    if (isScrapedBucket(modelKey)) pick.scraped = true;
+    picks.push(pick);
+  }
+  return picks;
+}
+
+function picksFromCache(payload: ModelCachePayload): Pick[] {
+  const picks: Pick[] = [];
+  for (const [modelKey, bucket] of Object.entries(recordValue(payload.models))) {
+    const model = bucket as ModelBucket;
+    if (!model || model.shadow_mode === true) continue;
+    picks.push(...normalizedBucketPicks(modelKey, model, String(payload.date || ''))
+      .filter(pick => pick.shadow_mode !== true && isTrackedPick(pick)));
+  }
+  return picks;
+}
+
+function researchFromCache(payload: ModelCachePayload): Pick[] {
+  const picks: Pick[] = [];
+  for (const [key, bucket] of Object.entries(cacheBuckets(payload))) {
+    const scraped = isScrapedBucket(key);
+    if (!scraped && key !== 'cfb') continue;
+    for (const pick of normalizedBucketPicks(key, bucket, String(payload.date || ''))) {
+      if (isPlayerScopedPick(pick)) continue;
+      const shadow = bucket.shadow_mode === true || pick.shadow_mode === true;
+      if (!(scraped && String(pick.decision || '').trim().toUpperCase() === 'PASS') && !shadow) continue;
+      picks.push({ ...pick, research: true, decision: 'PASS', units: 0, pl: 0 });
     }
   }
   return picks;
@@ -821,13 +897,11 @@ async function fetchJson<T>(path: string): Promise<T | null> {
   }
 }
 
-function mergePayloadsByDate<T>(existing: T[], incoming: T[], dateOf: (payload: T) => string): T[] {
+function mergePayloadsByDate<T>(
+  existing: T[], incoming: T[], dateOf: (payload: T) => string, incomingWins = true,
+): T[] {
   const byDate = new Map<string, T>();
-  for (const payload of incoming) {
-    const date = dateOf(payload);
-    if (date) byDate.set(date, payload);
-  }
-  for (const payload of existing) {
+  for (const payload of incomingWins ? [...existing, ...incoming] : [...incoming, ...existing]) {
     const date = dateOf(payload);
     if (date) byDate.set(date, payload);
   }
@@ -897,12 +971,15 @@ export async function loadLatestAndNewestDated<T>(
 function rebuildPicks(): void {
   const teamById = new Map<string, Pick>();
   const playerById = new Map<string, Pick>();
+  const researchById = new Map<string, Pick>();
   teamCachePayloads.flatMap(picksFromCache).forEach(pick => {
     if (isPlayerScopedPick(pick)) playerById.set(pick.id, pick);
     else teamById.set(pick.id, pick);
   });
   playerCachePayloads.flatMap(picksFromPlayerProps).forEach(pick => playerById.set(pick.id, pick));
+  teamCachePayloads.flatMap(researchFromCache).forEach(pick => researchById.set(pick.id, pick));
   teamPicks = sortPicks([...teamById.values()].filter(pick => !ARCHIVED_SPORTS.has(pick.sport)));
+  researchPicks = sortPicks([...researchById.values()].filter(pick => !teamById.has(pick.id)));
   // External player-prop feeds (scope=player rows in the team cache) render
   // in Player mode alongside the in-house ML-era props; the
   // scope routing above already keeps them out of Team mode and rankings.
@@ -982,18 +1059,21 @@ async function loadHistoryCaches(): Promise<void> {
     teamCachePayloads,
     teamIncoming.filter((payload): payload is ModelCachePayload => Boolean(payload)),
     payload => String(payload.date || ''),
+    false,
   );
   latestTeamCache = teamCachePayloads[teamCachePayloads.length - 1] || latestTeamCache;
   playerCachePayloads = mergePayloadsByDate(
     playerCachePayloads,
     playerIncoming.filter((payload): payload is PlayerPropsPayload => Boolean(payload)),
     payload => String(payload.date || payload.slate_date || ''),
+    false,
   );
   latestPlayerCache = playerCachePayloads[playerCachePayloads.length - 1] || latestPlayerCache;
   parlayPayloads = mergePayloadsByDate(
     parlayPayloads,
     parlayIncoming.filter((payload): payload is ParlayCardsPayload => Boolean(payload)),
     payload => String(payload.date || ''),
+    false,
   );
   latestParlayPayload = parlayPayloads[parlayPayloads.length - 1] || latestParlayPayload;
   profitDeskPayloads = mergePayloadsByDate(
@@ -1002,6 +1082,7 @@ async function loadHistoryCaches(): Promise<void> {
       .filter((payload): payload is ProfitDeskPayload => Boolean(payload?.date))
       .map(withoutRetiredProfitDeskSources),
     payload => String(payload.date || ''),
+    false,
   );
   latestProfitDeskPayload = profitDeskPayloads[profitDeskPayloads.length - 1] || latestProfitDeskPayload;
   rebuildPicks();
@@ -1145,6 +1226,132 @@ function isTennisPick(pick: Pick): boolean {
 
 export function getTeamPicks(): Pick[] {
   return teamPicks;
+}
+
+export function getResearchPicks(date?: string): Pick[] {
+  return researchPicks.filter(pick => (!date || pick.date === date)
+    && (!hideScrapedPicks || pick.scraped !== true)
+    && (!hideTennisPicks || !isTennisPick(pick)));
+}
+
+function bucketSport(key: string, bucket: ModelBucket = {}): string {
+  if (/(?:^|_)nba(?:_|$)/.test(key)) return 'NBA';
+  if (key.includes('fifa')) return 'FIFA WC';
+  for (const sport of ['cfb', 'nfl', 'mlb', 'wnba', 'mls', 'tennis', 'ipl']) {
+    if (key === sport || key.startsWith(`${sport}_`) || key.endsWith(`_${sport}`)) return sport.toUpperCase();
+  }
+  const row = Array.isArray(bucket.picks) ? recordValue(bucket.picks[0]) : {};
+  return String(bucket.sport || row.sport || 'OTHER').toUpperCase();
+}
+
+function sourceErrorText(payload: ModelCachePayload, key: string, bucket: ModelBucket): string {
+  const scopedErrors = [payload.errors, payload.external_feed_errors].flatMap(value => (
+    Array.isArray(value) ? value.filter(error => String(error).startsWith(`${key}:`)) : []
+  ));
+  const errors = Array.isArray(bucket.errors) ? bucket.errors : [];
+  const meta = recordValue(bucket.meta);
+  const sportErrors = recordValue(meta.sportErrors);
+  const sport = bucketSport(key).toLowerCase();
+  const belongsToSource = (error: unknown): boolean => {
+    const prefix = String(error || '').split(':', 1)[0].trim().toLowerCase();
+    if (['cfb', 'nfl', 'mlb', 'wnba', 'mls', 'tennis', 'nba', 'nba_summer', 'fifa_world_cup', 'ipl'].includes(prefix)) {
+      return prefix === sport;
+    }
+    if (isScrapedBucket(prefix)) return prefix === key;
+    return true;
+  };
+  return [bucket.error, bucket.lastError, ...errors, ...scopedErrors, sportErrors[bucketSport(key).toLowerCase()]]
+    .filter(error => Boolean(error) && belongsToSource(error)).map(String).join(' ');
+}
+
+/** Source health is based on published cache evidence, independent of view filters. */
+export function getSourceStatuses(date: string): SourceStatus[] {
+  const payload = teamCachePayloads.filter(item => String(item.date || '') <= date).at(-1);
+  const buckets = payload ? cacheBuckets(payload) : {};
+  // Football stays visible even before its first successful publication.
+  const keys = new Set(['nfl', 'cfb', ...Object.keys(buckets)]);
+  const statuses: SourceStatus[] = [];
+  for (const key of keys) {
+    const bucket = buckets[key];
+    const sport = bucketSport(key, bucket);
+    if (isRetiredBucket(key) || ARCHIVED_SPORTS.has(sport)) continue;
+    const scraped = isScrapedBucket(key);
+    const sourceDate = bucket ? bucketDate(bucket, String(payload?.date || '')) : '';
+    const status: SourceStatus = {
+      key, label: SOURCE_LABELS[key] || key, sport, scraped, date: sourceDate,
+      filterLabels: [...new Set([
+        SOURCE_LABELS[key] || key,
+        ...Object.values(MARKET_SOURCE_LABELS[key] || {}),
+        ...(bucket ? normalizedBucketPicks(key, bucket, String(payload?.date || '')).map(pick => pick.source) : []),
+      ])],
+      updatedAt: bucket ? bucketUpdatedAt(bucket, sourceDate === payload?.date ? payload : undefined) : null,
+      pickCount: 0, researchCount: 0, state: 'missing', detail: 'No refresh published for this date.',
+    };
+    if (!bucket || typeof bucket !== 'object' || !payload) {
+      statuses.push(status);
+      continue;
+    }
+    const meta = recordValue(bucket.meta);
+    const errors = sourceErrorText(payload, key, bucket);
+    const failed = bucket.ok === false || bucket.refreshStatus === 'error' || Boolean(errors);
+    const blocked = (numberOrNull(meta.blockedUrls) || 0) > 0
+      || /cloudflare|captcha|forbidden|blocked|\b403\b|\b429\b/i.test(errors);
+    if (sourceDate !== date) {
+      status.state = 'stale';
+      status.detail = failed || blocked
+        ? 'Latest refresh failed; no forecasts published for this date.'
+        : 'Awaiting a refresh for this date.';
+      statuses.push(status);
+      continue;
+    }
+    const scoped: ModelCachePayload = { date, models: { [key]: bucket } };
+    const tracked = payload.models?.[key]
+      ? picksFromCache({ date, models: { [key]: payload.models[key] } })
+        .filter(pick => pick.date === date && !isPlayerScopedPick(pick))
+      : [];
+    status.pickCount = new Set(tracked.map(pick => pick.id)).size;
+    status.researchCount = new Set(researchFromCache(scoped)
+      .filter(pick => pick.date === date && !tracked.some(row => row.id === pick.id))
+      .map(pick => pick.id)).size;
+    const missing = Array.isArray(meta.missingMatchups) ? meta.missingMatchups.length : 0;
+    const countBySport = recordValue(meta.officialMatchupCounts);
+    const coverage = recordValue(bucket.coverage);
+    const official = numberOrNull(meta.officialMatchups ?? countBySport[sport.toLowerCase()]
+      ?? coverage.official_games ?? bucket.slate_games);
+    const noGames = official === 0
+      || (Array.isArray(meta.zeroSlateSports) && meta.zeroSlateSports.includes(sport.toLowerCase()))
+      || /no (?:official )?(?:mls |nfl |cfb |wnba |mlb )?(?:games|matchups)(?: on| for| found)/i.test(String(bucket.note || ''))
+      || /active slate:\s*0 game/i.test(String(bucket.note || ''));
+    if (failed || blocked || missing > 0) {
+      status.state = 'error';
+      status.detail = blocked ? 'Upstream access blocked; coverage is incomplete.'
+        : missing > 0 ? `Incomplete coverage: ${missing} scheduled matchup${missing === 1 ? '' : 's'} missing.`
+          : 'Latest refresh failed; awaiting a successful update.';
+      if (status.pickCount + status.researchCount > 0) status.detail += ' Available same-day picks remain visible.';
+    } else if (status.pickCount + status.researchCount > 0) {
+      status.state = 'ready';
+      status.detail = status.pickCount > 0
+        ? `${status.pickCount} tracked pick${status.pickCount === 1 ? '' : 's'} published.`
+        : scraped ? 'Provider forecasts published for research; excluded from tracked bets.'
+          : 'Research forecasts published; the model is still in evaluation.';
+    } else if (bucket.ok === true) {
+      status.state = 'empty';
+      status.detail = noGames ? 'No games scheduled for this date.'
+        : key === 'cfb' && official != null && official > 0
+          && (coverage.forecast_games === 0 || coverage.pregame_games === 0)
+          ? (numberOrNull(coverage.incomplete_games) || 0) > 0
+            ? 'No eligible pregame FBS matchups; slate details are incomplete.'
+            : 'No eligible pregame FBS matchups; started games and unsupported opponents are excluded.'
+        : /no fully priced/i.test(String(bucket.note || '')) ? 'No fully priced games; no qualified picks.'
+          : scraped ? 'Refresh completed; no provider forecasts published for this date.'
+            : 'Refresh completed; no picks met the qualification rules.';
+    } else {
+      status.detail = 'No completed refresh recorded for this date.';
+    }
+    statuses.push(status);
+  }
+  return statuses.sort((left, right) => left.sport.localeCompare(right.sport)
+    || Number(left.scraped) - Number(right.scraped) || left.label.localeCompare(right.label));
 }
 
 export function getAllPicks(): Pick[] {

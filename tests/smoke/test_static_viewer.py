@@ -297,9 +297,13 @@ def test_static_viewer_keeps_public_tabs_and_client_grading():
     assert "embeddedResult === 'pending' ? localResult : embeddedResult" in data
     assert "function isTrackedPick(" in data
     assert "decision === 'BET' || decision === 'LEAN'" in data
-    assert "pick && isTrackedPick(pick)" in data
+    assert "pick.shadow_mode !== true && isTrackedPick(pick)" in data
     assert "function renderRankings()" in main
     assert "function renderSearch()" in main
+    assert "getSourceStatuses" in main
+    assert "getResearchPicks" in main
+    assert "college-football" in main
+    assert 'id="research-board"' in html
 
 
 def test_rich_static_viewer_restores_consensus_table_and_scores():
@@ -575,7 +579,7 @@ def test_home_filters_prioritize_primary_sports_and_use_more_menu():
     data = (ROOT / "src" / "data.ts").read_text(encoding="utf-8")
     css = (ROOT / "src" / "styles" / "pickledger.css").read_text(encoding="utf-8")
 
-    assert "const PRIMARY_FILTERS = ['ALL', 'MLB', 'WNBA', 'NFL', 'MLS', 'TENNIS']" in main
+    assert "const PRIMARY_FILTERS = ['ALL', 'NFL', 'CFB', 'MLB', 'WNBA', 'MLS', 'TENNIS']" in main
     assert "const ARCHIVED_SPORTS = new Set(['NBA', 'NBA SUMMER', 'FIFA WC'])" in data
     assert "!ARCHIVED_SPORTS.has(pick.sport)" in data
     assert "'MLB NEW': 'MLB Model'" in data
@@ -1750,7 +1754,7 @@ def test_external_feed_publish_promotes_latest_without_archived_sports(tmp_path)
     )
     cache_dir = tmp_path / "data" / "model_cache"
     cache_dir.mkdir(parents=True)
-    live_models = ["mlb_new", "mlb_inning", "mlb_first_five", "wnba", "nba", "nba_playoffs", "mls", "nfl", "tennis"]
+    live_models = ["mlb_new", "mlb_inning", "mlb_first_five", "wnba", "nba", "nba_playoffs", "mls", "nfl", "cfb", "tennis"]
     payload = {
         "date": "2026-07-27",
         "models": {key: {"ok": True, "picks": []} for key in live_models},

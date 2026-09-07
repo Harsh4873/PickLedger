@@ -84,9 +84,9 @@ EXTERNAL_FEED_SOURCE_LABELS = {
 # — that is what left 2026-07-25 showing a tennis-only slate.
 #
 # Scores24 CFB is scraped on the same weekday morning/afternoon run as
-# MLB+WNBA, but it is intentionally absent from this gate. Incomplete,
-# blocked, or hung CFB must not prevent publishing a complete MLB+WNBA slate
-# (same soft-fail as tennis).
+# MLB+WNBA, but it remains a soft-fail external feed. Incomplete, blocked, or
+# hung Scores24 CFB must not prevent publishing a complete MLB+WNBA slate;
+# the in-house CFB model is still part of the required team-model set below.
 #
 # Keep this identical to site_upcheck.REQUIRED_MODEL_KEYS and to the required
 # set in model-cache-freshness-guard.yml; a drift test pins all three together.
@@ -104,6 +104,7 @@ REQUIRED_TEAM_MODEL_KEYS = {
     "nba",
     "nba_playoffs",
     "nfl",
+    "cfb",
 }
 PICK_METADATA_FIELDS = {"result", "start_time", "game_start_time", "pregame_snapshot"}
 MARKET_ODDS_METADATA_FIELDS = {

@@ -44,7 +44,7 @@ jobs:
           import json
           from pathlib import Path
 
-          required = {"mlb_new", "mlb_inning", "mlb_first_five", "wnba", "nba", "nba_playoffs", "nfl"}
+          required = {"mlb_new", "mlb_inning", "mlb_first_five", "wnba", "nba", "nba_playoffs", "nfl", "cfb"}
           try:
               payload = json.loads(Path("data/model_cache/latest.json").read_text(encoding="utf-8"))
           except Exception:

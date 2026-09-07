@@ -253,13 +253,14 @@
   }
   .filter-more-wrap { position: relative; display: inline-block; }
   .filter-more-btn {
-    width: 42px;
+    min-width: 42px;
     height: 42px;
-    border-radius: 50%;
+    padding: 0 14px;
+    border-radius: 999px;
     background: rgba(255,255,255,0.04);
     border: 1px solid var(--border);
     color: var(--muted);
-    font-size: 22px;
+    font-size: 12px;
     font-family: 'DM Sans', sans-serif;
     cursor: pointer;
     display: flex;
@@ -5875,3 +5876,58 @@ body.mobile-app-mode .rank-filter-btn { padding: 6px 11px; font-size: 10px; }
     border-right-color: var(--border);
     border-bottom-color: var(--border);
   }
+
+/* Publication health and research forecasts share the board's sport filters. */
+.board-filter-count { margin-left: 7px; opacity: .78; font-size: 10px; }
+.source-health, .research-board { border: 1px solid var(--border); border-radius: 18px; background: var(--surface); }
+.source-health summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 20px; cursor: pointer; list-style: none; }
+.source-health summary::-webkit-details-marker { display: none; }
+.source-health summary > span:first-child { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.source-health summary strong { font-size: 14px; }
+.source-health-summary, .source-health-intro, .source-health-card p, .research-board-note, .research-empty { color: var(--muted); font-size: 12px; line-height: 1.65; }
+.source-health-indicator { color: var(--accent); font-size: 11px; white-space: nowrap; }
+.source-health-indicator.needs-attention { color: var(--gold); }
+.source-health-intro { padding: 0 20px 16px; }
+.source-health-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 0 16px 16px; }
+.source-health-card { border: 1px solid var(--border); border-radius: 12px; padding: 14px; min-width: 0; background: var(--card); }
+.source-health-card-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.source-health-card-top strong { font-size: 12px; overflow-wrap: anywhere; }
+.source-health-card-top > span { color: var(--accent); font-size: 10px; white-space: nowrap; }
+.source-health-card.state-error .source-health-card-top > span { color: var(--danger); }
+.source-health-card.state-stale .source-health-card-top > span, .source-health-card.state-missing .source-health-card-top > span { color: var(--gold); }
+.source-health-card.state-empty .source-health-card-top > span { color: var(--muted); }
+.source-health-card p { margin-top: 8px; }
+.source-health-meta { margin-top: 10px; font-size: 10px; line-height: 1.6; color: var(--muted); }
+.board-feed-notice { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 12px; padding: 14px 18px; border: 1px solid var(--gold); border-radius: 12px; font-size: 12px; }
+.board-feed-notice button, .board-empty-actions button, .board-empty-actions a { border: 1px solid var(--border); border-radius: 999px; padding: 10px 16px; color: var(--text); background: var(--card); cursor: pointer; font: inherit; font-size: 12px; text-decoration: none; }
+.board-empty-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 18px; }
+.research-board { padding: 24px; scroll-margin-top: 20px; }
+.research-board[hidden] { display: none; }
+.research-board-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.research-board h2 { margin-top: 6px; font-size: 23px; letter-spacing: -.6px; }
+.research-count { border: 1px solid var(--border); padding: 7px 11px; border-radius: 999px; font-size: 11px; color: var(--accent3); white-space: nowrap; }
+.research-board-note { max-width: 780px; margin: 12px 0 22px; }
+.research-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.research-game { min-width: 0; padding: 18px; background: var(--card); border: 1px solid var(--border); border-radius: 14px; }
+.research-game-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 11px; }
+.research-game h3 { font-size: 17px; line-height: 1.4; margin: 14px 0; overflow-wrap: anywhere; }
+.research-forecast { padding: 14px 0; border-top: 1px solid var(--border); }
+.research-forecast:last-child { padding-bottom: 0; }
+.research-forecast-source { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; font-size: 11px; color: var(--muted); }
+.research-forecast-source span { color: var(--accent3); font-size: 10px; white-space: nowrap; }
+.research-forecast-pick { margin-top: 7px; font-size: 14px; line-height: 1.55; overflow-wrap: anywhere; }
+.research-reason { font-size: 11px; line-height: 1.65; margin-top: 10px; color: var(--muted); }
+.research-reason summary { cursor: pointer; color: var(--accent3); }
+.research-reason p { margin-top: 8px; }
+.research-empty { grid-column: 1 / -1; padding: 20px 0; }
+.source-health summary:focus-visible, .research-reason summary:focus-visible, .board-empty-actions :focus-visible, .board-feed-notice button:focus-visible { outline: 2px solid var(--accent3); outline-offset: 4px; }
+@media (max-width: 640px) {
+  .source-health-grid, .research-grid { grid-template-columns: minmax(0, 1fr); }
+  .source-health summary { padding: 16px; }
+  .source-health summary > span:first-child { gap: 4px; flex-direction: column; }
+  .research-board { padding: 18px 14px; }
+  .research-board-head { align-items: flex-start; }
+  .research-board h2 { font-size: 20px; }
+  .research-count { font-size: 10px; padding: 6px 8px; }
+  .board-feed-notice { align-items: flex-start; flex-direction: column; }
+}

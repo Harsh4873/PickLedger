@@ -2,6 +2,8 @@ import { initMobileMode, initPickMode, initSettingsUI, initTheme, type PickMode 
 import {
   getAllPicks,
   getTeamPicks,
+  getResearchPicks,
+  getSourceStatuses,
   getHideScrapedPicks,
   setHideScrapedPicks,
   initHideScrapedPicks,
@@ -117,6 +119,7 @@ const ESPN_ENDPOINTS: Record<string, [string, string]> = {
   'NBA SUMMER': ['basketball', 'nba-summer'],
   WNBA: ['basketball', 'wnba'],
   NFL: ['football', 'nfl'],
+  CFB: ['football', 'college-football'],
   'FIFA WC': ['soccer', 'fifa.world'],
   'MLS': ['soccer', 'usa.1'],
   NHL: ['hockey', 'nhl'],
@@ -145,6 +148,7 @@ let dailyCalendarOpen = false;
 let profitCalendarOpen = false;
 let parlayCalendarOpen = false;
 let filterMoreOpen = false;
+let sourceStatusOpen = false;
 let refreshInFlight = false;
 const homeScores = new Map<string, HomeScoreInfo>();
 const homeScoreFetches = new Map<string, number>();
@@ -190,7 +194,7 @@ const MLB_INNING_RANKING_START_DATE = '2026-08-25';
 // the per-market split can never carry the old engine's record forward.
 const MLS_RESET_SOURCES = new Set(['MLS Model', 'MLS ML', 'MLS Spread', 'MLS Total']);
 const MLS_RANKING_START_DATE = '2026-07-25';
-const PRIMARY_FILTERS = ['ALL', 'MLB', 'WNBA', 'NFL', 'MLS', 'TENNIS'];
+const PRIMARY_FILTERS = ['ALL', 'NFL', 'CFB', 'MLB', 'WNBA', 'MLS', 'TENNIS'];
 let lastCentralDate = '';
 
 function escapeHtml(value: unknown): string {
@@ -796,13 +800,12 @@ function activeFilterSummary(): string {
 }
 
 function ensureSelection(): void {
-  const dates = [...new Set(getAllPicks().map(pickDateKey).filter(Boolean))].sort();
   const today = centralDateKey();
   // Stay pinned to Central "today" while following the live slate — even when the
   // active mode is empty (e.g. no player props on All-Star day). Falling back to a
   // prior date made Team Home look like Monday while Summer/WNBA/FIFA lived on today.
   if (followCentralToday) selectedDate = today;
-  else if (!selectedDate || !dates.includes(selectedDate)) selectedDate = dates.at(-1) || today;
+  else if (!selectedDate) selectedDate = today;
   if (!calendarMonth) calendarMonth = selectedDate.slice(0, 7);
 }
 
@@ -811,6 +814,13 @@ function filteredPicks(): Pick[] {
     activeFilters.size === 0 ||
     activeFilters.has(pick.sport) ||
     activeFilters.has(sourceName(pick))
+  ));
+}
+
+function filteredResearchPicks(): Pick[] {
+  if (activePickMode !== 'team') return [];
+  return getResearchPicks().filter(pick => (
+    activeFilters.size === 0 || activeFilters.has(pick.sport) || activeFilters.has(sourceName(pick))
   ));
 }
 
@@ -835,14 +845,14 @@ function setRefreshStatus(message: string, state = ''): void {
 function renderFilters(): void {
   const container = document.getElementById('filter-bar');
   if (!container) return;
-  const picks = getAllPicks();
+  const picks = [...getAllPicks(), ...(activePickMode === 'team' ? getResearchPicks() : [])];
   const available = [...new Set([
     ...picks.map(pick => pick.sport),
     ...picks.map(sourceName),
   ])];
   const extraFilters = available.filter(filter => !PRIMARY_FILTERS.includes(filter)).sort((a, b) => a.localeCompare(b));
   const filterButton = (filter: string): string => (
-    `<button type="button" class="filter-btn ${filterActive(filter) ? 'active' : ''}" data-filter="${escapeHtml(filter)}" aria-pressed="${filterActive(filter)}">${escapeHtml(filterLabel(filter))}</button>`
+    `<button type="button" class="filter-btn ${filterActive(filter) ? 'active' : ''}" data-filter="${escapeHtml(filter)}" aria-pressed="${filterActive(filter)}"${filter === 'CFB' ? ' title="College football"' : ''}>${escapeHtml(filterLabel(filter))}<span class="board-filter-count">${picks.filter(pick => pickDateKey(pick) === selectedDate && (filter === 'ALL' || pick.sport === filter || sourceName(pick) === filter)).length}</span></button>`
   );
   const extraSelected = extraFilters.some(filterActive);
   const primaryFilters = getHideTennisPicks()
@@ -850,7 +860,7 @@ function renderFilters(): void {
     : PRIMARY_FILTERS;
   container.innerHTML = `${primaryFilters.map(filterButton).join('')}
     <div class="filter-more-wrap" id="filter-more-wrap">
-      <button type="button" class="filter-more-btn ${extraSelected ? 'has-selection' : ''}" id="filter-more-btn" aria-label="Show more sports and sources" aria-expanded="${filterMoreOpen}">+</button>
+      <button type="button" class="filter-more-btn ${extraSelected ? 'has-selection' : ''}" id="filter-more-btn" aria-label="Show more sports and sources" aria-expanded="${filterMoreOpen}">Sources +</button>
       <div class="filter-dropdown ${filterMoreOpen ? 'open' : ''}" id="filter-dropdown">
         ${extraFilters.length ? extraFilters.map(filterButton).join('') : '<div class="filter-dropdown-empty">No other sources in this view</div>'}
       </div>
@@ -873,7 +883,7 @@ function calendarHtml(): string {
   const monthDate = parseDateKey(`${calendarMonth}-01`) || parseDateKey(selectedDate) || new Date();
   const gridStart = new Date(monthDate.getFullYear(), monthDate.getMonth(), 1 - monthDate.getDay());
   const counts = new Map<string, number>();
-  filteredPicks().forEach(pick => counts.set(pickDateKey(pick), (counts.get(pickDateKey(pick)) || 0) + 1));
+  [...filteredPicks(), ...filteredResearchPicks()].forEach(pick => counts.set(pickDateKey(pick), (counts.get(pickDateKey(pick)) || 0) + 1));
   const days = Array.from({ length: 42 }, (_, index) => {
     const date = new Date(gridStart.getFullYear(), gridStart.getMonth(), gridStart.getDate() + index);
     const key = calendarDateKey(date);
@@ -966,6 +976,8 @@ function bindInlineDatePicker(prefix: 'daily' | 'parlay' | 'profit'): void {
 function renderHome(): void {
   ensureSelection();
   renderFilters();
+  renderSourceStatus();
+  renderResearchBoard();
   const picks = boardPicks();
   const stats = statsFor(picks);
   const selectedAll = filteredPicks().filter(pick => pickDateKey(pick) === selectedDate);
@@ -984,10 +996,14 @@ function renderHome(): void {
   if (title) title.textContent = activePickMode === 'player'
     ? `${dateLabel(selectedDate, true)} Player Props`
     : `${dateLabel(selectedDate, true)} Picks`;
-  if (sub) sub.textContent = `${selectedAll.length} ${activePickMode === 'player' ? 'player props' : 'picks'} from ${new Set(selectedAll.map(sourceName)).size} sources, organized by matchup.`;
+  const researchCount = filteredResearchPicks().filter(pick => pickDateKey(pick) === selectedDate).length;
+  if (sub) sub.textContent = `${selectedAll.length} ${activePickMode === 'player' ? 'player props' : 'tracked picks'} from ${new Set(selectedAll.map(sourceName)).size} sources${researchCount ? ` · ${researchCount} research forecasts below` : ''}. Updated automatically.`;
   if (triggerValue) triggerValue.textContent = dateLabel(selectedDate, true);
   if (triggerMeta) triggerMeta.textContent = selectedDate === centralDateKey() ? 'Today | CT' : `${selectedAll.length} picks`;
-  document.querySelectorAll<HTMLElement>('[data-home-mode]').forEach(button => button.classList.toggle('active', button.dataset.homeMode === homeMode));
+  document.querySelectorAll<HTMLElement>('[data-home-mode]').forEach(button => {
+    button.classList.toggle('active', button.dataset.homeMode === homeMode);
+    button.setAttribute('aria-pressed', String(button.dataset.homeMode === homeMode));
+  });
 
   const summary = document.getElementById('home-summary-grid');
   if (summary) summary.innerHTML = [
@@ -1005,12 +1021,18 @@ function renderHome(): void {
   }
   document.getElementById('home-date-trigger')?.setAttribute('aria-expanded', String(calendarOpen));
   bindCalendar();
+  void refreshHomeScores(selectedDate, [...picks, ...filteredResearchPicks().filter(pick => pickDateKey(pick) === selectedDate)]);
 
   const feed = document.getElementById('pick-feed');
   if (!feed) return;
   if (!picks.length) {
     const modeLabel = homeMode === 'pending' ? 'open' : homeMode === 'settled' ? 'finished' : 'available';
-    feed.innerHTML = `<div class="pick-feed-empty"><div class="home-empty-kicker">${homeMode === 'pending' ? `OPEN ${itemLabel.toUpperCase()}` : homeMode === 'settled' ? 'RESULTS' : `ALL ${itemLabel.toUpperCase()}`} | ${escapeHtml(dateLabel(selectedDate).toUpperCase())}</div><div class="home-empty-title">No ${modeLabel} ${itemLabel} in this view</div><div class="home-empty-sub">Try another date, sport, source, or result view.</div></div>`;
+    const explanation = researchCount
+      ? `${researchCount} published forecasts are available in Research below. These sources have not qualified for the tracked picks board.`
+      : selectedAll.length && homeMode === 'pending'
+        ? 'The tracked picks for this date have finished. Open Results to see how they did.'
+        : 'No tracked picks match this selection. Check source status for missing updates, or choose another sport or date.';
+    feed.innerHTML = `<div class="pick-feed-empty"><div class="home-empty-kicker">${homeMode === 'pending' ? `OPEN ${itemLabel.toUpperCase()}` : homeMode === 'settled' ? 'RESULTS' : `ALL ${itemLabel.toUpperCase()}`} | ${escapeHtml(dateLabel(selectedDate).toUpperCase())}</div><div class="home-empty-title">No ${modeLabel} ${itemLabel} in this view</div><div class="home-empty-sub">${escapeHtml(explanation)}</div><div class="board-empty-actions">${selectedAll.length && homeMode === 'pending' ? '<button type="button" onclick="setHomeResultMode(\'settled\')">View results</button>' : ''}${activeFilters.size ? '<button type="button" onclick="clearBoardFilters()">Clear filters</button>' : ''}${researchCount ? '<a href="#research-board">View research</a>' : ''}</div></div>`;
     return;
   }
   const bySport = new Map<string, Array<[string, Pick[]]>>();
@@ -1026,7 +1048,50 @@ function renderHome(): void {
       <div class="home-feed-grid">${games.map(([, gamePicks]) => renderGameCard(gamePicks)).join('')}</div>
     </section>`).join('');
   bindPickCards(feed);
-  void refreshHomeScores(selectedDate, picks);
+}
+
+function clearBoardFilters(): void {
+  activeFilters.clear();
+  render();
+}
+
+function renderSourceStatus(): void {
+  const container = document.getElementById('source-status');
+  if (!container) return;
+  if (activePickMode !== 'team') {
+    container.innerHTML = '';
+    return;
+  }
+  const statuses = getSourceStatuses(selectedDate).filter(source => (
+    !activeFilters.size || activeFilters.has(source.sport)
+    || source.filterLabels.some(label => activeFilters.has(label))
+  ));
+  const issues = statuses.filter(source => ['error', 'stale', 'missing'].includes(source.state));
+  const published = statuses.filter(source => source.pickCount + source.researchCount > 0 && source.date === selectedDate);
+  const stateLabels = { ready: 'Published', empty: 'No picks', stale: 'Stale', error: 'Refresh failed', missing: 'Awaiting update' };
+  const hidden = getHideScrapedPicks();
+  container.innerHTML = `${hidden ? '<div class="board-feed-notice"><span>External feed picks are hidden by your saved filter.</span><button type="button" onclick="toggleScrapedPicks()">Show feeds</button></div>' : ''}
+    <details class="source-health" ${sourceStatusOpen ? 'open' : ''}>
+      <summary><span><strong>Source status</strong><span class="source-health-summary">${published.length} publishing · ${issues.length ? `${issues.length} need attention` : 'no reported feed issues'}</span></span><span class="source-health-indicator ${issues.length ? 'needs-attention' : ''}">${issues.length ? 'Check updates' : 'Details'} <span aria-hidden="true">↗</span></span></summary>
+      <p class="source-health-intro">Last published updates for ${escapeHtml(dateLabel(selectedDate, true))}. A research forecast is visible below even when a source has not qualified for tracked betting.</p>
+      <div class="source-health-grid">${statuses.map(source => `<article class="source-health-card state-${source.state}"><div class="source-health-card-top"><strong>${escapeHtml(source.label)}</strong><span>${stateLabels[source.state]}</span></div><p>${escapeHtml(source.detail)}</p><div class="source-health-meta">${escapeHtml(source.sport)} · ${source.pickCount} tracked · ${source.researchCount} research${source.updatedAt ? ` · Updated ${escapeHtml(updatedAgoLabel(source.updatedAt))}` : ''}${source.date && source.date !== selectedDate ? ` · Slate ${escapeHtml(source.date)}` : ''}</div></article>`).join('') || '<p class="source-health-intro">No source update is available for this selection yet.</p>'}</div>
+    </details>`;
+  container.querySelector('details')?.addEventListener('toggle', event => {
+    sourceStatusOpen = (event.currentTarget as HTMLDetailsElement).open;
+  });
+}
+
+function renderResearchBoard(): void {
+  const container = document.getElementById('research-board');
+  if (!container) return;
+  const picks = filteredResearchPicks().filter(pick => pickDateKey(pick) === selectedDate).sort(compareHomePickRows);
+  container.hidden = activePickMode !== 'team';
+  if (activePickMode !== 'team') return;
+  const groups = new Map<string, Pick[]>();
+  picks.forEach(pick => groups.set(gameKey(pick), [...(groups.get(gameKey(pick)) || []), pick]));
+  container.innerHTML = `<div class="research-board-head"><div><div class="home-eyebrow">PUBLISHED RESEARCH</div><h2>Source picks &amp; college football</h2></div><span class="research-count">${picks.length} forecasts</span></div>
+    <p class="research-board-note">External source picks and CFB model forecasts, published for comparison while their performance is evaluated. No suggested stake; excluded from Best Bets, parlays and tracked profit. All forecasts shown for this date.</p>
+    <div class="research-grid">${[...groups.values()].sort(compareGameStartAsc).map(gamePicks => `<article class="research-game"><div class="research-game-head"><span class="home-sport-pill">${escapeHtml(gamePicks[0].sport)}</span>${homeScoreChipHtml(homeScores.get(gameKey(gamePicks[0])), gamePicks[0].start_time, gameName(gamePicks[0]))}</div><h3>${escapeHtml(gameName(gamePicks[0]))}</h3>${gamePicks.map(pick => `<div class="research-forecast"><div class="research-forecast-source">${escapeHtml(sourceName(pick))}<span>Research only</span></div><div class="research-forecast-pick">${escapeHtml(pickSelectionText(pick))}</div>${pick.reason || pick.rationale ? `<details class="research-reason"><summary>Why this forecast</summary><p>${escapeHtml(pick.reason || pick.rationale)}</p></details>` : ''}</div>`).join('')}</article>`).join('') || `<div class="research-empty">${getHideScrapedPicks() ? 'Feeds are hidden. Use Show feeds above to include external forecasts.' : 'No research forecasts published for this selection. Source status above shows whether feeds are awaiting an update or have no picks.'}</div>`}</div>`;
 }
 
 // --- Market lanes ---------------------------------------------------------
@@ -3541,7 +3606,7 @@ function homeScoreChipHtml(info: HomeScoreInfo | undefined, fallbackStart: unkno
   if (!info) {
     return fallbackStart ? `<span class="home-score-chip pregame">${escapeHtml(`Starts ${formatStart(fallbackStart)}`)}</span>` : '';
   }
-  const sportSlug = info.sport.toLowerCase();
+  const sportSlug = info.sport === 'CFB' ? 'college-football' : info.sport.toLowerCase();
   const url = info.eventId ? `https://www.espn.com/${sportSlug}/game/_/gameId/${encodeURIComponent(info.eventId)}` : '';
   const tag = url ? 'a' : 'span';
   const attrs = url ? ` href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" title="Open ESPN box score for ${escapeHtml(gameLabel)}"` : '';
@@ -3569,7 +3634,7 @@ async function refreshHomeScores(date: string, picks: Pick[]): Promise<void> {
     for (const [sport, sportPicks] of bySport) {
       const endpoint = ESPN_ENDPOINTS[sport];
       try {
-        const response = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${endpoint[0]}/${endpoint[1]}/scoreboard?dates=${date.replace(/-/g, '')}`, { cache: 'no-store' });
+        const response = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${endpoint[0]}/${endpoint[1]}/scoreboard?dates=${date.replace(/-/g, '')}${sport === 'CFB' ? '&groups=80&limit=1000' : ''}`, { cache: 'no-store' });
         if (!response.ok) continue;
         const payload = await response.json() as { events?: unknown[] };
         sportPicks.forEach(pick => {
@@ -3943,7 +4008,7 @@ async function gradeDate(date: string, picks: Pick[]): Promise<number> {
     const sportPicks = picks.filter(pick => pick.sport === sport && isOpenPick(pick));
     if (!sportPicks.length) continue;
     try {
-      const response = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${endpoint[0]}/${endpoint[1]}/scoreboard?dates=${dateParam}`, { cache: 'no-store' });
+      const response = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${endpoint[0]}/${endpoint[1]}/scoreboard?dates=${dateParam}${sport === 'CFB' ? '&groups=80&limit=1000' : ''}`, { cache: 'no-store' });
       if (!response.ok) continue;
       const payload = await response.json() as { events?: unknown[] };
       for (const pick of sportPicks) {
@@ -4131,7 +4196,7 @@ function applyScrapedToggleUI(hidden: boolean): void {
       hidden ? 'Scraped feed picks hidden — click to show' : 'Hide picks from scraped tipster feeds',
     );
   }
-  if (label) label.textContent = hidden ? 'IN-HOUSE' : 'FEEDS';
+  if (label) label.textContent = hidden ? 'FEEDS OFF' : 'FEEDS ON';
 }
 
 /** Hide or show every scraped-feed pick. Purely a view filter — the rows stay
@@ -4176,6 +4241,7 @@ function toggleTennisPicks(): void {
 }
 
 Object.assign(window, {
+  clearBoardFilters,
   switchTab,
   toggleScrapedPicks,
   toggleTennisPicks,

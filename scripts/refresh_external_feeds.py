@@ -126,9 +126,20 @@ def _base_cache_payload(date_iso: str) -> dict[str, Any]:
     latest = _read_json(MODEL_CACHE_DIR / "latest.json")
     if latest and str(latest.get("date") or "") == date_iso:
         return latest
+    previous_feeds = {}
+    if latest:
+        keys = set(FEED_RUNNERS)
+        for split_keys in SPLIT_PROVIDER_MODEL_KEYS.values():
+            keys.update(split_keys)
+        previous_feeds = {
+            key: bucket
+            for key in keys
+            if (bucket := _previous_feed_bucket(latest, key)) is not None
+        }
     return {
         "date": date_iso,
         "models": {},
+        "external_feeds": previous_feeds,
     }
 
 
@@ -240,6 +251,13 @@ def _split_provider_result(
         if split_key.startswith(prefix):
             sport_key = split_key[len(prefix):]
         sport_error = sport_errors.get(sport_key)
+        # Provider-level diagnostics contain all requested sports. Keep the
+        # split bucket's error list scoped so a CFB outage does not label the
+        # successfully published MLB feed as failed.
+        if result.get("ok"):
+            bucket["errors"] = [sport_error] if sport_error else []
+            if not sport_error:
+                bucket.pop("error", None)
         if sport_error:
             bucket["ok"] = False
             bucket["error"] = sport_error
@@ -249,6 +267,70 @@ def _split_provider_result(
             "pick_count": len(bucket["picks"]),
         }
     return buckets
+
+
+def _record_feed_attempt(
+    previous: Any,
+    result: dict[str, Any],
+    date_iso: str,
+    now_iso: str,
+) -> dict[str, Any]:
+    """Retain the last successful snapshot without hiding a later failure."""
+    if result.get("ok"):
+        bucket = dict(result)
+        bucket.pop("lastError", None)
+        bucket["lastSuccessAt"] = now_iso
+        bucket["refreshStatus"] = "ok"
+    else:
+        # A failed fetch must not erase already published picks, or redatestamp
+        # yesterday's rows as today's. Attempt freshness is separate from the
+        # date and time of the last successfully collected source snapshot.
+        has_previous = isinstance(previous, dict) and previous.get("ok")
+        bucket = dict(previous if has_previous else result)
+        if has_previous:
+            bucket.setdefault("lastSuccessAt", previous.get("updatedAt") or previous.get("generatedAt"))
+        bucket["refreshStatus"] = "error"
+        bucket["lastError"] = str(result.get("error") or "Source refresh failed")
+    bucket["lastAttemptAt"] = now_iso
+    bucket["lastAttemptDate"] = date_iso
+    return bucket
+
+
+def _previous_feed_bucket(payload: dict[str, Any], key: str) -> dict[str, Any] | None:
+    for container_key in ("external_feeds", "models"):
+        container = payload.get(container_key)
+        if isinstance(container, dict) and isinstance(container.get(key), dict):
+            return container[key]
+    bucket = payload.get(key)
+    return bucket if isinstance(bucket, dict) else None
+
+
+def _write_run_summary(date_iso: str, results: dict[str, Any], errors: list[str]) -> None:
+    """Expose partial outages in Actions even when other feeds published."""
+    for error in errors:
+        if _runtime_origin() == "github-actions":
+            escaped = error.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+            print(f"::warning::{escaped}")
+        else:
+            print(f"[external-feeds] warning: {error}")
+    summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+    if not summary_path:
+        return
+    lines = [
+        f"### External sources for {date_iso}",
+        "",
+        "| Source | Latest attempt | Published date | Picks | Detail |",
+        "| --- | --- | --- | ---: | --- |",
+    ]
+    for key, bucket in sorted(results.items()):
+        detail = str(bucket.get("lastError") or bucket.get("note") or "").replace("|", "\\|")
+        detail = " ".join(detail.splitlines())
+        lines.append(
+            f"| {key} | {bucket['refreshStatus']} | {bucket.get('date') or '—'} | "
+            f"{len(bucket.get('picks') or [])} | {detail} |"
+        )
+    with Path(summary_path).open("a", encoding="utf-8") as handle:
+        handle.write("\n".join(lines) + "\n")
 
 
 def _write_json_cache(date_iso: str, payload: dict[str, Any]) -> dict[str, Any]:
@@ -305,20 +387,21 @@ def main() -> int:
         print(f"[external-feeds] {feed_key}: {'ok' if ok else 'error'} ({pick_count} pick(s))")
         if ok:
             success_count += 1
-            results.update(split_results)
-            if feed_key in SPLIT_PROVIDER_FEEDS:
-                payload["models"].pop(feed_key, None)
-                payload.pop(feed_key, None)
-            for split_key, split_result in split_results.items():
-                payload["models"][split_key] = split_result
-                payload[split_key] = split_result
-        else:
-            errors.append(f"{feed_key}: {result.get('error') or 'unknown error'}")
+        if feed_key in SPLIT_PROVIDER_FEEDS:
+            payload["models"].pop(feed_key, None)
+            payload.pop(feed_key, None)
+        for split_key, split_result in split_results.items():
+            if not split_result.get("ok"):
+                errors.append(f"{split_key}: {split_result.get('error') or 'unknown error'}")
+            bucket = _record_feed_attempt(
+                _previous_feed_bucket(payload, split_key), split_result, date_iso, now_iso,
+            )
+            results[split_key] = bucket
+            payload["models"][split_key] = bucket
+            payload[split_key] = bucket
 
-    if errors:
-        payload["external_feed_errors"] = errors
-    else:
-        payload.pop("external_feed_errors", None)
+    # An explicit empty list clears errors from a previous run during merge.
+    payload["external_feed_errors"] = errors
     external_feeds = payload.get("external_feeds") if isinstance(payload.get("external_feeds"), dict) else {}
     external_feeds = dict(external_feeds)
     for feed_key in feeds:
@@ -326,6 +409,7 @@ def main() -> int:
             external_feeds.pop(feed_key, None)
     payload["external_feeds"] = {**external_feeds, **results}
 
+    _write_run_summary(date_iso, results, errors)
     payload = _write_json_cache(date_iso, payload)
     if args.skip_firestore:
         print("[external-feeds] skipped Firestore write")

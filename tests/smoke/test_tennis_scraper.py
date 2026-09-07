@@ -200,6 +200,61 @@ def test_scrape_tennistonic_matches_official_slate():
     assert pick["selected_player"] == "Barbora Krejcikova"
 
 
+def test_tennistonic_does_not_label_blocked_pages_as_unpublished_predictions():
+    match = {"away": "Carlos Alcaraz", "home": "Tommy Paul"}
+    result = tn.scrape_tennistonic(
+        "2026-09-06", matches=[match], fetch_html=lambda _url: ("Challenge", 403, True),
+    )
+    assert result["ok"] is False
+    assert result["picks"] == []
+    assert "blocked" in result["error"]
+    assert result["meta"]["blockedUrls"] == len(tn.tennistonic_urls(match))
+    assert result["meta"]["unavailableMatchups"] == ["Carlos Alcaraz vs Tommy Paul"]
+    assert result["meta"]["unpublishedMatchups"] == []
+
+
+def test_tennistonic_reports_network_failure_separately_from_no_prediction():
+    match = {"away": "Carlos Alcaraz", "home": "Tommy Paul"}
+    result = tn.scrape_tennistonic(
+        "2026-09-06", matches=[match], fetch_html=lambda _url: ("", 0, False),
+    )
+    assert result["ok"] is False
+    assert result["meta"]["failedUrls"] == len(tn.tennistonic_urls(match))
+    assert result["meta"]["blockedUrls"] == 0
+
+
+def test_tennistonic_keeps_verified_prediction_when_another_match_is_blocked():
+    matches = [
+        {"away": "Carlos Alcaraz", "home": "Tommy Paul"},
+        {"away": "Barbora Krejcikova", "home": "Lucie Havlickova"},
+    ]
+
+    def fetch(url):
+        if "Alcaraz" in url:
+            return "Challenge", 403, True
+        return _tennistonic_html("Barbora Krejcikova Vs Lucie Havlickova", prediction="Krejcikova in 2"), 200, False
+
+    result = tn.scrape_tennistonic("2026-09-06", matches=matches, fetch_html=fetch)
+    assert result["ok"] is True
+    assert len(result["picks"]) == 1
+    assert result["meta"]["unavailableMatchups"] == ["Carlos Alcaraz vs Tommy Paul"]
+
+
+def test_tennistonic_accepts_verified_no_prediction_even_if_alternative_url_is_blocked():
+    match = {"away": "Carlos Alcaraz", "home": "Tommy Paul"}
+
+    def fetch(url):
+        if "Carlos-Alcaraz-Vs" in url:
+            return _tennistonic_html("Carlos Alcaraz Vs Tommy Paul", not_prediction=True), 200, False
+        return "Challenge", 403, True
+
+    result = tn.scrape_tennistonic("2026-09-06", matches=[match], fetch_html=fetch)
+    assert result["ok"] is True
+    assert result["picks"] == []
+    assert result["meta"]["unpublishedMatchups"] == ["Carlos Alcaraz vs Tommy Paul"]
+    assert result["meta"]["unavailableMatchups"] == []
+
+
 # --------------------------------------------------------------------------- #
 # Scores24 tennis                                                              #
 # --------------------------------------------------------------------------- #

@@ -339,6 +339,14 @@ def _preserve_pick_metadata(current_bucket: Any, generated_bucket: Any) -> Any:
     if not isinstance(current_bucket, dict) or not isinstance(generated_bucket, dict):
         return generated_bucket
     current_picks = current_bucket.get("picks")
+    if generated_bucket.get("ok") is False and isinstance(current_picks, list) and current_picks:
+        # Keep the already published same-date record when a provider fails.
+        # The error remains authoritative, so health checks still request a
+        # recovery refresh instead of certifying stale output as healthy.
+        retained = {**current_bucket, **generated_bucket}
+        retained["picks"] = current_picks
+        retained["preserved_after_refresh_error"] = True
+        return retained
     generated_picks = generated_bucket.get("picks")
     if not isinstance(current_picks, list) or not isinstance(generated_picks, list):
         return generated_bucket

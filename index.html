@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PickLedger — Daily Sports Picks and Source Records</title>
 <meta name="description" content="PickLedger brings today’s sports picks, source records, consensus signals, and results into one clear daily board.">
-<meta property="og:title" content="PickLedgerPro">
+<meta property="og:title" content="PickLedger — Daily Sports Picks">
 <meta property="og:description" content="Today’s sports picks, source records, consensus signals, and results in one clear board.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://harsh.bet/pickledger/">
@@ -75,7 +75,7 @@
             <path d="M4.5 11.5a8 8 0 0 1 8 8M4.5 5.5a14 14 0 0 1 14 14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
           </svg>
           <div class="mobile-toggle-track"><div class="mobile-toggle-thumb"></div></div>
-          <span class="toggle-label" id="scraped-mode-label">FEEDS</span>
+          <span class="toggle-label" id="scraped-mode-label">FEEDS ON</span>
         </button>
         <button id="tennis-mode-toggle" class="tennis-mode-toggle" onclick="toggleTennisPicks()" aria-label="Show or hide tennis picks" aria-pressed="false" title="Hide tennis picks from the board and rankings">
           <svg class="tennis-sport-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -85,8 +85,8 @@
           <div class="mobile-toggle-track"><div class="mobile-toggle-thumb"></div></div>
           <span class="toggle-label" id="tennis-mode-label">TENNIS</span>
         </button>
-        <button id="refresh-btn" class="refresh-btn" onclick="refreshAutoGrades()" aria-label="Check for new picks and final scores">CHECK SCORES</button>
-        <span id="sync-status" class="sync-status">Finding the latest picks...</span>
+        <button id="refresh-btn" class="refresh-btn" onclick="refreshAutoGrades()" aria-label="Check for new picks and final scores">REFRESH PICKS</button>
+        <span id="sync-status" class="sync-status" role="status">Finding the latest picks...</span>
 
       </div>
     </div>
@@ -126,7 +126,7 @@
         <div class="home-filter-head">
           <div>
             <div class="home-filter-title">Explore The Board</div>
-            <div class="home-filter-sub">Choose a date, then select one or more sport/source tags.</div>
+            <div class="home-filter-sub">NFL, college football and more. Counts include published research forecasts.</div>
           </div>
           <div class="home-date-wrap" id="home-date-wrap">
             <button
@@ -150,9 +150,12 @@
         <div class="filter-bar" id="filter-bar"></div>
       </div>
 
+      <div id="source-status"></div>
+
       <div class="panel home-feed-panel">
         <div id="pick-feed" class="pick-feed"></div>
       </div>
+      <section id="research-board" class="research-board" aria-label="Published research forecasts"></section>
     </div>
   </div>
 

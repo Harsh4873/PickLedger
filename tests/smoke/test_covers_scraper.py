@@ -755,7 +755,7 @@ def test_covers_feeds_are_retired_across_the_pipeline(tmp_path):
 
     data_ts = (ROOT / "src" / "data.ts").read_text(encoding="utf-8")
     assert "const RETIRED_BUCKET_PREFIXES = ['covers_']" in data_ts
-    assert "if (isRetiredBucket(modelKey)) continue" in data_ts
+    assert "if (isRetiredBucket(modelKey)" in data_ts
     assert "withoutRetiredProfitDeskSources" in data_ts
     assert "covers_experts_mlb: 'Covers Expert'" not in data_ts
 

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import pytest
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -77,7 +78,7 @@ def test_shadow_serving_emits_exactly_three_stable_market_rows(monkeypatch):
             "odds_source": "espn_scoreboard:DraftKings",
         },
     }
-    monkeypatch.setattr(cfb_model, "serving_rows", lambda _date: [entry])
+    monkeypatch.setattr(cfb_model, "serving_rows", lambda _date, **_kwargs: [entry])
     payload = cfb_model.generate_cfb_picks("2026-09-05")
     assert payload["ok"] is True
     assert payload["shadow_mode"] is True
@@ -92,6 +93,8 @@ def test_shadow_serving_emits_exactly_three_stable_market_rows(monkeypatch):
         assert pick["home_team_id"] == "1"
         assert pick["away_team_id"] == "2"
         assert 0 <= pick["push_probability"] < 1
+        assert pick["units"] == 0
+        assert pick["decision"] == "PASS"
 
 
 def test_artifact_records_walk_forward_calibration_and_feature_contract():
@@ -108,7 +111,7 @@ def test_artifact_records_walk_forward_calibration_and_feature_contract():
     assert (ROOT / "CFBPredictionModel" / "artifacts" / "cfb_model.joblib").stat().st_size > 1000
 
 
-def test_registration_is_shared_but_cfb_is_not_a_core_freshness_requirement():
+def test_cfb_model_is_a_core_freshness_requirement():
     import pickgrader_server as server
     from scripts import site_upcheck
     from scripts.market_odds import SPORT_LEAGUES, TEAM_MODEL_BUCKET_KEYS
@@ -129,21 +132,16 @@ def test_registration_is_shared_but_cfb_is_not_a_core_freshness_requirement():
     assert "cfb" in SUPPORTED_MODEL_KEYS
     assert "cfb" in CALIBRATION_EXCLUDED_MODEL_KEYS
     assert "cfb" in _model_jobs("2026-09-05")
-    assert "cfb" not in site_upcheck.REQUIRED_MODEL_KEYS
-    assert "cfb" not in REQUIRED_TEAM_MODEL_KEYS
+    assert "cfb" in site_upcheck.REQUIRED_MODEL_KEYS
+    assert "cfb" in REQUIRED_TEAM_MODEL_KEYS
     assert "scores24_cfb" not in site_upcheck.REQUIRED_SCORES24_FEED_KEYS
 
 
-def test_shadow_rows_are_contained_from_every_public_surface():
-    data_ts = (ROOT / "src" / "data.ts").read_text(encoding="utf-8")
+def test_research_rows_are_contained_from_staked_recommendations():
     parlay = (ROOT / "scripts" / "build_parlay_cards.py").read_text(encoding="utf-8")
     profit = (ROOT / "scripts" / "build_profit_desk.py").read_text(encoding="utf-8")
-    main_ts = (ROOT / "src" / "main.ts").read_text(encoding="utf-8")
-    assert "if (bucket.shadow_mode === true) continue;" in data_ts
-    assert "if (rawRecord.shadow_mode === true) continue;" in data_ts
     assert "if pick.get(\"shadow_mode\") is True:" in parlay
     assert "if record.get(\"shadow_mode\") is True:" in profit
-    assert "'CFB'" not in main_ts.split("PRIMARY_FILTERS")[1][:120]
 
 
 def test_pass_rows_enter_forecast_audit_ledger(tmp_path):
@@ -253,3 +251,124 @@ def test_cfb_training_workflow_is_manual_and_isolated():
     assert "schedule:" not in workflow
     assert "group: cfb-train" in workflow
     assert "CFBPredictionModel/requirements.txt" in workflow
+
+
+def _scoreboard_event(*, state="pre", odds=None):
+    return {
+        "id": "401900001", "date": "2026-09-05T17:00:00Z",
+        "status": {"type": {"state": state}}, "season": {"year": 2026},
+        "competitions": [{
+            "neutralSite": False,
+            "competitors": [
+                {"homeAway": "home", "team": {"id": "1", "displayName": "Home State"}},
+                {"homeAway": "away", "team": {"id": "2", "displayName": "Away Tech"}},
+            ],
+            "odds": [odds] if odds else [],
+        }],
+    }
+
+
+def _mock_scoreboard(monkeypatch, payload):
+    from CFBPredictionModel import cfb_core
+
+    class Response:
+        def raise_for_status(self):
+            return None
+
+        def json(self):
+            return payload
+
+    monkeypatch.setattr(cfb_core.requests, "get", lambda *_args, **_kwargs: Response())
+
+
+def test_cfb_scoreboard_preserves_unpriced_pregame_games_and_explains_started_games(monkeypatch):
+    from CFBPredictionModel.cfb_core import load_live_slate
+
+    _mock_scoreboard(monkeypatch, {"events": [_scoreboard_event(), _scoreboard_event(state="post")]})
+    coverage = {}
+    slate = load_live_slate("2026-09-05", coverage=coverage)
+    assert len(slate) == 1
+    assert slate[0]["home_moneyline"] is None
+    assert slate[0]["home_line"] is None
+    assert coverage == {"official_games": 2, "started_games": 1, "incomplete_games": 0,
+                        "pregame_games": 1, "unpriced_games": 1}
+
+
+def test_cfb_scoreboard_reads_current_nested_market_prices(monkeypatch):
+    from CFBPredictionModel.cfb_core import load_live_slate
+
+    odds = {
+        "spread": -3.5, "overUnder": 52.5,
+        "moneyline": {"home": {"current": {"odds": "-155"}}, "away": {"close": {"odds": "+135"}}},
+        "pointSpread": {"home": {"close": {"odds": "-115"}}, "away": {"close": {"odds": "-105"}}},
+        "total": {"over": {"open": {"odds": "-108"}}, "under": {"open": {"odds": "-112"}}},
+    }
+    _mock_scoreboard(monkeypatch, {"events": [_scoreboard_event(odds=odds)]})
+    game = load_live_slate("2026-09-05")[0]
+    assert (game["home_moneyline"], game["away_moneyline"]) == (-155, 135)
+    assert (game["home_spread_odds"], game["away_spread_odds"]) == (-115, -105)
+    assert (game["over_odds"], game["under_odds"]) == (-108, -112)
+
+
+def test_cfb_scoreboard_invalid_payload_does_not_claim_no_games(monkeypatch):
+    from CFBPredictionModel.cfb_core import load_live_slate
+
+    _mock_scoreboard(monkeypatch, {"error": "unavailable"})
+    with pytest.raises(ValueError, match="invalid events"):
+        load_live_slate("2026-09-05")
+
+
+@pytest.mark.parametrize("home_line,total_line,markets", [
+    (None, None, {"h2h"}),
+    (None, 52.5, {"h2h", "totals"}),
+    (-3.5, None, {"h2h", "spread"}),
+    (-3.5, 52.5, {"h2h", "spread", "totals"}),
+])
+def test_cfb_unpriced_forecasts_have_no_fabricated_prices_or_stakes(monkeypatch, home_line, total_line, markets):
+    from CFBPredictionModel import cfb_model
+    from CFBPredictionModel.cfb_core import FEATURE_NAMES
+
+    game = {
+        "game_id": "401900001", "home_team_id": "1", "away_team_id": "2",
+        "home_team": "Home State", "away_team": "Away Tech",
+        "start_time": "2026-09-05T17:00:00Z", "home_line": home_line, "total_line": total_line,
+        "home_moneyline": None, "away_moneyline": None, "odds_source": "espn_scoreboard:unknown",
+    }
+    entry = {"game": game, "features": {name: 0.0 for name in FEATURE_NAMES}}
+    monkeypatch.setattr(cfb_model, "serving_rows", lambda _date, **_kwargs: [entry])
+    payload = cfb_model.generate_cfb_picks("2026-09-05")
+    assert payload["ok"] is True
+    assert {pick["market"] for pick in payload["picks"]} == markets
+    for pick in payload["picks"]:
+        assert pick["date"] == "2026-09-05"
+        assert pick["odds"] is None
+        assert pick["expected_value"] is None
+        assert pick["edge"] is None
+        assert pick["units"] == 0
+        assert pick["decision"] == "PASS"
+        assert pick["shadow_mode"] is True
+        assert pick["market_priced"] is False
+
+
+def test_cfb_missing_artifacts_fail_visibly(monkeypatch):
+    from CFBPredictionModel import cfb_model
+
+    monkeypatch.setattr(cfb_model, "_load_artifacts", lambda: None)
+    payload = cfb_model.generate_cfb_picks("2026-09-05")
+    assert payload["ok"] is False
+    assert "artifacts" in payload["error"]
+    assert payload["picks"] == []
+
+
+def test_cfb_no_game_day_has_explicit_coverage(monkeypatch):
+    from CFBPredictionModel import cfb_model
+
+    def empty_slate(_date, *, coverage):
+        coverage.update(official_games=0, pregame_games=0)
+        return []
+
+    monkeypatch.setattr(cfb_model, "serving_rows", empty_slate)
+    payload = cfb_model.generate_cfb_picks("2026-09-05")
+    assert payload["ok"] is True
+    assert payload["coverage"]["official_games"] == 0
+    assert "No FBS games" in payload["note"]

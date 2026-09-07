@@ -72,6 +72,9 @@ jobs:
           echo "value=${FEEDS}" >> "$GITHUB_OUTPUT"
 
       - name: Refresh external feeds
+        id: refresh-feeds
+        # Publish source outage diagnostics even when every provider fails.
+        continue-on-error: true
         run: |
           python scripts/refresh_external_feeds.py \
             --date "${{ github.event.inputs.date || '' }}" \
@@ -138,3 +141,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run profit-desk-notify.yml --ref main
+
+      - name: Report refresh failure after publishing diagnostics
+        if: steps.refresh-feeds.outcome == 'failure'
+        run: |
+          echo "::error::External feed refresh failed. Published source diagnostics and retained the last successful picks."
+          exit 1

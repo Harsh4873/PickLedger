@@ -22,6 +22,7 @@ MODEL_KEYS = {
     "nba",
     "nba_playoffs",
     "nfl",
+    "cfb",
 }
 PLAYER_PROP_KEYS = {
     "nba_player_props",

@@ -19,7 +19,6 @@ LEAN_EV = 0.025
 BET_EV = 0.055
 LEAN_PROBABILITY = 0.52
 BET_PROBABILITY = 0.55
-ASSUMED_TWO_WAY_ODDS = -110
 
 
 def _cdf(value: float) -> float:
@@ -128,17 +127,17 @@ def _row(
     pick: str,
     market: str,
     selection: str,
-    odds: int,
+    odds: int | None,
     raw_probability: float,
     probability: float,
     push_probability: float,
-    market_probability: float,
+    market_probability: float | None,
     features: dict[str, float],
     extra: dict[str, Any],
     price_observed: bool,
 ) -> dict[str, Any]:
-    expected_value = _ev(probability, push_probability, odds)
-    decision = _decision(expected_value, probability)
+    expected_value = _ev(probability, push_probability, odds) if odds is not None else None
+    decision = _decision(expected_value, probability) if expected_value is not None else "PASS"
     return {
         **base,
         "source": source,
@@ -151,14 +150,15 @@ def _row(
         "probability": round(probability, 6),
         "calibrated_probability": round(probability, 6),
         "push_probability": round(push_probability, 6),
-        "market_probability": round(market_probability, 6),
-        "market_implied_probability": round(market_probability, 6),
-        "edge": round((probability - market_probability) * 100.0, 3),
-        "expected_value": round(expected_value, 6),
-        "decision": decision,
-        "units": 0.5 if decision == "BET" else 0.25 if decision == "LEAN" else 0.0,
-        "pricing_type": "market" if price_observed else "assumed",
-        "odds_source": base.get("odds_source") if price_observed else "model_assumed_two_way_price",
+        "market_probability": round(market_probability, 6) if market_probability is not None else None,
+        "market_implied_probability": round(market_probability, 6) if market_probability is not None else None,
+        "edge": round((probability - market_probability) * 100.0, 3) if market_probability is not None else None,
+        "expected_value": round(expected_value, 6) if expected_value is not None else None,
+        "source_decision": decision,
+        "decision": "PASS",
+        "units": 0.0,
+        "pricing_type": "market" if price_observed else "unpriced",
+        "odds_source": base.get("odds_source") if price_observed else None,
         "market_priced": price_observed,
         "features": {name: round(float(features[name]), 6) for name in FEATURE_NAMES},
         **extra,
@@ -169,16 +169,17 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
     artifacts = _load_artifacts()
     if artifacts is None:
         return {
-            "ok": True,
+            "ok": False,
             "date": date_iso,
             "model": "CFBShadow",
             "shadow_mode": True,
             "games": [],
             "picks": [],
-            "note": "CFB artifacts not trained yet; emitting an empty shadow slate.",
+            "error": "CFB model artifacts are missing or unreadable; forecasts could not run.",
         }
     bundle, metadata = artifacts
-    slate = serving_rows(date_iso)
+    coverage: dict[str, int] = {}
+    slate = serving_rows(date_iso, coverage=coverage)
     if not slate:
         return {
             "ok": True,
@@ -188,7 +189,12 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
             "shadow_mode": True,
             "games": [],
             "picks": [],
-            "note": "No fully priced FBS games on the CFB slate.",
+            "coverage": coverage,
+            "note": (
+                "No FBS games on the official CFB scoreboard."
+                if coverage.get("official_games") == 0 else
+                "No eligible pregame FBS-vs-FBS games; started games and unsupported opponents are excluded."
+            ),
         }
 
     vectors = matrix(slate)
@@ -212,13 +218,14 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
         raw_home, _, raw_away = _probabilities(model_margin, 0.0, sigma_margin, push_possible=False)
         home_probability = _calibrated_probability(calibrators["moneyline"], raw_home, 0.0)
         away_probability = 1.0 - home_probability
-        home_ml, away_ml = int(game["home_moneyline"]), int(game["away_moneyline"])
+        home_ml, away_ml = game.get("home_moneyline"), game.get("away_moneyline")
+        ml_priced = home_ml is not None and away_ml is not None
         ml_candidates = [
-            ("home", game["home_team"], home_ml, raw_home, home_probability, _no_vig(home_ml, away_ml)),
-            ("away", game["away_team"], away_ml, raw_away, away_probability, _no_vig(away_ml, home_ml)),
+            ("home", game["home_team"], home_ml if ml_priced else None, raw_home, home_probability, _no_vig(home_ml, away_ml) if ml_priced else None),
+            ("away", game["away_team"], away_ml if ml_priced else None, raw_away, away_probability, _no_vig(away_ml, home_ml) if ml_priced else None),
         ]
         ml_side, ml_team, ml_odds, ml_raw, ml_probability, ml_market = max(
-            ml_candidates, key=lambda row: _ev(row[4], 0.0, row[2])
+            ml_candidates, key=lambda row: _ev(row[4], 0.0, row[2]) if ml_priced else row[4]
         )
         picks.append(
             _row(
@@ -234,91 +241,96 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
                 market_probability=ml_market,
                 features=features,
                 extra={"team": ml_team, "side": ml_side, "model_home_win_probability": round(home_probability, 6)},
-                price_observed=True,
+                price_observed=ml_priced,
             )
         )
 
-        home_line = float(game["home_line"])
-        home_win, spread_push, home_loss = _probabilities(
-            model_margin,
-            -home_line,
-            sigma_margin,
-            push_possible=_is_integer_line(home_line),
-        )
-        calibrated_home_cover = _calibrated_probability(calibrators["spread"], home_win, spread_push)
-        calibrated_away_cover = max(0.0, 1.0 - spread_push - calibrated_home_cover)
-        spread_market = _american_implied(ASSUMED_TWO_WAY_ODDS) or 0.52381
-        spread_candidates = [
-            ("home", game["home_team"], home_line, home_win, calibrated_home_cover),
-            ("away", game["away_team"], -home_line, home_loss, calibrated_away_cover),
-        ]
-        spread_side, spread_team, spread_line, spread_raw, spread_probability = max(
-            spread_candidates,
-            key=lambda row: _ev(row[4], spread_push, ASSUMED_TWO_WAY_ODDS),
-        )
-        picks.append(
-            _row(
-                base,
-                source="CFB Spread",
-                pick=f"{spread_team} {spread_line:+g} ({base['matchup']})",
-                market="spread",
-                selection=spread_team,
-                odds=ASSUMED_TWO_WAY_ODDS,
-                raw_probability=spread_raw,
-                probability=spread_probability,
-                push_probability=spread_push,
-                market_probability=spread_market,
-                features=features,
-                extra={
-                    "team": spread_team,
-                    "side": spread_side,
-                    "line": spread_line,
-                    "market_line": spread_line,
-                    "model_margin": round(model_margin, 3),
-                },
-                price_observed=False,
+        if game.get("home_line") is not None:
+            home_line = float(game["home_line"])
+            home_win, spread_push, home_loss = _probabilities(
+                model_margin,
+                -home_line,
+                sigma_margin,
+                push_possible=_is_integer_line(home_line),
             )
-        )
+            calibrated_home_cover = _calibrated_probability(calibrators["spread"], home_win, spread_push)
+            calibrated_away_cover = max(0.0, 1.0 - spread_push - calibrated_home_cover)
+            home_price, away_price = game.get("home_spread_odds"), game.get("away_spread_odds")
+            spread_priced = home_price is not None and away_price is not None
+            spread_candidates = [
+                ("home", game["home_team"], home_line, home_win, calibrated_home_cover, home_price, away_price),
+                ("away", game["away_team"], -home_line, home_loss, calibrated_away_cover, away_price, home_price),
+            ]
+            spread_side, spread_team, spread_line, spread_raw, spread_probability, spread_odds, opposite_odds = max(
+                spread_candidates,
+                key=lambda row: _ev(row[4], spread_push, row[5]) if spread_priced else row[4],
+            )
+            picks.append(
+                _row(
+                    base,
+                    source="CFB Spread",
+                    pick=f"{spread_team} {spread_line:+g} ({base['matchup']})",
+                    market="spread",
+                    selection=spread_team,
+                    odds=spread_odds if spread_priced else None,
+                    raw_probability=spread_raw,
+                    probability=spread_probability,
+                    push_probability=spread_push,
+                    market_probability=_no_vig(spread_odds, opposite_odds) if spread_priced else None,
+                    features=features,
+                    extra={
+                        "team": spread_team,
+                        "side": spread_side,
+                        "line": spread_line,
+                        "market_line": spread_line,
+                        "model_margin": round(model_margin, 3),
+                    },
+                    price_observed=spread_priced,
+                )
+            )
 
-        total_line = float(game["total_line"])
-        raw_over, total_push, raw_under = _probabilities(
-            model_total,
-            total_line,
-            sigma_total,
-            push_possible=_is_integer_line(total_line),
-        )
-        calibrated_over = _calibrated_probability(calibrators["total"], raw_over, total_push)
-        calibrated_under = max(0.0, 1.0 - total_push - calibrated_over)
-        total_candidates = [
-            ("over", "Over", raw_over, calibrated_over),
-            ("under", "Under", raw_under, calibrated_under),
-        ]
-        direction, direction_label, total_raw, total_probability = max(
-            total_candidates,
-            key=lambda row: _ev(row[3], total_push, ASSUMED_TWO_WAY_ODDS),
-        )
-        picks.append(
-            _row(
-                base,
-                source="CFB Total",
-                pick=f"{direction_label} {total_line:g} ({base['matchup']})",
-                market="totals",
-                selection=direction_label,
-                odds=ASSUMED_TWO_WAY_ODDS,
-                raw_probability=total_raw,
-                probability=total_probability,
-                push_probability=total_push,
-                market_probability=spread_market,
-                features=features,
-                extra={
-                    "direction": direction,
-                    "line": total_line,
-                    "market_line": total_line,
-                    "model_total": round(model_total, 3),
-                },
-                price_observed=False,
+        if game.get("total_line") is not None:
+            total_line = float(game["total_line"])
+            raw_over, total_push, raw_under = _probabilities(
+                model_total,
+                total_line,
+                sigma_total,
+                push_possible=_is_integer_line(total_line),
             )
-        )
+            calibrated_over = _calibrated_probability(calibrators["total"], raw_over, total_push)
+            calibrated_under = max(0.0, 1.0 - total_push - calibrated_over)
+            over_odds, under_odds = game.get("over_odds"), game.get("under_odds")
+            total_priced = over_odds is not None and under_odds is not None
+            total_candidates = [
+                ("over", "Over", raw_over, calibrated_over, over_odds, under_odds),
+                ("under", "Under", raw_under, calibrated_under, under_odds, over_odds),
+            ]
+            direction, direction_label, total_raw, total_probability, total_odds, opposite_odds = max(
+                total_candidates,
+                key=lambda row: _ev(row[3], total_push, row[4]) if total_priced else row[3],
+            )
+            picks.append(
+                _row(
+                    base,
+                    source="CFB Total",
+                    pick=f"{direction_label} {total_line:g} ({base['matchup']})",
+                    market="totals",
+                    selection=direction_label,
+                    odds=total_odds if total_priced else None,
+                    raw_probability=total_raw,
+                    probability=total_probability,
+                    push_probability=total_push,
+                    market_probability=_no_vig(total_odds, opposite_odds) if total_priced else None,
+                    features=features,
+                    extra={
+                        "direction": direction,
+                        "line": total_line,
+                        "market_line": total_line,
+                        "model_total": round(model_total, 3),
+                    },
+                    price_observed=total_priced,
+                )
+            )
 
         games.append(
             {
@@ -341,7 +353,8 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
         "model_version": model_version,
         "shadow_mode": True,
         "actionability": "research_signal",
+        "coverage": coverage,
         "games": games,
         "picks": picks,
-        "note": f"CFB shadow slate: {len(games)} game(s), {len(picks)} market row(s).",
+        "note": f"CFB research forecasts: {len(games)} game(s), {len(picks)} market row(s). Not qualified for live staking.",
     }

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -122,7 +123,7 @@ def _is_transient_model_error(result: Any) -> bool:
     if not isinstance(result, dict) or result.get("ok") is True:
         return False
     error = str(result.get("error") or "").lower()
-    return any(
+    return bool(re.search(r"\b(?:429|500|502|503|504)\s+(?:server error|client error|error|bad gateway|service unavailable|gateway timeout)", error)) or any(
         marker in error
         for marker in (
             "readtimeout",
@@ -133,6 +134,8 @@ def _is_transient_model_error(result: Any) -> bool:
             "connection reset",
             "connection aborted",
             "remote disconnected",
+            "bad gateway",
+            "service unavailable",
         )
     )
 

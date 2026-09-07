@@ -36,7 +36,7 @@ LINE_ODDS_URL = (
     "betting/csv/cfb_line_odds.csv.gz"
 )
 SCOREBOARD_URL = (
-    "http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard"
+    "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard"
 )
 REQUEST_TIMEOUT = 60
 CURRENT_TTL_SECONDS = 3 * 60 * 60
@@ -422,8 +422,20 @@ def _american(value: Any) -> int | None:
     return int(round(number)) if number is not None and (number <= -100 or number >= 100) else None
 
 
-def load_live_slate(date_iso: str) -> list[dict[str, Any]]:
-    """Load the FBS scoreboard slate with stable ESPN identities and prices."""
+def _odds_price(node: Any) -> int | None:
+    if not isinstance(node, Mapping):
+        return None
+    for phase in ("close", "current", "open"):
+        values = node.get(phase)
+        if isinstance(values, Mapping):
+            price = _american(values.get("odds") or values.get("american"))
+            if price is not None:
+                return price
+    return _american(node.get("odds") or node.get("american") or node.get("moneyLine"))
+
+
+def load_live_slate(date_iso: str, *, coverage: dict[str, int] | None = None) -> list[dict[str, Any]]:
+    """Load pregame identities; missing prices must not erase forecasts."""
 
     response = requests.get(
         SCOREBOARD_URL,
@@ -433,31 +445,50 @@ def load_live_slate(date_iso: str) -> list[dict[str, Any]]:
     )
     response.raise_for_status()
     payload = response.json()
+    if not isinstance(payload, Mapping) or not isinstance(payload.get("events"), list):
+        raise ValueError("CFB scoreboard returned an invalid events payload")
+    counts = coverage if coverage is not None else {}
+    counts.update(official_games=len(payload["events"]), started_games=0, incomplete_games=0,
+                  pregame_games=0, unpriced_games=0)
     slate: list[dict[str, Any]] = []
     for event in payload.get("events") or []:
+        state = _text(((event.get("status") or {}).get("type") or {}).get("state"))
+        if state != "pre":
+            counts["started_games"] += 1
+            continue
         competitions = event.get("competitions") or []
         if not competitions or not isinstance(competitions[0], Mapping):
+            counts["incomplete_games"] += 1
             continue
         competition = competitions[0]
         if "neutralSite" not in competition:
+            counts["incomplete_games"] += 1
             continue
         competitors = [row for row in competition.get("competitors") or [] if isinstance(row, Mapping)]
         home = next((row for row in competitors if _text(row.get("homeAway")) == "home"), None)
         away = next((row for row in competitors if _text(row.get("homeAway")) == "away"), None)
         if home is None or away is None:
+            counts["incomplete_games"] += 1
             continue
         home_id, home_team, home_abbr = _team_names(home)
         away_id, away_team, away_abbr = _team_names(away)
+        if not all((home_id, home_team, away_id, away_team, _text(event.get("id")),
+                    _text(event.get("date") or competition.get("date")))):
+            counts["incomplete_games"] += 1
+            continue
         odds_rows = [row for row in competition.get("odds") or [] if isinstance(row, Mapping)]
         odds = odds_rows[0] if odds_rows else {}
         home_line = _num(odds.get("spread"))
         total_line = _num(odds.get("overUnder"))
-        home_ml = _american((odds.get("homeTeamOdds") or {}).get("moneyLine"))
-        away_ml = _american((odds.get("awayTeamOdds") or {}).get("moneyLine"))
-        state = _text(((event.get("status") or {}).get("type") or {}).get("state"))
-        if state != "pre" or None in (home_line, total_line, home_ml, away_ml):
-            continue
-        season = int(date_iso[:4])
+        moneyline = odds.get("moneyline") if isinstance(odds.get("moneyline"), Mapping) else {}
+        home_ml = _odds_price(moneyline.get("home")) or _american((odds.get("homeTeamOdds") or {}).get("moneyLine"))
+        away_ml = _odds_price(moneyline.get("away")) or _american((odds.get("awayTeamOdds") or {}).get("moneyLine"))
+        point_spread = odds.get("pointSpread") if isinstance(odds.get("pointSpread"), Mapping) else {}
+        total = odds.get("total") if isinstance(odds.get("total"), Mapping) else {}
+        counts["pregame_games"] += 1
+        if None in (home_line, total_line, home_ml, away_ml):
+            counts["unpriced_games"] += 1
+        season = int(_num((event.get("season") or {}).get("year"), int(date_iso[:4])))
         week = int(_num(((event.get("week") or {}).get("number")), 1) or 1)
         provider = odds.get("provider") if isinstance(odds.get("provider"), Mapping) else {}
         slate.append(
@@ -478,18 +509,22 @@ def load_live_slate(date_iso: str) -> list[dict[str, Any]]:
                 "away_team": away_team,
                 "home_abbreviation": home_abbr,
                 "away_abbreviation": away_abbr,
-                "home_line": float(home_line),
-                "total_line": float(total_line),
+                "home_line": home_line,
+                "total_line": total_line,
                 "home_moneyline": home_ml,
                 "away_moneyline": away_ml,
+                "home_spread_odds": _odds_price(point_spread.get("home")),
+                "away_spread_odds": _odds_price(point_spread.get("away")),
+                "over_odds": _odds_price(total.get("over")),
+                "under_odds": _odds_price(total.get("under")),
                 "odds_source": f"espn_scoreboard:{_text(provider.get('name') or provider.get('displayName')) or 'unknown'}",
             }
         )
     return slate
 
 
-def serving_rows(date_iso: str) -> list[dict[str, Any]]:
-    slate = load_live_slate(date_iso)
+def serving_rows(date_iso: str, *, coverage: dict[str, int] | None = None) -> list[dict[str, Any]]:
+    slate = load_live_slate(date_iso, coverage=coverage)
     if not slate:
         return []
     season = int(date_iso[:4])
@@ -502,12 +537,15 @@ def serving_rows(date_iso: str) -> list[dict[str, Any]]:
             known_fbs.add(_text(game.get("home_team_id")))
         if game.get("away_division") == "fbs":
             known_fbs.add(_text(game.get("away_team_id")))
-    slate = [
+    supported_slate = [
         game
         for game in slate
         if game["home_team_id"] in known_fbs and game["away_team_id"] in known_fbs
     ]
-    return features_for_slate(history, slate)
+    if coverage is not None:
+        coverage["excluded_non_fbs_games"] = len(slate) - len(supported_slate)
+        coverage["forecast_games"] = len(supported_slate)
+    return features_for_slate(history, supported_slate)
 
 
 def matrix(records: list[dict[str, Any]]) -> list[list[float]]:

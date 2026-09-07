@@ -302,9 +302,8 @@ def _result_envelope(
     extra_meta: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     # Tennis is best-effort by design: a large slate with partial prediction
-    # coverage is healthy, so unmatched matchups are always "unpublished", never
-    # "missing" (which would trip the publisher gate). expectedMatchups is kept
-    # equal to matchedPicks so the strict Scores24-style gate still passes.
+    # coverage is valid. A blocked or failed fetch cannot establish that a
+    # source has no prediction, so transport outages remain explicit.
     meta = {
         "officialMatchups": len(matches),
         "expectedMatchups": len(picks),
@@ -316,8 +315,13 @@ def _result_envelope(
     }
     if extra_meta:
         meta.update(extra_meta)
-    return {
-        "ok": True,
+    unavailable = (
+        bool(meta["unavailableMatchups"])
+        if "unavailableMatchups" in meta
+        else bool(blocked or meta.get("failedUrls"))
+    )
+    result = {
+        "ok": bool(picks) or not unavailable,
         "date": date_iso,
         "picks": picks,
         "note": (
@@ -326,6 +330,13 @@ def _result_envelope(
         ),
         "meta": meta,
     }
+    if unavailable and not picks:
+        result["error"] = (
+            f"{source} returned no verified predictions while source requests "
+            f"were blocked or failed ({blocked} blocked, {meta.get('failedUrls', 0)} failed)."
+        )
+        result["note"] = result["error"]
+    return result
 
 
 # --------------------------------------------------------------------------- #
@@ -435,15 +446,23 @@ def scrape_tennistonic(
     unpublished: list[str] = []
     attempted = 0
     blocked_count = 0
+    failed_count = 0
+    unavailable_matchups: list[str] = []
     for match in matches:
         label = f"{match['away']} vs {match['home']}"
         found = None
-        was_blocked = False
+        unavailable = False
+        resolved = False
         for url in tennistonic_urls(match):
             attempted += 1
             html, status, blocked = fetch_html(url)
             if blocked:
-                was_blocked = True
+                blocked_count += 1
+                unavailable = True
+                continue
+            if status == 0 or status >= 500:
+                failed_count += 1
+                unavailable = True
                 continue
             if status != 200 or not html:
                 continue
@@ -452,6 +471,7 @@ def scrape_tennistonic(
             blob = f"{title} {url.replace('-', ' ')}"
             if not (_name_tokens(match["away"])[-1] in _normalize_team(blob) and _name_tokens(match["home"])[-1] in _normalize_team(blob)):
                 continue
+            resolved = True
             prediction = parse_tennistonic_prediction(html, match)
             if prediction is None:
                 continue
@@ -469,9 +489,9 @@ def scrape_tennistonic(
             break
         if found is not None:
             picks.append(found)
+        elif unavailable and not resolved:
+            unavailable_matchups.append(label)
         else:
-            if was_blocked:
-                blocked_count += 1
             unpublished.append(label)
     return _result_envelope(
         source,
@@ -481,6 +501,7 @@ def scrape_tennistonic(
         unpublished,
         attempted=attempted,
         blocked=blocked_count,
+        extra_meta={"failedUrls": failed_count, "unavailableMatchups": unavailable_matchups},
     )
 
 
