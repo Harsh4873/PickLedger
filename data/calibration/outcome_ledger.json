@@ -540979,7 +540979,7 @@
       "ml_calibration_excluded": true,
       "model_key": "mlb_player_props",
       "odds": -391.0,
-      "outcome": null,
+      "outcome": 1,
       "pick": "David Fry Under 0.5 RBIs",
       "pregame_snapshot": {
         "actionability": "consensus_qualified",
@@ -541129,12 +541129,12 @@
       },
       "probability": 0.8362,
       "probability_source": "player_props_ml_v1",
-      "profit": null,
+      "profit": 0.2557544757033248,
       "raw_decision": "LEAN",
       "raw_edge": 3.99,
       "raw_probability": 0.8362,
       "raw_units": 1.0,
-      "result": "pending",
+      "result": "win",
       "source": "MLBPlayerProps",
       "sport": "MLB",
       "stake_units": 1.0,
@@ -541143,8 +541143,8 @@
   ],
   "schema_version": 1,
   "summary": {
-    "decided_picks": 6754,
-    "pending_picks": 103,
+    "decided_picks": 6755,
+    "pending_picks": 102,
     "total_picks": 7070,
     "trainable_decided_picks": 783
   }

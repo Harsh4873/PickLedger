@@ -271,7 +271,7 @@
         "updatedAt": "2026-09-07T20:35Z"
       },
       "rawModelProbabilityIgnored": 0.8362,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLBPlayerProps",
       "sourceKey": "mlb_player_props",
@@ -386,7 +386,7 @@
         "updatedAt": "2026-09-07T19:28:49.273792Z"
       },
       "rawModelProbabilityIgnored": 0.567,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -495,7 +495,7 @@
         "updatedAt": "2026-09-07T18:05:19.882438Z"
       },
       "rawModelProbabilityIgnored": 0.627,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -717,7 +717,7 @@
         "updatedAt": "2026-09-07T18:50:55.564734Z"
       },
       "rawModelProbabilityIgnored": 0.601,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -935,7 +935,7 @@
         "updatedAt": "2026-09-07T18:05:19.882438Z"
       },
       "rawModelProbabilityIgnored": 0.564,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -1159,7 +1159,7 @@
         "updatedAt": "2026-09-07T19:28:49.273792Z"
       },
       "rawModelProbabilityIgnored": 0.5542,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
