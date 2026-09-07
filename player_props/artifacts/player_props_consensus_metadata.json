@@ -541,6 +541,6 @@
     }
   },
   "target_accuracy": 0.7,
-  "training_fingerprint": "668be663343e782d5b8358fe431e958c96eca24e50f61056509a2c5b488b5d94",
+  "training_fingerprint": "a72c99dfc2587d836e9bd42b3b61bb6725e3d790cd614e10b49048deb14e1f2b",
   "version": "player_props_consensus_v2.0.0"
 }

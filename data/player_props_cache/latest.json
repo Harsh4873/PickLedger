@@ -1,40 +1,40 @@
 {
   "date": "2026-09-07",
-  "generatedAt": "2026-09-07T18:20:39.659099Z",
+  "generatedAt": "2026-09-07T19:07:09.626215Z",
   "models": {
     "mlb_player_props": {
       "abstained": false,
-      "candidate_count": 3408,
-      "consensus_rejected_count": 8649,
+      "candidate_count": 3396,
+      "consensus_rejected_count": 8618,
       "consensus_rejection_reasons": {
-        "batter_strikeouts has not cleared 70%": 372,
-        "batter_walks has not cleared 70%": 1281,
-        "doubles has not cleared 70%": 712,
+        "batter_strikeouts has not cleared 70%": 370,
+        "batter_walks has not cleared 70%": 1274,
+        "doubles has not cleared 70%": 708,
         "failed: season_rate": 12,
-        "hits has not cleared 70%": 1403,
-        "hits_runs_rbis has not cleared 70%": 1379,
-        "home_runs has not cleared 70%": 342,
+        "hits has not cleared 70%": 1399,
+        "hits_runs_rbis has not cleared 70%": 1372,
+        "home_runs has not cleared 70%": 340,
         "missing season/history player profile": 7,
         "pitcher_earned_runs_allowed has not cleared 70%": 34,
         "pitcher_hits_allowed has not cleared 70%": 34,
         "pitcher_outs_recorded has not cleared 70%": 34,
         "pitcher_walks_allowed has not cleared 70%": 66,
-        "runs has not cleared 70%": 358,
-        "singles has not cleared 70%": 716,
-        "stolen_bases has not cleared 70%": 462,
+        "runs has not cleared 70%": 356,
+        "singles has not cleared 70%": 712,
+        "stolen_bases has not cleared 70%": 464,
         "strikeouts has not cleared 70%": 132,
-        "total_bases has not cleared 70%": 516,
+        "total_bases has not cleared 70%": 518,
         "triples has not cleared 70%": 228,
-        "under price unavailable": 561
+        "under price unavailable": 558
       },
       "consensus_rejections": [
         {
-          "id": "pp_bab9b87778a6dbd261e3_season",
+          "id": "pp_61e807fc75b8826e9201_season",
           "line": 3.5,
-          "odds": -126,
+          "odds": -101,
           "player_name": "Grant Holmes",
           "reason": "strikeouts has not cleared 70%",
-          "selection": "Under",
+          "selection": "Over",
           "stat_key": "strikeouts"
         },
         {
@@ -157,8 +157,8 @@
         {
           "actionability": "consensus_qualified",
           "away_team": "Cleveland Guardians",
-          "baseline_probability": 0.393801,
-          "baseline_projection": 0.177,
+          "baseline_probability": 0.393088,
+          "baseline_projection": 0.174,
           "closing_line_movement": null,
           "closing_line_source": "not_tracked",
           "confidence": "Medium",
@@ -214,7 +214,7 @@
             "Under history hit rate 253-328 (77.1%)",
             "Season rbis per game 0.16 over 81 games",
             "Posted 0.5 rbis line at +267 over",
-            "Opposing pitcher allows 8.73 hits/9",
+            "Opposing pitcher allows 8.62 hits/9",
             "Venue Oriole Park at Camden Yards, park factor 1.07",
             "Weather Partly Cloudy, 78F",
             "Wind 7 mph, In From LF"
@@ -242,11 +242,11 @@
           "ml_probability": 0.8362,
           "ml_probability_mode": "four_model_consensus_gate",
           "ml_rank": 1,
-          "ml_rank_epoch": "MLB:player_props_consensus_v2.0.0:published:668be663343e782d",
+          "ml_rank_epoch": "MLB:player_props_consensus_v2.0.0:published:a72c99dfc2587d83",
           "ml_raw_probability": 0.8362,
           "ml_stake_cap": 0.5,
-          "ml_training_fingerprint": "668be663343e782d5b8358fe431e958c96eca24e50f61056509a2c5b488b5d94",
-          "model_epoch": "MLB:player_props_consensus_v2.0.0:published:668be663343e782d",
+          "ml_training_fingerprint": "a72c99dfc2587d836e9bd42b3b61bb6725e3d790cd614e10b49048deb14e1f2b",
+          "model_epoch": "MLB:player_props_consensus_v2.0.0:published:a72c99dfc2587d83",
           "model_key": "mlb_player_props",
           "model_rank": 1,
           "model_variant": "all_time",
@@ -259,7 +259,7 @@
           "pick": "David Fry Under 0.5 RBIs",
           "pitch_mix": "four-seamers 49%, changeups 19%, sweepers 16%",
           "pitch_type_factor": 1.0398,
-          "pitcher_adjustment": 1.0393,
+          "pitcher_adjustment": 1.0262,
           "player_id": "681807",
           "player_name": "David Fry",
           "precision_evaluated": true,
@@ -270,14 +270,14 @@
           "pricing_type": "market",
           "probability": 0.8362,
           "probability_source": "player_props_ml_v1",
-          "projection": 0.18,
+          "projection": 0.17,
           "prop_role": "batter",
           "published_model": "MLBPlayerProps",
           "quarter_kelly": 0.0489,
           "rank": 1,
-          "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:668be663343e782d",
+          "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:a72c99dfc2587d83",
           "ranking_model": "MLBPlayerProps",
-          "ranking_updated_at": "2026-09-07T18:20:39.659099Z",
+          "ranking_updated_at": "2026-09-07T19:07:09.626215Z",
           "reason": "The active four-model consensus gate qualifies this market at 83.6%; the All Time variant is retained as a supporting signal.",
           "research_details": "History model over probability 13.9%; Under history hit rate 253-328 (77.1%)",
           "result": "pending",
@@ -302,11 +302,11 @@
           "weather_factor": 0.99
         }
       ],
-      "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:668be663343e782d",
-      "ranking_updated_at": "2026-09-07T18:20:39.659099Z",
-      "scored_count": 9349,
+      "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:a72c99dfc2587d83",
+      "ranking_updated_at": "2026-09-07T19:07:09.626215Z",
+      "scored_count": 9314,
       "sport": "MLB",
-      "training_fingerprint": "668be663343e782d5b8358fe431e958c96eca24e50f61056509a2c5b488b5d94"
+      "training_fingerprint": "a72c99dfc2587d836e9bd42b3b61bb6725e3d790cd614e10b49048deb14e1f2b"
     },
     "nba_player_props": {
       "abstained": false,
@@ -330,7 +330,7 @@
       "note": "No NBA prop cleared the consensus publication gate.",
       "ok": true,
       "picks": [],
-      "ranking_epoch": "NBA:player_props_consensus_v2.0.0:published:668be663343e782d",
+      "ranking_epoch": "NBA:player_props_consensus_v2.0.0:published:a72c99dfc2587d83",
       "scored_count": 0,
       "sport": "NBA"
     },
@@ -356,10 +356,10 @@
       "note": "No WNBA prop cleared the consensus publication gate.",
       "ok": true,
       "picks": [],
-      "ranking_epoch": "WNBA:player_props_consensus_v2.0.0:published:668be663343e782d",
+      "ranking_epoch": "WNBA:player_props_consensus_v2.0.0:published:a72c99dfc2587d83",
       "scored_count": 0,
       "sport": "WNBA"
     }
   },
-  "updatedAt": "2026-09-07T18:20:39.659099Z"
+  "updatedAt": "2026-09-07T19:07:09.626215Z"
 }
