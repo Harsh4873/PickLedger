@@ -181,6 +181,7 @@
           "edge_basis": "no_vig",
           "full_kelly": 0.1908,
           "game_id": "824793",
+          "game_start_time": "2026-09-07T17:35Z",
           "h2h": {
             "at_bats": 6,
             "available": true,
@@ -269,7 +270,7 @@
           "selection": "Under",
           "source": "MLBPlayerProps",
           "sport": "MLB",
-          "start_time": "2026-09-07T17:35:00Z",
+          "start_time": "2026-09-07T17:35Z",
           "stat_key": "rbis",
           "stat_label": "RBIs",
           "supporting_variant": "all_time",
