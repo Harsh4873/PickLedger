@@ -357,7 +357,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 1.078,
+        "ageHours": 0.318,
         "breakEvenProbability": 0.52381,
         "decimalOdds": 1.909091,
         "eligibleForAlphaEstimate": false,
@@ -378,10 +378,10 @@
         "startTime": "2026-09-07T19:10Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-07T18:05:19.882438Z",
+        "timestamp": "2026-09-07T18:50:55.564734Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": true,
-        "updatedAt": "2026-09-07T18:05:19.882438Z"
+        "updatedAt": "2026-09-07T18:50:55.564734Z"
       },
       "rawModelProbabilityIgnored": 0.567,
       "result": "pending",
@@ -579,7 +579,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 3.078,
+        "ageHours": 2.318,
         "breakEvenProbability": 0.52381,
         "decimalOdds": 1.909091,
         "eligibleForAlphaEstimate": false,
@@ -600,10 +600,10 @@
         "startTime": "2026-09-07T21:10Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-07T18:05:19.882438Z",
+        "timestamp": "2026-09-07T18:50:55.564734Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": true,
-        "updatedAt": "2026-09-07T18:05:19.882438Z"
+        "updatedAt": "2026-09-07T18:50:55.564734Z"
       },
       "rawModelProbabilityIgnored": 0.5588,
       "result": "pending",
@@ -690,7 +690,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 1.078,
+        "ageHours": 0.318,
         "breakEvenProbability": 0.545455,
         "decimalOdds": 1.833333,
         "eligibleForAlphaEstimate": false,
@@ -709,10 +709,10 @@
         "startTime": "2026-09-07T19:10Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-07T18:05:19.882438Z",
+        "timestamp": "2026-09-07T18:50:55.564734Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-07T18:05:19.882438Z"
+        "updatedAt": "2026-09-07T18:50:55.564734Z"
       },
       "rawModelProbabilityIgnored": 0.601,
       "result": "pending",
@@ -1017,7 +1017,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 6.078,
+        "ageHours": 5.318,
         "breakEvenProbability": 0.545455,
         "decimalOdds": 1.833333,
         "eligibleForAlphaEstimate": false,
@@ -1036,10 +1036,10 @@
         "startTime": "2026-09-08T00:10Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-07T18:05:19.882438Z",
+        "timestamp": "2026-09-07T18:50:55.564734Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-07T18:05:19.882438Z"
+        "updatedAt": "2026-09-07T18:50:55.564734Z"
       },
       "rawModelProbabilityIgnored": 0.589,
       "result": "pending",
@@ -1055,6 +1055,7 @@
       "blockers": [
         "assumed_or_non_executable_price",
         "unverified_price_provenance",
+        "price_not_pregame",
         "edge_no_usable_price_baseline",
         "value_no_usable_price_baseline"
       ],
@@ -1110,7 +1111,8 @@
         ],
         "structural": [
           "assumed_or_non_executable_price",
-          "unverified_price_provenance"
+          "unverified_price_provenance",
+          "price_not_pregame"
         ],
         "value": [
           "value_no_usable_price_baseline"
@@ -1128,12 +1130,12 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 0.078,
+        "ageHours": -0.682,
         "breakEvenProbability": 0.52381,
         "decimalOdds": 1.909091,
         "eligibleForAlphaEstimate": false,
-        "fresh": true,
-        "freshPregame": true,
+        "fresh": false,
+        "freshPregame": false,
         "maxAgeHours": 24.0,
         "noVigInputs": {
           "field": "market_no_vig_probability"
@@ -1149,10 +1151,10 @@
         "startTime": "2026-09-07T18:10Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-07T18:05:19.882438Z",
+        "timestamp": "2026-09-07T18:50:55.564734Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": true,
-        "updatedAt": "2026-09-07T18:05:19.882438Z"
+        "updatedAt": "2026-09-07T18:50:55.564734Z"
       },
       "rawModelProbabilityIgnored": 0.5542,
       "result": "pending",
@@ -1169,7 +1171,7 @@
   "date": "2026-09-07",
   "engineVersion": "profit_desk_v2_live",
   "firstLiveDate": "2026-07-11",
-  "generatedAt": "2026-09-07T18:20:39.659099Z",
+  "generatedAt": "2026-09-07T18:50:55.564734Z",
   "notices": [
     "Qualified picks carry real flat stakes: EDGE 1.0u, VALUE 0.5u; everything else stays 0u.",
     "The market price is the baseline; historical residual alpha is shrunk and uncertainty-adjusted.",
