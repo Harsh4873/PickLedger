@@ -106,7 +106,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 21.97,
+        "ageHours": 18.367,
         "breakEvenProbability": 0.534884,
         "decimalOdds": 1.869565,
         "eligibleForAlphaEstimate": true,
@@ -127,10 +127,10 @@
         "startTime": "2026-09-08T01:10Z",
         "tier": "A",
         "tierLabel": "certified_executable",
-        "timestamp": "2026-09-07T03:11:49.443116Z",
+        "timestamp": "2026-09-07T06:48:00.216586Z",
         "timestampField": "pick.market_updated_at",
         "twoSided": true,
-        "updatedAt": "2026-09-07T03:11:49.443116Z"
+        "updatedAt": "2026-09-07T06:48:00.216586Z"
       },
       "rawModelProbabilityIgnored": 0.5706,
       "result": "pending",
