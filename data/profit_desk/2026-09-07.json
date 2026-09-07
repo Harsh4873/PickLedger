@@ -826,7 +826,7 @@
         "updatedAt": "2026-09-07T14:39:49.098375Z"
       },
       "rawModelProbabilityIgnored": 0.56,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -926,7 +926,7 @@
         "quality": "assumed",
         "source": "user_assumed_no_run_inning_-120",
         "sourceField": "pick.odds_source",
-        "startTime": "2026-09-07T18:10:00Z",
+        "startTime": "2026-09-07T18:10Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
         "timestamp": "2026-09-07T18:05:19.882438Z",
