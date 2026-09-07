@@ -1,0 +1,58 @@
+{
+  "date": "2026-09-07",
+  "rows": [
+    {
+      "capturedAt": "2026-09-07T19:05:05.708703Z",
+      "decimalOdds": 2.0,
+      "marketIdentity": "market:d047db76940147c12bf9f600",
+      "matchup": "Minnesota Twins @ Detroit Tigers",
+      "noVigProbability": 0.469388,
+      "oddsAmerican": 100,
+      "pick": "Over 4.5 F5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-07T19:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-07T19:05:05.708703Z",
+      "decimalOdds": 1.714286,
+      "marketIdentity": "market:44b4b9db159541d6763488af",
+      "matchup": "Minnesota Twins @ Detroit Tigers",
+      "noVigProbability": 0.550562,
+      "oddsAmerican": -140,
+      "pick": "Detroit Tigers F5 ML",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-07T19:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-07T19:05:05.708703Z",
+      "decimalOdds": 2.02,
+      "marketIdentity": "market:09caf7538cc0c471153bfb1a",
+      "matchup": "",
+      "noVigProbability": 0.472999,
+      "oddsAmerican": 102,
+      "pick": "Twins ML (Twins vs Tigers)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-07T19:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-07T19:05:05.708703Z",
+      "decimalOdds": 2.1,
+      "marketIdentity": "market:3bd0638faedb61d920f78cf5",
+      "matchup": "Detroit Tigers vs Minnesota Twins",
+      "noVigProbability": 0.449438,
+      "oddsAmerican": 110,
+      "pick": "Detroit Tigers Team Total Under 3.5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-07T19:10:00Z"
+    }
+  ],
+  "updatedAt": "2026-09-07T19:05:05.715597Z"
+}
