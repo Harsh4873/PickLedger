@@ -162,28 +162,13 @@
           "closing_line_movement": null,
           "closing_line_source": "not_tracked",
           "confidence": "Medium",
-          "consensus_applicable_models": [
-            "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-            "mlb_season: 2026 market classifier"
-          ],
           "consensus_conservative_validation_accuracy": 0.7674418604651163,
           "consensus_evaluated": true,
           "consensus_history_probability": 0.8438110500574112,
           "consensus_history_projection": null,
           "consensus_holdout_accuracy": 0.8064516129032258,
           "consensus_model_agreement": true,
-          "consensus_model_count": 4,
-          "consensus_models": [
-            "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-            "mlb_season: 2026 market classifier",
-            "wnba_history: 2024-26 workload-aware market/count models",
-            "wnba_season: 2026 market/count models"
-          ],
           "consensus_qualified": true,
-          "consensus_record_models": [
-            "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-            "mlb_season: 2026 market classifier"
-          ],
           "consensus_rejection_reason": null,
           "consensus_required": true,
           "consensus_score": 0.8220607623603388,
@@ -196,7 +181,6 @@
           "edge_basis": "no_vig",
           "full_kelly": 0.2,
           "game_id": "823174",
-          "game_start_time": "2026-09-09T01:45Z",
           "h2h": {
             "at_bats": 0,
             "available": false,
@@ -207,7 +191,6 @@
           "home_team": "San Francisco Giants",
           "id": "pp_c0e912313c9972e081d3_consensus",
           "key_factors": [
-            "Four-model consensus suite active: mlb_history, mlb_season, wnba_history, wnba_season",
             "Active four-model consensus gate qualified publication",
             "All Time model signal",
             "History model over probability 15.6%",
