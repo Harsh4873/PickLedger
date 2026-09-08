@@ -46,7 +46,7 @@
   ],
   "date": "2026-09-08",
   "engineVersion": "parlay_cards_v6_proven_legs",
-  "generatedAt": "2026-09-08T15:07:00.416209Z",
+  "generatedAt": "2026-09-08T15:17:57.661434Z",
   "notices": [
     "Leg probabilities are anchored to market prices and adjusted only by each source's proven trailing excess.",
     "No same-game, same-player, or same-side duplicate legs are allowed; game keys are canonicalized across sources.",
@@ -91,7 +91,7 @@
   "summary": {
     "averageOdds": null,
     "displayedCards": 0,
-    "eligibleLegs": 0,
+    "eligibleLegs": 6,
     "generatedThreeLegCandidates": 0,
     "modes": {
       "player": {
