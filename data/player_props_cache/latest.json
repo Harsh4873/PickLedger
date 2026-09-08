@@ -1,18 +1,18 @@
 {
   "date": "2026-09-08",
-  "generatedAt": "2026-09-08T17:17:03.566600Z",
+  "generatedAt": "2026-09-08T18:12:46.574731Z",
   "models": {
     "mlb_player_props": {
       "abstained": false,
-      "candidate_count": 4652,
-      "consensus_rejected_count": 11795,
+      "candidate_count": 4645,
+      "consensus_rejected_count": 11768,
       "consensus_rejection_reasons": {
-        "batter_strikeouts has not cleared 70%": 536,
+        "batter_strikeouts has not cleared 70%": 530,
         "batter_walks has not cleared 70%": 1574,
         "doubles has not cleared 70%": 988,
         "failed: season_rate": 8,
-        "hits has not cleared 70%": 1996,
-        "hits_runs_rbis has not cleared 70%": 1935,
+        "hits has not cleared 70%": 1983,
+        "hits_runs_rbis has not cleared 70%": 1923,
         "home_runs has not cleared 70%": 486,
         "missing season/history player profile": 8,
         "pitcher_earned_runs_allowed has not cleared 70%": 48,
@@ -23,7 +23,7 @@
         "singles has not cleared 70%": 988,
         "stolen_bases has not cleared 70%": 536,
         "strikeouts has not cleared 70%": 213,
-        "total_bases has not cleared 70%": 682,
+        "total_bases has not cleared 70%": 686,
         "triples has not cleared 70%": 338,
         "under price unavailable": 781
       },
@@ -67,7 +67,7 @@
         {
           "id": "pp_dc16bb29a6bc8a9c71a8_season",
           "line": 5.5,
-          "odds": 112,
+          "odds": 113,
           "player_name": "Tanner Bibee",
           "reason": "strikeouts has not cleared 70%",
           "selection": "Over",
@@ -85,7 +85,7 @@
         {
           "id": "pp_e58d594cfac8dbf9d274_season",
           "line": 4.5,
-          "odds": -165,
+          "odds": -157,
           "player_name": "Brandon Young",
           "reason": "pitcher_hits_allowed has not cleared 70%",
           "selection": "Over",
@@ -94,7 +94,7 @@
         {
           "id": "pp_7da1efcaa30c312a8bd0_season",
           "line": 2.5,
-          "odds": -132,
+          "odds": -136,
           "player_name": "Brandon Young",
           "reason": "pitcher_earned_runs_allowed has not cleared 70%",
           "selection": "Under",
@@ -121,7 +121,7 @@
         {
           "id": "pp_21a193e2da1026ff744a_season",
           "line": 3.5,
-          "odds": -131,
+          "odds": -133,
           "player_name": "Brandon Young",
           "reason": "strikeouts has not cleared 70%",
           "selection": "Over",
@@ -242,11 +242,11 @@
           "ml_probability": 0.8377,
           "ml_probability_mode": "four_model_consensus_gate",
           "ml_rank": 1,
-          "ml_rank_epoch": "MLB:player_props_consensus_v2.0.0:published:4d71f5eac4c4321b",
+          "ml_rank_epoch": "MLB:player_props_consensus_v2.0.0:published:155ed7f983355cbe",
           "ml_raw_probability": 0.8377,
           "ml_stake_cap": 0.5,
-          "ml_training_fingerprint": "4d71f5eac4c4321b65fc37fb016d8df074aec7bcfa8c245e98b9fb8b19240f1d",
-          "model_epoch": "MLB:player_props_consensus_v2.0.0:published:4d71f5eac4c4321b",
+          "ml_training_fingerprint": "155ed7f983355cbe1013ccea5c34ee4996490acd6d789236b63ceec65534385f",
+          "model_epoch": "MLB:player_props_consensus_v2.0.0:published:155ed7f983355cbe",
           "model_key": "mlb_player_props",
           "model_rank": 1,
           "model_variant": "all_time",
@@ -275,9 +275,9 @@
           "published_model": "MLBPlayerProps",
           "quarter_kelly": 0.05,
           "rank": 1,
-          "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:4d71f5eac4c4321b",
+          "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:155ed7f983355cbe",
           "ranking_model": "MLBPlayerProps",
-          "ranking_updated_at": "2026-09-08T17:17:03.566600Z",
+          "ranking_updated_at": "2026-09-08T18:12:46.574731Z",
           "reason": "The active four-model consensus gate qualifies this market at 83.8%; the All Time variant is retained as a supporting signal.",
           "research_details": "History model over probability 15.6%; Under history hit rate 69-80 (86.2%)",
           "result": "pending",
@@ -286,7 +286,7 @@
           "selection": "Under",
           "source": "MLBPlayerProps",
           "sport": "MLB",
-          "start_time": "2026-09-09T01:45Z",
+          "start_time": "2026-09-09T01:45:00Z",
           "stat_key": "rbis",
           "stat_label": "RBIs",
           "supporting_variant": "all_time",
@@ -302,11 +302,11 @@
           "weather_factor": 1.0
         }
       ],
-      "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:4d71f5eac4c4321b",
-      "ranking_updated_at": "2026-09-08T17:17:03.566600Z",
-      "scored_count": 12771,
+      "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:155ed7f983355cbe",
+      "ranking_updated_at": "2026-09-08T18:12:46.574731Z",
+      "scored_count": 12744,
       "sport": "MLB",
-      "training_fingerprint": "4d71f5eac4c4321b65fc37fb016d8df074aec7bcfa8c245e98b9fb8b19240f1d"
+      "training_fingerprint": "155ed7f983355cbe1013ccea5c34ee4996490acd6d789236b63ceec65534385f"
     },
     "nba_player_props": {
       "abstained": false,
@@ -330,7 +330,7 @@
       "note": "No NBA prop cleared the consensus publication gate.",
       "ok": true,
       "picks": [],
-      "ranking_epoch": "NBA:player_props_consensus_v2.0.0:published:4d71f5eac4c4321b",
+      "ranking_epoch": "NBA:player_props_consensus_v2.0.0:published:155ed7f983355cbe",
       "scored_count": 0,
       "sport": "NBA"
     },
@@ -356,10 +356,10 @@
       "note": "No WNBA prop cleared the consensus publication gate.",
       "ok": true,
       "picks": [],
-      "ranking_epoch": "WNBA:player_props_consensus_v2.0.0:published:4d71f5eac4c4321b",
+      "ranking_epoch": "WNBA:player_props_consensus_v2.0.0:published:155ed7f983355cbe",
       "scored_count": 0,
       "sport": "WNBA"
     }
   },
-  "updatedAt": "2026-09-08T17:17:03.566600Z"
+  "updatedAt": "2026-09-08T18:12:46.574731Z"
 }
