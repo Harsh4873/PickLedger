@@ -540834,7 +540834,7 @@
       "model_key": "mlb_new",
       "model_version": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
       "odds": -115.0,
-      "outcome": null,
+      "outcome": 0,
       "pick": "Under 8.5 (Cincinnati Reds vs Los Angeles Dodgers)",
       "pregame_snapshot": {
         "assumed_odds_replaced": true,
@@ -540881,12 +540881,12 @@
         "vegas": 8.5
       },
       "probability": 0.5802,
-      "profit": null,
+      "profit": -0.25,
       "raw_decision": "LEAN",
       "raw_edge": 4.68,
       "raw_probability": 0.5706,
       "raw_units": 0.25,
-      "result": "pending",
+      "result": "loss",
       "source": "MLB Model",
       "sport": "MLB",
       "stake_units": 0.25,
@@ -540906,7 +540906,7 @@
       "model_key": "mlb_new",
       "model_version": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
       "odds": -114.0,
-      "outcome": null,
+      "outcome": 0,
       "pick": "Under 8.5 (Cincinnati Reds vs Los Angeles Dodgers)",
       "pregame_snapshot": {
         "assumed_odds_replaced": true,
@@ -540953,12 +540953,12 @@
         "vegas": 8.5
       },
       "probability": 0.5802,
-      "profit": null,
+      "profit": -0.25,
       "raw_decision": "LEAN",
       "raw_edge": 4.68,
       "raw_probability": 0.5706,
       "raw_units": 0.25,
-      "result": "pending",
+      "result": "loss",
       "source": "MLB Model",
       "sport": "MLB",
       "stake_units": 0.25,
@@ -540978,7 +540978,7 @@
       "model_key": "mlb_new",
       "model_version": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
       "odds": -114.0,
-      "outcome": null,
+      "outcome": 0,
       "pick": "Under 8.5 (Cincinnati Reds vs Los Angeles Dodgers)",
       "pregame_snapshot": {
         "assumed_odds_replaced": true,
@@ -541025,12 +541025,12 @@
         "vegas": 8.5
       },
       "probability": 0.5802,
-      "profit": null,
+      "profit": -0.25,
       "raw_decision": "LEAN",
       "raw_edge": 4.68,
       "raw_probability": 0.5706,
       "raw_units": 0.25,
-      "result": "pending",
+      "result": "loss",
       "source": "MLB Model",
       "sport": "MLB",
       "stake_units": 0.25,
@@ -541051,7 +541051,7 @@
       "ml_calibration_excluded": true,
       "model_key": "mlb_player_props",
       "odds": -389.0,
-      "outcome": null,
+      "outcome": 1,
       "pick": "Andrew Knizner Under 0.5 RBIs",
       "pregame_snapshot": {
         "actionability": "consensus_qualified",
@@ -541201,12 +541201,12 @@
       },
       "probability": 0.8381,
       "probability_source": "player_props_ml_v1",
-      "profit": null,
+      "profit": 0.2570694087403599,
       "raw_decision": "LEAN",
       "raw_edge": 4.26,
       "raw_probability": 0.8381,
       "raw_units": 1.0,
-      "result": "pending",
+      "result": "win",
       "source": "MLBPlayerProps",
       "sport": "MLB",
       "stake_units": 1.0,
@@ -541375,9 +541375,9 @@
   ],
   "schema_version": 1,
   "summary": {
-    "decided_picks": 6755,
-    "pending_picks": 104,
+    "decided_picks": 6759,
+    "pending_picks": 100,
     "total_picks": 7072,
-    "trainable_decided_picks": 783
+    "trainable_decided_picks": 786
   }
 }

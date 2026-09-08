@@ -12,6 +12,14 @@
         "value_insufficient_source_samples"
       ],
       "canonicalGame": "2026-09-07:mlb:cincinnati reds|los angeles dodgers",
+      "closing": {
+        "capturedAt": "2026-09-08T00:38:30.299788Z",
+        "clv": 0.00408,
+        "decimalOdds": 1.869565,
+        "noVigProbability": 0.512003,
+        "oddsAmerican": -115,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-07",
       "decimalOdds": 1.877193,
@@ -133,7 +141,7 @@
         "updatedAt": "2026-09-07T22:14:39.241894Z"
       },
       "rawModelProbabilityIgnored": 0.5706,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -271,7 +279,7 @@
         "updatedAt": "2026-09-08T00:12Z"
       },
       "rawModelProbabilityIgnored": 0.8381,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLBPlayerProps",
       "sourceKey": "mlb_player_props",
@@ -1044,7 +1052,7 @@
         "updatedAt": "2026-09-07T23:07:44.288622Z"
       },
       "rawModelProbabilityIgnored": 0.589,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
