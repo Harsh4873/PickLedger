@@ -130,7 +130,59 @@
       "role": "anchor",
       "sport": "MLB",
       "startTime": "2026-09-08T01:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-08T02:03:45.248078Z",
+      "decimalOdds": 1.465116,
+      "marketIdentity": "market:0404d2b0e2cdd47e72923551",
+      "matchup": "Toronto Blue Jays @ Athletics",
+      "noVigProbability": 0.643967,
+      "oddsAmerican": -215,
+      "pick": "Toronto Blue Jays F5 ML",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-08T02:05:00Z"
+    },
+    {
+      "capturedAt": "2026-09-08T02:03:45.248078Z",
+      "decimalOdds": 2.2,
+      "marketIdentity": "market:0c17339c142ced5a54718083",
+      "matchup": "Toronto Blue Jays @ Athletics",
+      "noVigProbability": 0.428475,
+      "oddsAmerican": 120,
+      "pick": "Over 4.5 F5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-08T02:05:00Z"
+    },
+    {
+      "capturedAt": "2026-09-08T02:03:45.248078Z",
+      "decimalOdds": 1.480769,
+      "marketIdentity": "market:7537fbb4f2217c3ce564c87b",
+      "matchup": "",
+      "noVigProbability": 0.645814,
+      "oddsAmerican": -208,
+      "pick": "Blue Jays ML (Blue Jays vs Athletics)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-08T02:05:00Z"
+    },
+    {
+      "capturedAt": "2026-09-08T02:03:45.248078Z",
+      "decimalOdds": 1.952381,
+      "marketIdentity": "market:9fba7ca2b24d6d225ec69136",
+      "matchup": "Athletics vs Toronto Blue Jays",
+      "noVigProbability": 0.479695,
+      "oddsAmerican": -105,
+      "pick": "Toronto Blue Jays Team Total Under 4.5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-08T02:05:00Z"
     }
   ],
-  "updatedAt": "2026-09-08T00:38:30.306899Z"
+  "updatedAt": "2026-09-08T02:03:45.252880Z"
 }
