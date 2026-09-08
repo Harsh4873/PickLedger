@@ -52,7 +52,85 @@
       "role": "anchor",
       "sport": "MLB",
       "startTime": "2026-09-07T19:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-08T00:38:30.299788Z",
+      "decimalOdds": 1.909091,
+      "marketIdentity": "market:316e04ba8ecbca5adab447f9",
+      "matchup": "Cincinnati Reds @ Los Angeles Dodgers",
+      "noVigProbability": 0.489879,
+      "oddsAmerican": -110,
+      "pick": "Over 4.5 F5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-08T01:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-08T00:38:30.299788Z",
+      "decimalOdds": 2.14,
+      "marketIdentity": "market:8739cb2d51926a143c0fef76",
+      "matchup": "Cincinnati Reds @ Los Angeles Dodgers",
+      "noVigProbability": 0.441203,
+      "oddsAmerican": 114,
+      "pick": "Cincinnati Reds F5 ML",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-08T01:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-08T00:38:30.299788Z",
+      "decimalOdds": 2.49,
+      "marketIdentity": "market:e03499ee2a4aad3ee5c8800f",
+      "matchup": "",
+      "noVigProbability": 0.384042,
+      "oddsAmerican": 149,
+      "pick": "Reds ML (Reds vs Dodgers)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-08T01:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-08T00:38:30.299788Z",
+      "decimalOdds": 1.869565,
+      "marketIdentity": "market:d214441d559f331207f26193",
+      "matchup": "",
+      "noVigProbability": 0.512003,
+      "oddsAmerican": -115,
+      "pick": "Under 8.5 (Cincinnati Reds vs Los Angeles Dodgers)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-08T01:10Z"
+    },
+    {
+      "capturedAt": "2026-09-08T00:38:30.299788Z",
+      "decimalOdds": 1.552486,
+      "marketIdentity": "market:9b36fe13f5cd9d8668e27f09",
+      "matchup": "",
+      "noVigProbability": 0.615958,
+      "oddsAmerican": -181,
+      "pick": "Dodgers ML (Reds vs Dodgers)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-08T01:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-08T00:38:30.299788Z",
+      "decimalOdds": 1.833333,
+      "marketIdentity": "market:5b219a50fb3464c82e120142",
+      "matchup": "Los Angeles Dodgers vs Cincinnati Reds",
+      "noVigProbability": 0.510121,
+      "oddsAmerican": -120,
+      "pick": "Los Angeles Dodgers Team Total Under 4.5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-08T01:10:00Z"
     }
   ],
-  "updatedAt": "2026-09-07T19:05:05.715597Z"
+  "updatedAt": "2026-09-08T00:38:30.306899Z"
 }
