@@ -1,0 +1,58 @@
+{
+  "date": "2026-09-08",
+  "rows": [
+    {
+      "capturedAt": "2026-09-08T21:22:35.210939Z",
+      "decimalOdds": 1.869565,
+      "marketIdentity": "market:f21081f180f030d21ae23360",
+      "matchup": "Cleveland Guardians @ Baltimore Orioles",
+      "noVigProbability": 0.5,
+      "oddsAmerican": -115,
+      "pick": "Baltimore Orioles F5 ML",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-08T22:35:00Z"
+    },
+    {
+      "capturedAt": "2026-09-08T21:22:35.210939Z",
+      "decimalOdds": 1.909091,
+      "marketIdentity": "market:c8c1c3d9a20215937d0ebca5",
+      "matchup": "Cleveland Guardians @ Baltimore Orioles",
+      "noVigProbability": 0.489879,
+      "oddsAmerican": -110,
+      "pick": "Over 4.5 F5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-08T22:35:00Z"
+    },
+    {
+      "capturedAt": "2026-09-08T21:22:35.210939Z",
+      "decimalOdds": 1.813008,
+      "marketIdentity": "market:e9dc65da75b1f630e5e8bae7",
+      "matchup": "",
+      "noVigProbability": 0.527001,
+      "oddsAmerican": -123,
+      "pick": "Orioles ML (Guardians vs Orioles)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-08T22:35:00Z"
+    },
+    {
+      "capturedAt": "2026-09-08T21:22:35.210939Z",
+      "decimalOdds": 2.02,
+      "marketIdentity": "market:d7548adf6d8256474f06f7ad",
+      "matchup": "Cleveland Guardians @ Baltimore Orioles",
+      "noVigProbability": 0.472999,
+      "oddsAmerican": 102,
+      "pick": "Cleveland Guardians ML (Cleveland Guardians @ Baltimore Orioles)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-08T22:35Z"
+    }
+  ],
+  "updatedAt": "2026-09-08T21:22:35.223128Z"
+}
