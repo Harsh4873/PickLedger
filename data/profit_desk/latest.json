@@ -240,7 +240,7 @@
         "quality": "verified_two_sided",
         "source": "posted_market",
         "sourceField": "pick.odds_source",
-        "startTime": "2026-09-09T01:45:00Z",
+        "startTime": "2026-09-09T01:45Z",
         "tier": "B",
         "tierLabel": "posted_two_sided",
         "timestamp": "2026-09-09T00:34Z",
