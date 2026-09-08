@@ -1,6 +1,6 @@
 {
   "date": "2026-09-08",
-  "generatedAt": "2026-09-08T16:59:22.479644Z",
+  "generatedAt": "2026-09-08T17:17:03.566600Z",
   "models": {
     "mlb_player_props": {
       "abstained": false,
@@ -241,11 +241,11 @@
           "ml_probability": 0.8377,
           "ml_probability_mode": "four_model_consensus_gate",
           "ml_rank": 1,
-          "ml_rank_epoch": "MLB:player_props_consensus_v2.0.0:published:f2d0519330fc66ae",
+          "ml_rank_epoch": "MLB:player_props_consensus_v2.0.0:published:4d71f5eac4c4321b",
           "ml_raw_probability": 0.8377,
           "ml_stake_cap": 0.5,
-          "ml_training_fingerprint": "f2d0519330fc66ae90a504536f168d5bff49e2803f883023d3028648b085b36b",
-          "model_epoch": "MLB:player_props_consensus_v2.0.0:published:f2d0519330fc66ae",
+          "ml_training_fingerprint": "4d71f5eac4c4321b65fc37fb016d8df074aec7bcfa8c245e98b9fb8b19240f1d",
+          "model_epoch": "MLB:player_props_consensus_v2.0.0:published:4d71f5eac4c4321b",
           "model_key": "mlb_player_props",
           "model_rank": 1,
           "model_variant": "all_time",
@@ -274,9 +274,9 @@
           "published_model": "MLBPlayerProps",
           "quarter_kelly": 0.05,
           "rank": 1,
-          "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:f2d0519330fc66ae",
+          "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:4d71f5eac4c4321b",
           "ranking_model": "MLBPlayerProps",
-          "ranking_updated_at": "2026-09-08T16:59:22.479644Z",
+          "ranking_updated_at": "2026-09-08T17:17:03.566600Z",
           "reason": "The active four-model consensus gate qualifies this market at 83.8%; the All Time variant is retained as a supporting signal.",
           "research_details": "History model over probability 15.6%; Under history hit rate 69-80 (86.2%)",
           "result": "pending",
@@ -301,11 +301,11 @@
           "weather_factor": 1.0
         }
       ],
-      "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:f2d0519330fc66ae",
-      "ranking_updated_at": "2026-09-08T16:59:22.479644Z",
+      "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:4d71f5eac4c4321b",
+      "ranking_updated_at": "2026-09-08T17:17:03.566600Z",
       "scored_count": 12771,
       "sport": "MLB",
-      "training_fingerprint": "f2d0519330fc66ae90a504536f168d5bff49e2803f883023d3028648b085b36b"
+      "training_fingerprint": "4d71f5eac4c4321b65fc37fb016d8df074aec7bcfa8c245e98b9fb8b19240f1d"
     },
     "nba_player_props": {
       "abstained": false,
@@ -329,7 +329,7 @@
       "note": "No NBA prop cleared the consensus publication gate.",
       "ok": true,
       "picks": [],
-      "ranking_epoch": "NBA:player_props_consensus_v2.0.0:published:f2d0519330fc66ae",
+      "ranking_epoch": "NBA:player_props_consensus_v2.0.0:published:4d71f5eac4c4321b",
       "scored_count": 0,
       "sport": "NBA"
     },
@@ -355,10 +355,10 @@
       "note": "No WNBA prop cleared the consensus publication gate.",
       "ok": true,
       "picks": [],
-      "ranking_epoch": "WNBA:player_props_consensus_v2.0.0:published:f2d0519330fc66ae",
+      "ranking_epoch": "WNBA:player_props_consensus_v2.0.0:published:4d71f5eac4c4321b",
       "scored_count": 0,
       "sport": "WNBA"
     }
   },
-  "updatedAt": "2026-09-08T16:59:22.479644Z"
+  "updatedAt": "2026-09-08T17:17:03.566600Z"
 }
