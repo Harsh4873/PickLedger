@@ -7,7 +7,7 @@
   "errors": [
     "cfb: 403 Client Error: Forbidden for url: https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?dates=20260908&groups=80&limit=1000"
   ],
-  "externalFeedsUpdatedAt": "2026-09-08T15:06:04.574650Z",
+  "externalFeedsUpdatedAt": "2026-09-08T21:05:59.485515Z",
   "external_feed_errors": [
     "scores24_tennis: Scores24Tennis could not resolve an official 2026-09-08 tennis slate"
   ],
@@ -489,11 +489,11 @@
     },
     "scores24_cfb": {
       "date": "2026-09-08",
-      "generatedAt": "2026-09-08T15:04:13.070965Z",
+      "generatedAt": "2026-09-08T21:02:26.087661Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-08T15:04:13.070965Z",
+      "lastAttemptAt": "2026-09-08T21:02:26.087661Z",
       "lastAttemptDate": "2026-09-08",
-      "lastSuccessAt": "2026-09-08T15:04:13.070965Z",
+      "lastSuccessAt": "2026-09-08T21:02:26.087661Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -503,74 +503,75 @@
         "expectedMatchups": 0,
         "feed": "scores24_cfb",
         "from": "local",
-        "leagues": "mlb,wnba,cfb",
+        "leagues": "mlb,wnba,cfb,fifa_world_cup,nba_summer",
         "matchedPicks": 0,
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-08T15:04:13.070965Z"
+        "updatedAt": "2026-09-08T21:02:26.087661Z"
       },
       "note": "Scores24CFB has no official 2026-09-08 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-08T15:04:13.070965Z"
+      "updatedAt": "2026-09-08T21:02:26.087661Z"
     },
     "scores24_fifa_world_cup": {
-      "date": "2026-09-07",
-      "generatedAt": "2026-09-07T21:06:29.246021Z",
+      "date": "2026-09-08",
+      "generatedAt": "2026-09-08T21:03:32.204966Z",
       "generatedBy": "local:external-feed-refresh",
+      "lastAttemptAt": "2026-09-08T21:03:32.204966Z",
+      "lastAttemptDate": "2026-09-08",
+      "lastSuccessAt": "2026-09-08T21:03:32.204966Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
         "blockedUrls": 0,
         "checkpointedPicks": 0,
-        "date": "2026-09-07",
-        "espnResolve": "camoufox",
+        "date": "2026-09-08",
         "expectedMatchups": 0,
         "feed": "scores24_fifa_world_cup",
         "from": "local",
-        "leagues": "mlb,wnba,cfb",
+        "leagues": "mlb,wnba,cfb,fifa_world_cup,nba_summer",
         "matchedPicks": 0,
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-07T21:06:29.246021Z"
+        "updatedAt": "2026-09-08T21:03:32.204966Z"
       },
-      "note": "Scores24FIFAWorldCup has no official 2026-09-07 matchups.",
+      "note": "Scores24FIFAWorldCup has no official 2026-09-08 matchups.",
       "ok": true,
       "picks": [],
-      "updatedAt": "2026-09-07T21:06:29.246021Z"
+      "refreshStatus": "ok",
+      "updatedAt": "2026-09-08T21:03:32.204966Z"
     },
     "scores24_mlb": {
       "date": "2026-09-08",
-      "generatedAt": "2026-09-08T14:53:14.494241Z",
+      "generatedAt": "2026-09-08T20:58:42.830403Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-08T14:53:14.494241Z",
+      "lastAttemptAt": "2026-09-08T20:58:42.830403Z",
       "lastAttemptDate": "2026-09-08",
-      "lastSuccessAt": "2026-09-08T14:53:14.494241Z",
+      "lastSuccessAt": "2026-09-08T20:58:42.830403Z",
       "meta": {
-        "attemptedUrls": 21,
+        "attemptedUrls": 1,
         "blockRetryRounds": 0,
         "blockedUrls": 0,
-        "checkpointedPicks": 0,
+        "checkpointedPicks": 14,
         "date": "2026-09-08",
-        "expectedMatchups": 14,
+        "expectedMatchups": 15,
         "feed": "scores24_mlb",
         "from": "local",
         "leagues": "mlb,wnba,cfb",
         "listingLinks": 12,
         "listingResolved": true,
         "listingUrlsAttempted": 1,
-        "matchedPicks": 14,
+        "matchedPicks": 15,
         "missingMatchups": [],
         "officialMatchups": 15,
-        "unpublishedMatchups": [
-          "Tampa Bay Rays @ Atlanta Braves"
-        ],
-        "updatedAt": "2026-09-08T14:53:14.494241Z"
+        "unpublishedMatchups": [],
+        "updatedAt": "2026-09-08T20:58:42.830403Z"
       },
-      "note": "Scores24MLB matched 14 published editorial choice(s) against 15 official 2026-09-08 matchup(s).",
+      "note": "Scores24MLB matched 15 published editorial choice(s) against 15 official 2026-09-08 matchup(s).",
       "ok": true,
       "picks": [
         {
@@ -866,43 +867,67 @@
           "start_time": "2026-09-09T01:40Z",
           "tip": "Total Over (7,5)",
           "units": 0
+        },
+        {
+          "away_team": "Tampa Bay Rays",
+          "date": "2026-09-08",
+          "decision": "PASS",
+          "edge": null,
+          "game": "Tampa Bay Rays @ Atlanta Braves",
+          "home_team": "Atlanta Braves",
+          "matchup": "Tampa Bay Rays @ Atlanta Braves",
+          "odds": -167,
+          "pick": "Total Under (9,5) (Tampa Bay Rays @ Atlanta Braves)",
+          "probability": null,
+          "scraped_tip_demoted": true,
+          "source": "Scores24MLB",
+          "source_decision": "BET",
+          "source_units": 1,
+          "source_url": "https://scores24.live/en/baseball/m-08-09-2026-atlanta-braves-tampa-bay-rays-prediction",
+          "sport": "MLB",
+          "start_time": "2026-09-08T23:15:00Z",
+          "tip": "Total Under (9,5)",
+          "units": 0
         }
       ],
       "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-08T14:53:14.494241Z"
+      "updatedAt": "2026-09-08T20:58:42.830403Z"
     },
     "scores24_nba_summer": {
-      "date": "2026-09-07",
-      "generatedAt": "2026-09-07T21:06:29.246021Z",
+      "date": "2026-09-08",
+      "generatedAt": "2026-09-08T21:04:38.353531Z",
       "generatedBy": "local:external-feed-refresh",
+      "lastAttemptAt": "2026-09-08T21:04:38.353531Z",
+      "lastAttemptDate": "2026-09-08",
+      "lastSuccessAt": "2026-09-08T21:04:38.353531Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
         "blockedUrls": 0,
         "checkpointedPicks": 0,
-        "date": "2026-09-07",
-        "espnResolve": "camoufox",
+        "date": "2026-09-08",
         "expectedMatchups": 0,
         "feed": "scores24_nba_summer",
         "from": "local",
-        "leagues": "mlb,wnba,cfb",
+        "leagues": "mlb,wnba,cfb,fifa_world_cup,nba_summer",
         "matchedPicks": 0,
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-07T21:06:29.246021Z"
+        "updatedAt": "2026-09-08T21:04:38.353531Z"
       },
-      "note": "Scores24NBASummer has no official 2026-09-07 matchups.",
+      "note": "Scores24NBASummer has no official 2026-09-08 matchups.",
       "ok": true,
       "picks": [],
-      "updatedAt": "2026-09-07T21:06:29.246021Z"
+      "refreshStatus": "ok",
+      "updatedAt": "2026-09-08T21:04:38.353531Z"
     },
     "scores24_tennis": {
       "date": "2026-08-31",
       "generatedAt": "2026-08-31T14:49:13.410911Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-08T15:06:04.574650Z",
+      "lastAttemptAt": "2026-09-08T21:05:59.485515Z",
       "lastAttemptDate": "2026-09-08",
       "lastError": "Scores24Tennis could not resolve an official 2026-09-08 tennis slate",
       "lastSuccessAt": "2026-08-31T14:49:13.410911Z",
@@ -1065,11 +1090,11 @@
     },
     "scores24_wnba": {
       "date": "2026-09-08",
-      "generatedAt": "2026-09-08T15:01:46.212695Z",
+      "generatedAt": "2026-09-08T21:00:50.129339Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-08T15:01:46.212695Z",
+      "lastAttemptAt": "2026-09-08T21:00:50.129339Z",
       "lastAttemptDate": "2026-09-08",
-      "lastSuccessAt": "2026-09-08T15:01:46.212695Z",
+      "lastSuccessAt": "2026-09-08T21:00:50.129339Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -1084,13 +1109,13 @@
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-08T15:01:46.212695Z"
+        "updatedAt": "2026-09-08T21:00:50.129339Z"
       },
       "note": "Scores24WNBA has no official 2026-09-08 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-08T15:01:46.212695Z"
+      "updatedAt": "2026-09-08T21:00:50.129339Z"
     },
     "sportsgambler_cfb": {
       "date": "2026-09-07",
@@ -66854,11 +66879,11 @@
     },
     "scores24_cfb": {
       "date": "2026-09-08",
-      "generatedAt": "2026-09-08T15:04:13.070965Z",
+      "generatedAt": "2026-09-08T21:02:26.087661Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-08T15:04:13.070965Z",
+      "lastAttemptAt": "2026-09-08T21:02:26.087661Z",
       "lastAttemptDate": "2026-09-08",
-      "lastSuccessAt": "2026-09-08T15:04:13.070965Z",
+      "lastSuccessAt": "2026-09-08T21:02:26.087661Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -66868,48 +66893,75 @@
         "expectedMatchups": 0,
         "feed": "scores24_cfb",
         "from": "local",
-        "leagues": "mlb,wnba,cfb",
+        "leagues": "mlb,wnba,cfb,fifa_world_cup,nba_summer",
         "matchedPicks": 0,
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-08T15:04:13.070965Z"
+        "updatedAt": "2026-09-08T21:02:26.087661Z"
       },
       "note": "Scores24CFB has no official 2026-09-08 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-08T15:04:13.070965Z"
+      "updatedAt": "2026-09-08T21:02:26.087661Z"
     },
-    "scores24_mlb": {
+    "scores24_fifa_world_cup": {
       "date": "2026-09-08",
-      "generatedAt": "2026-09-08T14:53:14.494241Z",
+      "generatedAt": "2026-09-08T21:03:32.204966Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-08T14:53:14.494241Z",
+      "lastAttemptAt": "2026-09-08T21:03:32.204966Z",
       "lastAttemptDate": "2026-09-08",
-      "lastSuccessAt": "2026-09-08T14:53:14.494241Z",
+      "lastSuccessAt": "2026-09-08T21:03:32.204966Z",
       "meta": {
-        "attemptedUrls": 21,
+        "attemptedUrls": 0,
         "blockRetryRounds": 0,
         "blockedUrls": 0,
         "checkpointedPicks": 0,
         "date": "2026-09-08",
-        "expectedMatchups": 14,
+        "expectedMatchups": 0,
+        "feed": "scores24_fifa_world_cup",
+        "from": "local",
+        "leagues": "mlb,wnba,cfb,fifa_world_cup,nba_summer",
+        "matchedPicks": 0,
+        "missingMatchups": [],
+        "officialMatchups": 0,
+        "unpublishedMatchups": [],
+        "updatedAt": "2026-09-08T21:03:32.204966Z"
+      },
+      "note": "Scores24FIFAWorldCup has no official 2026-09-08 matchups.",
+      "ok": true,
+      "picks": [],
+      "refreshStatus": "ok",
+      "updatedAt": "2026-09-08T21:03:32.204966Z"
+    },
+    "scores24_mlb": {
+      "date": "2026-09-08",
+      "generatedAt": "2026-09-08T20:58:42.830403Z",
+      "generatedBy": "local:external-feed-refresh",
+      "lastAttemptAt": "2026-09-08T20:58:42.830403Z",
+      "lastAttemptDate": "2026-09-08",
+      "lastSuccessAt": "2026-09-08T20:58:42.830403Z",
+      "meta": {
+        "attemptedUrls": 1,
+        "blockRetryRounds": 0,
+        "blockedUrls": 0,
+        "checkpointedPicks": 14,
+        "date": "2026-09-08",
+        "expectedMatchups": 15,
         "feed": "scores24_mlb",
         "from": "local",
         "leagues": "mlb,wnba,cfb",
         "listingLinks": 12,
         "listingResolved": true,
         "listingUrlsAttempted": 1,
-        "matchedPicks": 14,
+        "matchedPicks": 15,
         "missingMatchups": [],
         "officialMatchups": 15,
-        "unpublishedMatchups": [
-          "Tampa Bay Rays @ Atlanta Braves"
-        ],
-        "updatedAt": "2026-09-08T14:53:14.494241Z"
+        "unpublishedMatchups": [],
+        "updatedAt": "2026-09-08T20:58:42.830403Z"
       },
-      "note": "Scores24MLB matched 14 published editorial choice(s) against 15 official 2026-09-08 matchup(s).",
+      "note": "Scores24MLB matched 15 published editorial choice(s) against 15 official 2026-09-08 matchup(s).",
       "ok": true,
       "picks": [
         {
@@ -67203,8 +67255,16 @@
           "edge": null,
           "game": "Chicago Cubs @ Milwaukee Brewers",
           "home_team": "Milwaukee Brewers",
+          "market_line": 7.0,
+          "market_no_vig_selected_probability": 0.520501,
+          "market_odds_captured_at": "2026-09-08T21:06:05.237327Z",
+          "market_odds_provider": "espn_scoreboard:DraftKings",
+          "market_over_odds": -120,
+          "market_under_odds": -101,
+          "market_updated_at": "2026-09-08T21:06:05.237327Z",
           "matchup": "Chicago Cubs @ Milwaukee Brewers",
           "odds": -149,
+          "opposite_odds": -101,
           "pick": "Total Over (7,5) (Chicago Cubs @ Milwaukee Brewers)",
           "pregame_snapshot": {
             "away_team": "Chicago Cubs",
@@ -67229,6 +67289,7 @@
           },
           "probability": null,
           "scraped_tip_demoted": true,
+          "selected_odds": -120,
           "source": "Scores24MLB",
           "source_decision": "BET",
           "source_units": 1,
@@ -67565,11 +67626,82 @@
           "start_time": "2026-09-09T01:40Z",
           "tip": "Total Over (7,5)",
           "units": 0
+        },
+        {
+          "away_team": "Tampa Bay Rays",
+          "date": "2026-09-08",
+          "decision": "PASS",
+          "edge": null,
+          "game": "Tampa Bay Rays @ Atlanta Braves",
+          "home_team": "Atlanta Braves",
+          "matchup": "Tampa Bay Rays @ Atlanta Braves",
+          "odds": -167,
+          "pick": "Total Under (9,5) (Tampa Bay Rays @ Atlanta Braves)",
+          "pregame_snapshot": {
+            "away_team": "Tampa Bay Rays",
+            "date": "2026-09-08",
+            "decision": "PASS",
+            "edge": null,
+            "game": "Tampa Bay Rays @ Atlanta Braves",
+            "home_team": "Atlanta Braves",
+            "matchup": "Tampa Bay Rays @ Atlanta Braves",
+            "odds": -167,
+            "pick": "Total Under (9,5) (Tampa Bay Rays @ Atlanta Braves)",
+            "probability": null,
+            "scraped_tip_demoted": true,
+            "source": "Scores24MLB",
+            "source_decision": "BET",
+            "source_units": 1,
+            "source_url": "https://scores24.live/en/baseball/m-08-09-2026-atlanta-braves-tampa-bay-rays-prediction",
+            "sport": "MLB",
+            "start_time": "2026-09-08T23:15:00Z",
+            "tip": "Total Under (9,5)",
+            "units": 0
+          },
+          "probability": null,
+          "scraped_tip_demoted": true,
+          "source": "Scores24MLB",
+          "source_decision": "BET",
+          "source_units": 1,
+          "source_url": "https://scores24.live/en/baseball/m-08-09-2026-atlanta-braves-tampa-bay-rays-prediction",
+          "sport": "MLB",
+          "start_time": "2026-09-08T23:15:00Z",
+          "tip": "Total Under (9,5)",
+          "units": 0
         }
       ],
       "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-08T14:53:14.494241Z"
+      "updatedAt": "2026-09-08T20:58:42.830403Z"
+    },
+    "scores24_nba_summer": {
+      "date": "2026-09-08",
+      "generatedAt": "2026-09-08T21:04:38.353531Z",
+      "generatedBy": "local:external-feed-refresh",
+      "lastAttemptAt": "2026-09-08T21:04:38.353531Z",
+      "lastAttemptDate": "2026-09-08",
+      "lastSuccessAt": "2026-09-08T21:04:38.353531Z",
+      "meta": {
+        "attemptedUrls": 0,
+        "blockRetryRounds": 0,
+        "blockedUrls": 0,
+        "checkpointedPicks": 0,
+        "date": "2026-09-08",
+        "expectedMatchups": 0,
+        "feed": "scores24_nba_summer",
+        "from": "local",
+        "leagues": "mlb,wnba,cfb,fifa_world_cup,nba_summer",
+        "matchedPicks": 0,
+        "missingMatchups": [],
+        "officialMatchups": 0,
+        "unpublishedMatchups": [],
+        "updatedAt": "2026-09-08T21:04:38.353531Z"
+      },
+      "note": "Scores24NBASummer has no official 2026-09-08 matchups.",
+      "ok": true,
+      "picks": [],
+      "refreshStatus": "ok",
+      "updatedAt": "2026-09-08T21:04:38.353531Z"
     },
     "scores24_tennis": {
       "date": "2026-08-31",
@@ -67744,11 +67876,11 @@
     },
     "scores24_wnba": {
       "date": "2026-09-08",
-      "generatedAt": "2026-09-08T15:01:46.212695Z",
+      "generatedAt": "2026-09-08T21:00:50.129339Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-08T15:01:46.212695Z",
+      "lastAttemptAt": "2026-09-08T21:00:50.129339Z",
       "lastAttemptDate": "2026-09-08",
-      "lastSuccessAt": "2026-09-08T15:01:46.212695Z",
+      "lastSuccessAt": "2026-09-08T21:00:50.129339Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -67763,13 +67895,13 @@
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-08T15:01:46.212695Z"
+        "updatedAt": "2026-09-08T21:00:50.129339Z"
       },
       "note": "Scores24WNBA has no official 2026-09-08 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-08T15:01:46.212695Z"
+      "updatedAt": "2026-09-08T21:00:50.129339Z"
     },
     "tennis": {
       "date": "2026-09-08",
@@ -70243,11 +70375,11 @@
   },
   "scores24_cfb": {
     "date": "2026-09-08",
-    "generatedAt": "2026-09-08T15:04:13.070965Z",
+    "generatedAt": "2026-09-08T21:02:26.087661Z",
     "generatedBy": "local:external-feed-refresh",
-    "lastAttemptAt": "2026-09-08T15:04:13.070965Z",
+    "lastAttemptAt": "2026-09-08T21:02:26.087661Z",
     "lastAttemptDate": "2026-09-08",
-    "lastSuccessAt": "2026-09-08T15:04:13.070965Z",
+    "lastSuccessAt": "2026-09-08T21:02:26.087661Z",
     "meta": {
       "attemptedUrls": 0,
       "blockRetryRounds": 0,
@@ -70257,48 +70389,75 @@
       "expectedMatchups": 0,
       "feed": "scores24_cfb",
       "from": "local",
-      "leagues": "mlb,wnba,cfb",
+      "leagues": "mlb,wnba,cfb,fifa_world_cup,nba_summer",
       "matchedPicks": 0,
       "missingMatchups": [],
       "officialMatchups": 0,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-08T15:04:13.070965Z"
+      "updatedAt": "2026-09-08T21:02:26.087661Z"
     },
     "note": "Scores24CFB has no official 2026-09-08 matchups.",
     "ok": true,
     "picks": [],
     "refreshStatus": "ok",
-    "updatedAt": "2026-09-08T15:04:13.070965Z"
+    "updatedAt": "2026-09-08T21:02:26.087661Z"
   },
-  "scores24_mlb": {
+  "scores24_fifa_world_cup": {
     "date": "2026-09-08",
-    "generatedAt": "2026-09-08T14:53:14.494241Z",
+    "generatedAt": "2026-09-08T21:03:32.204966Z",
     "generatedBy": "local:external-feed-refresh",
-    "lastAttemptAt": "2026-09-08T14:53:14.494241Z",
+    "lastAttemptAt": "2026-09-08T21:03:32.204966Z",
     "lastAttemptDate": "2026-09-08",
-    "lastSuccessAt": "2026-09-08T14:53:14.494241Z",
+    "lastSuccessAt": "2026-09-08T21:03:32.204966Z",
     "meta": {
-      "attemptedUrls": 21,
+      "attemptedUrls": 0,
       "blockRetryRounds": 0,
       "blockedUrls": 0,
       "checkpointedPicks": 0,
       "date": "2026-09-08",
-      "expectedMatchups": 14,
+      "expectedMatchups": 0,
+      "feed": "scores24_fifa_world_cup",
+      "from": "local",
+      "leagues": "mlb,wnba,cfb,fifa_world_cup,nba_summer",
+      "matchedPicks": 0,
+      "missingMatchups": [],
+      "officialMatchups": 0,
+      "unpublishedMatchups": [],
+      "updatedAt": "2026-09-08T21:03:32.204966Z"
+    },
+    "note": "Scores24FIFAWorldCup has no official 2026-09-08 matchups.",
+    "ok": true,
+    "picks": [],
+    "refreshStatus": "ok",
+    "updatedAt": "2026-09-08T21:03:32.204966Z"
+  },
+  "scores24_mlb": {
+    "date": "2026-09-08",
+    "generatedAt": "2026-09-08T20:58:42.830403Z",
+    "generatedBy": "local:external-feed-refresh",
+    "lastAttemptAt": "2026-09-08T20:58:42.830403Z",
+    "lastAttemptDate": "2026-09-08",
+    "lastSuccessAt": "2026-09-08T20:58:42.830403Z",
+    "meta": {
+      "attemptedUrls": 1,
+      "blockRetryRounds": 0,
+      "blockedUrls": 0,
+      "checkpointedPicks": 14,
+      "date": "2026-09-08",
+      "expectedMatchups": 15,
       "feed": "scores24_mlb",
       "from": "local",
       "leagues": "mlb,wnba,cfb",
       "listingLinks": 12,
       "listingResolved": true,
       "listingUrlsAttempted": 1,
-      "matchedPicks": 14,
+      "matchedPicks": 15,
       "missingMatchups": [],
       "officialMatchups": 15,
-      "unpublishedMatchups": [
-        "Tampa Bay Rays @ Atlanta Braves"
-      ],
-      "updatedAt": "2026-09-08T14:53:14.494241Z"
+      "unpublishedMatchups": [],
+      "updatedAt": "2026-09-08T20:58:42.830403Z"
     },
-    "note": "Scores24MLB matched 14 published editorial choice(s) against 15 official 2026-09-08 matchup(s).",
+    "note": "Scores24MLB matched 15 published editorial choice(s) against 15 official 2026-09-08 matchup(s).",
     "ok": true,
     "picks": [
       {
@@ -70594,11 +70753,61 @@
         "start_time": "2026-09-09T01:40Z",
         "tip": "Total Over (7,5)",
         "units": 0
+      },
+      {
+        "away_team": "Tampa Bay Rays",
+        "date": "2026-09-08",
+        "decision": "PASS",
+        "edge": null,
+        "game": "Tampa Bay Rays @ Atlanta Braves",
+        "home_team": "Atlanta Braves",
+        "matchup": "Tampa Bay Rays @ Atlanta Braves",
+        "odds": -167,
+        "pick": "Total Under (9,5) (Tampa Bay Rays @ Atlanta Braves)",
+        "probability": null,
+        "scraped_tip_demoted": true,
+        "source": "Scores24MLB",
+        "source_decision": "BET",
+        "source_units": 1,
+        "source_url": "https://scores24.live/en/baseball/m-08-09-2026-atlanta-braves-tampa-bay-rays-prediction",
+        "sport": "MLB",
+        "start_time": "2026-09-08T23:15:00Z",
+        "tip": "Total Under (9,5)",
+        "units": 0
       }
     ],
     "refreshStatus": "ok",
     "scraped_tip_feed": true,
-    "updatedAt": "2026-09-08T14:53:14.494241Z"
+    "updatedAt": "2026-09-08T20:58:42.830403Z"
+  },
+  "scores24_nba_summer": {
+    "date": "2026-09-08",
+    "generatedAt": "2026-09-08T21:04:38.353531Z",
+    "generatedBy": "local:external-feed-refresh",
+    "lastAttemptAt": "2026-09-08T21:04:38.353531Z",
+    "lastAttemptDate": "2026-09-08",
+    "lastSuccessAt": "2026-09-08T21:04:38.353531Z",
+    "meta": {
+      "attemptedUrls": 0,
+      "blockRetryRounds": 0,
+      "blockedUrls": 0,
+      "checkpointedPicks": 0,
+      "date": "2026-09-08",
+      "expectedMatchups": 0,
+      "feed": "scores24_nba_summer",
+      "from": "local",
+      "leagues": "mlb,wnba,cfb,fifa_world_cup,nba_summer",
+      "matchedPicks": 0,
+      "missingMatchups": [],
+      "officialMatchups": 0,
+      "unpublishedMatchups": [],
+      "updatedAt": "2026-09-08T21:04:38.353531Z"
+    },
+    "note": "Scores24NBASummer has no official 2026-09-08 matchups.",
+    "ok": true,
+    "picks": [],
+    "refreshStatus": "ok",
+    "updatedAt": "2026-09-08T21:04:38.353531Z"
   },
   "scores24_tennis": {
     "date": "2026-08-31",
@@ -70767,11 +70976,11 @@
   },
   "scores24_wnba": {
     "date": "2026-09-08",
-    "generatedAt": "2026-09-08T15:01:46.212695Z",
+    "generatedAt": "2026-09-08T21:00:50.129339Z",
     "generatedBy": "local:external-feed-refresh",
-    "lastAttemptAt": "2026-09-08T15:01:46.212695Z",
+    "lastAttemptAt": "2026-09-08T21:00:50.129339Z",
     "lastAttemptDate": "2026-09-08",
-    "lastSuccessAt": "2026-09-08T15:01:46.212695Z",
+    "lastSuccessAt": "2026-09-08T21:00:50.129339Z",
     "meta": {
       "attemptedUrls": 0,
       "blockRetryRounds": 0,
@@ -70786,15 +70995,15 @@
       "missingMatchups": [],
       "officialMatchups": 0,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-08T15:01:46.212695Z"
+      "updatedAt": "2026-09-08T21:00:50.129339Z"
     },
     "note": "Scores24WNBA has no official 2026-09-08 matchups.",
     "ok": true,
     "picks": [],
     "refreshStatus": "ok",
-    "updatedAt": "2026-09-08T15:01:46.212695Z"
+    "updatedAt": "2026-09-08T21:00:50.129339Z"
   },
-  "updatedAt": "2026-09-08T19:44:33.429460Z",
+  "updatedAt": "2026-09-08T21:05:59.485515Z",
   "wnba": {
     "date": "2026-09-08",
     "note": "No WNBA picks today \u2014 off-season or no edge found.",
