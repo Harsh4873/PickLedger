@@ -2011,7 +2011,7 @@
         "quality": "verified_no_vig",
         "source": "espn_scoreboard:DraftKings",
         "sourceField": "pick.price_source",
-        "startTime": "2026-09-09T20:10:00Z",
+        "startTime": "2026-09-09T20:10Z",
         "tier": "A",
         "tierLabel": "certified_executable",
         "timestamp": "2026-09-09T20:43:11.196846Z",
@@ -3564,7 +3564,7 @@
   "date": "2026-09-09",
   "engineVersion": "profit_desk_v2_live",
   "firstLiveDate": "2026-07-11",
-  "generatedAt": "2026-09-09T20:43:07.353693Z",
+  "generatedAt": "2026-09-09T21:34:51.091007Z",
   "notices": [
     "Qualified picks carry real flat stakes: EDGE 1.0u, VALUE 0.5u; everything else stays 0u.",
     "The market price is the baseline; historical residual alpha is shrunk and uncertainty-adjusted.",
