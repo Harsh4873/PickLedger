@@ -3,6 +3,14 @@
     {
       "blockers": [],
       "canonicalGame": "2026-09-08:mlb:san francisco giants|st louis cardinals",
+      "closing": {
+        "capturedAt": "2026-09-08T11:52Z",
+        "clv": 0.0,
+        "decimalOdds": 1.255754,
+        "noVigProbability": 0.7451,
+        "oddsAmerican": -391,
+        "provider": null
+      },
       "consensusSources": [],
       "date": "2026-09-08",
       "decimalOdds": 1.255754,
@@ -120,7 +128,7 @@
         "updatedAt": "2026-09-08T11:52Z"
       },
       "rawModelProbabilityIgnored": 0.8408,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": true,
       "source": "MLBPlayerProps",
       "sourceKey": "mlb_player_props",
@@ -132,6 +140,14 @@
     {
       "blockers": [],
       "canonicalGame": "2026-09-08:mlb:san francisco giants|st louis cardinals",
+      "closing": {
+        "capturedAt": "2026-09-09T00:34Z",
+        "clv": 0.0,
+        "decimalOdds": 1.247525,
+        "noVigProbability": 0.7504,
+        "oddsAmerican": -404,
+        "provider": null
+      },
       "consensusSources": [],
       "date": "2026-09-08",
       "decimalOdds": 1.247525,
@@ -249,7 +265,7 @@
         "updatedAt": "2026-09-09T00:34Z"
       },
       "rawModelProbabilityIgnored": 0.8316,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": true,
       "source": "MLBPlayerProps",
       "sourceKey": "mlb_player_props",
@@ -389,7 +405,7 @@
         "updatedAt": "2026-09-08T21:22:35.210939Z"
       },
       "rawModelProbabilityIgnored": 0.97,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -410,6 +426,14 @@
         "value_insufficient_source_samples"
       ],
       "canonicalGame": "2026-09-08:mlb:chicago white sox|pittsburgh pirates",
+      "closing": {
+        "capturedAt": "2026-09-08T23:36:34.175000Z",
+        "clv": -0.011982,
+        "decimalOdds": 1.877193,
+        "noVigProbability": 0.509817,
+        "oddsAmerican": -114,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-08",
       "decimalOdds": 1.854701,
@@ -531,7 +555,7 @@
         "updatedAt": "2026-09-08T21:22:35.210939Z"
       },
       "rawModelProbabilityIgnored": 0.5597,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -644,7 +668,7 @@
         "updatedAt": "2026-09-08T23:05:12.012702Z"
       },
       "rawModelProbabilityIgnored": 0.5922,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -757,7 +781,7 @@
         "updatedAt": "2026-09-08T23:05:12.012702Z"
       },
       "rawModelProbabilityIgnored": 0.6381,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -866,7 +890,7 @@
         "updatedAt": "2026-09-08T23:05:12.012702Z"
       },
       "rawModelProbabilityIgnored": 0.592,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -1084,7 +1108,7 @@
         "updatedAt": "2026-09-08T19:44:33.429460Z"
       },
       "rawModelProbabilityIgnored": 0.568,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -1197,7 +1221,7 @@
         "updatedAt": "2026-09-08T19:03:45.033806Z"
       },
       "rawModelProbabilityIgnored": 0.5551,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -1306,7 +1330,7 @@
         "updatedAt": "2026-09-08T19:44:33.429460Z"
       },
       "rawModelProbabilityIgnored": 0.585,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -1534,7 +1558,7 @@
         "updatedAt": "2026-09-08T23:05:12.012702Z"
       },
       "rawModelProbabilityIgnored": 0.556,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -1758,7 +1782,7 @@
         "updatedAt": "2026-09-08T23:05:12.012702Z"
       },
       "rawModelProbabilityIgnored": 0.571,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -1833,6 +1857,14 @@
       {
         "blockers": [],
         "canonicalGame": "2026-09-08:mlb:san francisco giants|st louis cardinals",
+        "closing": {
+          "capturedAt": "2026-09-08T11:52Z",
+          "clv": 0.0,
+          "decimalOdds": 1.255754,
+          "noVigProbability": 0.7451,
+          "oddsAmerican": -391,
+          "provider": null
+        },
         "consensusSources": [],
         "date": "2026-09-08",
         "decimalOdds": 1.255754,
@@ -1952,7 +1984,7 @@
         },
         "rank": 1,
         "rawModelProbabilityIgnored": 0.8408,
-        "result": "pending",
+        "result": "win",
         "shadowQualified": true,
         "source": "MLBPlayerProps",
         "sourceKey": "mlb_player_props",
@@ -1966,6 +1998,14 @@
       {
         "blockers": [],
         "canonicalGame": "2026-09-08:mlb:san francisco giants|st louis cardinals",
+        "closing": {
+          "capturedAt": "2026-09-08T11:52Z",
+          "clv": 0.0,
+          "decimalOdds": 1.255754,
+          "noVigProbability": 0.7451,
+          "oddsAmerican": -391,
+          "provider": null
+        },
         "consensusSources": [],
         "date": "2026-09-08",
         "decimalOdds": 1.255754,
@@ -2085,7 +2125,7 @@
         },
         "rank": 1,
         "rawModelProbabilityIgnored": 0.8408,
-        "result": "pending",
+        "result": "win",
         "shadowQualified": true,
         "source": "MLBPlayerProps",
         "sourceKey": "mlb_player_props",
@@ -2099,6 +2139,14 @@
       {
         "blockers": [],
         "canonicalGame": "2026-09-08:mlb:san francisco giants|st louis cardinals",
+        "closing": {
+          "capturedAt": "2026-09-08T11:52Z",
+          "clv": 0.0,
+          "decimalOdds": 1.255754,
+          "noVigProbability": 0.7451,
+          "oddsAmerican": -391,
+          "provider": null
+        },
         "consensusSources": [],
         "date": "2026-09-08",
         "decimalOdds": 1.255754,
@@ -2218,7 +2266,7 @@
         },
         "rank": 1,
         "rawModelProbabilityIgnored": 0.8408,
-        "result": "pending",
+        "result": "win",
         "shadowQualified": true,
         "source": "MLBPlayerProps",
         "sourceKey": "mlb_player_props",
@@ -3763,30 +3811,30 @@
     "livePortfolioCandidates": 1,
     "liveQualified": 2,
     "liveRecord": {
-      "avgClv": null,
-      "clvCount": 0,
+      "avgClv": 0.0,
+      "clvCount": 1,
       "losses": 0,
-      "netUnits": 0.0,
-      "pending": 1,
+      "netUnits": 0.1279,
+      "pending": 0,
       "pushes": 0,
-      "roi": null,
-      "settled": 0,
-      "stakedUnits": 0.0,
-      "wins": 0
+      "roi": 0.255754,
+      "settled": 1,
+      "stakedUnits": 0.5,
+      "wins": 1
     },
     "liveRecordToDate": {
-      "avgClv": 0.025129,
-      "clvCount": 66,
+      "avgClv": 0.024754,
+      "clvCount": 67,
       "losses": 25,
-      "netUnits": -3.8466,
-      "pending": 5,
+      "netUnits": -3.7187,
+      "pending": 4,
       "pushes": 0,
-      "roi": -0.099911,
-      "settled": 70,
+      "roi": -0.095351,
+      "settled": 71,
       "sinceDate": "2026-07-11",
-      "stakedUnits": 38.5,
+      "stakedUnits": 39.0,
       "throughDate": "2026-09-08",
-      "wins": 45
+      "wins": 46
     },
     "modes": {
       "player": {
@@ -3826,31 +3874,31 @@
     "portfolioCandidates": 1,
     "researchQualified": 2,
     "researchRecord": {
-      "avgClv": null,
-      "clvCount": 0,
+      "avgClv": 0.0,
+      "clvCount": 1,
       "losses": 0,
-      "netUnits": 0.0,
-      "pending": 1,
+      "netUnits": 0.2558,
+      "pending": 0,
       "pushes": 0,
-      "roi": null,
-      "settled": 0,
-      "stakedUnits": 0.0,
-      "wins": 0
+      "roi": 0.255754,
+      "settled": 1,
+      "stakedUnits": 1.0,
+      "wins": 1
     },
     "selected": 1,
     "shadowPortfolioCandidates": 0,
     "shadowQualified": 2,
     "shadowRecord": {
-      "avgClv": null,
-      "clvCount": 0,
+      "avgClv": 0.0,
+      "clvCount": 1,
       "losses": 0,
-      "netUnits": 0.0,
-      "pending": 1,
+      "netUnits": 0.2558,
+      "pending": 0,
       "pushes": 0,
-      "roi": null,
-      "settled": 0,
-      "stakedUnits": 0.0,
-      "wins": 0
+      "roi": 0.255754,
+      "settled": 1,
+      "stakedUnits": 1.0,
+      "wins": 1
     },
     "sourcesTracked": 33,
     "valueQualified": 2,
