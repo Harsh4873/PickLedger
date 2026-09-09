@@ -1956,7 +1956,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 8.356,
+        "ageHours": 6.459,
         "breakEvenProbability": 0.6,
         "decimalOdds": 1.666667,
         "eligibleForAlphaEstimate": false,
@@ -1975,10 +1975,10 @@
         "startTime": "2026-09-09T23:30Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-09T15:08:40.165809Z",
+        "timestamp": "2026-09-09T17:02:26.185262Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-09T15:08:40.165809Z"
+        "updatedAt": "2026-09-09T17:02:26.185262Z"
       },
       "rawModelProbabilityIgnored": 0.6077,
       "result": "pending",
@@ -2065,7 +2065,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 11.356,
+        "ageHours": 9.459,
         "breakEvenProbability": 0.583333,
         "decimalOdds": 1.714286,
         "eligibleForAlphaEstimate": false,
@@ -2084,10 +2084,10 @@
         "startTime": "2026-09-10T02:30Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-09T15:08:40.165809Z",
+        "timestamp": "2026-09-09T17:02:26.185262Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-09T15:08:40.165809Z"
+        "updatedAt": "2026-09-09T17:02:26.185262Z"
       },
       "rawModelProbabilityIgnored": 0.5991,
       "result": "pending",
@@ -2174,7 +2174,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 8.606,
+        "ageHours": 6.709,
         "breakEvenProbability": 0.615385,
         "decimalOdds": 1.625,
         "eligibleForAlphaEstimate": false,
@@ -2193,121 +2193,12 @@
         "startTime": "2026-09-09T23:45Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-09T15:08:40.165809Z",
+        "timestamp": "2026-09-09T17:02:26.185262Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-09T15:08:40.165809Z"
+        "updatedAt": "2026-09-09T17:02:26.185262Z"
       },
       "rawModelProbabilityIgnored": 0.5112,
-      "result": "pending",
-      "shadowQualified": false,
-      "source": "MLS Model",
-      "sourceKey": "mls",
-      "sport": "MLS",
-      "stakeUnits": 0.0,
-      "tier": "avoid",
-      "valueQualified": false
-    },
-    {
-      "blockers": [
-        "unverified_price_provenance",
-        "edge_no_usable_price_baseline",
-        "value_no_usable_price_baseline"
-      ],
-      "canonicalGame": "2026-09-09:mls:chicago fire fc|inter miami cf",
-      "consensusSources": [],
-      "date": "2026-09-09",
-      "decimalOdds": 1.645161,
-      "decision": "BET",
-      "dedupeRule": "exact_market_identity_best_executable_price",
-      "direction": "side",
-      "duplicateCount": 1,
-      "duplicateSources": [
-        "MLS Model"
-      ],
-      "edgeQualified": false,
-      "estimate": null,
-      "evidence": {
-        "chronologicalHalvesNonnegative": false,
-        "cutoffExclusive": "2026-09-09",
-        "distinctDates": 0,
-        "firstHalfFlatNetUnits": 0.0,
-        "flatNetUnits": 0.0,
-        "flatRoi": null,
-        "losses": 0,
-        "modelVersion": "mls_dixon_coles_v2.0",
-        "policyVersion": "profit_desk_policy_v2",
-        "priorOnly": true,
-        "pushes": 0,
-        "secondHalfFlatNetUnits": 0.0,
-        "segmentDistinctDates": 0,
-        "segmentEvidenceKey": null,
-        "segmentSamples": 0,
-        "sourceChronologicalHalvesNonnegative": false,
-        "sourceDistinctDates": 13,
-        "sourceEvidenceKey": "team|mls|mls",
-        "sourceFirstHalfFlatNetUnits": 0.0,
-        "sourceFlatNetUnits": 0.0,
-        "sourceFlatRoi": null,
-        "sourceLosses": 0,
-        "sourceSamples": 99,
-        "sourceSecondHalfFlatNetUnits": 0.0,
-        "sourceWins": 0,
-        "wins": 0
-      },
-      "game": "Inter Miami CF @ Chicago Fire FC",
-      "gradeSupportSource": "repository_grader_default",
-      "gradeSupported": true,
-      "id": "profit-39adf172b08ba7dd84e26651",
-      "lane": null,
-      "laneBlockers": {
-        "edge": [
-          "edge_no_usable_price_baseline"
-        ],
-        "structural": [
-          "unverified_price_provenance"
-        ],
-        "value": [
-          "value_no_usable_price_baseline"
-        ]
-      },
-      "line": 0.5,
-      "liveQualified": false,
-      "market": "soccer_handicap",
-      "marketFamily": "soccer handicap",
-      "marketIdentity": "market:5f3a1472779149961f3f7ccc",
-      "mode": "team",
-      "modelVersion": "mls_dixon_coles_v2.0",
-      "oddsAmerican": -155,
-      "pick": "Inter Miami CF +0.5 (Inter Miami CF @ Chicago Fire FC)",
-      "player": null,
-      "policyVersion": "profit_desk_policy_v2",
-      "price": {
-        "ageHours": 9.356,
-        "breakEvenProbability": 0.607843,
-        "decimalOdds": 1.645161,
-        "eligibleForAlphaEstimate": false,
-        "fresh": true,
-        "freshPregame": true,
-        "maxAgeHours": 24.0,
-        "noVigInputs": {},
-        "noVigMethod": "unverified_single_side",
-        "noVigProbability": null,
-        "noVigVerified": false,
-        "observedExecutable": false,
-        "oddsAmerican": -155,
-        "quality": "assumed",
-        "source": null,
-        "sourceField": "unverified",
-        "startTime": "2026-09-10T00:30Z",
-        "tier": "D",
-        "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-09T15:08:40.165809Z",
-        "timestampField": "pick.certification_timing.data_as_of",
-        "twoSided": false,
-        "updatedAt": "2026-09-09T15:08:40.165809Z"
-      },
-      "rawModelProbabilityIgnored": 0.6195,
       "result": "pending",
       "shadowQualified": false,
       "source": "MLS Model",
@@ -2392,7 +2283,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 4.606,
+        "ageHours": 2.709,
         "breakEvenProbability": 0.545455,
         "decimalOdds": 1.833333,
         "eligibleForAlphaEstimate": false,
@@ -2411,10 +2302,10 @@
         "startTime": "2026-09-09T19:45Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-09T15:08:40.165809Z",
+        "timestamp": "2026-09-09T17:02:26.185262Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-09T15:08:40.165809Z"
+        "updatedAt": "2026-09-09T17:02:26.185262Z"
       },
       "rawModelProbabilityIgnored": 0.595,
       "result": "pending",
@@ -2501,7 +2392,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 11.356,
+        "ageHours": 9.459,
         "breakEvenProbability": 0.642857,
         "decimalOdds": 1.555556,
         "eligibleForAlphaEstimate": false,
@@ -2520,10 +2411,10 @@
         "startTime": "2026-09-10T02:30Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-09T15:08:40.165809Z",
+        "timestamp": "2026-09-09T17:02:26.185262Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-09T15:08:40.165809Z"
+        "updatedAt": "2026-09-09T17:02:26.185262Z"
       },
       "rawModelProbabilityIgnored": 0.526,
       "result": "pending",
@@ -2610,7 +2501,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 8.356,
+        "ageHours": 6.459,
         "breakEvenProbability": 0.636364,
         "decimalOdds": 1.571429,
         "eligibleForAlphaEstimate": false,
@@ -2629,10 +2520,10 @@
         "startTime": "2026-09-09T23:30Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-09T15:08:40.165809Z",
+        "timestamp": "2026-09-09T17:02:26.185262Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-09T15:08:40.165809Z"
+        "updatedAt": "2026-09-09T17:02:26.185262Z"
       },
       "rawModelProbabilityIgnored": 0.6976,
       "result": "pending",
@@ -2719,7 +2610,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 9.356,
+        "ageHours": 7.459,
         "breakEvenProbability": 0.655172,
         "decimalOdds": 1.526316,
         "eligibleForAlphaEstimate": false,
@@ -2738,10 +2629,10 @@
         "startTime": "2026-09-10T00:30Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-09T15:08:40.165809Z",
+        "timestamp": "2026-09-09T17:02:26.185262Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-09T15:08:40.165809Z"
+        "updatedAt": "2026-09-09T17:02:26.185262Z"
       },
       "rawModelProbabilityIgnored": 0.5772,
       "result": "pending",
@@ -2830,7 +2721,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 8.522,
+        "ageHours": 6.626,
         "breakEvenProbability": 0.52381,
         "decimalOdds": 1.909091,
         "eligibleForAlphaEstimate": false,
@@ -2851,10 +2742,10 @@
         "startTime": "2026-09-09T23:40Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-09T15:08:40.165809Z",
+        "timestamp": "2026-09-09T17:02:26.185262Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": true,
-        "updatedAt": "2026-09-09T15:08:40.165809Z"
+        "updatedAt": "2026-09-09T17:02:26.185262Z"
       },
       "rawModelProbabilityIgnored": 0.567,
       "result": "pending",
@@ -2941,7 +2832,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 8.356,
+        "ageHours": 6.459,
         "breakEvenProbability": 0.655172,
         "decimalOdds": 1.526316,
         "eligibleForAlphaEstimate": false,
@@ -2960,10 +2851,10 @@
         "startTime": "2026-09-09T23:30Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-09T15:08:40.165809Z",
+        "timestamp": "2026-09-09T17:02:26.185262Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-09T15:08:40.165809Z"
+        "updatedAt": "2026-09-09T17:02:26.185262Z"
       },
       "rawModelProbabilityIgnored": 0.7109,
       "result": "pending",
@@ -3050,7 +2941,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 11.356,
+        "ageHours": 9.459,
         "breakEvenProbability": 0.565217,
         "decimalOdds": 1.769231,
         "eligibleForAlphaEstimate": false,
@@ -3069,10 +2960,10 @@
         "startTime": "2026-09-10T02:30Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-09T15:08:40.165809Z",
+        "timestamp": "2026-09-09T17:02:26.185262Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-09T15:08:40.165809Z"
+        "updatedAt": "2026-09-09T17:02:26.185262Z"
       },
       "rawModelProbabilityIgnored": 0.6119,
       "result": "pending",
@@ -3159,7 +3050,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 8.856,
+        "ageHours": 6.959,
         "breakEvenProbability": 0.655172,
         "decimalOdds": 1.526316,
         "eligibleForAlphaEstimate": false,
@@ -3178,10 +3069,10 @@
         "startTime": "2026-09-10T00:00Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-09T15:08:40.165809Z",
+        "timestamp": "2026-09-09T17:02:26.185262Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-09T15:08:40.165809Z"
+        "updatedAt": "2026-09-09T17:02:26.185262Z"
       },
       "rawModelProbabilityIgnored": 0.4812,
       "result": "pending",
@@ -3268,7 +3159,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 7.939,
+        "ageHours": 6.043,
         "breakEvenProbability": 0.545455,
         "decimalOdds": 1.833333,
         "eligibleForAlphaEstimate": false,
@@ -3287,10 +3178,10 @@
         "startTime": "2026-09-09T23:05Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-09T15:08:40.165809Z",
+        "timestamp": "2026-09-09T17:02:26.185262Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-09T15:08:40.165809Z"
+        "updatedAt": "2026-09-09T17:02:26.185262Z"
       },
       "rawModelProbabilityIgnored": 0.561,
       "result": "pending",
@@ -3377,7 +3268,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 7.439,
+        "ageHours": 5.543,
         "breakEvenProbability": 0.545455,
         "decimalOdds": 1.833333,
         "eligibleForAlphaEstimate": false,
@@ -3396,10 +3287,10 @@
         "startTime": "2026-09-09T22:35Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-09T15:08:40.165809Z",
+        "timestamp": "2026-09-09T17:02:26.185262Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-09T15:08:40.165809Z"
+        "updatedAt": "2026-09-09T17:02:26.185262Z"
       },
       "rawModelProbabilityIgnored": 0.588,
       "result": "pending",
@@ -3410,13 +3301,122 @@
       "stakeUnits": 0.0,
       "tier": "avoid",
       "valueQualified": false
+    },
+    {
+      "blockers": [
+        "unverified_price_provenance",
+        "edge_no_usable_price_baseline",
+        "value_no_usable_price_baseline"
+      ],
+      "canonicalGame": "2026-09-09:mls:chicago fire fc|inter miami cf",
+      "consensusSources": [],
+      "date": "2026-09-09",
+      "decimalOdds": 1.625,
+      "decision": "BET",
+      "dedupeRule": "exact_market_identity_best_executable_price",
+      "direction": "side",
+      "duplicateCount": 1,
+      "duplicateSources": [
+        "MLS Model"
+      ],
+      "edgeQualified": false,
+      "estimate": null,
+      "evidence": {
+        "chronologicalHalvesNonnegative": false,
+        "cutoffExclusive": "2026-09-09",
+        "distinctDates": 0,
+        "firstHalfFlatNetUnits": 0.0,
+        "flatNetUnits": 0.0,
+        "flatRoi": null,
+        "losses": 0,
+        "modelVersion": "mls_dixon_coles_v2.0",
+        "policyVersion": "profit_desk_policy_v2",
+        "priorOnly": true,
+        "pushes": 0,
+        "secondHalfFlatNetUnits": 0.0,
+        "segmentDistinctDates": 0,
+        "segmentEvidenceKey": null,
+        "segmentSamples": 0,
+        "sourceChronologicalHalvesNonnegative": false,
+        "sourceDistinctDates": 13,
+        "sourceEvidenceKey": "team|mls|mls",
+        "sourceFirstHalfFlatNetUnits": 0.0,
+        "sourceFlatNetUnits": 0.0,
+        "sourceFlatRoi": null,
+        "sourceLosses": 0,
+        "sourceSamples": 99,
+        "sourceSecondHalfFlatNetUnits": 0.0,
+        "sourceWins": 0,
+        "wins": 0
+      },
+      "game": "Inter Miami CF @ Chicago Fire FC",
+      "gradeSupportSource": "repository_grader_default",
+      "gradeSupported": true,
+      "id": "profit-eb969eafad13dd7ec8ab62ee",
+      "lane": null,
+      "laneBlockers": {
+        "edge": [
+          "edge_no_usable_price_baseline"
+        ],
+        "structural": [
+          "unverified_price_provenance"
+        ],
+        "value": [
+          "value_no_usable_price_baseline"
+        ]
+      },
+      "line": 0.5,
+      "liveQualified": false,
+      "market": "soccer_handicap",
+      "marketFamily": "soccer handicap",
+      "marketIdentity": "market:5f3a1472779149961f3f7ccc",
+      "mode": "team",
+      "modelVersion": "mls_dixon_coles_v2.0",
+      "oddsAmerican": -160,
+      "pick": "Inter Miami CF +0.5 (Inter Miami CF @ Chicago Fire FC)",
+      "player": null,
+      "policyVersion": "profit_desk_policy_v2",
+      "price": {
+        "ageHours": 7.459,
+        "breakEvenProbability": 0.615385,
+        "decimalOdds": 1.625,
+        "eligibleForAlphaEstimate": false,
+        "fresh": true,
+        "freshPregame": true,
+        "maxAgeHours": 24.0,
+        "noVigInputs": {},
+        "noVigMethod": "unverified_single_side",
+        "noVigProbability": null,
+        "noVigVerified": false,
+        "observedExecutable": false,
+        "oddsAmerican": -160,
+        "quality": "assumed",
+        "source": null,
+        "sourceField": "unverified",
+        "startTime": "2026-09-10T00:30Z",
+        "tier": "D",
+        "tierLabel": "assumed_proxy_or_synthetic",
+        "timestamp": "2026-09-09T17:02:26.185262Z",
+        "timestampField": "pick.certification_timing.data_as_of",
+        "twoSided": false,
+        "updatedAt": "2026-09-09T17:02:26.185262Z"
+      },
+      "rawModelProbabilityIgnored": 0.6195,
+      "result": "pending",
+      "shadowQualified": false,
+      "source": "MLS Model",
+      "sourceKey": "mls",
+      "sport": "MLS",
+      "stakeUnits": 0.0,
+      "tier": "avoid",
+      "valueQualified": false
     }
   ],
   "cutoverDate": "2026-07-10",
   "date": "2026-09-09",
   "engineVersion": "profit_desk_v2_live",
   "firstLiveDate": "2026-07-11",
-  "generatedAt": "2026-09-09T15:30:37.579434Z",
+  "generatedAt": "2026-09-09T17:02:26.185262Z",
   "notices": [
     "Qualified picks carry real flat stakes: EDGE 1.0u, VALUE 0.5u; everything else stays 0u.",
     "The market price is the baseline; historical residual alpha is shrunk and uncertainty-adjusted.",
