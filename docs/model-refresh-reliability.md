@@ -32,8 +32,10 @@ Every trigger is serialized through `model-cache-freshness-guard`. A queued or
 running model refresh prevents another dispatch. Failed or cancelled attempts
 have a 20-minute cooldown and at most three manual/recovery attempts per window.
 Exhausting recovery fails the guard visibly. The next window resets the budget.
-The guard waits for fresh models before recovering player props, so it does not
-replace its own pending model run in the shared `pick-cache-writer` group.
+The guard recovers player props only when models are fresh or waiting out a
+retry cooldown. It does not queue props behind a pending model run in the
+shared `pick-cache-writer` group, where a second pending writer replaces the
+first. A model outage therefore need not prevent props recovery during cooldown.
 If the current window ran but a core model failed, recovery reruns just the
 failed models. A missed window still requests the full model refresh.
 

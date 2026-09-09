@@ -178,7 +178,7 @@ jobs:
 
       - name: Dispatch player-props refresh if stale
         # Avoid replacing a pending model run in the shared writer group.
-        if: steps.cache.outputs.player_fresh != 'true' && steps.models.outputs.state == 'fresh'
+        if: steps.cache.outputs.player_fresh != 'true' && (steps.models.outputs.state == 'fresh' || steps.models.outputs.state == 'cooldown')
         env:
           GH_TOKEN: ${{ github.token }}
           TARGET_DATE: ${{ steps.cache.outputs.target_date }}

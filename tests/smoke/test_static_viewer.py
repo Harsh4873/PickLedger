@@ -853,6 +853,7 @@ def test_refresh_timing_and_pages_deploy_are_deterministic():
     assert "python scripts/site_upcheck.py" in deploy
     guard = (workflows / "model-cache-freshness-guard.yml").read_text(encoding="utf-8")
     assert "python scripts/automation/ensure_model_refresh.py --dispatch" in guard
+    assert "steps.models.outputs.state == 'fresh' || steps.models.outputs.state == 'cooldown'" in guard
     assert 'models[key].get("ok") is True for key in required' in guard
     assert 'PLAYER_CACHE_HEALTHY="$(python - <<\'PY\'' in guard
     assert '"nba_player_props"' in guard
