@@ -234,7 +234,59 @@
       "role": "anchor",
       "sport": "MLB",
       "startTime": "2026-09-08T23:40Z"
+    },
+    {
+      "capturedAt": "2026-09-09T02:08:38.594767Z",
+      "decimalOdds": 1.31746,
+      "marketIdentity": "market:63d282010a52f89cedf053ca",
+      "matchup": "Cincinnati Reds @ Los Angeles Dodgers",
+      "noVigProbability": 0.714679,
+      "oddsAmerican": -315,
+      "pick": "Los Angeles Dodgers F5 ML",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-09T02:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-09T02:08:38.594767Z",
+      "decimalOdds": 1.952381,
+      "marketIdentity": "market:084e12a3074b3468321f7e97",
+      "matchup": "Cincinnati Reds @ Los Angeles Dodgers",
+      "noVigProbability": 0.479695,
+      "oddsAmerican": -105,
+      "pick": "Over 4.5 F5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-09T02:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-09T02:08:38.594767Z",
+      "decimalOdds": 1.307692,
+      "marketIdentity": "market:e88ab315532f50c5ca44081c",
+      "matchup": "",
+      "noVigProbability": 0.731353,
+      "oddsAmerican": -325,
+      "pick": "Dodgers ML (Reds vs Dodgers)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-09T02:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-09T02:08:38.594767Z",
+      "decimalOdds": 1.714286,
+      "marketIdentity": "market:d777c147e95b0408220003b2",
+      "matchup": "Los Angeles Dodgers vs Cincinnati Reds",
+      "noVigProbability": 0.550562,
+      "oddsAmerican": -140,
+      "pick": "Los Angeles Dodgers Team Total Over 4.5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-09T02:10:00Z"
     }
   ],
-  "updatedAt": "2026-09-08T23:36:34.188815Z"
+  "updatedAt": "2026-09-09T02:08:38.603930Z"
 }
