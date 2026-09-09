@@ -154,7 +154,7 @@
   "validation": {
     "actual_rate": 0.6058201058201058,
     "baseline_brier": 0.2424183243505082,
-    "calibration_gap": 0.03916748256578373,
+    "calibration_gap": 0.039167482565782175,
     "dates": [
       "2026-06-21",
       "2026-06-22",
@@ -231,8 +231,8 @@
       "2026-09-08"
     ],
     "market_brier": 0.21504723845238083,
-    "model_brier": 0.23211560385457686,
-    "predicted_rate": 0.6449875883858895,
+    "model_brier": 0.2321156038545768,
+    "predicted_rate": 0.644987588385888,
     "samples": 756
   },
   "version": "player_props_ml_v1.1.0"
