@@ -18,10 +18,8 @@
   },
   "date": "2026-09-09",
   "errors": [],
-  "externalFeedsUpdatedAt": "2026-09-09T14:57:46.915748Z",
-  "external_feed_errors": [
-    "scores24_tennis: Scores24Tennis could not resolve an official 2026-09-09 tennis slate"
-  ],
+  "externalFeedsUpdatedAt": "2026-09-09T21:34:51.091007Z",
+  "external_feed_errors": [],
   "external_feeds": {
     "forebet_mlb": {
       "date": "2026-08-18",
@@ -500,11 +498,11 @@
     },
     "scores24_cfb": {
       "date": "2026-09-09",
-      "generatedAt": "2026-09-09T14:57:30.749173Z",
+      "generatedAt": "2026-09-09T21:34:37.012701Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-09T14:57:30.749173Z",
+      "lastAttemptAt": "2026-09-09T21:34:37.012701Z",
       "lastAttemptDate": "2026-09-09",
-      "lastSuccessAt": "2026-09-09T14:57:30.749173Z",
+      "lastSuccessAt": "2026-09-09T21:34:37.012701Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -519,21 +517,21 @@
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-09T14:57:30.749173Z"
+        "updatedAt": "2026-09-09T21:34:37.012701Z"
       },
       "note": "Scores24CFB has no official 2026-09-09 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-09T14:57:30.749173Z"
+      "updatedAt": "2026-09-09T21:34:37.012701Z"
     },
     "scores24_fifa_world_cup": {
       "date": "2026-09-09",
-      "generatedAt": "2026-09-09T14:57:36.104847Z",
+      "generatedAt": "2026-09-09T21:34:46.802992Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-09T14:57:36.104847Z",
+      "lastAttemptAt": "2026-09-09T21:34:46.802992Z",
       "lastAttemptDate": "2026-09-09",
-      "lastSuccessAt": "2026-09-09T14:57:36.104847Z",
+      "lastSuccessAt": "2026-09-09T21:34:46.802992Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -548,39 +546,39 @@
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-09T14:57:36.104847Z"
+        "updatedAt": "2026-09-09T21:34:46.802992Z"
       },
       "note": "Scores24FIFAWorldCup has no official 2026-09-09 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-09T14:57:36.104847Z"
+      "updatedAt": "2026-09-09T21:34:46.802992Z"
     },
     "scores24_mlb": {
       "date": "2026-09-09",
-      "generatedAt": "2026-09-09T14:47:15.110969Z",
+      "generatedAt": "2026-09-09T21:30:37.503100Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-09T14:47:15.110969Z",
+      "lastAttemptAt": "2026-09-09T21:30:37.503100Z",
       "lastAttemptDate": "2026-09-09",
-      "lastSuccessAt": "2026-09-09T14:47:15.110969Z",
+      "lastSuccessAt": "2026-09-09T21:30:37.503100Z",
       "meta": {
-        "attemptedUrls": 22,
+        "attemptedUrls": 0,
         "blockRetryRounds": 0,
         "blockedUrls": 0,
-        "checkpointedPicks": 0,
+        "checkpointedPicks": 15,
         "date": "2026-09-09",
         "expectedMatchups": 15,
         "feed": "scores24_mlb",
         "from": "local",
         "leagues": "mlb,wnba,cfb",
-        "listingLinks": 12,
-        "listingResolved": true,
-        "listingUrlsAttempted": 1,
+        "listingLinks": 0,
+        "listingResolved": false,
+        "listingUrlsAttempted": 0,
         "matchedPicks": 15,
         "missingMatchups": [],
         "officialMatchups": 15,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-09T14:47:15.110969Z"
+        "updatedAt": "2026-09-09T21:30:37.503100Z"
       },
       "note": "Scores24MLB matched 15 published editorial choice(s) against 15 official 2026-09-09 matchup(s).",
       "ok": true,
@@ -903,15 +901,15 @@
       ],
       "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-09T14:47:15.110969Z"
+      "updatedAt": "2026-09-09T21:30:37.503100Z"
     },
     "scores24_nba_summer": {
       "date": "2026-09-09",
-      "generatedAt": "2026-09-09T14:57:41.421316Z",
+      "generatedAt": "2026-09-09T21:34:51.091007Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-09T14:57:41.421316Z",
+      "lastAttemptAt": "2026-09-09T21:34:51.091007Z",
       "lastAttemptDate": "2026-09-09",
-      "lastSuccessAt": "2026-09-09T14:57:41.421316Z",
+      "lastSuccessAt": "2026-09-09T21:34:51.091007Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -926,13 +924,13 @@
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-09T14:57:41.421316Z"
+        "updatedAt": "2026-09-09T21:34:51.091007Z"
       },
       "note": "Scores24NBASummer has no official 2026-09-09 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-09T14:57:41.421316Z"
+      "updatedAt": "2026-09-09T21:34:51.091007Z"
     },
     "scores24_tennis": {
       "date": "2026-08-31",
@@ -1101,11 +1099,11 @@
     },
     "scores24_wnba": {
       "date": "2026-09-09",
-      "generatedAt": "2026-09-09T14:55:43.588621Z",
+      "generatedAt": "2026-09-09T21:32:55.314321Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-09T14:55:43.588621Z",
+      "lastAttemptAt": "2026-09-09T21:32:55.314321Z",
       "lastAttemptDate": "2026-09-09",
-      "lastSuccessAt": "2026-09-09T14:55:43.588621Z",
+      "lastSuccessAt": "2026-09-09T21:32:55.314321Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -1120,13 +1118,13 @@
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-09T14:55:43.588621Z"
+        "updatedAt": "2026-09-09T21:32:55.314321Z"
       },
       "note": "Scores24WNBA has no official 2026-09-09 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-09T14:55:43.588621Z"
+      "updatedAt": "2026-09-09T21:32:55.314321Z"
     },
     "sportsgambler_cfb": {
       "date": "2026-09-08",
@@ -66643,11 +66641,11 @@
     },
     "scores24_cfb": {
       "date": "2026-09-09",
-      "generatedAt": "2026-09-09T14:57:30.749173Z",
+      "generatedAt": "2026-09-09T21:34:37.012701Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-09T14:57:30.749173Z",
+      "lastAttemptAt": "2026-09-09T21:34:37.012701Z",
       "lastAttemptDate": "2026-09-09",
-      "lastSuccessAt": "2026-09-09T14:57:30.749173Z",
+      "lastSuccessAt": "2026-09-09T21:34:37.012701Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -66662,21 +66660,21 @@
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-09T14:57:30.749173Z"
+        "updatedAt": "2026-09-09T21:34:37.012701Z"
       },
       "note": "Scores24CFB has no official 2026-09-09 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-09T14:57:30.749173Z"
+      "updatedAt": "2026-09-09T21:34:37.012701Z"
     },
     "scores24_fifa_world_cup": {
       "date": "2026-09-09",
-      "generatedAt": "2026-09-09T14:57:36.104847Z",
+      "generatedAt": "2026-09-09T21:34:46.802992Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-09T14:57:36.104847Z",
+      "lastAttemptAt": "2026-09-09T21:34:46.802992Z",
       "lastAttemptDate": "2026-09-09",
-      "lastSuccessAt": "2026-09-09T14:57:36.104847Z",
+      "lastSuccessAt": "2026-09-09T21:34:46.802992Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -66691,39 +66689,39 @@
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-09T14:57:36.104847Z"
+        "updatedAt": "2026-09-09T21:34:46.802992Z"
       },
       "note": "Scores24FIFAWorldCup has no official 2026-09-09 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-09T14:57:36.104847Z"
+      "updatedAt": "2026-09-09T21:34:46.802992Z"
     },
     "scores24_mlb": {
       "date": "2026-09-09",
-      "generatedAt": "2026-09-09T14:47:15.110969Z",
+      "generatedAt": "2026-09-09T21:30:37.503100Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-09T14:47:15.110969Z",
+      "lastAttemptAt": "2026-09-09T21:30:37.503100Z",
       "lastAttemptDate": "2026-09-09",
-      "lastSuccessAt": "2026-09-09T14:47:15.110969Z",
+      "lastSuccessAt": "2026-09-09T21:30:37.503100Z",
       "meta": {
-        "attemptedUrls": 22,
+        "attemptedUrls": 0,
         "blockRetryRounds": 0,
         "blockedUrls": 0,
-        "checkpointedPicks": 0,
+        "checkpointedPicks": 15,
         "date": "2026-09-09",
         "expectedMatchups": 15,
         "feed": "scores24_mlb",
         "from": "local",
         "leagues": "mlb,wnba,cfb",
-        "listingLinks": 12,
-        "listingResolved": true,
-        "listingUrlsAttempted": 1,
+        "listingLinks": 0,
+        "listingResolved": false,
+        "listingUrlsAttempted": 0,
         "matchedPicks": 15,
         "missingMatchups": [],
         "officialMatchups": 15,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-09T14:47:15.110969Z"
+        "updatedAt": "2026-09-09T21:30:37.503100Z"
       },
       "note": "Scores24MLB matched 15 published editorial choice(s) against 15 official 2026-09-09 matchup(s).",
       "ok": true,
@@ -67418,15 +67416,15 @@
       ],
       "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-09T14:47:15.110969Z"
+      "updatedAt": "2026-09-09T21:30:37.503100Z"
     },
     "scores24_nba_summer": {
       "date": "2026-09-09",
-      "generatedAt": "2026-09-09T14:57:41.421316Z",
+      "generatedAt": "2026-09-09T21:34:51.091007Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-09T14:57:41.421316Z",
+      "lastAttemptAt": "2026-09-09T21:34:51.091007Z",
       "lastAttemptDate": "2026-09-09",
-      "lastSuccessAt": "2026-09-09T14:57:41.421316Z",
+      "lastSuccessAt": "2026-09-09T21:34:51.091007Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -67441,13 +67439,13 @@
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-09T14:57:41.421316Z"
+        "updatedAt": "2026-09-09T21:34:51.091007Z"
       },
       "note": "Scores24NBASummer has no official 2026-09-09 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-09T14:57:41.421316Z"
+      "updatedAt": "2026-09-09T21:34:51.091007Z"
     },
     "scores24_tennis": {
       "date": "2026-08-31",
@@ -67622,11 +67620,11 @@
     },
     "scores24_wnba": {
       "date": "2026-09-09",
-      "generatedAt": "2026-09-09T14:55:43.588621Z",
+      "generatedAt": "2026-09-09T21:32:55.314321Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-09T14:55:43.588621Z",
+      "lastAttemptAt": "2026-09-09T21:32:55.314321Z",
       "lastAttemptDate": "2026-09-09",
-      "lastSuccessAt": "2026-09-09T14:55:43.588621Z",
+      "lastSuccessAt": "2026-09-09T21:32:55.314321Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -67641,13 +67639,13 @@
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-09T14:55:43.588621Z"
+        "updatedAt": "2026-09-09T21:32:55.314321Z"
       },
       "note": "Scores24WNBA has no official 2026-09-09 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-09T14:55:43.588621Z"
+      "updatedAt": "2026-09-09T21:32:55.314321Z"
     },
     "tennis": {
       "date": "2026-09-09",
@@ -69242,11 +69240,11 @@
   },
   "scores24_cfb": {
     "date": "2026-09-09",
-    "generatedAt": "2026-09-09T14:57:30.749173Z",
+    "generatedAt": "2026-09-09T21:34:37.012701Z",
     "generatedBy": "local:external-feed-refresh",
-    "lastAttemptAt": "2026-09-09T14:57:30.749173Z",
+    "lastAttemptAt": "2026-09-09T21:34:37.012701Z",
     "lastAttemptDate": "2026-09-09",
-    "lastSuccessAt": "2026-09-09T14:57:30.749173Z",
+    "lastSuccessAt": "2026-09-09T21:34:37.012701Z",
     "meta": {
       "attemptedUrls": 0,
       "blockRetryRounds": 0,
@@ -69261,21 +69259,21 @@
       "missingMatchups": [],
       "officialMatchups": 0,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-09T14:57:30.749173Z"
+      "updatedAt": "2026-09-09T21:34:37.012701Z"
     },
     "note": "Scores24CFB has no official 2026-09-09 matchups.",
     "ok": true,
     "picks": [],
     "refreshStatus": "ok",
-    "updatedAt": "2026-09-09T14:57:30.749173Z"
+    "updatedAt": "2026-09-09T21:34:37.012701Z"
   },
   "scores24_fifa_world_cup": {
     "date": "2026-09-09",
-    "generatedAt": "2026-09-09T14:57:36.104847Z",
+    "generatedAt": "2026-09-09T21:34:46.802992Z",
     "generatedBy": "local:external-feed-refresh",
-    "lastAttemptAt": "2026-09-09T14:57:36.104847Z",
+    "lastAttemptAt": "2026-09-09T21:34:46.802992Z",
     "lastAttemptDate": "2026-09-09",
-    "lastSuccessAt": "2026-09-09T14:57:36.104847Z",
+    "lastSuccessAt": "2026-09-09T21:34:46.802992Z",
     "meta": {
       "attemptedUrls": 0,
       "blockRetryRounds": 0,
@@ -69290,39 +69288,39 @@
       "missingMatchups": [],
       "officialMatchups": 0,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-09T14:57:36.104847Z"
+      "updatedAt": "2026-09-09T21:34:46.802992Z"
     },
     "note": "Scores24FIFAWorldCup has no official 2026-09-09 matchups.",
     "ok": true,
     "picks": [],
     "refreshStatus": "ok",
-    "updatedAt": "2026-09-09T14:57:36.104847Z"
+    "updatedAt": "2026-09-09T21:34:46.802992Z"
   },
   "scores24_mlb": {
     "date": "2026-09-09",
-    "generatedAt": "2026-09-09T14:47:15.110969Z",
+    "generatedAt": "2026-09-09T21:30:37.503100Z",
     "generatedBy": "local:external-feed-refresh",
-    "lastAttemptAt": "2026-09-09T14:47:15.110969Z",
+    "lastAttemptAt": "2026-09-09T21:30:37.503100Z",
     "lastAttemptDate": "2026-09-09",
-    "lastSuccessAt": "2026-09-09T14:47:15.110969Z",
+    "lastSuccessAt": "2026-09-09T21:30:37.503100Z",
     "meta": {
-      "attemptedUrls": 22,
+      "attemptedUrls": 0,
       "blockRetryRounds": 0,
       "blockedUrls": 0,
-      "checkpointedPicks": 0,
+      "checkpointedPicks": 15,
       "date": "2026-09-09",
       "expectedMatchups": 15,
       "feed": "scores24_mlb",
       "from": "local",
       "leagues": "mlb,wnba,cfb",
-      "listingLinks": 12,
-      "listingResolved": true,
-      "listingUrlsAttempted": 1,
+      "listingLinks": 0,
+      "listingResolved": false,
+      "listingUrlsAttempted": 0,
       "matchedPicks": 15,
       "missingMatchups": [],
       "officialMatchups": 15,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-09T14:47:15.110969Z"
+      "updatedAt": "2026-09-09T21:30:37.503100Z"
     },
     "note": "Scores24MLB matched 15 published editorial choice(s) against 15 official 2026-09-09 matchup(s).",
     "ok": true,
@@ -69645,15 +69643,15 @@
     ],
     "refreshStatus": "ok",
     "scraped_tip_feed": true,
-    "updatedAt": "2026-09-09T14:47:15.110969Z"
+    "updatedAt": "2026-09-09T21:30:37.503100Z"
   },
   "scores24_nba_summer": {
     "date": "2026-09-09",
-    "generatedAt": "2026-09-09T14:57:41.421316Z",
+    "generatedAt": "2026-09-09T21:34:51.091007Z",
     "generatedBy": "local:external-feed-refresh",
-    "lastAttemptAt": "2026-09-09T14:57:41.421316Z",
+    "lastAttemptAt": "2026-09-09T21:34:51.091007Z",
     "lastAttemptDate": "2026-09-09",
-    "lastSuccessAt": "2026-09-09T14:57:41.421316Z",
+    "lastSuccessAt": "2026-09-09T21:34:51.091007Z",
     "meta": {
       "attemptedUrls": 0,
       "blockRetryRounds": 0,
@@ -69668,13 +69666,13 @@
       "missingMatchups": [],
       "officialMatchups": 0,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-09T14:57:41.421316Z"
+      "updatedAt": "2026-09-09T21:34:51.091007Z"
     },
     "note": "Scores24NBASummer has no official 2026-09-09 matchups.",
     "ok": true,
     "picks": [],
     "refreshStatus": "ok",
-    "updatedAt": "2026-09-09T14:57:41.421316Z"
+    "updatedAt": "2026-09-09T21:34:51.091007Z"
   },
   "scores24_tennis": {
     "date": "2026-08-31",
@@ -69843,11 +69841,11 @@
   },
   "scores24_wnba": {
     "date": "2026-09-09",
-    "generatedAt": "2026-09-09T14:55:43.588621Z",
+    "generatedAt": "2026-09-09T21:32:55.314321Z",
     "generatedBy": "local:external-feed-refresh",
-    "lastAttemptAt": "2026-09-09T14:55:43.588621Z",
+    "lastAttemptAt": "2026-09-09T21:32:55.314321Z",
     "lastAttemptDate": "2026-09-09",
-    "lastSuccessAt": "2026-09-09T14:55:43.588621Z",
+    "lastSuccessAt": "2026-09-09T21:32:55.314321Z",
     "meta": {
       "attemptedUrls": 0,
       "blockRetryRounds": 0,
@@ -69862,15 +69860,15 @@
       "missingMatchups": [],
       "officialMatchups": 0,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-09T14:55:43.588621Z"
+      "updatedAt": "2026-09-09T21:32:55.314321Z"
     },
     "note": "Scores24WNBA has no official 2026-09-09 matchups.",
     "ok": true,
     "picks": [],
     "refreshStatus": "ok",
-    "updatedAt": "2026-09-09T14:55:43.588621Z"
+    "updatedAt": "2026-09-09T21:32:55.314321Z"
   },
-  "updatedAt": "2026-09-09T20:43:07.353693Z",
+  "updatedAt": "2026-09-09T21:34:51.091007Z",
   "wnba": {
     "date": "2026-09-09",
     "note": "No WNBA picks today \u2014 off-season or no edge found.",
