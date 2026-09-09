@@ -45,7 +45,7 @@
     "family::total_bases",
     "family::triples"
   ],
-  "ledger_samples": 799,
+  "ledger_samples": 801,
   "market_families": [
     "hits",
     "hrr",
@@ -66,7 +66,7 @@
     "pitcher_earned_runs_allowed"
   ],
   "model_type": "StandardScaler+LogisticRegression",
-  "positive_rate": 0.6032540675844806,
+  "positive_rate": 0.6042446941323346,
   "probability_mode": "market_anchor_validation_gate",
   "sport": "MLB",
   "training_dates": [
@@ -142,18 +142,19 @@
     "2026-09-04",
     "2026-09-05",
     "2026-09-06",
-    "2026-09-07"
+    "2026-09-07",
+    "2026-09-08"
   ],
-  "training_fingerprint": "060b5886f0c65cabbb73af750d5a01ee0d51fba69458115d57a57f9de21e7697",
+  "training_fingerprint": "01e8353bf590eeba5f31ff04f29a18d90de588dc7617101af68c299bd1b6eb07",
   "training_season": 2026,
   "training_sources": [
     "current_season_projection_features",
     "current_season_pickledger_outcome_ledger"
   ],
   "validation": {
-    "actual_rate": 0.6047745358090185,
-    "baseline_brier": 0.2419880879106833,
-    "calibration_gap": 0.039314973773436845,
+    "actual_rate": 0.6058201058201058,
+    "baseline_brier": 0.2424183243505082,
+    "calibration_gap": 0.03916748256578373,
     "dates": [
       "2026-06-21",
       "2026-06-22",
@@ -226,12 +227,13 @@
       "2026-09-04",
       "2026-09-05",
       "2026-09-06",
-      "2026-09-07"
+      "2026-09-07",
+      "2026-09-08"
     ],
-    "market_brier": 0.2155104191246683,
-    "model_brier": 0.23273057827507326,
-    "predicted_rate": 0.6440895095824554,
-    "samples": 754
+    "market_brier": 0.21504723845238083,
+    "model_brier": 0.23211560385457686,
+    "predicted_rate": 0.6449875883858895,
+    "samples": 756
   },
   "version": "player_props_ml_v1.1.0"
 }
