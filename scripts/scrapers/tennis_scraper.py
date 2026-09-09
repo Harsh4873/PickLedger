@@ -47,6 +47,8 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from scripts.scrapers.espn_scoreboard import fetch_scoreboard_json
+
 from scripts.scrapers.scores24_scraper import (  # noqa: E402
     CLOUDFLARE_SIGNALS,
     Scores24Client,
@@ -58,7 +60,7 @@ from scripts.scrapers.scores24_scraper import (  # noqa: E402
 
 CENTRAL = ZoneInfo("America/Chicago")
 ESPN_SCOREBOARD_URL = (
-    "http://site.api.espn.com/apis/site/v2/sports/tennis/{league}/scoreboard?dates={date}"
+    "https://site.api.espn.com/apis/site/v2/sports/tennis/{league}/scoreboard?dates={date}"
 )
 TENNISTONIC_BASE = "https://tennistonic.com"
 SCORES24_BASE = "https://scores24.live"
@@ -122,9 +124,7 @@ def _match_key(a: str, b: str) -> tuple[str, str] | None:
 
 
 def _default_fetch_json(url: str) -> Any:
-    response = requests.get(url, headers={"User-Agent": HEADERS["User-Agent"]}, timeout=20)
-    response.raise_for_status()
-    return response.json()
+    return fetch_scoreboard_json(url)
 
 
 def espn_tennis_matches(
@@ -137,23 +137,23 @@ def espn_tennis_matches(
     Each match dict carries the two athletes (``away``/``home`` by ESPN homeAway),
     the tour, kickoff, live status and — once final — the ``winner`` display name.
     Doubles rows (no ``athlete``) and unfilled draws (a ``TBD`` opponent) are
-    dropped. ``resolved`` is True when at least one ESPN board answered, so an
+    dropped. ``resolved`` is True only when both ESPN boards answered, so an
     empty slate on a genuine off-day is distinguishable from a total fetch
     failure.
     """
     fetch_json = fetch_json or _default_fetch_json
     target = _parse_target_date(date_iso)
     matches: dict[tuple[str, str], dict[str, Any]] = {}
-    resolved = False
+    resolved_tours = 0
     for league in SPORT_CONFIG["tennis"]["espn_leagues"]:
         url = ESPN_SCOREBOARD_URL.format(league=league, date=date_iso.replace("-", ""))
         try:
             payload = fetch_json(url)
         except Exception:
             continue
-        if not isinstance(payload, dict):
+        if not isinstance(payload, dict) or not isinstance(payload.get("events"), list):
             continue
-        resolved = True
+        resolved_tours += 1
         for event in payload.get("events", []) if isinstance(payload.get("events"), list) else []:
             if not isinstance(event, dict):
                 continue
@@ -180,7 +180,7 @@ def espn_tennis_matches(
                     key = _match_key(match["away"], match["home"])
                     if key and key not in matches:
                         matches[key] = match
-    return list(matches.values()), resolved
+    return list(matches.values()), resolved_tours == len(SPORT_CONFIG["tennis"]["espn_leagues"])
 
 
 def _espn_competition_to_match(

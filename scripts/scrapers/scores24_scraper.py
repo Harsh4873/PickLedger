@@ -7,6 +7,7 @@ import argparse
 import json
 import os
 import re
+import sys
 import time
 import unicodedata
 from datetime import date, datetime, timedelta, timezone
@@ -21,6 +22,10 @@ from bs4 import BeautifulSoup
 
 BASE_URL = "https://scores24.live"
 REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+from scripts.scrapers.espn_scoreboard import fetch_scoreboard_json
+
 MODEL_CACHE_DIR = REPO_ROOT / "data" / "model_cache"
 HEADERS = {
     "User-Agent": (
@@ -265,7 +270,7 @@ def _cache_matchups(
 def _espn_scoreboard_url(config: dict[str, Any], date_iso: str) -> str:
     compact = date_iso.replace("-", "")
     url = (
-        "http://site.api.espn.com/apis/site/v2/sports/"
+        "https://site.api.espn.com/apis/site/v2/sports/"
         f"{config['espn_sport']}/{config['espn_league']}/scoreboard?dates={compact}"
     )
     extra = str(config.get("espn_query") or "").strip().lstrip("&")
@@ -293,9 +298,7 @@ def fetch_daily_matchups(
     matchups: dict[tuple[str, str], dict[str, str]] = {}
     espn_resolved = False
     try:
-        response = client.get(url, headers={"User-Agent": "PickLedgerScores24/1.0"}, timeout=20)
-        response.raise_for_status()
-        payload = response.json()
+        payload = fetch_scoreboard_json(url, session=client)
         espn_resolved = True
     except (requests.RequestException, ValueError):
         payload = {}

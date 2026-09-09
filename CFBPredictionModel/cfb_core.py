@@ -10,6 +10,7 @@ import csv
 import gzip
 import math
 import statistics
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -18,6 +19,10 @@ from typing import Any, Iterable, Mapping
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+from scripts.scrapers.espn_scoreboard import fetch_scoreboard_json
+
 DATA_DIR = REPO_ROOT / "data" / "cfb"
 SCHEDULE_DIR = DATA_DIR / "schedules"
 BETTING_DIR = DATA_DIR / "betting"
@@ -437,16 +442,12 @@ def _odds_price(node: Any) -> int | None:
 def load_live_slate(date_iso: str, *, coverage: dict[str, int] | None = None) -> list[dict[str, Any]]:
     """Load pregame identities; missing prices must not erase forecasts."""
 
-    response = requests.get(
-        SCOREBOARD_URL,
-        params={"dates": date_iso.replace("-", ""), "groups": "80", "limit": 1000},
-        headers={"User-Agent": "PickLedgerCFB/1.0", "Accept": "application/json"},
-        timeout=REQUEST_TIMEOUT,
-    )
-    response.raise_for_status()
-    payload = response.json()
-    if not isinstance(payload, Mapping) or not isinstance(payload.get("events"), list):
-        raise ValueError("CFB scoreboard returned an invalid events payload")
+    try:
+        payload = fetch_scoreboard_json(
+            f"{SCOREBOARD_URL}?dates={date_iso.replace('-', '')}&groups=80&limit=1000"
+        )
+    except ValueError as exc:
+        raise ValueError("CFB scoreboard returned an invalid events payload") from exc
     counts = coverage if coverage is not None else {}
     counts.update(official_games=len(payload["events"]), started_games=0, incomplete_games=0,
                   pregame_games=0, unpriced_games=0)

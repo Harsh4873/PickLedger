@@ -21,7 +21,7 @@ if [[ -z "${GH_BIN}" ]]; then
   exit 1
 fi
 
-DATE_ISO="${SCORES24_DATE:-$(date +%F)}"
+DATE_ISO="${SCORES24_DATE:-$(TZ=America/Chicago date +%F)}"
 # MLB+WNBA remain the publish gate. CFB rides the same weekday morning/afternoon
 # Scores24 run as a soft-fail optional feed: scrape when the slate exists, but
 # incomplete/blocked/hung CFB must not prevent publishing a complete MLB+WNBA
@@ -89,6 +89,12 @@ GIT_EMAIL="$(git -C "${REPO_ROOT}" config user.email)"
 git clone --quiet --depth 1 "${REMOTE_URL}" "${TEMP_REPO}"
 git -C "${TEMP_REPO}" config user.name "${GIT_NAME}"
 git -C "${TEMP_REPO}" config user.email "${GIT_EMAIL}"
+
+# The local publisher supplies an independent trigger when GitHub cron is late.
+# Recovery must not prevent publishing the editorial feeds if Actions is down.
+"${PYTHON_BIN}" "${TEMP_REPO}/scripts/automation/ensure_model_refresh.py" \
+  --remote --dispatch --date "${DATE_ISO}" \
+  || echo "Model recovery check failed; continuing Scores24 publish." >&2
 
 "${PYTHON_BIN}" - <<'PY'
 import os

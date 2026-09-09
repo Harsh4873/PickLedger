@@ -852,7 +852,7 @@ def test_refresh_timing_and_pages_deploy_are_deterministic():
     assert "! grep -q 'src/main.ts' dist/index.html" in deploy
     assert "python scripts/site_upcheck.py" in deploy
     guard = (workflows / "model-cache-freshness-guard.yml").read_text(encoding="utf-8")
-    assert 'CACHE_HEALTHY="$(python - <<\'PY\'' in guard
+    assert "python scripts/automation/ensure_model_refresh.py --dispatch" in guard
     assert 'models[key].get("ok") is True for key in required' in guard
     assert 'PLAYER_CACHE_HEALTHY="$(python - <<\'PY\'' in guard
     assert '"nba_player_props"' in guard
@@ -1708,13 +1708,10 @@ def test_home_game_cards_organize_picks_into_market_lanes():
 
 
 def _core_team_model_keys_from_guard() -> set[str]:
-    """The `required = {...}` team-model set inside the freshness guard workflow."""
-    import re
+    """The team-model set used by the shared freshness guard implementation."""
+    from scripts.automation.ensure_model_refresh import REQUIRED
 
-    text = (ROOT / ".github" / "workflows" / "model-cache-freshness-guard.yml").read_text(encoding="utf-8")
-    match = re.search(r'required = \{("mlb_new".*?)\}', text, re.S)
-    assert match, "freshness guard no longer declares a team-model required set"
-    return set(re.findall(r'"([a-z0-9_]+)"', match.group(1)))
+    return REQUIRED
 
 
 def test_core_team_model_required_sets_do_not_drift():
