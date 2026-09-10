@@ -542788,7 +542788,7 @@
       "model_key": "mlb_new",
       "model_version": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
       "odds": -108.0,
-      "outcome": null,
+      "outcome": 1,
       "pick": "Over 8.5 (Cincinnati Reds vs Los Angeles Dodgers)",
       "pregame_snapshot": {
         "assumed_odds_replaced": true,
@@ -542835,12 +542835,12 @@
         "vegas": 8.5
       },
       "probability": 0.6361,
-      "profit": null,
+      "profit": 0.46296296296296297,
       "raw_decision": "BET",
       "raw_edge": 11.69,
       "raw_probability": 0.6407,
       "raw_units": 0.5,
-      "result": "pending",
+      "result": "win",
       "source": "MLB Model",
       "sport": "MLB",
       "stake_units": 0.5,
@@ -543143,7 +543143,7 @@
       "ml_calibration_excluded": true,
       "model_key": "mlb_player_props",
       "odds": -355.0,
-      "outcome": null,
+      "outcome": 0,
       "pick": "Alex Freeland Under 0.5 RBIs",
       "pregame_snapshot": {
         "actionability": "consensus_qualified",
@@ -543277,12 +543277,12 @@
       },
       "probability": 0.8144,
       "probability_source": "player_props_ml_v1",
-      "profit": null,
+      "profit": -1.0,
       "raw_decision": "LEAN",
       "raw_edge": 3.42,
       "raw_probability": 0.8144,
       "raw_units": 1.0,
-      "result": "pending",
+      "result": "loss",
       "source": "MLBPlayerProps",
       "sport": "MLB",
       "stake_units": 1.0,
@@ -543627,9 +543627,9 @@
   ],
   "schema_version": 1,
   "summary": {
-    "decided_picks": 6782,
-    "pending_picks": 102,
+    "decided_picks": 6784,
+    "pending_picks": 100,
     "total_picks": 7097,
-    "trainable_decided_picks": 805
+    "trainable_decided_picks": 806
   }
 }

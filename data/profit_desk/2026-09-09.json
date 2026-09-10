@@ -1054,6 +1054,14 @@
         "value_probability_positive_ev_below_0.70"
       ],
       "canonicalGame": "2026-09-09:mls:portland timbers|st louis city sc",
+      "closing": {
+        "capturedAt": "2026-09-10T02:05:51.451048Z",
+        "clv": -0.031056,
+        "decimalOdds": 1.769231,
+        "noVigProbability": 0.536757,
+        "oddsAmerican": -130,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-09",
       "decimalOdds": 1.714286,
@@ -1179,7 +1187,7 @@
         "updatedAt": "2026-09-09T18:27:37.940559Z"
       },
       "rawModelProbabilityIgnored": 0.6064,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -1200,6 +1208,14 @@
         "value_insufficient_source_samples"
       ],
       "canonicalGame": "2026-09-09:mlb:cincinnati reds|los angeles dodgers",
+      "closing": {
+        "capturedAt": "2026-09-10T02:05:51.451048Z",
+        "clv": 0.0,
+        "decimalOdds": 1.925926,
+        "noVigProbability": 0.49567,
+        "oddsAmerican": -108,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-09",
       "decimalOdds": 1.925926,
@@ -1321,7 +1337,7 @@
         "updatedAt": "2026-09-09T22:52:54.144946Z"
       },
       "rawModelProbabilityIgnored": 0.6407,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -1346,6 +1362,14 @@
         "value_probability_positive_ev_below_0.70"
       ],
       "canonicalGame": "2026-09-09:mls:san diego fc|san jose earthquakes",
+      "closing": {
+        "capturedAt": "2026-09-10T02:05:51.451048Z",
+        "clv": -0.018182,
+        "decimalOdds": 1.833333,
+        "noVigProbability": 0.515723,
+        "oddsAmerican": -120,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-09",
       "decimalOdds": 1.8,
@@ -1471,7 +1495,7 @@
         "updatedAt": "2026-09-09T18:27:37.940559Z"
       },
       "rawModelProbabilityIgnored": 0.5916,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -1495,6 +1519,14 @@
         "value_probability_positive_ev_below_0.70"
       ],
       "canonicalGame": "2026-09-09:mls:lafc|red bull new york",
+      "closing": {
+        "capturedAt": "2026-09-10T02:05:51.451048Z",
+        "clv": -0.022173,
+        "decimalOdds": 1.952381,
+        "noVigProbability": 0.484277,
+        "oddsAmerican": -105,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-09",
       "decimalOdds": 1.909091,
@@ -1619,7 +1651,7 @@
         "updatedAt": "2026-09-09T18:27:37.940559Z"
       },
       "rawModelProbabilityIgnored": 0.6577,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -2327,7 +2359,7 @@
         "updatedAt": "2026-09-09T22:52:51.263826Z"
       },
       "rawModelProbabilityIgnored": 0.5991,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -2545,7 +2577,7 @@
         "updatedAt": "2026-09-09T22:52:51.263826Z"
       },
       "rawModelProbabilityIgnored": 0.6119,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -2981,7 +3013,7 @@
         "updatedAt": "2026-09-09T22:52:51.263826Z"
       },
       "rawModelProbabilityIgnored": 0.526,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
