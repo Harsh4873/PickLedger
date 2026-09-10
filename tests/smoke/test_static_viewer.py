@@ -663,7 +663,8 @@ def test_tab_ordering_prioritizes_home_start_time_and_actionable_picks_elsewhere
     assert "return timestamp > now ? 0 : 2" in main
     assert "if (leftBucket !== rightBucket) return leftBucket - rightBucket" in main
     assert "return leftBucket === 2 ? right - left : left - right" in main
-    assert "const sortedGames = [...groups.entries()].sort((left, right) => compareGameStartAsc(left[1], right[1]))" in main
+    assert "[...groups.entries()].sort((left, right) => compareGameStartAsc(left[1], right[1]))" in main
+    assert "function groupBoardGames(" in main
     assert "const sortedPicks = [...picks].sort(compareHomePickRows)" in main
     assert "homeDecisionRank(left) - homeDecisionRank(right)" in main
     assert "(pickProbability(right) || 0) - (pickProbability(left) || 0)" in main
@@ -1616,19 +1617,24 @@ def test_rankings_boards_follow_a_sport_and_source_filter_while_overall_stats_st
     assert "const rankingPicks = scopedPicks.filter(isSettledPick)" in main
     assert "renderDayOfWeekTable(scopedPicks)" in main
     assert "function renderDayOfWeekTable(comparablePicks: Pick[]): void" in main
-    # Sports and sources intersect; a flat OR would union unrelated buckets.
-    assert "comparablePicks.filter(pick => matchesRankingSports(pick) && matchesRankingSources(pick))" in main
+    # Sports, sources, and BET/LEAN/PASS intersect; a flat OR would union unrelated buckets.
+    assert "matchesRankingSports(pick) && matchesRankingSources(pick) && matchesRankingDecision(pick)" in main
+    assert "function matchesRankingDecision(" in main
+    assert "rankingDecisionFilter === 'STAKED'" in main
     # Overall Stats never reads the scoped pool.
     stats_start = main.index("function updateOverallStats(): void {")
     stats_end = main.index("function ", stats_start + 1)
     assert "rankingScopedPicks" not in main[stats_start:stats_end]
     assert "rankingSportFilters" not in main[stats_start:stats_end]
+    assert "getAllPicks().filter(isPublishedDailyPick)" in main[stats_start:stats_end]
 
     # Switching Team/Player mode rebuilds the buckets, so the scope must reset.
     mode_start = main.index("function switchPickMode(mode: PickMode): void {")
     mode_end = main.index("function ", mode_start + 1)
     assert "rankingSportFilters.clear()" in main[mode_start:mode_end]
     assert "rankingSourceFilters.clear()" in main[mode_start:mode_end]
+    assert "rankingDecisionFilter = 'STAKED'" in main[mode_start:mode_end]
+    assert "homeDecisionFilter = 'ALL'" in main[mode_start:mode_end]
 
     assert 'data-rank-${kind}="' in main
     assert "button.dataset.rankSport || 'ALL'" in main
