@@ -349,7 +349,7 @@ def test_data_only_readiness_defers_stale_daily_data(tmp_path: Path):
     assert "expected" in result.stdout
 
 
-def test_data_only_readiness_rejects_incomplete_scores24_bucket(tmp_path: Path):
+def test_data_only_readiness_warns_on_incomplete_scores24_bucket(tmp_path: Path):
     today = datetime.now(ZoneInfo("America/Chicago")).strftime("%Y-%m-%d")
     script = _upcheck_repo(tmp_path, today)
     cache_path = tmp_path / "data" / "model_cache" / "latest.json"
@@ -375,8 +375,86 @@ def test_data_only_readiness_rejects_incomplete_scores24_bucket(tmp_path: Path):
         text=True,
     )
 
-    assert result.returncode == 1
+    assert result.returncode == 0
+    assert "daily data is ready" in result.stdout
+    assert "[readiness] warning:" in result.stdout
     assert "scores24_wnba failed" in result.stdout
+
+
+def test_data_only_readiness_warns_on_incomplete_scores24_coverage(tmp_path: Path):
+    today = datetime.now(ZoneInfo("America/Chicago")).strftime("%Y-%m-%d")
+    script = _upcheck_repo(tmp_path, today)
+    cache_path = tmp_path / "data" / "model_cache" / "latest.json"
+    payload = json.loads(cache_path.read_text(encoding="utf-8"))
+    payload["external_feeds"]["scores24_mlb"]["meta"] = {
+        "expectedMatchups": 2,
+        "matchedPicks": 0,
+        "missingMatchups": ["Yankees @ Red Sox"],
+    }
+    _write_json(cache_path, payload)
+
+    result = subprocess.run(
+        [sys.executable, str(script), "--data-only"],
+        cwd=tmp_path,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0
+    assert "daily data is ready" in result.stdout
+    assert "[readiness] warning:" in result.stdout
+    assert "scores24_mlb has incomplete official-slate coverage" in result.stdout
+
+
+def test_data_only_readiness_allows_missing_scores24_when_inhouse_ready(tmp_path: Path):
+    today = datetime.now(ZoneInfo("America/Chicago")).strftime("%Y-%m-%d")
+    script = _upcheck_repo(tmp_path, today)
+    cache_path = tmp_path / "data" / "model_cache" / "latest.json"
+    payload = json.loads(cache_path.read_text(encoding="utf-8"))
+    payload["external_feeds"] = {}
+    for key in SCORES24_KEYS:
+        payload.get("models", {}).pop(key, None)
+    _write_json(cache_path, payload)
+    _write_json(tmp_path / "data" / "model_cache" / f"{today}.json", payload)
+
+    result = subprocess.run(
+        [sys.executable, str(script), "--data-only"],
+        cwd=tmp_path,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0
+    assert "daily data is ready" in result.stdout
+    assert "[readiness] warning:" in result.stdout
+    assert "scores24_mlb is missing" in result.stdout
+    assert "scores24_wnba is missing" in result.stdout
+
+
+def test_data_only_readiness_still_fails_missing_inhouse_without_scores24(tmp_path: Path):
+    today = datetime.now(ZoneInfo("America/Chicago")).strftime("%Y-%m-%d")
+    script = _upcheck_repo(tmp_path, today)
+    cache_path = tmp_path / "data" / "model_cache" / "latest.json"
+    payload = json.loads(cache_path.read_text(encoding="utf-8"))
+    payload["external_feeds"] = {}
+    del payload["models"]["mlb_new"]
+    _write_json(cache_path, payload)
+    _write_json(tmp_path / "data" / "model_cache" / f"{today}.json", payload)
+
+    result = subprocess.run(
+        [sys.executable, str(script), "--data-only"],
+        cwd=tmp_path,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 1
+    assert "model bucket mlb_new is missing" in result.stdout
+    assert "scores24_mlb is missing" in result.stdout
+    assert "[readiness] waiting:" in result.stdout
 
 
 def test_data_only_readiness_allows_stale_but_valid_scores24_feed(tmp_path: Path):
@@ -384,8 +462,8 @@ def test_data_only_readiness_allows_stale_but_valid_scores24_feed(tmp_path: Path
     yesterday = (datetime.now(ZoneInfo("America/Chicago")) - timedelta(days=1)).strftime("%Y-%m-%d")
     script = _upcheck_repo(tmp_path, today)
     # Scores24 refreshes only from a residential IP, so its published date can lag a day
-    # behind the rest of today's data. A stale-but-valid feed (still ok and slate-complete)
-    # must warn without freezing the deploy — the core model/props/parlay data is today's.
+    # behind the rest of today's data. Yesterday's otherwise-valid MLB/WNBA buckets must
+    # warn without freezing the deploy — in-house model/props/parlay data is today's.
     cache_path = tmp_path / "data" / "model_cache" / "latest.json"
     payload = json.loads(cache_path.read_text(encoding="utf-8"))
     for key in SCORES24_KEYS:
@@ -569,6 +647,7 @@ def test_upcheck_reports_raw_and_visible_pick_counts(tmp_path: Path):
     )
 
     assert result.returncode == 0
+    assert "[upcheck] failure:" not in result.stdout
     assert "teams_raw=" in result.stdout
     assert "teams_visible=" in result.stdout
     assert "player_props_raw=" in result.stdout
@@ -616,3 +695,38 @@ def test_data_only_readiness_allows_complete_scores24_without_inhouse_models(tmp
     assert result.returncode == 0, result.stdout
     assert "daily data is ready" in result.stdout
     assert "today's Scores24 slate is complete" in result.stdout
+
+
+def test_full_upcheck_allows_missing_scores24_when_inhouse_ready(tmp_path: Path):
+    today = datetime.now(ZoneInfo("America/Chicago")).strftime("%Y-%m-%d")
+    script = _upcheck_repo(tmp_path, today)
+    (tmp_path / "index.html").write_text(
+        '<link rel="stylesheet" href="./src/styles/pickledger.css">'
+        '<script type="module" src="./src/main.ts"></script>',
+        encoding="utf-8",
+    )
+    (tmp_path / "dist").mkdir()
+    (tmp_path / "dist" / "index.html").write_text(
+        '<link rel="stylesheet" href="/assets/index.css">'
+        '<script type="module" src="/assets/index.js"></script>',
+        encoding="utf-8",
+    )
+    cache_path = tmp_path / "data" / "model_cache" / "latest.json"
+    payload = json.loads(cache_path.read_text(encoding="utf-8"))
+    payload["external_feeds"] = {}
+    _write_json(cache_path, payload)
+    _write_json(tmp_path / "data" / "model_cache" / f"{today}.json", payload)
+
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=tmp_path,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0, result.stdout
+    assert "[upcheck] warning:" in result.stdout
+    assert "scores24_mlb is missing" in result.stdout
+    assert "[upcheck] failure:" not in result.stdout
+    assert "healthy for" in result.stdout
