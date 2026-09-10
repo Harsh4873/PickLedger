@@ -1,30 +1,30 @@
 {
   "date": "2026-09-10",
-  "generatedAt": "2026-09-10T18:23:41.531307Z",
+  "generatedAt": "2026-09-10T18:56:47.796715Z",
   "models": {
     "mlb_player_props": {
       "abstained": true,
-      "candidate_count": 1481,
-      "consensus_rejected_count": 3757,
+      "candidate_count": 1495,
+      "consensus_rejected_count": 3793,
       "consensus_rejection_reasons": {
         "batter_strikeouts has not cleared 70%": 172,
         "batter_walks has not cleared 70%": 532,
-        "doubles has not cleared 70%": 316,
+        "doubles has not cleared 70%": 320,
         "failed: season_rate": 4,
-        "hits has not cleared 70%": 616,
-        "hits_runs_rbis has not cleared 70%": 607,
-        "home_runs has not cleared 70%": 152,
+        "hits has not cleared 70%": 624,
+        "hits_runs_rbis has not cleared 70%": 615,
+        "home_runs has not cleared 70%": 154,
         "pitcher_earned_runs_allowed has not cleared 70%": 16,
         "pitcher_hits_allowed has not cleared 70%": 16,
         "pitcher_outs_recorded has not cleared 70%": 16,
         "pitcher_walks_allowed has not cleared 70%": 32,
-        "runs has not cleared 70%": 158,
-        "singles has not cleared 70%": 316,
+        "runs has not cleared 70%": 160,
+        "singles has not cleared 70%": 320,
         "stolen_bases has not cleared 70%": 172,
-        "strikeouts has not cleared 70%": 62,
-        "total_bases has not cleared 70%": 200,
+        "strikeouts has not cleared 70%": 65,
+        "total_bases has not cleared 70%": 202,
         "triples has not cleared 70%": 118,
-        "under price unavailable": 252
+        "under price unavailable": 255
       },
       "consensus_rejections": [
         {
@@ -152,8 +152,8 @@
       "note": "No MLB prop cleared the consensus publication gate.",
       "ok": true,
       "picks": [],
-      "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:b441c002ce01b726",
-      "scored_count": 4065,
+      "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:cabb60569630caf9",
+      "scored_count": 4105,
       "sport": "MLB"
     },
     "nba_player_props": {
@@ -178,7 +178,7 @@
       "note": "No NBA prop cleared the consensus publication gate.",
       "ok": true,
       "picks": [],
-      "ranking_epoch": "NBA:player_props_consensus_v2.0.0:published:b441c002ce01b726",
+      "ranking_epoch": "NBA:player_props_consensus_v2.0.0:published:cabb60569630caf9",
       "scored_count": 0,
       "sport": "NBA"
     },
@@ -204,10 +204,10 @@
       "note": "No WNBA prop cleared the consensus publication gate.",
       "ok": true,
       "picks": [],
-      "ranking_epoch": "WNBA:player_props_consensus_v2.0.0:published:b441c002ce01b726",
+      "ranking_epoch": "WNBA:player_props_consensus_v2.0.0:published:cabb60569630caf9",
       "scored_count": 0,
       "sport": "WNBA"
     }
   },
-  "updatedAt": "2026-09-10T18:23:41.531307Z"
+  "updatedAt": "2026-09-10T18:56:47.796715Z"
 }
