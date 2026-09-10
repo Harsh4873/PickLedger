@@ -281,6 +281,14 @@
         "value_insufficient_source_samples"
       ],
       "canonicalGame": "2026-09-09:mlb:san diego padres|washington nationals",
+      "closing": {
+        "capturedAt": "2026-09-09T18:27:37.940559Z",
+        "clv": 0.0,
+        "decimalOdds": 1.943396,
+        "noVigProbability": 0.491336,
+        "oddsAmerican": -106,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-09",
       "decimalOdds": 1.943396,
@@ -399,7 +407,7 @@
         "updatedAt": "2026-09-09T18:27:37.940559Z"
       },
       "rawModelProbabilityIgnored": 0.5606,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -2017,7 +2025,7 @@
         "updatedAt": "2026-09-09T19:59Z"
       },
       "rawModelProbabilityIgnored": 0.8308,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLBPlayerProps",
       "sourceKey": "mlb_player_props",
@@ -2162,7 +2170,7 @@
         "updatedAt": "2026-09-09T20:43:11.196846Z"
       },
       "rawModelProbabilityIgnored": 0.6285,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -2816,7 +2824,7 @@
         "updatedAt": "2026-09-09T18:57:38.117347Z"
       },
       "rawModelProbabilityIgnored": 0.595,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
