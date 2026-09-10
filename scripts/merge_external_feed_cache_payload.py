@@ -84,8 +84,9 @@ EXTERNAL_FEED_SOURCE_LABELS = {
     },
 }
 # The in-house team models that, when all ok, promote a day to latest.json.
-# A complete Scores24 MLB+WNBA slate also promotes, so the 9:30 local scrape
-# can first-paint today without waiting on in-house models. Tennis-only,
+# A complete Scores24 MLB+WNBA slate also promotes (team_ready or scores24_ready),
+# so the 9:30 local scrape can first-paint today without waiting on in-house
+# models — and in-house models can publish without waiting on Scores24. Tennis-only,
 # CFB-only, FIFA/NBA Summer, and other feed-only days still must not promote
 # — that is what left 2026-07-25 showing a tennis-only slate.
 #
@@ -534,9 +535,12 @@ def _scores24_feed_bucket(payload: dict[str, Any], key: str) -> dict[str, Any] |
 def _scores24_mlb_wnba_complete(payload: dict[str, Any], date_iso: str) -> bool:
     """True when today's official Scores24 MLB and WNBA slates are complete.
 
-    Tennis, CFB, NFL, FIFA, and NBA Summer must still not promote latest.json.
-    scores24_cfb and scores24_nfl are scraped best-effort on the same local
-    run; their absence or failure must not block this gate.
+    Used as one side of latestUpdated (team_ready or scores24_ready). Complete
+    Scores24 can first-paint without in-house models; in-house models can
+    publish without Scores24. Tennis, CFB, NFL, FIFA, and NBA Summer must still
+    not promote latest.json on their own. scores24_cfb and scores24_nfl are
+    scraped best-effort on the same local run; their absence or failure must
+    not block this helper.
     """
     for key in ("scores24_mlb", "scores24_wnba"):
         bucket = _scores24_feed_bucket(payload, key)

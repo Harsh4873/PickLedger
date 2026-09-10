@@ -863,6 +863,9 @@ def test_refresh_timing_and_pages_deploy_are_deterministic():
     assert "python scripts/site_upcheck.py --data-only" in deploy
     assert "if: needs.readiness.outputs.ready == 'true'" in deploy
     assert "Verify styled Pages artifact" in deploy
+    upcheck_src = (ROOT / "scripts" / "site_upcheck.py").read_text(encoding="utf-8")
+    assert "not a Pages requirement" in upcheck_src
+    assert 'failures.append(f"external-feed bucket {key} is missing")' not in upcheck_src
     assert "find dist/assets -maxdepth 1 -name '*.js'" in deploy
     assert "! grep -q 'src/main.ts' dist/index.html" in deploy
     assert "python scripts/site_upcheck.py" in deploy
@@ -1800,6 +1803,27 @@ def test_external_feed_publish_still_refuses_a_day_without_team_models(tmp_path)
     assert module.write_merged_payload(feeds_only, cache_dir) is False
     assert not (cache_dir / "latest.json").exists()
 
+
+
+def test_external_feed_publish_promotes_team_models_without_scores24(tmp_path):
+    """In-house team models must promote latest.json even with no Scores24 buckets."""
+    module = _load_module(
+        "merge_external_feed_cache_payload_team_without_scores24",
+        ROOT / "scripts" / "merge_external_feed_cache_payload.py",
+    )
+    cache_dir = tmp_path / "data" / "model_cache"
+    cache_dir.mkdir(parents=True)
+    payload = {
+        "date": "2026-09-10",
+        "models": {
+            key: {"ok": True, "picks": []}
+            for key in module.REQUIRED_TEAM_MODEL_KEYS
+        },
+        "external_feeds": {},
+    }
+
+    assert module.write_merged_payload(payload, cache_dir) is True
+    assert json.loads((cache_dir / "latest.json").read_text(encoding="utf-8"))["date"] == "2026-09-10"
 
 
 def test_external_feed_publish_promotes_complete_scores24_mlb_wnba_without_team_models(tmp_path):

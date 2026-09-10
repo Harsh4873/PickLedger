@@ -22,11 +22,13 @@ if [[ -z "${GH_BIN}" ]]; then
 fi
 
 DATE_ISO="${SCORES24_DATE:-$(TZ=America/Chicago date +%F)}"
-# MLB+WNBA remain the publish gate. CFB and NFL ride the same weekday
-# morning/afternoon Scores24 run as soft-fail optional feeds: scrape when the
-# slate exists, but incomplete/blocked/hung CFB or NFL must not prevent
-# publishing a complete MLB+WNBA slate, and must not gate latestUpdated /
-# site_upcheck.
+# MLB+WNBA remain the Scores24 publisher completeness gate (and can still
+# promote latest.json when complete). They are not a hard site_upcheck / Pages
+# deploy requirement: in-house team models alone are enough to publish.
+# CFB and NFL ride the same weekday morning/afternoon Scores24 run as soft-fail
+# optional feeds: scrape when the slate exists, but incomplete/blocked/hung
+# CFB or NFL must not prevent publishing a complete MLB+WNBA slate, and must
+# not gate latestUpdated.
 PUBLISH_FEEDS="${SCORES24_PUBLISH_FEEDS:-scores24_mlb,scores24_wnba}"
 OPTIONAL_FEEDS="${SCORES24_OPTIONAL_FEEDS:-scores24_cfb,scores24_nfl}"
 PUBLISH_SPORTS="${SCORES24_PUBLISH_SPORTS:-mlb,wnba,cfb,nfl}"

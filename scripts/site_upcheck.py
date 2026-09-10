@@ -51,10 +51,11 @@ REQUIRED_SCORES24_FEED_KEYS = {
     "scores24_mlb",
     "scores24_wnba",
 }
-# scores24_cfb and scores24_nfl are scraped on the same local Scores24 run as
-# MLB+WNBA but are not freshness/upcheck requirements. Incomplete or blocked
-# CFB/NFL must not fail the site the way a missing MLB/WNBA bucket does
-# (soft-fail like tennis).
+# Watched Scores24 MLB+WNBA buckets: warn when missing/stale/incomplete, and a
+# complete today's slate can still first-paint latest.json / allow deploy when
+# in-house models are not ready yet. They are not a hard Pages / --data-only
+# gate. scores24_cfb and scores24_nfl are scraped on the same local Scores24
+# run but are never freshness/upcheck requirements (soft-fail like tennis).
 TEAM_VISIBLE_DECISIONS = {"BET", "LEAN"}
 PLAYER_VISIBLE_DECISIONS = {"BET", "LEAN", "PASS"}
 LEGACY_PUBLIC_PLAYER_PROP_SUFFIXES = (
@@ -273,8 +274,10 @@ def _inhouse_unreadiness_when_scores24_ready(
 ) -> bool:
     """True when the failure is only 'in-house data is not today's yet'.
 
-    A complete Scores24 MLB+WNBA slate should still deploy. Broken *today's*
-    player/parlay/profit artifacts stay hard failures.
+    A complete Scores24 MLB+WNBA slate can still first-paint the site when
+    in-house team models have not landed. Broken *today's* player/parlay/profit
+    artifacts stay hard failures. Missing/stale Scores24 must not block deploy
+    when the required in-house models are already ready.
     """
     if message.startswith("model bucket "):
         return True
@@ -409,22 +412,19 @@ def main() -> int:
         elif bucket.get("ok") is not True:
             failures.append(f"model bucket {key} failed: {bucket.get('error') or 'unknown error'}")
 
-    external_feeds = latest.get("external_feeds") if isinstance(latest, dict) else {}
-    external_feeds = external_feeds if isinstance(external_feeds, dict) else {}
-    # Scores24 feeds refresh only from a residential IP — CI and other datacenter IPs are
-    # Cloudflare-blocked — so their published date can legitimately lag by a day. A feed
-    # that is only a day stale (but present, ok, and slate-complete) must not block the
-    # site deploy while the model, player-props, parlay, and Profit Desk data are already
-    # today's. Both deploy gates run this check — the readiness job (`--data-only`) and the
-    # artifact-verify step (the full upcheck) — so date-staleness is a warning in both
-    # modes; a missing, errored, or incomplete-slate Scores24 bucket is still a failure.
+    # Scores24 MLB/WNBA still first-paint latest.json when complete, but they are
+    # not a Pages requirement. CI cannot scrape Scores24, so missing, errored,
+    # incomplete, or yesterday-dated buckets are warnings in both --data-only
+    # readiness and the full upcheck. In-house team models, player props, parlays,
+    # and Profit Desk still hard-fail when unreadiness is not covered by a complete
+    # today's Scores24 slate.
     for key in sorted(REQUIRED_SCORES24_FEED_KEYS):
-        bucket = external_feeds.get(key)
+        bucket = _scores24_feed_bucket(latest, key)
         if not isinstance(bucket, dict):
-            failures.append(f"external-feed bucket {key} is missing")
+            warnings.append(f"external-feed bucket {key} is missing")
             continue
         if bucket.get("ok") is not True:
-            failures.append(f"external-feed bucket {key} failed: {bucket.get('error') or 'unknown error'}")
+            warnings.append(f"external-feed bucket {key} failed: {bucket.get('error') or 'unknown error'}")
             continue
         if str(bucket.get("date") or "") != today:
             warnings.append(f"external-feed bucket {key} is {bucket.get('date') or 'undated'}, expected {today}")
@@ -433,7 +433,7 @@ def main() -> int:
         expected = meta.get("expectedMatchups")
         matched = meta.get("matchedPicks")
         if missing or expected != matched or matched != len(bucket.get("picks") or []):
-            failures.append(
+            warnings.append(
                 f"external-feed bucket {key} has incomplete official-slate coverage: "
                 f"matched={matched!r}, expected={expected!r}, missing={missing!r}"
             )
