@@ -2155,7 +2155,7 @@
     "scraped_tip_feed": true,
     "updatedAt": "2026-09-10T15:44:30.530037Z"
   },
-  "generatedAt": "2026-09-10T14:21:22.620808Z",
+  "generatedAt": "2026-09-10T15:53:52.971155Z",
   "generatedBy": "github-actions:model-cache-refresh",
   "mlb_first_five": {
     "consensus_gate_version": "mlb_team_consensus_v1.2.0",
@@ -2203,7 +2203,7 @@
             "travel_run_delta": -0.0,
             "travel_timezone_shift_hours": 0,
             "venue_delta": 0.067,
-            "wind_direction": "out",
+            "wind_direction": "cross",
             "wind_mph": 3.0,
             "wind_run_delta_per_team": 0.0
           },
@@ -2295,7 +2295,7 @@
             "travel_run_delta": -0.0,
             "travel_timezone_shift_hours": 0,
             "venue_delta": 0.067,
-            "wind_direction": "out",
+            "wind_direction": "cross",
             "wind_mph": 3.0,
             "wind_run_delta_per_team": 0.0
           },
@@ -2397,8 +2397,8 @@
             },
             "park_run_delta_per_team": 0.067,
             "run_delta_per_team": 0.067,
-            "weather_raw": "3 mph, Out To RF",
-            "wind_direction": "out",
+            "weather_raw": "3 mph, L To R",
+            "wind_direction": "cross",
             "wind_mph": 3.0,
             "wind_run_delta_per_team": 0.0
           }
@@ -2455,13 +2455,13 @@
         "features": {
           "away_lineup_matchup": {
             "current_bvp_pa": 0,
-            "older_bvp_pa": 69,
-            "run_delta": 0.031,
+            "older_bvp_pa": 66,
+            "run_delta": 0.014,
             "sampled_batters": 9,
-            "threat_score": 0.3625
+            "threat_score": 0.3553
           },
           "away_offense": {
-            "lineup_delta": 0.031,
+            "lineup_delta": 0.014,
             "park_run_delta_per_team": 0.18,
             "pitcher_current_f5_allowed": 2.062,
             "pitcher_current_vs_opponent": 1.853,
@@ -2471,7 +2471,7 @@
             "pitcher_rest_label": "normal rest (4d)",
             "pitcher_rest_runs_modifier": 0.0,
             "pitcher_venue_f5_allowed": 1.857,
-            "projected_runs": 2.5,
+            "projected_runs": 2.58,
             "team_current_f5_runs": 2.536,
             "team_prior_f5_runs": 2.378,
             "team_recent_f5_runs": 2.583,
@@ -2484,9 +2484,9 @@
             "travel_run_delta": -0.0,
             "travel_timezone_shift_hours": 0,
             "venue_delta": 0.18,
-            "wind_direction": "",
-            "wind_mph": 0.0,
-            "wind_run_delta_per_team": 0.0
+            "wind_direction": "out",
+            "wind_mph": 9.0,
+            "wind_run_delta_per_team": 0.1
           },
           "away_pitcher": {
             "current_f5_allowed": 4.778,
@@ -2549,13 +2549,13 @@
           },
           "home_lineup_matchup": {
             "current_bvp_pa": 0,
-            "older_bvp_pa": 20,
-            "run_delta": 0.082,
+            "older_bvp_pa": 26,
+            "run_delta": 0.063,
             "sampled_batters": 9,
-            "threat_score": 0.3841
+            "threat_score": 0.3764
           },
           "home_offense": {
-            "lineup_delta": 0.082,
+            "lineup_delta": 0.063,
             "park_run_delta_per_team": 0.18,
             "pitcher_current_f5_allowed": 4.778,
             "pitcher_current_vs_opponent": 2.848,
@@ -2565,7 +2565,7 @@
             "pitcher_rest_label": "normal rest (5d)",
             "pitcher_rest_runs_modifier": 0.0,
             "pitcher_venue_f5_allowed": 2.848,
-            "projected_runs": 3.47,
+            "projected_runs": 3.55,
             "team_current_f5_runs": 2.442,
             "team_prior_f5_runs": 2.489,
             "team_recent_f5_runs": 2.458,
@@ -2578,9 +2578,9 @@
             "travel_run_delta": -0.0,
             "travel_timezone_shift_hours": 0,
             "venue_delta": 0.18,
-            "wind_direction": "",
-            "wind_mph": 0.0,
-            "wind_run_delta_per_team": 0.0
+            "wind_direction": "out",
+            "wind_mph": 9.0,
+            "wind_run_delta_per_team": 0.1
           },
           "home_pitcher": {
             "current_f5_allowed": 2.062,
@@ -2682,10 +2682,10 @@
             },
             "park_run_delta_per_team": 0.18,
             "run_delta_per_team": 0.18,
-            "weather_raw": "",
-            "wind_direction": "",
-            "wind_mph": 0.0,
-            "wind_run_delta_per_team": 0.0
+            "weather_raw": "9 mph, Out To RF",
+            "wind_direction": "out",
+            "wind_mph": 9.0,
+            "wind_run_delta_per_team": 0.1
           }
         },
         "game_id": "823413",
@@ -2694,13 +2694,13 @@
         "home_pitcher": "Zack Wheeler",
         "home_team": "Philadelphia Phillies",
         "matchup": "Houston Astros @ Philadelphia Phillies",
-        "notes": "F5 projection Houston Astros 2.5, Philadelphia Phillies 3.47 (total 5.97). BvP PA away/home: 0+69/0+20; venue F5 total 4.98 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00).",
+        "notes": "F5 projection Houston Astros 2.58, Philadelphia Phillies 3.55 (total 6.13). BvP PA away/home: 0+66/0+26; venue F5 total 4.98 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00).",
         "projected_first_five": {
           "away_lead_probability": 0.3772,
-          "away_runs": 2.5,
+          "away_runs": 2.58,
           "home_lead_probability": 0.6228,
-          "home_runs": 3.47,
-          "total_runs": 5.97
+          "home_runs": 3.55,
+          "total_runs": 6.13
         },
         "top_picks": [
           {
@@ -2719,13 +2719,13 @@
             "assumed_odds": -170,
             "confidence": "Low",
             "decision": "PASS",
-            "edge_pct": -2.94,
-            "guardrail": "projection too close to F5 line",
+            "edge_pct": 0.36,
+            "guardrail": "line gap below bet threshold",
             "market": "f5_total",
-            "model_prediction": "5.97 F5 total",
+            "model_prediction": "6.13 F5 total",
             "pick": "Over 5.5 F5",
-            "probability": 0.6003,
-            "projection_gap": 0.47,
+            "probability": 0.6333,
+            "projection_gap": 0.63,
             "team": "",
             "vegas_line": 5.5
           }
@@ -3585,7 +3585,7 @@
         "actionability": "research_signal",
         "assumed_odds_replaced": true,
         "away_team": "Tampa Bay Rays",
-        "calibrated_edge": -3.2959121951219528,
+        "calibrated_edge": -2.0764000000000005,
         "calibrated_model_probability": 0.479236,
         "calibrated_probability": 0.479236,
         "calibration": {
@@ -3597,8 +3597,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -3835,15 +3835,15 @@
         "line": null,
         "line_source": "whole_game_moneyline_proxy",
         "market": "f5_side",
-        "market_away_odds": -110,
-        "market_home_odds": -120,
+        "market_away_odds": 100,
+        "market_home_odds": -130,
         "market_implied_probability": 0.52381,
-        "market_no_vig_probability": 0.5121951219512195,
-        "market_no_vig_selected_probability": 0.489879,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_no_vig_probability": 0.5,
+        "market_no_vig_selected_probability": 0.469388,
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_priced": true,
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "matchup": "Tampa Bay Rays @ Atlanta Braves",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
@@ -3851,9 +3851,9 @@
         "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "model_prediction": "Tampa Bay Rays +0.37 F5 runs",
         "notes": "F5 projection Tampa Bay Rays 2.42, Atlanta Braves 2.05 (total 4.47). BvP PA away/home: 0+64/0+53; venue F5 total 4.63 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00). Projection: Tampa Bay Rays 2.42, Atlanta Braves 2.05; total 4.47.",
-        "odds": -110,
+        "odds": 100,
         "odds_source": "posted_market",
-        "opposite_odds": -120,
+        "opposite_odds": -130,
         "pick": "Tampa Bay Rays F5 ML",
         "pregame_snapshot": {
           "actionability": "research_signal",
@@ -3913,8 +3913,8 @@
         "raw_model_probability": 0.5488,
         "raw_probability": 0.5488,
         "recommended_units": 0.0,
-        "selected_odds": -110,
-        "selected_side_implied_probability": 0.5121951219512195,
+        "selected_odds": 100,
+        "selected_side_implied_probability": 0.5,
         "source": "MLB First Five",
         "sport": "MLB",
         "start_time": "2026-09-10T16:15:00Z",
@@ -3928,7 +3928,7 @@
         "actionability": "research_signal",
         "assumed_odds_replaced": true,
         "away_team": "Tampa Bay Rays",
-        "calibrated_edge": -5.983652380952381,
+        "calibrated_edge": -7.091072093023248,
         "calibrated_model_probability": 0.463973,
         "calibrated_probability": 0.463973,
         "calibration": {
@@ -3940,8 +3940,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -4271,14 +4271,14 @@
         "market": "f5_total",
         "market_implied_probability": 0.565217,
         "market_line": 4.5,
-        "market_no_vig_probability": 0.5238095238095238,
+        "market_no_vig_probability": 0.5348837209302325,
         "market_no_vig_selected_probability": 0.5,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_over_odds": -115,
         "market_priced": true,
         "market_under_odds": -115,
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "matchup": "Tampa Bay Rays @ Atlanta Braves",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
@@ -4350,7 +4350,7 @@
         "raw_probability": 0.5043,
         "recommended_units": 0.0,
         "selected_odds": -115,
-        "selected_side_implied_probability": 0.5238095238095238,
+        "selected_side_implied_probability": 0.5348837209302325,
         "source": "MLB First Five",
         "sport": "MLB",
         "start_time": "2026-09-10T16:15:00Z",
@@ -4364,7 +4364,7 @@
         "actionability": "research_signal",
         "assumed_odds_replaced": true,
         "away_team": "Houston Astros",
-        "calibrated_edge": -13.799766666666669,
+        "calibrated_edge": -14.875035483870969,
         "calibrated_model_probability": 0.528669,
         "calibrated_probability": 0.528669,
         "calibration": {
@@ -4376,8 +4376,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -4515,7 +4515,7 @@
           },
           {
             "category": "lineup_matchup",
-            "detail": "home offense: 20 batter-vs-pitcher PA included",
+            "detail": "home offense: 26 batter-vs-pitcher PA included",
             "impact": "support",
             "name": "batter_pitcher_history",
             "strength": 0.7
@@ -4605,25 +4605,25 @@
         "line": null,
         "line_source": "whole_game_moneyline_proxy",
         "market": "f5_side",
-        "market_away_odds": 154,
-        "market_home_odds": -200,
+        "market_away_odds": 160,
+        "market_home_odds": -210,
         "market_implied_probability": 0.52381,
-        "market_no_vig_probability": 0.6666666666666666,
-        "market_no_vig_selected_probability": 0.628713,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_no_vig_probability": 0.6774193548387096,
+        "market_no_vig_selected_probability": 0.63785,
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_priced": true,
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "matchup": "Houston Astros @ Philadelphia Phillies",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
         "model_assumed_odds": -110,
         "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "model_prediction": "Philadelphia Phillies +0.97 F5 runs",
-        "notes": "F5 projection Houston Astros 2.5, Philadelphia Phillies 3.47 (total 5.97). BvP PA away/home: 0+69/0+20; venue F5 total 4.98 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00). Projection: Houston Astros 2.5, Philadelphia Phillies 3.47; total 5.97.",
-        "odds": -200,
+        "notes": "F5 projection Houston Astros 2.58, Philadelphia Phillies 3.55 (total 6.13). BvP PA away/home: 0+66/0+26; venue F5 total 4.98 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00). Projection: Houston Astros 2.58, Philadelphia Phillies 3.55; total 6.13.",
+        "odds": -210,
         "odds_source": "posted_market",
-        "opposite_odds": 154,
+        "opposite_odds": 160,
         "pick": "Philadelphia Phillies F5 ML",
         "pregame_snapshot": {
           "actionability": "research_signal",
@@ -4683,8 +4683,8 @@
         "raw_model_probability": 0.6228,
         "raw_probability": 0.6228,
         "recommended_units": 0.0,
-        "selected_odds": -200,
-        "selected_side_implied_probability": 0.6666666666666666,
+        "selected_odds": -210,
+        "selected_side_implied_probability": 0.6774193548387096,
         "source": "MLB First Five",
         "sport": "MLB",
         "start_time": "2026-09-10T17:05:00Z",
@@ -4710,8 +4710,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -4871,7 +4871,7 @@
           },
           {
             "category": "lineup_matchup",
-            "detail": "away offense: 69 batter-vs-pitcher PA included",
+            "detail": "away offense: 66 batter-vs-pitcher PA included",
             "impact": "support",
             "name": "batter_pitcher_history",
             "strength": 0.7
@@ -4962,7 +4962,7 @@
           },
           {
             "category": "lineup_matchup",
-            "detail": "home offense: 20 batter-vs-pitcher PA included",
+            "detail": "home offense: 26 batter-vs-pitcher PA included",
             "impact": "support",
             "name": "batter_pitcher_history",
             "strength": 0.7
@@ -5056,19 +5056,19 @@
         "market_line": 5.5,
         "market_no_vig_probability": 0.4166666666666667,
         "market_no_vig_selected_probability": 0.393258,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_over_odds": 140,
         "market_priced": true,
         "market_under_odds": -180,
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "matchup": "Houston Astros @ Philadelphia Phillies",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
         "model_assumed_odds": -170,
         "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
-        "model_prediction": "5.97 F5 total",
-        "notes": "F5 projection Houston Astros 2.5, Philadelphia Phillies 3.47 (total 5.97). BvP PA away/home: 0+69/0+20; venue F5 total 4.98 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00). Projection: Houston Astros 2.5, Philadelphia Phillies 3.47; total 5.97.",
+        "model_prediction": "6.13 F5 total",
+        "notes": "F5 projection Houston Astros 2.58, Philadelphia Phillies 3.55 (total 6.13). BvP PA away/home: 0+66/0+26; venue F5 total 4.98 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00). Projection: Houston Astros 2.58, Philadelphia Phillies 3.55; total 6.13.",
         "odds": 140,
         "odds_source": "posted_market",
         "opposite_odds": -180,
@@ -5159,8 +5159,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -5397,15 +5397,15 @@
         "line": null,
         "line_source": "whole_game_moneyline_proxy",
         "market": "f5_side",
-        "market_away_odds": 105,
-        "market_home_odds": -135,
+        "market_away_odds": 100,
+        "market_home_odds": -130,
         "market_implied_probability": 0.52381,
         "market_no_vig_probability": 0.5652173913043478,
-        "market_no_vig_selected_probability": 0.540791,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_no_vig_selected_probability": 0.530612,
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_priced": true,
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "matchup": "Texas Rangers @ Seattle Mariners",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
@@ -5413,9 +5413,9 @@
         "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "model_prediction": "Seattle Mariners +0.14 F5 runs",
         "notes": "F5 projection Texas Rangers 2.19, Seattle Mariners 2.33 (total 4.52). BvP PA away/home: 46+95/43+75; venue F5 total 3.88 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00). Projection: Texas Rangers 2.19, Seattle Mariners 2.33; total 4.52.",
-        "odds": -135,
+        "odds": -130,
         "odds_source": "posted_market",
-        "opposite_odds": 105,
+        "opposite_odds": 100,
         "pick": "Seattle Mariners F5 ML",
         "pregame_snapshot": {
           "actionability": "research_signal",
@@ -5475,7 +5475,7 @@
         "raw_model_probability": 0.518,
         "raw_probability": 0.518,
         "recommended_units": 0.0,
-        "selected_odds": -135,
+        "selected_odds": -130,
         "selected_side_implied_probability": 0.5652173913043478,
         "source": "MLB First Five",
         "sport": "MLB",
@@ -5490,7 +5490,7 @@
         "actionability": "research_signal",
         "assumed_odds_replaced": true,
         "away_team": "Texas Rangers",
-        "calibrated_edge": 7.935761538461539,
+        "calibrated_edge": 8.661450943396225,
         "calibrated_model_probability": 0.463973,
         "calibrated_probability": 0.463973,
         "calibration": {
@@ -5502,8 +5502,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -5595,7 +5595,7 @@
         "consensus_qualified": false,
         "consensus_rejection_reason": "raw_model_abstained; failed_walk_forward_validation",
         "consensus_required": true,
-        "consensus_score": 55.436,
+        "consensus_score": 56.161,
         "consensus_signal_count": 19,
         "consensus_signals": [
           {
@@ -5603,7 +5603,7 @@
             "detail": "calibrated probability beats selected-side market price",
             "impact": "support",
             "name": "market_price",
-            "strength": 0.794
+            "strength": 0.866
           },
           {
             "category": "calibration",
@@ -5841,7 +5841,7 @@
         "decision": "PASS",
         "edge": -10.12,
         "edge_basis": "no_vig",
-        "full_kelly": 0.129,
+        "full_kelly": 0.1391,
         "game": "Texas Rangers @ Seattle Mariners",
         "game_id": "823088",
         "game_order": 2,
@@ -5853,14 +5853,14 @@
         "market": "f5_total",
         "market_implied_probability": 0.565217,
         "market_line": 4.5,
-        "market_no_vig_probability": 0.38461538461538464,
-        "market_no_vig_selected_probability": 0.350109,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_no_vig_probability": 0.37735849056603776,
+        "market_no_vig_selected_probability": 0.356033,
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
-        "market_over_odds": 170,
+        "market_over_odds": 165,
         "market_priced": true,
-        "market_under_odds": -220,
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_under_odds": -215,
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "matchup": "Texas Rangers @ Seattle Mariners",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
@@ -5868,9 +5868,9 @@
         "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "model_prediction": "4.52 F5 total",
         "notes": "F5 projection Texas Rangers 2.19, Seattle Mariners 2.33 (total 4.52). BvP PA away/home: 46+95/43+75; venue F5 total 3.88 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00). Projection: Texas Rangers 2.19, Seattle Mariners 2.33; total 4.52.",
-        "odds": 170,
+        "odds": 165,
         "odds_source": "posted_market",
-        "opposite_odds": -220,
+        "opposite_odds": -215,
         "pick": "Over 4.5 F5",
         "pregame_snapshot": {
           "actionability": "research_signal",
@@ -5925,14 +5925,14 @@
         "pricing_type": "market",
         "primary_consensus_passed": false,
         "probability": 0.464,
-        "quarter_kelly": 0.0322,
+        "quarter_kelly": 0.0348,
         "ranking_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "raw_edge": -6.09,
         "raw_model_probability": 0.5043,
         "raw_probability": 0.5043,
         "recommended_units": 0.0,
-        "selected_odds": 170,
-        "selected_side_implied_probability": 0.38461538461538464,
+        "selected_odds": 165,
+        "selected_side_implied_probability": 0.37735849056603776,
         "source": "MLB First Five",
         "sport": "MLB",
         "start_time": "2026-09-10T20:10:00Z",
@@ -5958,8 +5958,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -6171,15 +6171,15 @@
         "line": null,
         "line_source": "whole_game_moneyline_proxy",
         "market": "f5_side",
-        "market_away_odds": 240,
-        "market_home_odds": -330,
+        "market_away_odds": 230,
+        "market_home_odds": -315,
         "market_implied_probability": 0.52381,
         "market_no_vig_probability": 0.7590361445783133,
-        "market_no_vig_selected_probability": 0.722938,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_no_vig_selected_probability": 0.714679,
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_priced": true,
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "matchup": "Colorado Rockies @ New York Yankees",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
@@ -6187,9 +6187,9 @@
         "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "model_prediction": "New York Yankees +1.19 F5 runs",
         "notes": "F5 projection Colorado Rockies 1.86, New York Yankees 3.05 (total 4.91). BvP PA away/home: 3+16/0+6; venue F5 total 4.45 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00). Projection: Colorado Rockies 1.86, New York Yankees 3.05; total 4.91.",
-        "odds": -330,
+        "odds": -315,
         "odds_source": "posted_market",
-        "opposite_odds": 240,
+        "opposite_odds": 230,
         "pick": "New York Yankees F5 ML",
         "pregame_snapshot": {
           "actionability": "research_signal",
@@ -6249,7 +6249,7 @@
         "raw_model_probability": 0.6495,
         "raw_probability": 0.6495,
         "recommended_units": 0.0,
-        "selected_odds": -330,
+        "selected_odds": -315,
         "selected_side_implied_probability": 0.7590361445783133,
         "source": "MLB First Five",
         "sport": "MLB",
@@ -6276,8 +6276,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -6595,13 +6595,13 @@
         "market_implied_probability": 0.565217,
         "market_line": 4.5,
         "market_no_vig_probability": 0.5454545454545454,
-        "market_no_vig_selected_probability": 0.530612,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_no_vig_selected_probability": 0.510121,
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
-        "market_over_odds": -130,
+        "market_over_odds": -120,
         "market_priced": true,
-        "market_under_odds": 100,
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_under_odds": -110,
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "matchup": "Colorado Rockies @ New York Yankees",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
@@ -6609,9 +6609,9 @@
         "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "model_prediction": "4.91 F5 total",
         "notes": "F5 projection Colorado Rockies 1.86, New York Yankees 3.05 (total 4.91). BvP PA away/home: 3+16/0+6; venue F5 total 4.45 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00). Projection: Colorado Rockies 1.86, New York Yankees 3.05; total 4.91.",
-        "odds": -130,
+        "odds": -120,
         "odds_source": "posted_market",
-        "opposite_odds": 100,
+        "opposite_odds": -110,
         "pick": "Over 4.5 F5",
         "pregame_snapshot": {
           "actionability": "research_signal",
@@ -6672,7 +6672,7 @@
         "raw_model_probability": 0.5877,
         "raw_probability": 0.5877,
         "recommended_units": 0.0,
-        "selected_odds": -130,
+        "selected_odds": -120,
         "selected_side_implied_probability": 0.5454545454545454,
         "source": "MLB First Five",
         "sport": "MLB",
@@ -6699,8 +6699,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -6930,10 +6930,10 @@
         "market_implied_probability": 0.52381,
         "market_no_vig_probability": 0.5348837209302325,
         "market_no_vig_selected_probability": 0.5,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_priced": true,
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "matchup": "Pittsburgh Pirates @ Chicago White Sox",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
@@ -7030,8 +7030,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -7319,13 +7319,13 @@
         "market_implied_probability": 0.565217,
         "market_line": 4.5,
         "market_no_vig_probability": 0.574468085106383,
-        "market_no_vig_selected_probability": 0.550562,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_no_vig_selected_probability": 0.540791,
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
-        "market_over_odds": 110,
+        "market_over_odds": 105,
         "market_priced": true,
-        "market_under_odds": -140,
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_under_odds": -135,
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "matchup": "Pittsburgh Pirates @ Chicago White Sox",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
@@ -7333,9 +7333,9 @@
         "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "model_prediction": "4.45 F5 total",
         "notes": "F5 projection Pittsburgh Pirates 1.69, Chicago White Sox 2.76 (total 4.45). BvP PA away/home: 0+0/0+0; venue F5 total 5.08 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00). Projection: Pittsburgh Pirates 1.69, Chicago White Sox 2.76; total 4.45.",
-        "odds": -140,
+        "odds": -135,
         "odds_source": "posted_market",
-        "opposite_odds": 110,
+        "opposite_odds": 105,
         "pick": "Under 4.5 F5",
         "pregame_snapshot": {
           "actionability": "research_signal",
@@ -7396,7 +7396,7 @@
         "raw_model_probability": 0.5108,
         "raw_probability": 0.5108,
         "recommended_units": 0.0,
-        "selected_odds": -140,
+        "selected_odds": -135,
         "selected_side_implied_probability": 0.574468085106383,
         "source": "MLB First Five",
         "sport": "MLB",
@@ -7550,12 +7550,12 @@
         "weather": {
           "condition": "Partly Cloudy",
           "temp": "85",
-          "wind": "3 mph, Out To RF"
+          "wind": "3 mph, L To R"
         },
         "weather_adjustment": {
           "scoreless_multiplier": 0.99,
           "temp_f": 85.0,
-          "wind_direction": "out",
+          "wind_direction": "none",
           "wind_mph": 3.0
         }
       },
@@ -7597,24 +7597,24 @@
           "8": 0.5625
         },
         "edge_table": {
-          "1": 0.0186,
-          "2": -0.1372,
-          "3": -0.1112,
-          "4": -0.147,
-          "5": -0.1135,
-          "6": -0.1026,
-          "7": -0.1495,
-          "8": -0.1949
+          "1": 0.0043,
+          "2": -0.1508,
+          "3": -0.1247,
+          "4": -0.1602,
+          "5": -0.1273,
+          "6": -0.1174,
+          "7": -0.1636,
+          "8": -0.2079
         },
         "full_inning_table": {
-          "1": 0.403,
-          "2": 0.381,
-          "3": 0.379,
-          "4": 0.371,
-          "5": 0.391,
-          "6": 0.416,
-          "7": 0.398,
-          "8": 0.368
+          "1": 0.389,
+          "2": 0.368,
+          "3": 0.365,
+          "4": 0.358,
+          "5": 0.377,
+          "6": 0.401,
+          "7": 0.384,
+          "8": 0.355
         },
         "game_id": "823413",
         "game_order": 1,
@@ -7689,15 +7689,15 @@
         },
         "venue_factor": 1.03,
         "weather": {
-          "condition": "",
-          "temp": "",
-          "wind": ""
+          "condition": "Cloudy",
+          "temp": "85",
+          "wind": "9 mph, Out To RF"
         },
         "weather_adjustment": {
-          "scoreless_multiplier": 1.0,
-          "temp_f": null,
-          "wind_direction": "none",
-          "wind_mph": 0.0
+          "scoreless_multiplier": 0.9821,
+          "temp_f": 85.0,
+          "wind_direction": "out",
+          "wind_mph": 9.0
         }
       },
       {
@@ -8149,8 +8149,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -8465,7 +8465,7 @@
     },
     "consensus_gate_version": "mlb_team_consensus_v1.2.0",
     "consensus_rejection_reasons": {
-      "edge_signal_threshold_not_met(edge=0.468823076923075, probability=0.523919, signals=5)": 1,
+      "edge_signal_threshold_not_met(edge=0.010947619047618762, probability=0.523919, signals=5)": 1,
       "non_positive_calibrated_edge": 3,
       "raw_model_abstained": 2
     },
@@ -8490,8 +8490,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -8572,24 +8572,24 @@
         "full_kelly": 0.0,
         "game_start_time": "2026-09-10T16:15:00Z",
         "home_team": "Atlanta Braves",
-        "market_away_odds": -101,
-        "market_home_odds": -120,
+        "market_away_odds": 105,
+        "market_home_odds": -127,
         "market_no_vig_probability": 0.5594713656387665,
-        "market_no_vig_selected_probability": 0.520501,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_no_vig_selected_probability": 0.534216,
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_pick_prob": null,
         "market_priced": true,
         "market_type": "h2h",
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
         "model_assumed_odds": null,
         "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "model_odds": -106,
-        "odds": -120,
+        "odds": -127,
         "odds_source": "posted_market",
-        "opposite_odds": -101,
+        "opposite_odds": 105,
         "pick": "Braves ML (Rays vs Braves)",
         "pregame_snapshot": {
           "assumed_odds_replaced": true,
@@ -8640,7 +8640,7 @@
         "raw_probability": 0.5742,
         "raw_units": 0.4,
         "recommended_units": 0.0,
-        "selected_odds": -120,
+        "selected_odds": -127,
         "selected_side_implied_probability": 0.5594713656387665,
         "source": "MLB Model",
         "sport": "MLB",
@@ -8655,7 +8655,7 @@
         "actionability": "lean",
         "assumed_odds_replaced": true,
         "away_team": "Tampa Bay Rays",
-        "calibrated_edge": 3.6090596330275226,
+        "calibrated_edge": 3.820449308755758,
         "calibrated_model_probability": 0.577375,
         "calibrated_probability": 0.577375,
         "calibration": {
@@ -8667,8 +8667,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -8717,7 +8717,7 @@
         "consensus_qualified": true,
         "consensus_rejection_reason": null,
         "consensus_required": true,
-        "consensus_score": 26.347,
+        "consensus_score": 26.558,
         "consensus_signal_count": 6,
         "consensus_signals": [
           {
@@ -8725,7 +8725,7 @@
             "detail": "calibrated probability beats selected-side market price",
             "impact": "support",
             "name": "market_price",
-            "strength": 0.361
+            "strength": 0.382
           },
           {
             "category": "calibration",
@@ -8767,22 +8767,22 @@
         "direction": "Under",
         "edge": 4.47,
         "edge_basis": "no_vig",
-        "full_kelly": 0.0787,
+        "full_kelly": 0.0829,
         "game_start_time": "2026-09-10T16:15Z",
         "home_team": "Atlanta Braves",
         "kelly": 2.21,
         "line": 8.5,
         "market_line": 8.5,
-        "market_no_vig_probability": 0.5412844036697247,
+        "market_no_vig_probability": 0.5391705069124424,
         "market_no_vig_selected_probability": 0.509817,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_over_odds": -105,
         "market_priced": true,
         "market_total_source": "model_output",
         "market_type": "totals",
         "market_under_odds": -114,
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
         "model_assumed_odds": -110,
@@ -8841,7 +8841,7 @@
         "primary_consensus_passed": true,
         "prob": 0.566,
         "probability": 0.5774,
-        "quarter_kelly": 0.0197,
+        "quarter_kelly": 0.0207,
         "ranking_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "raw_edge": 4.32,
         "raw_model_probability": 0.567,
@@ -8849,7 +8849,7 @@
         "raw_units": 0.01,
         "recommended_units": 0.25,
         "selected_odds": -114,
-        "selected_side_implied_probability": 0.5412844036697247,
+        "selected_side_implied_probability": 0.5391705069124424,
         "selection": "Under",
         "source": "MLB Model",
         "sport": "MLB",
@@ -8864,7 +8864,7 @@
         "actionability": "research_signal",
         "assumed_odds_replaced": true,
         "away_team": "Houston Astros",
-        "calibrated_edge": -13.36152465753424,
+        "calibrated_edge": -12.764894425087103,
         "calibrated_model_probability": 0.523919,
         "calibrated_probability": 0.523919,
         "calibration": {
@@ -8876,8 +8876,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -8958,24 +8958,24 @@
         "full_kelly": 0.0,
         "game_start_time": "2026-09-10T17:05:00Z",
         "home_team": "Philadelphia Phillies",
-        "market_away_odds": 158,
-        "market_home_odds": -193,
-        "market_no_vig_probability": 0.6575342465753424,
-        "market_no_vig_selected_probability": 0.629555,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_away_odds": 154,
+        "market_home_odds": -187,
+        "market_no_vig_probability": 0.6515679442508711,
+        "market_no_vig_selected_probability": 0.62335,
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_pick_prob": null,
         "market_priced": true,
         "market_type": "h2h",
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
         "model_assumed_odds": null,
         "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "model_odds": -135,
-        "odds": -193,
+        "odds": -187,
         "odds_source": "posted_market",
-        "opposite_odds": 158,
+        "opposite_odds": 154,
         "pick": "Phillies ML (Astros vs Phillies)",
         "pregame_snapshot": {
           "assumed_odds_replaced": true,
@@ -9026,8 +9026,8 @@
         "raw_probability": 0.5742,
         "raw_units": 0.4,
         "recommended_units": 0.0,
-        "selected_odds": -193,
-        "selected_side_implied_probability": 0.6575342465753424,
+        "selected_odds": -187,
+        "selected_side_implied_probability": 0.6515679442508711,
         "source": "MLB Model",
         "sport": "MLB",
         "start_time": "2026-09-10T17:05:00Z",
@@ -9041,7 +9041,7 @@
         "actionability": "research_signal",
         "assumed_odds_replaced": true,
         "away_team": "Houston Astros",
-        "calibrated_edge": 0.7679649289099588,
+        "calibrated_edge": 0.9936476190476218,
         "calibrated_model_probability": 0.533746,
         "calibrated_probability": 0.533746,
         "calibration": {
@@ -9053,8 +9053,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -9104,7 +9104,7 @@
         "consensus_qualified": false,
         "consensus_rejection_reason": "raw_model_abstained",
         "consensus_required": true,
-        "consensus_score": 16.643,
+        "consensus_score": 16.868,
         "consensus_signal_count": 5,
         "consensus_signals": [
           {
@@ -9112,7 +9112,7 @@
             "detail": "calibrated probability beats selected-side market price",
             "impact": "support",
             "name": "market_price",
-            "strength": 0.077
+            "strength": 0.099
           },
           {
             "category": "calibration",
@@ -9147,30 +9147,30 @@
         "direction": "Over",
         "edge": 0.54,
         "edge_basis": "no_vig",
-        "full_kelly": 0.0162,
+        "full_kelly": 0.0209,
         "game_start_time": "2026-09-10T17:05:00Z",
         "home_team": "Philadelphia Phillies",
         "kelly": 0.0,
         "line": 8.5,
         "market_line": 8.5,
-        "market_no_vig_probability": 0.5260663507109005,
-        "market_no_vig_selected_probability": 0.50545,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_no_vig_probability": 0.5238095238095238,
+        "market_no_vig_selected_probability": 0.50109,
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
-        "market_over_odds": -112,
+        "market_over_odds": -110,
         "market_priced": true,
         "market_total_source": "model_output",
         "market_type": "totals",
-        "market_under_odds": -107,
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_under_odds": -109,
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
         "model_assumed_odds": -110,
         "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "model_prediction": 8.7,
-        "odds": -112,
+        "odds": -110,
         "odds_source": "posted_market",
-        "opposite_odds": -107,
+        "opposite_odds": -109,
         "pick": "Over 8.5 (Houston Astros vs Philadelphia Phillies)",
         "pregame_snapshot": {
           "assumed_odds_replaced": true,
@@ -9221,15 +9221,15 @@
         "primary_consensus_passed": false,
         "prob": 0.5221,
         "probability": 0.5337,
-        "quarter_kelly": 0.0041,
+        "quarter_kelly": 0.0052,
         "ranking_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "raw_edge": -1.18,
         "raw_model_probability": 0.512,
         "raw_probability": 0.512,
         "raw_units": 0.0,
         "recommended_units": 0.0,
-        "selected_odds": -112,
-        "selected_side_implied_probability": 0.5260663507109005,
+        "selected_odds": -110,
+        "selected_side_implied_probability": 0.5238095238095238,
         "selection": "PASS",
         "source": "MLB Model",
         "sport": "MLB",
@@ -9256,8 +9256,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -9342,12 +9342,12 @@
         "market_home_odds": -130,
         "market_no_vig_probability": 0.5652173913043478,
         "market_no_vig_selected_probability": 0.540368,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_pick_prob": null,
         "market_priced": true,
         "market_type": "h2h",
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
         "model_assumed_odds": null,
@@ -9433,8 +9433,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -9616,8 +9616,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -9718,24 +9718,24 @@
         "full_kelly": 0.2,
         "game_start_time": "2026-09-10T23:05Z",
         "home_team": "New York Yankees",
-        "market_away_odds": 260,
-        "market_home_odds": -330,
+        "market_away_odds": 239,
+        "market_home_odds": -301,
         "market_no_vig_probability": 0.7506234413965087,
-        "market_no_vig_selected_probability": 0.73424,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_no_vig_selected_probability": 0.717882,
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_pick_prob": null,
         "market_priced": true,
         "market_type": "h2h",
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
         "model_assumed_odds": null,
         "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "model_odds": -3233,
-        "odds": -330,
+        "odds": -301,
         "odds_source": "posted_market",
-        "opposite_odds": 260,
+        "opposite_odds": 239,
         "pick": "Yankees ML (Rockies vs Yankees)",
         "pregame_snapshot": {
           "assumed_odds_replaced": true,
@@ -9786,7 +9786,7 @@
         "raw_probability": 0.97,
         "raw_units": 1.5,
         "recommended_units": 0.5,
-        "selected_odds": -330,
+        "selected_odds": -301,
         "selected_side_implied_probability": 0.7506234413965087,
         "source": "MLB Model",
         "sport": "MLB",
@@ -9813,8 +9813,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -9915,14 +9915,14 @@
         "market_line": 8.5,
         "market_no_vig_probability": 0.5169082125603864,
         "market_no_vig_selected_probability": 0.49455,
-        "market_odds_captured_at": "2026-09-10T14:21:23.085247Z",
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_over_odds": -107,
         "market_priced": true,
         "market_total_source": "model_output",
         "market_type": "totals",
         "market_under_odds": -112,
-        "market_updated_at": "2026-09-10T14:21:23.085247Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
         "model_assumed_odds": -110,
@@ -9991,7 +9991,7 @@
         "actionability": "research_signal",
         "assumed_odds_replaced": true,
         "away_team": "Pittsburgh Pirates",
-        "calibrated_edge": 0.468823076923075,
+        "calibrated_edge": 0.010947619047618762,
         "calibrated_model_probability": 0.523919,
         "calibrated_probability": 0.523919,
         "calibration": {
@@ -10003,8 +10003,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -10050,9 +10050,9 @@
         "consensus_passed": false,
         "consensus_publication_mode": "research",
         "consensus_qualified": false,
-        "consensus_rejection_reason": "edge_signal_threshold_not_met(edge=0.468823076923075, probability=0.523919, signals=5)",
+        "consensus_rejection_reason": "edge_signal_threshold_not_met(edge=0.010947619047618762, probability=0.523919, signals=5)",
         "consensus_required": true,
-        "consensus_score": 15.361,
+        "consensus_score": 14.903,
         "consensus_signal_count": 5,
         "consensus_signals": [
           {
@@ -10060,7 +10060,7 @@
             "detail": "calibrated probability beats selected-side market price",
             "impact": "support",
             "name": "market_price",
-            "strength": 0.047
+            "strength": 0.001
           },
           {
             "category": "calibration",
@@ -10094,27 +10094,27 @@
         "decision": "PASS",
         "edge": -0.44,
         "edge_basis": "no_vig",
-        "full_kelly": 0.0098,
+        "full_kelly": 0.0002,
         "game_start_time": "2026-09-10T23:40:00Z",
         "home_team": "Chicago White Sox",
-        "market_away_odds": -108,
-        "market_home_odds": -112,
-        "market_no_vig_probability": 0.5192307692307693,
-        "market_no_vig_selected_probability": 0.50433,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_away_odds": -110,
+        "market_home_odds": -110,
+        "market_no_vig_probability": 0.5238095238095238,
+        "market_no_vig_selected_probability": 0.5,
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_pick_prob": null,
         "market_priced": true,
         "market_type": "h2h",
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
         "model_assumed_odds": null,
         "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "model_odds": -135,
-        "odds": -112,
+        "odds": -110,
         "odds_source": "posted_market",
-        "opposite_odds": -108,
+        "opposite_odds": -110,
         "pick": "White Sox ML (Pirates vs White Sox)",
         "pregame_snapshot": {
           "assumed_odds_replaced": true,
@@ -10158,15 +10158,15 @@
         "pricing_type": "market",
         "primary_consensus_passed": false,
         "probability": 0.5239,
-        "quarter_kelly": 0.0024,
+        "quarter_kelly": 0.0001,
         "ranking_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
         "raw_edge": 7.42,
         "raw_model_probability": 0.5742,
         "raw_probability": 0.5742,
         "raw_units": 0.4,
         "recommended_units": 0.0,
-        "selected_odds": -112,
-        "selected_side_implied_probability": 0.5192307692307693,
+        "selected_odds": -110,
+        "selected_side_implied_probability": 0.5238095238095238,
         "source": "MLB Model",
         "sport": "MLB",
         "start_time": "2026-09-10T23:40:00Z",
@@ -10192,8 +10192,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -10674,8 +10674,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -10897,8 +10897,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -11120,8 +11120,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -11354,8 +11354,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -11588,8 +11588,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -11822,8 +11822,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -11975,12 +11975,12 @@
         "market_line": 3.5,
         "market_no_vig_probability": 0.47619047619047616,
         "market_no_vig_selected_probability": 0.449438,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
         "market_over_odds": 110,
         "market_priced": true,
         "market_under_odds": -140,
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "matchup": "Seattle Mariners vs Texas Rangers",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_team_total",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
@@ -12080,8 +12080,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -12303,8 +12303,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -12441,13 +12441,13 @@
         "market_implied_probability": 0.52381,
         "market_line": 5.5,
         "market_no_vig_probability": 0.5833333333333334,
-        "market_no_vig_selected_probability": 0.510121,
-        "market_odds_captured_at": "2026-09-10T13:28:07.903497Z",
+        "market_no_vig_selected_probability": 0.550562,
+        "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
-        "market_over_odds": -110,
+        "market_over_odds": 110,
         "market_priced": true,
-        "market_under_odds": -120,
-        "market_updated_at": "2026-09-10T13:28:07.903497Z",
+        "market_under_odds": -140,
+        "market_updated_at": "2026-09-10T15:46:19.234266Z",
         "matchup": "New York Yankees vs Colorado Rockies",
         "ml_rank_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_team_total",
         "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
@@ -12455,9 +12455,9 @@
         "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_team_total",
         "model_prediction": "5.104 runs projected",
         "notes": "Projected 5.104 runs vs Ryan Feltner (offense 4.25, pitching x1.1329, park x1.06).",
-        "odds": -120,
+        "odds": -140,
         "odds_source": "posted_market",
-        "opposite_odds": -110,
+        "opposite_odds": 110,
         "pick": "New York Yankees Team Total Under 5.5",
         "pregame_snapshot": {
           "actionability": "research_signal",
@@ -12520,7 +12520,7 @@
         "raw_model_probability": 0.5853,
         "raw_probability": 0.5853,
         "recommended_units": 0.0,
-        "selected_odds": -120,
+        "selected_odds": -140,
         "selected_side_implied_probability": 0.5833333333333334,
         "source": "MLB Team Total",
         "sport": "MLB",
@@ -12547,8 +12547,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -12781,8 +12781,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -13296,7 +13296,7 @@
               "travel_run_delta": -0.0,
               "travel_timezone_shift_hours": 0,
               "venue_delta": 0.067,
-              "wind_direction": "out",
+              "wind_direction": "cross",
               "wind_mph": 3.0,
               "wind_run_delta_per_team": 0.0
             },
@@ -13388,7 +13388,7 @@
               "travel_run_delta": -0.0,
               "travel_timezone_shift_hours": 0,
               "venue_delta": 0.067,
-              "wind_direction": "out",
+              "wind_direction": "cross",
               "wind_mph": 3.0,
               "wind_run_delta_per_team": 0.0
             },
@@ -13490,8 +13490,8 @@
               },
               "park_run_delta_per_team": 0.067,
               "run_delta_per_team": 0.067,
-              "weather_raw": "3 mph, Out To RF",
-              "wind_direction": "out",
+              "weather_raw": "3 mph, L To R",
+              "wind_direction": "cross",
               "wind_mph": 3.0,
               "wind_run_delta_per_team": 0.0
             }
@@ -13548,13 +13548,13 @@
           "features": {
             "away_lineup_matchup": {
               "current_bvp_pa": 0,
-              "older_bvp_pa": 69,
-              "run_delta": 0.031,
+              "older_bvp_pa": 66,
+              "run_delta": 0.014,
               "sampled_batters": 9,
-              "threat_score": 0.3625
+              "threat_score": 0.3553
             },
             "away_offense": {
-              "lineup_delta": 0.031,
+              "lineup_delta": 0.014,
               "park_run_delta_per_team": 0.18,
               "pitcher_current_f5_allowed": 2.062,
               "pitcher_current_vs_opponent": 1.853,
@@ -13564,7 +13564,7 @@
               "pitcher_rest_label": "normal rest (4d)",
               "pitcher_rest_runs_modifier": 0.0,
               "pitcher_venue_f5_allowed": 1.857,
-              "projected_runs": 2.5,
+              "projected_runs": 2.58,
               "team_current_f5_runs": 2.536,
               "team_prior_f5_runs": 2.378,
               "team_recent_f5_runs": 2.583,
@@ -13577,9 +13577,9 @@
               "travel_run_delta": -0.0,
               "travel_timezone_shift_hours": 0,
               "venue_delta": 0.18,
-              "wind_direction": "",
-              "wind_mph": 0.0,
-              "wind_run_delta_per_team": 0.0
+              "wind_direction": "out",
+              "wind_mph": 9.0,
+              "wind_run_delta_per_team": 0.1
             },
             "away_pitcher": {
               "current_f5_allowed": 4.778,
@@ -13642,13 +13642,13 @@
             },
             "home_lineup_matchup": {
               "current_bvp_pa": 0,
-              "older_bvp_pa": 20,
-              "run_delta": 0.082,
+              "older_bvp_pa": 26,
+              "run_delta": 0.063,
               "sampled_batters": 9,
-              "threat_score": 0.3841
+              "threat_score": 0.3764
             },
             "home_offense": {
-              "lineup_delta": 0.082,
+              "lineup_delta": 0.063,
               "park_run_delta_per_team": 0.18,
               "pitcher_current_f5_allowed": 4.778,
               "pitcher_current_vs_opponent": 2.848,
@@ -13658,7 +13658,7 @@
               "pitcher_rest_label": "normal rest (5d)",
               "pitcher_rest_runs_modifier": 0.0,
               "pitcher_venue_f5_allowed": 2.848,
-              "projected_runs": 3.47,
+              "projected_runs": 3.55,
               "team_current_f5_runs": 2.442,
               "team_prior_f5_runs": 2.489,
               "team_recent_f5_runs": 2.458,
@@ -13671,9 +13671,9 @@
               "travel_run_delta": -0.0,
               "travel_timezone_shift_hours": 0,
               "venue_delta": 0.18,
-              "wind_direction": "",
-              "wind_mph": 0.0,
-              "wind_run_delta_per_team": 0.0
+              "wind_direction": "out",
+              "wind_mph": 9.0,
+              "wind_run_delta_per_team": 0.1
             },
             "home_pitcher": {
               "current_f5_allowed": 2.062,
@@ -13775,10 +13775,10 @@
               },
               "park_run_delta_per_team": 0.18,
               "run_delta_per_team": 0.18,
-              "weather_raw": "",
-              "wind_direction": "",
-              "wind_mph": 0.0,
-              "wind_run_delta_per_team": 0.0
+              "weather_raw": "9 mph, Out To RF",
+              "wind_direction": "out",
+              "wind_mph": 9.0,
+              "wind_run_delta_per_team": 0.1
             }
           },
           "game_id": "823413",
@@ -13787,13 +13787,13 @@
           "home_pitcher": "Zack Wheeler",
           "home_team": "Philadelphia Phillies",
           "matchup": "Houston Astros @ Philadelphia Phillies",
-          "notes": "F5 projection Houston Astros 2.5, Philadelphia Phillies 3.47 (total 5.97). BvP PA away/home: 0+69/0+20; venue F5 total 4.98 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00).",
+          "notes": "F5 projection Houston Astros 2.58, Philadelphia Phillies 3.55 (total 6.13). BvP PA away/home: 0+66/0+26; venue F5 total 4.98 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00).",
           "projected_first_five": {
             "away_lead_probability": 0.3772,
-            "away_runs": 2.5,
+            "away_runs": 2.58,
             "home_lead_probability": 0.6228,
-            "home_runs": 3.47,
-            "total_runs": 5.97
+            "home_runs": 3.55,
+            "total_runs": 6.13
           },
           "top_picks": [
             {
@@ -13812,13 +13812,13 @@
               "assumed_odds": -170,
               "confidence": "Low",
               "decision": "PASS",
-              "edge_pct": -2.94,
-              "guardrail": "projection too close to F5 line",
+              "edge_pct": 0.36,
+              "guardrail": "line gap below bet threshold",
               "market": "f5_total",
-              "model_prediction": "5.97 F5 total",
+              "model_prediction": "6.13 F5 total",
               "pick": "Over 5.5 F5",
-              "probability": 0.6003,
-              "projection_gap": 0.47,
+              "probability": 0.6333,
+              "projection_gap": 0.63,
               "team": "",
               "vegas_line": 5.5
             }
@@ -14678,7 +14678,7 @@
           "actionability": "research_signal",
           "assumed_odds_replaced": true,
           "away_team": "Tampa Bay Rays",
-          "calibrated_edge": -3.2959121951219528,
+          "calibrated_edge": -2.0764000000000005,
           "calibrated_model_probability": 0.479236,
           "calibrated_probability": 0.479236,
           "calibration": {
@@ -14690,8 +14690,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -14931,7 +14931,7 @@
           "market_away_odds": 100,
           "market_home_odds": -130,
           "market_implied_probability": 0.52381,
-          "market_no_vig_probability": 0.5121951219512195,
+          "market_no_vig_probability": 0.5,
           "market_no_vig_selected_probability": 0.469388,
           "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
           "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -15007,7 +15007,7 @@
           "raw_probability": 0.5488,
           "recommended_units": 0.0,
           "selected_odds": 100,
-          "selected_side_implied_probability": 0.5121951219512195,
+          "selected_side_implied_probability": 0.5,
           "source": "MLB First Five",
           "sport": "MLB",
           "start_time": "2026-09-10T16:15:00Z",
@@ -15021,7 +15021,7 @@
           "actionability": "research_signal",
           "assumed_odds_replaced": true,
           "away_team": "Tampa Bay Rays",
-          "calibrated_edge": -5.983652380952381,
+          "calibrated_edge": -7.091072093023248,
           "calibrated_model_probability": 0.463973,
           "calibrated_probability": 0.463973,
           "calibration": {
@@ -15033,8 +15033,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -15364,7 +15364,7 @@
           "market": "f5_total",
           "market_implied_probability": 0.565217,
           "market_line": 4.5,
-          "market_no_vig_probability": 0.5238095238095238,
+          "market_no_vig_probability": 0.5348837209302325,
           "market_no_vig_selected_probability": 0.5,
           "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
           "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -15443,7 +15443,7 @@
           "raw_probability": 0.5043,
           "recommended_units": 0.0,
           "selected_odds": -115,
-          "selected_side_implied_probability": 0.5238095238095238,
+          "selected_side_implied_probability": 0.5348837209302325,
           "source": "MLB First Five",
           "sport": "MLB",
           "start_time": "2026-09-10T16:15:00Z",
@@ -15457,7 +15457,7 @@
           "actionability": "research_signal",
           "assumed_odds_replaced": true,
           "away_team": "Houston Astros",
-          "calibrated_edge": -13.799766666666669,
+          "calibrated_edge": -14.875035483870969,
           "calibrated_model_probability": 0.528669,
           "calibrated_probability": 0.528669,
           "calibration": {
@@ -15469,8 +15469,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -15608,7 +15608,7 @@
             },
             {
               "category": "lineup_matchup",
-              "detail": "home offense: 20 batter-vs-pitcher PA included",
+              "detail": "home offense: 26 batter-vs-pitcher PA included",
               "impact": "support",
               "name": "batter_pitcher_history",
               "strength": 0.7
@@ -15701,7 +15701,7 @@
           "market_away_odds": 160,
           "market_home_odds": -210,
           "market_implied_probability": 0.52381,
-          "market_no_vig_probability": 0.6666666666666666,
+          "market_no_vig_probability": 0.6774193548387096,
           "market_no_vig_selected_probability": 0.63785,
           "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
           "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -15713,7 +15713,7 @@
           "model_assumed_odds": -110,
           "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
           "model_prediction": "Philadelphia Phillies +0.97 F5 runs",
-          "notes": "F5 projection Houston Astros 2.5, Philadelphia Phillies 3.47 (total 5.97). BvP PA away/home: 0+69/0+20; venue F5 total 4.98 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00). Projection: Houston Astros 2.5, Philadelphia Phillies 3.47; total 5.97.",
+          "notes": "F5 projection Houston Astros 2.58, Philadelphia Phillies 3.55 (total 6.13). BvP PA away/home: 0+66/0+26; venue F5 total 4.98 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00). Projection: Houston Astros 2.58, Philadelphia Phillies 3.55; total 6.13.",
           "odds": -210,
           "odds_source": "posted_market",
           "opposite_odds": 160,
@@ -15777,12 +15777,12 @@
           "raw_probability": 0.6228,
           "recommended_units": 0.0,
           "selected_odds": -210,
-          "selected_side_implied_probability": 0.6666666666666666,
+          "selected_side_implied_probability": 0.6774193548387096,
           "source": "MLB First Five",
           "sport": "MLB",
           "start_time": "2026-09-10T17:05:00Z",
           "team": "Philadelphia Phillies",
-          "units": 0,
+          "units": 0.0,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": -0.49262497615593803,
           "walk_forward_samples": 33
@@ -15803,8 +15803,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -15964,7 +15964,7 @@
             },
             {
               "category": "lineup_matchup",
-              "detail": "away offense: 69 batter-vs-pitcher PA included",
+              "detail": "away offense: 66 batter-vs-pitcher PA included",
               "impact": "support",
               "name": "batter_pitcher_history",
               "strength": 0.7
@@ -16055,7 +16055,7 @@
             },
             {
               "category": "lineup_matchup",
-              "detail": "home offense: 20 batter-vs-pitcher PA included",
+              "detail": "home offense: 26 batter-vs-pitcher PA included",
               "impact": "support",
               "name": "batter_pitcher_history",
               "strength": 0.7
@@ -16160,8 +16160,8 @@
           "mlb_team_consensus_version": "mlb_team_consensus_v1.2.0",
           "model_assumed_odds": -170,
           "model_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
-          "model_prediction": "5.97 F5 total",
-          "notes": "F5 projection Houston Astros 2.5, Philadelphia Phillies 3.47 (total 5.97). BvP PA away/home: 0+69/0+20; venue F5 total 4.98 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00). Projection: Houston Astros 2.5, Philadelphia Phillies 3.47; total 5.97.",
+          "model_prediction": "6.13 F5 total",
+          "notes": "F5 projection Houston Astros 2.58, Philadelphia Phillies 3.55 (total 6.13). BvP PA away/home: 0+66/0+26; venue F5 total 4.98 over 60 games. Travel away/home: 1d since previous game; 0 mi (fatigue 0.00) / 1d since previous game; 0 mi (fatigue 0.00). Projection: Houston Astros 2.58, Philadelphia Phillies 3.55; total 6.13.",
           "odds": 140,
           "odds_source": "posted_market",
           "opposite_odds": -180,
@@ -16252,8 +16252,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -16583,7 +16583,7 @@
           "actionability": "research_signal",
           "assumed_odds_replaced": true,
           "away_team": "Texas Rangers",
-          "calibrated_edge": 7.935761538461539,
+          "calibrated_edge": 8.661450943396225,
           "calibrated_model_probability": 0.463973,
           "calibrated_probability": 0.463973,
           "calibration": {
@@ -16595,8 +16595,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -16688,7 +16688,7 @@
           "consensus_qualified": false,
           "consensus_rejection_reason": "raw_model_abstained; failed_walk_forward_validation",
           "consensus_required": true,
-          "consensus_score": 55.436,
+          "consensus_score": 56.161,
           "consensus_signal_count": 19,
           "consensus_signals": [
             {
@@ -16696,7 +16696,7 @@
               "detail": "calibrated probability beats selected-side market price",
               "impact": "support",
               "name": "market_price",
-              "strength": 0.794
+              "strength": 0.866
             },
             {
               "category": "calibration",
@@ -16934,7 +16934,7 @@
           "decision": "PASS",
           "edge": -10.12,
           "edge_basis": "no_vig",
-          "full_kelly": 0.129,
+          "full_kelly": 0.1391,
           "game": "Texas Rangers @ Seattle Mariners",
           "game_id": "823088",
           "game_order": 2,
@@ -16946,7 +16946,7 @@
           "market": "f5_total",
           "market_implied_probability": 0.565217,
           "market_line": 4.5,
-          "market_no_vig_probability": 0.38461538461538464,
+          "market_no_vig_probability": 0.37735849056603776,
           "market_no_vig_selected_probability": 0.356033,
           "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
           "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -17018,14 +17018,14 @@
           "pricing_type": "market",
           "primary_consensus_passed": false,
           "probability": 0.464,
-          "quarter_kelly": 0.0322,
+          "quarter_kelly": 0.0348,
           "ranking_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
           "raw_edge": -6.09,
           "raw_model_probability": 0.5043,
           "raw_probability": 0.5043,
           "recommended_units": 0.0,
           "selected_odds": 165,
-          "selected_side_implied_probability": 0.38461538461538464,
+          "selected_side_implied_probability": 0.37735849056603776,
           "source": "MLB First Five",
           "sport": "MLB",
           "start_time": "2026-09-10T20:10:00Z",
@@ -17051,8 +17051,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -17348,7 +17348,7 @@
           "sport": "MLB",
           "start_time": "2026-09-10T23:05:00Z",
           "team": "New York Yankees",
-          "units": 0,
+          "units": 0.0,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": -0.49262497615593803,
           "walk_forward_samples": 33
@@ -17369,8 +17369,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -17792,8 +17792,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -18102,7 +18102,7 @@
           "sport": "MLB",
           "start_time": "2026-09-10T23:40:00Z",
           "team": "Chicago White Sox",
-          "units": 0,
+          "units": 0.0,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": -0.49262497615593803,
           "walk_forward_samples": 33
@@ -18123,8 +18123,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -18643,12 +18643,12 @@
           "weather": {
             "condition": "Partly Cloudy",
             "temp": "85",
-            "wind": "3 mph, Out To RF"
+            "wind": "3 mph, L To R"
           },
           "weather_adjustment": {
             "scoreless_multiplier": 0.99,
             "temp_f": 85.0,
-            "wind_direction": "out",
+            "wind_direction": "none",
             "wind_mph": 3.0
           }
         },
@@ -18690,24 +18690,24 @@
             "8": 0.5625
           },
           "edge_table": {
-            "1": 0.0186,
-            "2": -0.1372,
-            "3": -0.1112,
-            "4": -0.147,
-            "5": -0.1135,
-            "6": -0.1026,
-            "7": -0.1495,
-            "8": -0.1949
+            "1": 0.0043,
+            "2": -0.1508,
+            "3": -0.1247,
+            "4": -0.1602,
+            "5": -0.1273,
+            "6": -0.1174,
+            "7": -0.1636,
+            "8": -0.2079
           },
           "full_inning_table": {
-            "1": 0.403,
-            "2": 0.381,
-            "3": 0.379,
-            "4": 0.371,
-            "5": 0.391,
-            "6": 0.416,
-            "7": 0.398,
-            "8": 0.368
+            "1": 0.389,
+            "2": 0.368,
+            "3": 0.365,
+            "4": 0.358,
+            "5": 0.377,
+            "6": 0.401,
+            "7": 0.384,
+            "8": 0.355
           },
           "game_id": "823413",
           "game_order": 1,
@@ -18782,15 +18782,15 @@
           },
           "venue_factor": 1.03,
           "weather": {
-            "condition": "",
-            "temp": "",
-            "wind": ""
+            "condition": "Cloudy",
+            "temp": "85",
+            "wind": "9 mph, Out To RF"
           },
           "weather_adjustment": {
-            "scoreless_multiplier": 1.0,
-            "temp_f": null,
-            "wind_direction": "none",
-            "wind_mph": 0.0
+            "scoreless_multiplier": 0.9821,
+            "temp_f": 85.0,
+            "wind_direction": "out",
+            "wind_mph": 9.0
           }
         },
         {
@@ -19242,8 +19242,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -19558,7 +19558,7 @@
       },
       "consensus_gate_version": "mlb_team_consensus_v1.2.0",
       "consensus_rejection_reasons": {
-        "edge_signal_threshold_not_met(edge=0.468823076923075, probability=0.523919, signals=5)": 1,
+        "edge_signal_threshold_not_met(edge=0.010947619047618762, probability=0.523919, signals=5)": 1,
         "non_positive_calibrated_edge": 3,
         "raw_model_abstained": 2
       },
@@ -19583,8 +19583,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -19739,7 +19739,7 @@
           "sport": "MLB",
           "start_time": "2026-09-10T16:15:00Z",
           "team": "Braves",
-          "units": 0,
+          "units": 0.0,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": 0.29872880278003777,
           "walk_forward_samples": 96
@@ -19748,7 +19748,7 @@
           "actionability": "lean",
           "assumed_odds_replaced": true,
           "away_team": "Tampa Bay Rays",
-          "calibrated_edge": 3.6090596330275226,
+          "calibrated_edge": 3.820449308755758,
           "calibrated_model_probability": 0.577375,
           "calibrated_probability": 0.577375,
           "calibration": {
@@ -19760,8 +19760,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -19810,7 +19810,7 @@
           "consensus_qualified": true,
           "consensus_rejection_reason": null,
           "consensus_required": true,
-          "consensus_score": 26.347,
+          "consensus_score": 26.558,
           "consensus_signal_count": 6,
           "consensus_signals": [
             {
@@ -19818,7 +19818,7 @@
               "detail": "calibrated probability beats selected-side market price",
               "impact": "support",
               "name": "market_price",
-              "strength": 0.361
+              "strength": 0.382
             },
             {
               "category": "calibration",
@@ -19860,13 +19860,13 @@
           "direction": "Under",
           "edge": 4.47,
           "edge_basis": "no_vig",
-          "full_kelly": 0.0787,
+          "full_kelly": 0.0829,
           "game_start_time": "2026-09-10T16:15Z",
           "home_team": "Atlanta Braves",
           "kelly": 2.21,
           "line": 8.5,
           "market_line": 8.5,
-          "market_no_vig_probability": 0.5412844036697247,
+          "market_no_vig_probability": 0.5391705069124424,
           "market_no_vig_selected_probability": 0.509817,
           "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
           "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -19934,7 +19934,7 @@
           "primary_consensus_passed": true,
           "prob": 0.566,
           "probability": 0.5774,
-          "quarter_kelly": 0.0197,
+          "quarter_kelly": 0.0207,
           "ranking_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
           "raw_edge": 4.32,
           "raw_model_probability": 0.567,
@@ -19942,12 +19942,12 @@
           "raw_units": 0.01,
           "recommended_units": 0.25,
           "selected_odds": -114,
-          "selected_side_implied_probability": 0.5412844036697247,
+          "selected_side_implied_probability": 0.5391705069124424,
           "selection": "Under",
           "source": "MLB Model",
           "sport": "MLB",
           "start_time": "2026-09-10T16:15Z",
-          "units": 0.01,
+          "units": 0.25,
           "vegas": 8.5,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": 0.44221147581953973,
@@ -19957,7 +19957,7 @@
           "actionability": "research_signal",
           "assumed_odds_replaced": true,
           "away_team": "Houston Astros",
-          "calibrated_edge": -13.36152465753424,
+          "calibrated_edge": -12.764894425087103,
           "calibrated_model_probability": 0.523919,
           "calibrated_probability": 0.523919,
           "calibration": {
@@ -19969,8 +19969,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -20053,7 +20053,7 @@
           "home_team": "Philadelphia Phillies",
           "market_away_odds": 154,
           "market_home_odds": -187,
-          "market_no_vig_probability": 0.6575342465753424,
+          "market_no_vig_probability": 0.6515679442508711,
           "market_no_vig_selected_probability": 0.62335,
           "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
           "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -20120,12 +20120,12 @@
           "raw_units": 0.4,
           "recommended_units": 0.0,
           "selected_odds": -187,
-          "selected_side_implied_probability": 0.6575342465753424,
+          "selected_side_implied_probability": 0.6515679442508711,
           "source": "MLB Model",
           "sport": "MLB",
           "start_time": "2026-09-10T17:05:00Z",
           "team": "Phillies",
-          "units": 0,
+          "units": 0.0,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": 0.29872880278003777,
           "walk_forward_samples": 96
@@ -20134,7 +20134,7 @@
           "actionability": "research_signal",
           "assumed_odds_replaced": true,
           "away_team": "Houston Astros",
-          "calibrated_edge": 0.7679649289099588,
+          "calibrated_edge": 0.9936476190476218,
           "calibrated_model_probability": 0.533746,
           "calibrated_probability": 0.533746,
           "calibration": {
@@ -20146,8 +20146,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -20197,7 +20197,7 @@
           "consensus_qualified": false,
           "consensus_rejection_reason": "raw_model_abstained",
           "consensus_required": true,
-          "consensus_score": 16.643,
+          "consensus_score": 16.868,
           "consensus_signal_count": 5,
           "consensus_signals": [
             {
@@ -20205,7 +20205,7 @@
               "detail": "calibrated probability beats selected-side market price",
               "impact": "support",
               "name": "market_price",
-              "strength": 0.077
+              "strength": 0.099
             },
             {
               "category": "calibration",
@@ -20240,13 +20240,13 @@
           "direction": "Over",
           "edge": 0.54,
           "edge_basis": "no_vig",
-          "full_kelly": 0.0162,
+          "full_kelly": 0.0209,
           "game_start_time": "2026-09-10T17:05:00Z",
           "home_team": "Philadelphia Phillies",
           "kelly": 0.0,
           "line": 8.5,
           "market_line": 8.5,
-          "market_no_vig_probability": 0.5260663507109005,
+          "market_no_vig_probability": 0.5238095238095238,
           "market_no_vig_selected_probability": 0.50109,
           "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
           "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -20314,7 +20314,7 @@
           "primary_consensus_passed": false,
           "prob": 0.5221,
           "probability": 0.5337,
-          "quarter_kelly": 0.0041,
+          "quarter_kelly": 0.0052,
           "ranking_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
           "raw_edge": -1.18,
           "raw_model_probability": 0.512,
@@ -20322,7 +20322,7 @@
           "raw_units": 0.0,
           "recommended_units": 0.0,
           "selected_odds": -110,
-          "selected_side_implied_probability": 0.5260663507109005,
+          "selected_side_implied_probability": 0.5238095238095238,
           "selection": "PASS",
           "source": "MLB Model",
           "sport": "MLB",
@@ -20349,8 +20349,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -20505,7 +20505,7 @@
           "sport": "MLB",
           "start_time": "2026-09-10T20:10:00Z",
           "team": "Mariners",
-          "units": 0,
+          "units": 0.0,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": 0.29872880278003777,
           "walk_forward_samples": 96
@@ -20526,8 +20526,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -20687,7 +20687,7 @@
           "source": "MLB Model",
           "sport": "MLB",
           "start_time": "2026-09-10T20:10Z",
-          "units": 0.03,
+          "units": 0.37,
           "vegas": 8.5,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": 0.44221147581953973,
@@ -20709,8 +20709,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -20885,7 +20885,7 @@
           "sport": "MLB",
           "start_time": "2026-09-10T23:05Z",
           "team": "Yankees",
-          "units": 0.75,
+          "units": 0.5,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": 0.29872880278003777,
           "walk_forward_samples": 96
@@ -20906,8 +20906,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -21084,7 +21084,7 @@
           "actionability": "research_signal",
           "assumed_odds_replaced": true,
           "away_team": "Pittsburgh Pirates",
-          "calibrated_edge": 0.468823076923075,
+          "calibrated_edge": 0.010947619047618762,
           "calibrated_model_probability": 0.523919,
           "calibrated_probability": 0.523919,
           "calibration": {
@@ -21096,8 +21096,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -21143,9 +21143,9 @@
           "consensus_passed": false,
           "consensus_publication_mode": "research",
           "consensus_qualified": false,
-          "consensus_rejection_reason": "edge_signal_threshold_not_met(edge=0.468823076923075, probability=0.523919, signals=5)",
+          "consensus_rejection_reason": "edge_signal_threshold_not_met(edge=0.010947619047618762, probability=0.523919, signals=5)",
           "consensus_required": true,
-          "consensus_score": 15.361,
+          "consensus_score": 14.903,
           "consensus_signal_count": 5,
           "consensus_signals": [
             {
@@ -21153,7 +21153,7 @@
               "detail": "calibrated probability beats selected-side market price",
               "impact": "support",
               "name": "market_price",
-              "strength": 0.047
+              "strength": 0.001
             },
             {
               "category": "calibration",
@@ -21187,12 +21187,12 @@
           "decision": "PASS",
           "edge": -0.44,
           "edge_basis": "no_vig",
-          "full_kelly": 0.0098,
+          "full_kelly": 0.0002,
           "game_start_time": "2026-09-10T23:40:00Z",
           "home_team": "Chicago White Sox",
           "market_away_odds": -110,
           "market_home_odds": -110,
-          "market_no_vig_probability": 0.5192307692307693,
+          "market_no_vig_probability": 0.5238095238095238,
           "market_no_vig_selected_probability": 0.5,
           "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
           "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -21251,7 +21251,7 @@
           "pricing_type": "market",
           "primary_consensus_passed": false,
           "probability": 0.5239,
-          "quarter_kelly": 0.0024,
+          "quarter_kelly": 0.0001,
           "ranking_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
           "raw_edge": 7.42,
           "raw_model_probability": 0.5742,
@@ -21259,12 +21259,12 @@
           "raw_units": 0.4,
           "recommended_units": 0.0,
           "selected_odds": -110,
-          "selected_side_implied_probability": 0.5192307692307693,
+          "selected_side_implied_probability": 0.5238095238095238,
           "source": "MLB Model",
           "sport": "MLB",
           "start_time": "2026-09-10T23:40:00Z",
           "team": "White Sox",
-          "units": 0,
+          "units": 0.0,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": 0.29872880278003777,
           "walk_forward_samples": 96
@@ -21285,8 +21285,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -21446,7 +21446,7 @@
           "source": "MLB Model",
           "sport": "MLB",
           "start_time": "2026-09-10T23:40Z",
-          "units": 0.02,
+          "units": 0.3,
           "vegas": 8.5,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": 0.44221147581953973,
@@ -21767,8 +21767,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -21990,8 +21990,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -22213,8 +22213,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -22426,7 +22426,7 @@
           "sport": "MLB",
           "start_time": "2026-09-10T17:05:00Z",
           "team": "Houston Astros",
-          "units": 0,
+          "units": 0.0,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": 0.27311460469355214,
           "walk_forward_samples": 38
@@ -22447,8 +22447,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -22660,7 +22660,7 @@
           "sport": "MLB",
           "start_time": "2026-09-10T17:05:00Z",
           "team": "Philadelphia Phillies",
-          "units": 0,
+          "units": 0.0,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": 0.27311460469355214,
           "walk_forward_samples": 38
@@ -22681,8 +22681,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -22813,7 +22813,7 @@
             }
           ],
           "date": "2026-09-10",
-          "decision": "LEAN",
+          "decision": "PASS",
           "direction": "under",
           "edge": 3.03,
           "edge_basis": "vigged",
@@ -22915,8 +22915,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -23173,8 +23173,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -23396,8 +23396,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -23619,7 +23619,7 @@
           "sport": "MLB",
           "start_time": "2026-09-10T23:05:00Z",
           "team": "New York Yankees",
-          "units": 0,
+          "units": 0.0,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": 0.27311460469355214,
           "walk_forward_samples": 38
@@ -23640,8 +23640,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -23853,7 +23853,7 @@
           "sport": "MLB",
           "start_time": "2026-09-10T23:40:00Z",
           "team": "Pittsburgh Pirates",
-          "units": 0,
+          "units": 0.0,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": 0.27311460469355214,
           "walk_forward_samples": 38
@@ -23874,8 +23874,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -24087,7 +24087,7 @@
           "sport": "MLB",
           "start_time": "2026-09-10T23:40:00Z",
           "team": "Chicago White Sox",
-          "units": 0,
+          "units": 0.0,
           "walk_forward_bootstrap": false,
           "walk_forward_roi": 0.27311460469355214,
           "walk_forward_samples": 38
@@ -24187,8 +24187,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -24267,8 +24267,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -24349,8 +24349,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T14:21:22.620808Z",
-            "published_at": "2026-09-10T14:21:22.620808Z",
+            "data_as_of": "2026-09-10T15:53:52.971155Z",
+            "published_at": "2026-09-10T15:53:52.971155Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -25088,7 +25088,7 @@
     },
     "tennis": {
       "date": "2026-09-10",
-      "generatedAt": "2026-09-10T14:14:55.798441Z",
+      "generatedAt": "2026-09-10T15:45:54.136142Z",
       "matches": [
         {
           "assumed_tournament_meta": false,
@@ -26137,8 +26137,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -26217,8 +26217,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -26299,8 +26299,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T14:21:22.620808Z",
-          "published_at": "2026-09-10T14:21:22.620808Z",
+          "data_as_of": "2026-09-10T15:53:52.971155Z",
+          "published_at": "2026-09-10T15:53:52.971155Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -26805,7 +26805,7 @@
     "scraped_tip_feed": true,
     "updatedAt": "2026-09-10T15:41:46.950157Z"
   },
-  "updatedAt": "2026-09-10T15:46:15.312491Z",
+  "updatedAt": "2026-09-10T15:53:52.971155Z",
   "wnba": {
     "date": "2026-09-10",
     "note": "No WNBA picks today \u2014 off-season or no edge found.",
