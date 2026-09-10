@@ -273,7 +273,98 @@
       "role": "anchor",
       "sport": "MLB",
       "startTime": "2026-09-09T23:40Z"
+    },
+    {
+      "capturedAt": "2026-09-10T01:24:57.385407Z",
+      "decimalOdds": 1.357143,
+      "marketIdentity": "market:cfd48a990fed3f48db687df1",
+      "matchup": "Cincinnati Reds @ Los Angeles Dodgers",
+      "noVigProbability": 0.695513,
+      "oddsAmerican": -280,
+      "pick": "Los Angeles Dodgers F5 ML",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-10T02:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-10T01:24:57.385407Z",
+      "decimalOdds": 1.952381,
+      "marketIdentity": "market:d39f29388397d17eb121b699",
+      "matchup": "Cincinnati Reds @ Los Angeles Dodgers",
+      "noVigProbability": 0.479695,
+      "oddsAmerican": -105,
+      "pick": "Over 4.5 F5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-10T02:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-10T01:24:57.385407Z",
+      "decimalOdds": 1.343643,
+      "marketIdentity": "market:49acf7b6a6c3006e52186641",
+      "matchup": "",
+      "noVigProbability": 0.71189,
+      "oddsAmerican": -291,
+      "pick": "Dodgers ML (Reds vs Dodgers)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-10T02:10:00Z"
+    },
+    {
+      "capturedAt": "2026-09-10T01:24:57.385407Z",
+      "decimalOdds": 1.952381,
+      "marketIdentity": "market:4091e69fe301ae7f103233d5",
+      "matchup": "Red Bull New York @ LAFC",
+      "noVigProbability": 0.484277,
+      "oddsAmerican": -105,
+      "pick": "Under 3.5 (Red Bull New York @ LAFC)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLS",
+      "startTime": "2026-09-10T02:30Z"
+    },
+    {
+      "capturedAt": "2026-09-10T01:24:57.385407Z",
+      "decimalOdds": 1.769231,
+      "marketIdentity": "market:2aa0d9ad66aad1fc2ce66a17",
+      "matchup": "St. Louis CITY SC @ Portland Timbers",
+      "noVigProbability": 0.536757,
+      "oddsAmerican": -130,
+      "pick": "Under 3.5 (St. Louis CITY SC @ Portland Timbers)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLS",
+      "startTime": "2026-09-10T02:30Z"
+    },
+    {
+      "capturedAt": "2026-09-10T01:24:57.385407Z",
+      "decimalOdds": 1.833333,
+      "marketIdentity": "market:2f9a7e8c4bd8432518a5588a",
+      "matchup": "San Jose Earthquakes @ San Diego FC",
+      "noVigProbability": 0.515723,
+      "oddsAmerican": -120,
+      "pick": "Under 3.5 (San Jose Earthquakes @ San Diego FC)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLS",
+      "startTime": "2026-09-10T02:30Z"
+    },
+    {
+      "capturedAt": "2026-09-10T01:24:57.385407Z",
+      "decimalOdds": 2.0,
+      "marketIdentity": "market:6e7ef0790873eb6e49bc4467",
+      "matchup": "LA Galaxy @ Vancouver Whitecaps",
+      "noVigProbability": 0.473684,
+      "oddsAmerican": 100,
+      "pick": "Under 3.5 (LA Galaxy @ Vancouver Whitecaps)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLS",
+      "startTime": "2026-09-10T02:30Z"
     }
   ],
-  "updatedAt": "2026-09-09T23:28:39.802836Z"
+  "updatedAt": "2026-09-10T01:24:57.390414Z"
 }
