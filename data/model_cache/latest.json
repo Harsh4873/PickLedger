@@ -3032,7 +3032,7 @@
     "refreshStatus": "ok",
     "updatedAt": "2026-09-10T18:28:19.845824Z"
   },
-  "generatedAt": "2026-09-10T18:12:43.696758Z",
+  "generatedAt": "2026-09-10T18:43:01.773363Z",
   "generatedBy": "github-actions:model-cache-refresh",
   "mlb_first_five": {
     "consensus_gate_version": "mlb_team_consensus_v1.2.0",
@@ -3897,7 +3897,7 @@
         "actionability": "research_signal",
         "assumed_odds_replaced": true,
         "away_team": "Texas Rangers",
-        "calibrated_edge": -10.594339130434777,
+        "calibrated_edge": -9.628155555555557,
         "calibrated_model_probability": 0.459274,
         "calibrated_probability": 0.459274,
         "calibration": {
@@ -3909,8 +3909,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -4150,7 +4150,7 @@
         "market_away_odds": 100,
         "market_home_odds": -130,
         "market_implied_probability": 0.52381,
-        "market_no_vig_probability": 0.5652173913043478,
+        "market_no_vig_probability": 0.5555555555555556,
         "market_no_vig_selected_probability": 0.530612,
         "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -4226,7 +4226,7 @@
         "raw_probability": 0.518,
         "recommended_units": 0.0,
         "selected_odds": -130,
-        "selected_side_implied_probability": 0.5652173913043478,
+        "selected_side_implied_probability": 0.5555555555555556,
         "source": "MLB First Five",
         "sport": "MLB",
         "start_time": "2026-09-10T20:10:00Z",
@@ -4240,7 +4240,7 @@
         "actionability": "research_signal",
         "assumed_odds_replaced": true,
         "away_team": "Texas Rangers",
-        "calibrated_edge": 8.661450943396225,
+        "calibrated_edge": 7.935761538461539,
         "calibrated_model_probability": 0.463973,
         "calibrated_probability": 0.463973,
         "calibration": {
@@ -4252,8 +4252,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -4345,7 +4345,7 @@
         "consensus_qualified": false,
         "consensus_rejection_reason": "raw_model_abstained; failed_walk_forward_validation",
         "consensus_required": true,
-        "consensus_score": 56.161,
+        "consensus_score": 55.436,
         "consensus_signal_count": 19,
         "consensus_signals": [
           {
@@ -4353,7 +4353,7 @@
             "detail": "calibrated probability beats selected-side market price",
             "impact": "support",
             "name": "market_price",
-            "strength": 0.866
+            "strength": 0.794
           },
           {
             "category": "calibration",
@@ -4591,7 +4591,7 @@
         "decision": "PASS",
         "edge": -10.12,
         "edge_basis": "no_vig",
-        "full_kelly": 0.1391,
+        "full_kelly": 0.129,
         "game": "Texas Rangers @ Seattle Mariners",
         "game_id": "823088",
         "game_order": 0,
@@ -4603,7 +4603,7 @@
         "market": "f5_total",
         "market_implied_probability": 0.565217,
         "market_line": 4.5,
-        "market_no_vig_probability": 0.37735849056603776,
+        "market_no_vig_probability": 0.38461538461538464,
         "market_no_vig_selected_probability": 0.356033,
         "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -4675,14 +4675,14 @@
         "pricing_type": "market",
         "primary_consensus_passed": false,
         "probability": 0.464,
-        "quarter_kelly": 0.0348,
+        "quarter_kelly": 0.0322,
         "ranking_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
         "raw_edge": -6.09,
         "raw_model_probability": 0.5043,
         "raw_probability": 0.5043,
         "recommended_units": 0.0,
         "selected_odds": 165,
-        "selected_side_implied_probability": 0.37735849056603776,
+        "selected_side_implied_probability": 0.38461538461538464,
         "source": "MLB First Five",
         "sport": "MLB",
         "start_time": "2026-09-10T20:10:00Z",
@@ -4708,8 +4708,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -5026,8 +5026,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -5449,8 +5449,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -5780,8 +5780,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -7610,8 +7610,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -7951,8 +7951,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -8129,8 +8129,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -8338,8 +8338,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -8516,8 +8516,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -8707,7 +8707,7 @@
         "actionability": "research_signal",
         "assumed_odds_replaced": true,
         "away_team": "Texas Rangers",
-        "calibrated_edge": -2.965242857142858,
+        "calibrated_edge": -2.5630549549549575,
         "calibrated_model_probability": 0.523919,
         "calibrated_probability": 0.523919,
         "calibration": {
@@ -8719,8 +8719,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -8803,7 +8803,7 @@
         "home_team": "Seattle Mariners",
         "market_away_odds": 108,
         "market_home_odds": -130,
-        "market_no_vig_probability": 0.5535714285714286,
+        "market_no_vig_probability": 0.5495495495495496,
         "market_no_vig_selected_probability": 0.540368,
         "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -8870,7 +8870,7 @@
         "raw_units": 0.4,
         "recommended_units": 0.0,
         "selected_odds": -130,
-        "selected_side_implied_probability": 0.5535714285714286,
+        "selected_side_implied_probability": 0.5495495495495496,
         "source": "MLB Model",
         "sport": "MLB",
         "start_time": "2026-09-10T20:10:00Z",
@@ -8896,8 +8896,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -9079,8 +9079,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -9276,8 +9276,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -9466,8 +9466,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -9655,8 +9655,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -10027,8 +10027,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -10249,7 +10249,7 @@
         "actionability": "research_signal",
         "assumed_odds_replaced": true,
         "away_team": "Texas Rangers",
-        "calibrated_edge": -0.17519999999999758,
+        "calibrated_edge": -1.3947121951219499,
         "calibrated_model_probability": 0.498248,
         "calibrated_probability": 0.498248,
         "calibration": {
@@ -10261,8 +10261,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -10399,7 +10399,7 @@
         "market": "team_total",
         "market_implied_probability": 0.52381,
         "market_line": 3.5,
-        "market_no_vig_probability": 0.5,
+        "market_no_vig_probability": 0.5121951219512195,
         "market_no_vig_selected_probability": 0.449438,
         "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -10480,7 +10480,7 @@
         "raw_probability": 0.5146,
         "recommended_units": 0.0,
         "selected_odds": 110,
-        "selected_side_implied_probability": 0.5,
+        "selected_side_implied_probability": 0.5121951219512195,
         "source": "MLB Team Total",
         "sport": "MLB",
         "start_time": "2026-09-10T20:10:00Z",
@@ -10506,8 +10506,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -10729,8 +10729,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -10973,8 +10973,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -11207,8 +11207,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -14429,7 +14429,7 @@
           "actionability": "research_signal",
           "assumed_odds_replaced": true,
           "away_team": "Texas Rangers",
-          "calibrated_edge": -10.594339130434777,
+          "calibrated_edge": -9.628155555555557,
           "calibrated_model_probability": 0.459274,
           "calibrated_probability": 0.459274,
           "calibration": {
@@ -14441,8 +14441,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -14682,7 +14682,7 @@
           "market_away_odds": 100,
           "market_home_odds": -130,
           "market_implied_probability": 0.52381,
-          "market_no_vig_probability": 0.5652173913043478,
+          "market_no_vig_probability": 0.5555555555555556,
           "market_no_vig_selected_probability": 0.530612,
           "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
           "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -14758,7 +14758,7 @@
           "raw_probability": 0.518,
           "recommended_units": 0.0,
           "selected_odds": -130,
-          "selected_side_implied_probability": 0.5652173913043478,
+          "selected_side_implied_probability": 0.5555555555555556,
           "source": "MLB First Five",
           "sport": "MLB",
           "start_time": "2026-09-10T20:10:00Z",
@@ -14772,7 +14772,7 @@
           "actionability": "research_signal",
           "assumed_odds_replaced": true,
           "away_team": "Texas Rangers",
-          "calibrated_edge": 8.661450943396225,
+          "calibrated_edge": 7.935761538461539,
           "calibrated_model_probability": 0.463973,
           "calibrated_probability": 0.463973,
           "calibration": {
@@ -14784,8 +14784,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -14877,7 +14877,7 @@
           "consensus_qualified": false,
           "consensus_rejection_reason": "raw_model_abstained; failed_walk_forward_validation",
           "consensus_required": true,
-          "consensus_score": 56.161,
+          "consensus_score": 55.436,
           "consensus_signal_count": 19,
           "consensus_signals": [
             {
@@ -14885,7 +14885,7 @@
               "detail": "calibrated probability beats selected-side market price",
               "impact": "support",
               "name": "market_price",
-              "strength": 0.866
+              "strength": 0.794
             },
             {
               "category": "calibration",
@@ -15123,7 +15123,7 @@
           "decision": "PASS",
           "edge": -10.12,
           "edge_basis": "no_vig",
-          "full_kelly": 0.1391,
+          "full_kelly": 0.129,
           "game": "Texas Rangers @ Seattle Mariners",
           "game_id": "823088",
           "game_order": 0,
@@ -15135,7 +15135,7 @@
           "market": "f5_total",
           "market_implied_probability": 0.565217,
           "market_line": 4.5,
-          "market_no_vig_probability": 0.37735849056603776,
+          "market_no_vig_probability": 0.38461538461538464,
           "market_no_vig_selected_probability": 0.356033,
           "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
           "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -15207,14 +15207,14 @@
           "pricing_type": "market",
           "primary_consensus_passed": false,
           "probability": 0.464,
-          "quarter_kelly": 0.0348,
+          "quarter_kelly": 0.0322,
           "ranking_epoch": "MLB:mlb_team_consensus_v1.2.0:mlb_first_five",
           "raw_edge": -6.09,
           "raw_model_probability": 0.5043,
           "raw_probability": 0.5043,
           "recommended_units": 0.0,
           "selected_odds": 165,
-          "selected_side_implied_probability": 0.37735849056603776,
+          "selected_side_implied_probability": 0.38461538461538464,
           "source": "MLB First Five",
           "sport": "MLB",
           "start_time": "2026-09-10T20:10:00Z",
@@ -15240,8 +15240,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -15558,8 +15558,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -15981,8 +15981,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -16312,8 +16312,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -18142,8 +18142,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -18483,8 +18483,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -18661,8 +18661,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -18870,8 +18870,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -19048,8 +19048,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -19239,7 +19239,7 @@
           "actionability": "research_signal",
           "assumed_odds_replaced": true,
           "away_team": "Texas Rangers",
-          "calibrated_edge": -2.965242857142858,
+          "calibrated_edge": -2.5630549549549575,
           "calibrated_model_probability": 0.523919,
           "calibrated_probability": 0.523919,
           "calibration": {
@@ -19251,8 +19251,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -19335,7 +19335,7 @@
           "home_team": "Seattle Mariners",
           "market_away_odds": 108,
           "market_home_odds": -130,
-          "market_no_vig_probability": 0.5535714285714286,
+          "market_no_vig_probability": 0.5495495495495496,
           "market_no_vig_selected_probability": 0.540368,
           "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
           "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -19402,7 +19402,7 @@
           "raw_units": 0.4,
           "recommended_units": 0.0,
           "selected_odds": -130,
-          "selected_side_implied_probability": 0.5535714285714286,
+          "selected_side_implied_probability": 0.5495495495495496,
           "source": "MLB Model",
           "sport": "MLB",
           "start_time": "2026-09-10T20:10:00Z",
@@ -19428,8 +19428,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -19611,8 +19611,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -19808,8 +19808,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -19998,8 +19998,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -20187,8 +20187,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -20559,8 +20559,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -20781,7 +20781,7 @@
           "actionability": "research_signal",
           "assumed_odds_replaced": true,
           "away_team": "Texas Rangers",
-          "calibrated_edge": -0.17519999999999758,
+          "calibrated_edge": -1.3947121951219499,
           "calibrated_model_probability": 0.498248,
           "calibrated_probability": 0.498248,
           "calibration": {
@@ -20793,8 +20793,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -20931,7 +20931,7 @@
           "market": "team_total",
           "market_implied_probability": 0.52381,
           "market_line": 3.5,
-          "market_no_vig_probability": 0.5,
+          "market_no_vig_probability": 0.5121951219512195,
           "market_no_vig_selected_probability": 0.449438,
           "market_odds_captured_at": "2026-09-10T15:46:19.234266Z",
           "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -21012,7 +21012,7 @@
           "raw_probability": 0.5146,
           "recommended_units": 0.0,
           "selected_odds": 110,
-          "selected_side_implied_probability": 0.5,
+          "selected_side_implied_probability": 0.5121951219512195,
           "source": "MLB Team Total",
           "sport": "MLB",
           "start_time": "2026-09-10T20:10:00Z",
@@ -21038,8 +21038,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -21261,8 +21261,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -21505,8 +21505,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -21739,8 +21739,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -22910,8 +22910,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -22990,8 +22990,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -23072,8 +23072,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-10T18:12:43.696758Z",
-            "published_at": "2026-09-10T18:12:43.696758Z",
+            "data_as_of": "2026-09-10T18:43:01.773363Z",
+            "published_at": "2026-09-10T18:43:01.773363Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -24065,7 +24065,7 @@
     },
     "tennis": {
       "date": "2026-09-10",
-      "generatedAt": "2026-09-10T18:06:14.712749Z",
+      "generatedAt": "2026-09-10T18:35:12.132214Z",
       "matches": [
         {
           "assumed_tournament_meta": false,
@@ -25337,8 +25337,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -25417,8 +25417,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -25499,8 +25499,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-10T18:12:43.696758Z",
-          "published_at": "2026-09-10T18:12:43.696758Z",
+          "data_as_of": "2026-09-10T18:43:01.773363Z",
+          "published_at": "2026-09-10T18:43:01.773363Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -26507,7 +26507,7 @@
     "scraped_tip_feed": true,
     "updatedAt": "2026-09-10T18:28:19.845824Z"
   },
-  "updatedAt": "2026-09-10T18:28:19.845824Z",
+  "updatedAt": "2026-09-10T18:43:01.773363Z",
   "wnba": {
     "date": "2026-09-10",
     "note": "No WNBA picks today \u2014 off-season or no edge found.",
