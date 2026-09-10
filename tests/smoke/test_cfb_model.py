@@ -1,4 +1,4 @@
-"""CFB shadow model, pipeline, settlement, and containment contracts."""
+"""CFB serving model, pipeline, settlement, and containment contracts."""
 from __future__ import annotations
 
 import json
@@ -55,7 +55,7 @@ def test_training_population_filters_non_fbs_and_missing_lines():
     assert build_dataset([fcs, missing_line]) == []
 
 
-def test_shadow_serving_emits_exactly_three_stable_market_rows(monkeypatch):
+def test_public_serving_emits_exactly_three_stable_market_rows(monkeypatch):
     from CFBPredictionModel import cfb_model
     from CFBPredictionModel.cfb_core import FEATURE_NAMES
 
@@ -81,20 +81,22 @@ def test_shadow_serving_emits_exactly_three_stable_market_rows(monkeypatch):
     monkeypatch.setattr(cfb_model, "serving_rows", lambda _date, **_kwargs: [entry])
     payload = cfb_model.generate_cfb_picks("2026-09-05")
     assert payload["ok"] is True
-    assert payload["shadow_mode"] is True
+    assert payload["shadow_mode"] is False
+    assert payload["model"] == "CFB Model"
+    assert payload["actionability"] == "bet_signal"
     assert len(payload["games"]) == 1
     assert len(payload["picks"]) == 3
     assert {pick["source"] for pick in payload["picks"]} == {"CFB ML", "CFB Spread", "CFB Total"}
     assert {pick["market"] for pick in payload["picks"]} == {"h2h", "spread", "totals"}
     for pick in payload["picks"]:
-        assert pick["shadow_mode"] is True
-        assert pick["actionability"] == "research_signal"
+        assert pick["shadow_mode"] is False
+        assert pick["actionability"] == "bet_signal"
         assert pick["espn_event_id"] == "401900001"
         assert pick["home_team_id"] == "1"
         assert pick["away_team_id"] == "2"
         assert 0 <= pick["push_probability"] < 1
-        assert pick["units"] == 0
-        assert pick["decision"] == "PASS"
+        assert pick["decision"] in {"BET", "LEAN", "PASS"}
+        assert pick["units"] == (0.5 if pick["decision"] == "BET" else 0.25 if pick["decision"] == "LEAN" else 0)
 
 
 def test_artifact_records_walk_forward_calibration_and_feature_contract():
@@ -140,8 +142,13 @@ def test_cfb_model_is_a_core_freshness_requirement():
 def test_research_rows_are_contained_from_staked_recommendations():
     parlay = (ROOT / "scripts" / "build_parlay_cards.py").read_text(encoding="utf-8")
     profit = (ROOT / "scripts" / "build_profit_desk.py").read_text(encoding="utf-8")
+    serving = (ROOT / "CFBPredictionModel" / "cfb_model.py").read_text(encoding="utf-8")
     assert "if pick.get(\"shadow_mode\") is True:" in parlay
     assert "if record.get(\"shadow_mode\") is True:" in profit
+    assert '"shadow_mode": False' in serving
+    assert '"actionability": "bet_signal"' in serving
+    assert '"model": "CFB Model"' in serving
+    assert "TEAM_VISIBLE_DECISIONS = {\"BET\", \"LEAN\"}" in parlay
 
 
 def test_pass_rows_enter_forecast_audit_ledger(tmp_path):
@@ -346,7 +353,7 @@ def test_cfb_unpriced_forecasts_have_no_fabricated_prices_or_stakes(monkeypatch,
         assert pick["edge"] is None
         assert pick["units"] == 0
         assert pick["decision"] == "PASS"
-        assert pick["shadow_mode"] is True
+        assert pick["shadow_mode"] is False
         assert pick["market_priced"] is False
 
 

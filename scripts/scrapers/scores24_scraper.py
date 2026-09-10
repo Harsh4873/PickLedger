@@ -75,7 +75,7 @@ SPORT_CONFIG = {
         "label": "FIFA WC",
         "cache_keys": ("fifa_world_cup",),
     },
-    # Sport key `cfb` matches the in-house CFBShadow bucket; the feed cache key is
+    # Sport key `cfb` matches the in-house CFB Model bucket; the feed cache key is
     # scores24_cfb. ESPN uses football/college-football (FBS via groups=80).
     # Scores24 NCAA and sport-wide American Football listings cover complementary
     # days, so scrape_scores24 walks the full listing_urls tuple.
@@ -93,6 +93,22 @@ SPORT_CONFIG = {
         "source": "Scores24CFB",
         "label": "CFB",
         "cache_keys": ("cfb",),
+    },
+    # NFL listings are USA NFL, not NCAA. Sport-wide American Football pages are
+    # fallbacks; the official ESPN NFL whitelist keeps college games out.
+    "nfl": {
+        "espn_sport": "football",
+        "espn_league": "nfl",
+        "scores24_sport": "american-football",
+        "listing_url": f"{BASE_URL}/en/american-football/l-usa-nfl/predictions",
+        "listing_urls": (
+            f"{BASE_URL}/en/american-football/l-usa-nfl/predictions",
+            f"{BASE_URL}/en/predictions/american-football",
+            f"{BASE_URL}/en/predictions/american-football/today",
+        ),
+        "source": "Scores24NFL",
+        "label": "NFL",
+        "cache_keys": ("nfl",),
     },
 }
 CLOUDFLARE_SIGNALS = (
@@ -1424,6 +1440,10 @@ def run_scores24_fifa_world_cup(date_iso: str, _sports: list[str] | None = None)
 
 def run_scores24_cfb(date_iso: str, _sports: list[str] | None = None) -> dict[str, Any]:
     return scrape_scores24("cfb", date_iso)
+
+
+def run_scores24_nfl(date_iso: str, _sports: list[str] | None = None) -> dict[str, Any]:
+    return scrape_scores24("nfl", date_iso)
 
 
 def main() -> int:

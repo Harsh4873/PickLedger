@@ -31,6 +31,7 @@ from scripts.scrapers.scores24_scraper import (  # noqa: E402
     run_scores24_fifa_world_cup,
     run_scores24_mlb,
     run_scores24_nba_summer,
+    run_scores24_nfl,
     run_scores24_wnba,
 )
 from scripts.scrapers.tennis_scraper import (  # noqa: E402
@@ -47,6 +48,7 @@ FEED_RUNNERS: dict[str, Callable[[str, list[str]], dict[str, Any]]] = {
     "scores24_mlb": run_scores24_mlb,
     "scores24_fifa_world_cup": run_scores24_fifa_world_cup,
     "scores24_cfb": run_scores24_cfb,
+    "scores24_nfl": run_scores24_nfl,
     "forebet_mls": run_forebet_mls,
     "forebet_mlb": run_forebet_mlb,
     "forebet_wnba": run_forebet_wnba,
@@ -62,6 +64,7 @@ SPLIT_PROVIDER_MODEL_KEYS = {
         "sportytrader_wnba",
         "sportytrader_fifa_world_cup",
         "sportytrader_cfb",
+        "sportytrader_nfl",
     ),
     "sportsgambler": (
         "sportsgambler_nba",
@@ -70,6 +73,7 @@ SPLIT_PROVIDER_MODEL_KEYS = {
         "sportsgambler_wnba",
         "sportsgambler_fifa_world_cup",
         "sportsgambler_cfb",
+        "sportsgambler_nfl",
     ),
 }
 
@@ -88,7 +92,7 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--sports",
-        default="nba,mlb,wnba,cfb",
+        default="nba,mlb,wnba,cfb,nfl",
         help="Comma-separated sports passed to each feed scraper.",
     )
     parser.add_argument("--skip-firestore", action="store_true", help="Write JSON only; useful for local checks.")
@@ -361,6 +365,7 @@ def main() -> int:
         "wnba",
         "fifa_world_cup",
         "cfb",
+        "nfl",
     ]
     now_iso = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 

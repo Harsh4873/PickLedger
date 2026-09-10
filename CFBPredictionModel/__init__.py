@@ -1,4 +1,4 @@
-"""College-football shadow model."""
+"""College-football serving model."""
 
 from .cfb_model import generate_cfb_picks
 

@@ -226,6 +226,7 @@
 
   /* Filter pills */
   .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; position: relative; }
+  .decision-filter-bar { margin-top: 10px; }
   .filter-btn {
     background: rgba(255,255,255,0.04);
     border: 1px solid var(--border);
@@ -1161,6 +1162,51 @@
   }
 
   .home-feed-section { display: flex; flex-direction: column; gap: 14px; }
+  .home-decision-board {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 22px;
+    padding: 14px 12px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+  }
+  .home-decision-board:last-child { margin-bottom: 0; }
+  .home-decision-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .home-decision-kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.9px;
+    color: var(--muted);
+  }
+  .home-decision-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 1.4px;
+    line-height: 0.95;
+    color: var(--text);
+  }
+  .home-decision-meta {
+    margin-top: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .home-decision-count {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    line-height: 1;
+    color: var(--muted);
+  }
+  .home-decision-bet { border-left: 4px solid var(--accent, #00e5a0); }
+  .home-decision-lean { border-left: 4px solid #4da6ff; }
+  .home-decision-pass { border-left: 4px solid rgba(160, 170, 180, 0.7); }
   .home-feed-section-head {
     display: flex;
     align-items: flex-end;
@@ -4909,6 +4955,13 @@
   }
 
   body.mobile-app-mode .pick-feed { gap: 18px; }
+  body.mobile-app-mode .home-decision-board {
+    padding: 12px 10px 14px;
+    margin-bottom: 16px;
+    border-radius: 16px;
+  }
+  body.mobile-app-mode .home-decision-title { font-size: 30px; }
+  body.mobile-app-mode .home-decision-count { font-size: 28px; }
   body.mobile-app-mode .home-feed-section-title,
   body.mobile-app-mode .pulse-log-title {
     font-size: 29px;
@@ -5010,6 +5063,7 @@
     overflow: visible;
     padding-bottom: 2px;
   }
+  body.mobile-app-mode .decision-filter-bar { margin-top: 8px; }
   body.mobile-app-mode .filter-btn {
     flex: 0 0 auto;
     padding: 8px 12px;

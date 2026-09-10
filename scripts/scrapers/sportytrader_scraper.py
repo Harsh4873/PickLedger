@@ -2,7 +2,7 @@
 """
 SportyTrader Scraper
 ====================
-    Scrapes NBA, NBA Summer League, WNBA, MLB, FIFA World Cup, and CFB picks from
+    Scrapes NBA, NBA Summer League, WNBA, MLB, FIFA World Cup, CFB, and NFL picks from
 SportyTrader and prints structured pick blocks for the backend parser.
 """
 
@@ -102,6 +102,24 @@ SPORT_CONFIG = {
         # Mixed American-football fallbacks may 403 independently of the NCAA
         # listing; CFB is optional at the provider runner, so one working page
         # is enough to publish a partial slate.
+        "allow_partial_listings": True,
+    },
+    "nfl": {
+        "aliases": {"nfl"},
+        "league": "USA - NFL",
+        "league_aliases": {
+            "USA - NFL",
+            "NFL",
+        },
+        "title": "NFL",
+        # League page nfl-598 (US picks + EN betting-tips mirrors). Mixed
+        # American-football fallbacks may 403 independently; NFL is optional
+        # at the provider runner, so one working page is enough.
+        "url": "https://www.sportytrader.com/us/picks/football/usa/nfl-598/",
+        "fallback_urls": (
+            "https://www.sportytrader.com/en/betting-tips/american-football/usa/nfl-598/",
+            "https://www.sportytrader.com/en/betting-tips/american-football/",
+        ),
         "allow_partial_listings": True,
     },
 }
@@ -459,7 +477,7 @@ def main() -> None:
         "--sport",
         "-s",
         default="nba",
-        help="Supported: nba/nba_summer/wnba/mlb/fifa_world_cup/cfb",
+        help="Supported: nba/nba_summer/wnba/mlb/fifa_world_cup/cfb/nfl",
     )
     ap.add_argument("--date", "-d", help="Date in YYYY-MM-DD")
     ap.add_argument("--expected-matchup", action="append", default=[])
@@ -478,7 +496,7 @@ def main() -> None:
     if not sport_key:
         print(
             "Error: SportyTrader scraper supports NBA/basketball, NBA Summer League, "
-            "WNBA, MLB/baseball, FIFA World Cup/soccer, and CFB/NCAAF."
+            "WNBA, MLB/baseball, FIFA World Cup/soccer, CFB/NCAAF, and NFL."
         )
         sys.exit(1)
 

@@ -23,6 +23,7 @@ EXTERNAL_FEED_MODEL_KEYS = {
     "sportytrader_wnba",
     "sportytrader_fifa_world_cup",
     "sportytrader_cfb",
+    "sportytrader_nfl",
     "sportsgambler",
     "sportsgambler_nba",
     "sportsgambler_nba_summer",
@@ -30,11 +31,13 @@ EXTERNAL_FEED_MODEL_KEYS = {
     "sportsgambler_wnba",
     "sportsgambler_fifa_world_cup",
     "sportsgambler_cfb",
+    "sportsgambler_nfl",
     "scores24_nba_summer",
     "scores24_wnba",
     "scores24_mlb",
     "scores24_fifa_world_cup",
     "scores24_cfb",
+    "scores24_nfl",
     "forebet_mls",
     "forebet_mlb",
     "forebet_wnba",
@@ -58,6 +61,7 @@ EXTERNAL_FEED_SPORT_KEYS = {
     "MLB": "mlb",
     "FIFA WC": "fifa_world_cup",
     "CFB": "cfb",
+    "NFL": "nfl",
 }
 EXTERNAL_FEED_SOURCE_LABELS = {
     "sportytrader": {
@@ -67,6 +71,7 @@ EXTERNAL_FEED_SOURCE_LABELS = {
         "MLB": "SportyTraderMLB",
         "FIFA WC": "SportyTraderFIFAWorldCup",
         "CFB": "SportyTraderCFB",
+        "NFL": "SportyTraderNFL",
     },
     "sportsgambler": {
         "NBA": "SportsGamblerNBA",
@@ -75,6 +80,7 @@ EXTERNAL_FEED_SOURCE_LABELS = {
         "MLB": "SportsGamblerMLB",
         "FIFA WC": "SportsGamblerFIFAWorldCup",
         "CFB": "SportsGamblerCFB",
+        "NFL": "SportsGamblerNFL",
     },
 }
 # The in-house team models that, when all ok, promote a day to latest.json.
@@ -83,10 +89,11 @@ EXTERNAL_FEED_SOURCE_LABELS = {
 # CFB-only, FIFA/NBA Summer, and other feed-only days still must not promote
 # — that is what left 2026-07-25 showing a tennis-only slate.
 #
-# Scores24 CFB is scraped on the same weekday morning/afternoon run as
-# MLB+WNBA, but it remains a soft-fail external feed. Incomplete, blocked, or
-# hung Scores24 CFB must not prevent publishing a complete MLB+WNBA slate;
-# the in-house CFB model is still part of the required team-model set below.
+# Scores24 CFB and NFL are scraped on the same weekday morning/afternoon run
+# as MLB+WNBA, but they remain soft-fail external feeds. Incomplete, blocked,
+# or hung Scores24 CFB/NFL must not prevent publishing a complete MLB+WNBA
+# slate; the in-house CFB and NFL models are still part of the required
+# team-model set below.
 #
 # Keep this identical to site_upcheck.REQUIRED_MODEL_KEYS and to the required
 # set in model-cache-freshness-guard.yml; a drift test pins all three together.
@@ -187,10 +194,11 @@ def _demote_scraped_feed_picks(payload: dict[str, Any]) -> dict[str, Any]:
     t-statistic near -3.5 -- provably negative rather than unlucky -- and it is
     what made the BET tier perform WORSE than the LEAN tier.
 
-    Demoting decision to PASS with units 0 keeps every row visible, attributed,
-    and gradeable as a sentiment column while removing it from anything that
-    reads as a recommendation: isTrackedPick() in the viewer admits only
-    BET/LEAN, and the parlay builder's TEAM_VISIBLE_DECISIONS does the same.
+    Demoting decision to PASS with units 0 keeps every scraped row visible,
+    attributed, and gradeable as a sentiment column while removing it from
+    anything that reads as a recommendation: isTrackedPick() posts in-house
+    PASS but keeps scraped PASS on the research board, and the parlay
+    builder's TEAM_VISIBLE_DECISIONS still admits only BET/LEAN.
     Applied at merge time so it holds for every writer and cannot be reintroduced
     by an individual scraper.
     """
@@ -323,6 +331,7 @@ def _canonical_sport_label(value: Any) -> str:
         "college_football": "CFB",
         "ncaa": "CFB",
         "ncaa_football": "CFB",
+        "nfl": "NFL",
     }
     if normalized in aliases:
         return aliases[normalized]
@@ -525,9 +534,9 @@ def _scores24_feed_bucket(payload: dict[str, Any], key: str) -> dict[str, Any] |
 def _scores24_mlb_wnba_complete(payload: dict[str, Any], date_iso: str) -> bool:
     """True when today's official Scores24 MLB and WNBA slates are complete.
 
-    Tennis, CFB, FIFA, and NBA Summer must still not promote latest.json.
-    scores24_cfb is scraped best-effort on the same local run; its absence or
-    failure must not block this gate.
+    Tennis, CFB, NFL, FIFA, and NBA Summer must still not promote latest.json.
+    scores24_cfb and scores24_nfl are scraped best-effort on the same local
+    run; their absence or failure must not block this gate.
     """
     for key in ("scores24_mlb", "scores24_wnba"):
         bucket = _scores24_feed_bucket(payload, key)

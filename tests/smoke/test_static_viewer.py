@@ -31,6 +31,9 @@ def test_frontend_is_static_json_only():
     assert "See how every source has performed across the picks and results collected here." in html
     assert "sportytrader_cfb: 'SportyTraderCFB'" in data
     assert "sportsgambler_cfb: 'SportsGamblerCFB'" in data
+    assert "sportytrader_nfl: 'SportyTraderNFL'" in data
+    assert "sportsgambler_nfl: 'SportsGamblerNFL'" in data
+    assert "scores24_nfl: 'Scores24NFL'" in data
 
 
 def test_viewer_paints_latest_picks_before_history_archive():
@@ -187,7 +190,8 @@ def test_frontend_player_mode_is_persisted_isolated_and_team_defaulted():
     assert "selectedDate = ''" in main
     assert "search.value = ''" in main
     assert "function isOpenPick(" in main
-    assert "pick.result === 'pending' && !isUnsupportedPendingPick(pick) && isPublishedDailyPick(pick)" in main
+    assert "pick.result === 'pending' && !isUnsupportedPendingPick(pick) && isPostedDecision(pick)" in main
+    assert "function isPostedDecision(" in main
     assert "dailyDecision(pick) === 'PASS'" in main
     assert "const pending = getAllPicks().filter(isOpenPick)" in main
     assert "UNTRACKED" in main
@@ -273,6 +277,7 @@ def test_static_viewer_keeps_public_tabs_and_client_grading():
     main = (ROOT / "src" / "main.ts").read_text(encoding="utf-8")
     data = (ROOT / "src" / "data.ts").read_text(encoding="utf-8")
     html = (ROOT / "index.html").read_text(encoding="utf-8")
+    css = (ROOT / "src" / "styles" / "pickledger.css").read_text(encoding="utf-8")
 
     for tab in ("home", "search", "rankings", "daily", "profit"):
         assert f"id=\"tab-{tab}\"" in html
@@ -297,6 +302,7 @@ def test_static_viewer_keeps_public_tabs_and_client_grading():
     assert "embeddedResult === 'pending' ? localResult : embeddedResult" in data
     assert "function isTrackedPick(" in data
     assert "decision === 'BET' || decision === 'LEAN'" in data
+    assert "decision === 'PASS' && pick.scraped !== true" in data
     assert "pick.shadow_mode !== true && isTrackedPick(pick)" in data
     assert "function renderRankings()" in main
     assert "function renderSearch()" in main
@@ -304,6 +310,14 @@ def test_static_viewer_keeps_public_tabs_and_client_grading():
     assert "getResearchPicks" in main
     assert "college-football" in main
     assert 'id="research-board"' in html
+    assert 'id="decision-filter-bar"' in html
+    assert "function renderDecisionBoardHtml(" in main
+    assert "function setHomeDecisionFilter(" in main
+    assert "function setRankingDecisionFilter(" in main
+    assert "home-decision-board" in css
+    assert "rankingDecisionFilter" in main
+    assert "getAllPicks().filter(isPublishedDailyPick)" in main
+    assert "Scraped source picks" in main
 
 
 def test_rich_static_viewer_restores_consensus_table_and_scores():
