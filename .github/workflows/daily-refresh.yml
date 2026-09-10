@@ -1,0 +1,47 @@
+name: Daily Refresh
+
+on:
+  schedule:
+    - cron: "30 6 * * *"
+      timezone: "America/Chicago"
+    - cron: "0 13 * * *"
+      timezone: "America/Chicago"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: daily-refresh
+  cancel-in-progress: false
+
+# Each writer keeps pick-cache-writer. Run them in sequence so only one
+# scheduled writer waits for that slot, even when an upstream job is slow.
+jobs:
+  models:
+    uses: ./.github/workflows/model-cache-refresh.yml
+    secrets: inherit
+
+  props:
+    needs: models
+    if: ${{ !cancelled() }}
+    uses: ./.github/workflows/player-props-refresh.yml
+    secrets: inherit
+
+  feeds:
+    needs: props
+    if: ${{ !cancelled() }}
+    uses: ./.github/workflows/external-feed-refresh.yml
+    secrets: inherit
+
+  deploy:
+    needs: feeds
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy the latest published cache
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh workflow run deploy-pages.yml --ref main

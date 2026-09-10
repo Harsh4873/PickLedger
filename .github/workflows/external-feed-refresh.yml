@@ -1,16 +1,11 @@
 name: External Feed Refresh
 
 # Runs SportyTrader, SportsGambler, Forebet, and TennisTonic scrapers on a daily
-# schedule and publishes their results into data/model_cache so GitHub Pages
+# coordinator and publishes their results into data/model_cache so GitHub Pages
 # can serve them without waiting on the cloud backend.
 
 on:
-  schedule:
-    - cron: "10,40 14 * * *"
-    - cron: "10 20 * * *"
-    # 14:10 UTC = 09:10 CT during daylight time, shortly after lines usually post.
-    # 14:40 UTC = 09:40 CT during daylight time, backup for delayed matchups/lines.
-    # 20:10 UTC = 15:10 CT during daylight time, safety-net refresh before later games.
+  workflow_call:
   workflow_dispatch:
     inputs:
       date:

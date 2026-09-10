@@ -849,8 +849,11 @@ def test_refresh_timing_and_pages_deploy_are_deterministic():
 
     assert "cache-gate" not in model
     assert "cron: '*/15 * * * *'" in grader
-    assert 'cron: "45 12 * * *"' in model
-    assert 'cron: "10,40 14 * * *"' in feeds
+    daily = (workflows / "daily-refresh.yml").read_text(encoding="utf-8")
+    assert 'cron: "30 6 * * *"' in daily
+    assert 'cron: "0 13 * * *"' in daily
+    assert daily.count('timezone: "America/Chicago"') == 2
+    assert "  workflow_call:" in model and "  workflow_call:" in feeds
     assert "gh workflow run calibration-refresh.yml --ref main" in grader
     assert "decided - last >= 100" in grader
     assert "python scripts/train_pick_calibration.py" in calibration
@@ -871,6 +874,8 @@ def test_refresh_timing_and_pages_deploy_are_deterministic():
     assert "python scripts/site_upcheck.py" in deploy
     guard = (workflows / "model-cache-freshness-guard.yml").read_text(encoding="utf-8")
     assert "python scripts/automation/ensure_model_refresh.py --dispatch" in guard
+    assert 'timezone: "America/Chicago"' in guard
+    assert "workflows: [Daily Refresh, Model Cache Refresh, Player Props Refresh, External Feed Refresh, Auto-Grade Picks]" in guard
     assert "steps.models.outputs.state == 'fresh' || steps.models.outputs.state == 'cooldown'" in guard
     assert 'models[key].get("ok") is True for key in required' in guard
     assert 'PLAYER_CACHE_HEALTHY="$(python - <<\'PY\'' in guard

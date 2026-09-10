@@ -5,14 +5,16 @@ guard used the same scheduler, so adding more cron entries did not give them an
 independent clock. A healthy same-day warmup also hid a missed later refresh.
 
 The guard now checks `generatedAt` against the latest scheduled model window:
-12:45, 14:05, 15:30, and 20:30 UTC. These remain the workflow's existing UTC
-times; their Central-time equivalents shift with daylight saving. External feed
+06:30 and 13:00 America/Chicago. The Daily Refresh coordinator uses the same
+timezone-aware schedule, keeping both local times fixed through daylight saving.
+It runs models, player props, and external feeds sequentially, then requests
+Pages deployment. Individual writers remain manually dispatchable. External feed
 updates to `updatedAt` do not count as a model refresh. Core models must also
 be healthy and dated for the current Central day.
 
 The lightweight guard runs on its cron, after other data workflows complete,
 and when requested by the local Scores24 publisher. The macOS backup clock
-requests that same guard every 15 minutes between 07:00 and 19:00 Central.
+requests that same guard every 15 minutes between 06:30 and 19:00 Central.
 It requires the Mac to be awake, online, and logged in with an authenticated
 `gh`; after sleep, its next execution checks the current window. GitHub Actions
 still runs the models, so an Actions outage can delay recovery.
@@ -29,7 +31,7 @@ Remove it with `launchctl bootout gui/$(id -u)/bet.harsh.pickledger.model-refres
 and delete its plist from `~/Library/LaunchAgents/`.
 
 Every trigger is serialized through `model-cache-freshness-guard`. A queued or
-running model refresh prevents another dispatch. Failed or cancelled attempts
+running model refresh or Daily Refresh coordinator prevents another dispatch. Failed or cancelled attempts
 have a 20-minute cooldown and at most three manual/recovery attempts per window.
 Exhausting recovery fails the guard visibly. The next window resets the budget.
 The guard recovers player props only when models are fresh or waiting out a
@@ -37,7 +39,9 @@ retry cooldown. It does not queue props behind a pending model run in the
 shared `pick-cache-writer` group, where a second pending writer replaces the
 first. A model outage therefore need not prevent props recovery during cooldown.
 If the current window ran but a core model failed, recovery reruns just the
-failed models. A missed window still requests the full model refresh.
+failed models. A missed window requests the full Daily Refresh coordinator, including props,
+CFB/NFL external feeds, and deployment. A healthy same-day morning cache does
+not satisfy the afternoon window.
 
 Scores24, tennis, and CFB share an ESPN scoreboard client with three bounded
 attempts for temporary failures and invalid JSON. It prefers HTTPS and switches

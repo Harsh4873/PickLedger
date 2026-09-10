@@ -2920,8 +2920,8 @@ def test_local_scores24_publisher_registers_separate_models():
     assert "workflow run deploy-pages.yml" in publisher
     assert "Skipped Pages deploy until the full" in publisher
     assert "steps.commit-feeds.outputs.deployable == 'true'" in workflow
-    assert 'cron: "10,40 14 * * *"' in workflow
-    assert 'cron: "10 20 * * *"' in workflow
+    assert "  workflow_call:" in workflow
+    assert "  schedule:" not in workflow
 
 
 def test_sportsgambler_football_short_names_resolve_from_full_team_slugs(monkeypatch):

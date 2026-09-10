@@ -4,10 +4,13 @@ on:
   schedule:
     # Check every refresh window through the evening. The local backup clock
     # and Scores24 publisher also dispatch this guard when cron is delayed.
-    - cron: "12,27,42,57 12-23 * * *"
+    - cron: "42,57 6 * * *"
+      timezone: "America/Chicago"
+    - cron: "12,27,42,57 7-18 * * *"
+      timezone: "America/Chicago"
   workflow_dispatch:
   workflow_run:
-    workflows: [Model Cache Refresh, Player Props Refresh, External Feed Refresh, Auto-Grade Picks]
+    workflows: [Daily Refresh, Model Cache Refresh, Player Props Refresh, External Feed Refresh, Auto-Grade Picks]
     types: [completed]
     branches: [main]
 

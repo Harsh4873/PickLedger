@@ -2,11 +2,7 @@ name: Player Props Refresh
 run-name: Player Props Refresh ${{ github.event.inputs.date || 'today' }}
 
 on:
-  schedule:
-    - cron: "0 13 * * *"
-    - cron: "20 14 * * *"
-    - cron: "50 15 * * *"
-    - cron: "50 20 * * *"
+  workflow_call:
   workflow_dispatch:
     inputs:
       date:

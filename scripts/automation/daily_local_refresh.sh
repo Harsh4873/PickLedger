@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Unattended daily production refresh, run from cron on the owner's machine.
+# Unattended production refresh backup, run from cron on the owner's machine.
+# GitHub Actions starts the same coordinator at 6:30 a.m. and 1:00 p.m.
+# America/Chicago; this job waits for that run when it is already active.
 #
 # WHY THIS RUNS LOCALLY AND NOT IN ACTIONS
 # Scores24 and Forebet Cloudflare-403 every GitHub-hosted runner IP, which is
@@ -116,16 +118,21 @@ log "syncing ${REPO}"
 sync_repo || { log "FATAL: could not sync repo"; exit 1; }
 log "  at $(git -C "$REPO" rev-parse --short HEAD)"
 
-# Team models and props first: they create today's cache entry. Only once those
-# exist can an external-feed publish promote latest.json (see
-# merge_external_feed_cache_payload.REQUIRED_TEAM_MODEL_KEYS), so running them
-# ahead of the publishers lets each publisher ship its own feeds live.
-log "dispatching Actions writers"
-MODEL_RUN="$(dispatch model-cache-refresh.yml 'model-cache')"
-PROPS_RUN="$(dispatch player-props-refresh.yml 'player-props')"
+# One coordinator owns pick-cache-writer. Dispatching models and props at the
+# same time used to replace a pending writer. GitHub already starts this at
+# 6:30 a.m. and 1:00 p.m. America/Chicago; wait for an active run instead of
+# stacking another.
+log "dispatching Daily Refresh coordinator"
+ACTIVE_DAILY="$(gh run list --repo "$GH_REPO" --workflow daily-refresh.yml --branch main --limit 10 \
+  --json databaseId,status --jq '[.[] | select(.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="pending" or .status=="requested")] | .[0].databaseId // empty' 2>/dev/null || true)"
+if [[ -n "${ACTIVE_DAILY}" ]]; then
+  log "  daily-refresh already ${ACTIVE_DAILY}; waiting instead of dispatching another"
+  DAILY_RUN="$ACTIVE_DAILY"
+else
+  DAILY_RUN="$(dispatch daily-refresh.yml 'daily-refresh')"
+fi
 if ! $DRY_RUN; then
-  [[ -n "${MODEL_RUN:-}" ]] && wait_for_run "$MODEL_RUN" "model-cache" 6000
-  [[ -n "${PROPS_RUN:-}" ]] && wait_for_run "$PROPS_RUN" "player-props" 3300
+  [[ -n "${DAILY_RUN:-}" ]] && wait_for_run "$DAILY_RUN" "daily-refresh" 10000
 fi
 
 log "running local publishers (Cloudflare-blocked on Actions; this host clears them)"
@@ -135,12 +142,6 @@ sync_repo
 publish forebet_publish.sh 'forebet'
 sync_repo
 publish tennis_publish.sh 'tennis'
-
-log "dispatching external feeds"
-FEED_RUN="$(dispatch external-feed-refresh.yml 'external-feeds')"
-if ! $DRY_RUN; then
-  [[ -n "${FEED_RUN:-}" ]] && wait_for_run "$FEED_RUN" "external-feeds" 1800
-fi
 
 # A green deploy-pages run is NOT a deploy: readiness can defer without failing
 # and leave the deploy job skipped. Always confirm the job itself executed for

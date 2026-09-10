@@ -12,11 +12,12 @@ from zoneinfo import ZoneInfo
 
 REPO = "Harsh4873/pickledger"
 WORKFLOW = "model-cache-refresh.yml"
+DAILY_WORKFLOW = "daily-refresh.yml"
 CENTRAL = ZoneInfo("America/Chicago")
 REQUIRED = {"mlb_new", "mlb_inning", "mlb_first_five", "wnba", "nba", "nba_playoffs", "nfl", "cfb"}
 ACTIVE = {"queued", "in_progress", "waiting", "pending", "requested"}
-# Match model-cache-refresh.yml. Keep UTC slots stable across daylight saving.
-SLOTS = (time(12, 45), time(14, 5), time(15, 30), time(20, 30))
+# Match the Daily Refresh coordinator's America/Chicago schedule, including DST.
+SLOTS = (time(6, 30), time(13, 0))
 
 
 def timestamp(value):
@@ -28,9 +29,9 @@ def timestamp(value):
 
 
 def latest_slot(now):
-    utc = now.astimezone(timezone.utc)
-    due = [datetime.combine(utc.date(), slot, timezone.utc) for slot in SLOTS]
-    return max((slot for slot in due if slot <= utc), default=None)
+    central = now.astimezone(CENTRAL)
+    due = [datetime.combine(central.date(), slot, CENTRAL) for slot in SLOTS]
+    return max((slot for slot in due if slot <= central), default=None)
 
 
 def refresh_decision(payload, runs, now):
@@ -59,6 +60,15 @@ def gh(*args):
     return subprocess.check_output(["gh", *args], text=True, timeout=60)
 
 
+def refresh_runs():
+    # Reusable model jobs belong to the coordinator's run in the Actions API.
+    # Include both paths so recovery cannot displace its pending writers.
+    return [run for workflow in (WORKFLOW, DAILY_WORKFLOW)
+            for run in json.loads(gh("run", "list", "--repo", REPO, "--workflow", workflow,
+                                     "--branch", "main", "--limit", "100", "--json",
+                                     "status,event,createdAt"))]
+
+
 def recovery_models(payload, now):
     """Retry only failed core models after an otherwise current window ran."""
     slot = latest_slot(now)
@@ -68,6 +78,15 @@ def recovery_models(payload, now):
         models = payload.get("models") if isinstance(payload.get("models"), dict) else {}
         return sorted(key for key in REQUIRED if not isinstance(models.get(key), dict) or models[key].get("ok") is not True)
     return []
+
+
+def dispatch_recovery(payload, now):
+    if models := recovery_models(payload, now):
+        target = now.astimezone(CENTRAL).date().isoformat()
+        gh("workflow", "run", WORKFLOW, "--repo", REPO, "--ref", "main",
+           "-f", f"date={target}", "-f", f"models={','.join(models)}")
+    else:
+        gh("workflow", "run", DAILY_WORKFLOW, "--repo", REPO, "--ref", "main")
 
 
 def main():
@@ -83,7 +102,7 @@ def main():
     if args.date and args.date != target:
         print("Skipping recovery for a historical or future publisher date")
         return 0
-    if args.local_clock and not time(7, 0) <= central.time() < time(19, 0):
+    if args.local_clock and not SLOTS[0] <= central.time() < time(19, 0):
         return 0
     if args.remote:
         runs = json.loads(gh("run", "list", "--repo", REPO, "--workflow", "model-cache-freshness-guard.yml", "--branch", "main", "--limit", "20", "--json", "status"))
@@ -99,17 +118,14 @@ def main():
         payload = json.loads((Path(__file__).resolve().parents[2] / "data/model_cache/latest.json").read_text())
     except (OSError, ValueError):
         payload = {}
-    runs = json.loads(gh("run", "list", "--repo", REPO, "--workflow", WORKFLOW, "--branch", "main", "--limit", "100", "--json", "status,event,createdAt"))
+    runs = refresh_runs()
     state, reason = refresh_decision(payload, runs, now)
     print(f"{state}: {reason}", flush=True)
     if output := os.environ.get("GITHUB_OUTPUT"):
         with open(output, "a", encoding="utf-8") as stream:
             stream.write(f"state={state}\n")
     if state == "dispatch" and args.dispatch:
-        fields = ["-f", f"date={target}"]
-        if models := recovery_models(payload, now):
-            fields += ["-f", f"models={','.join(models)}"]
-        gh("workflow", "run", WORKFLOW, "--repo", REPO, "--ref", "main", *fields)
+        dispatch_recovery(payload, now)
     return 1 if state == "exhausted" else 0
 
 
