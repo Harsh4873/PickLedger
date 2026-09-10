@@ -20,12 +20,8 @@
   },
   "date": "2026-09-10",
   "errors": [],
-  "externalFeedsUpdatedAt": "2026-09-10T19:01:33.094552Z",
-  "external_feed_errors": [
-    "forebet_mlb: ForebetMLB: listing fetch blocked by Cloudflare",
-    "forebet_cfb: ForebetCFB: listing fetch blocked by Cloudflare",
-    "forebet_nfl: ForebetNFL: listing fetch blocked by Cloudflare"
-  ],
+  "externalFeedsUpdatedAt": "2026-09-10T19:13:39.558145Z",
+  "external_feed_errors": [],
   "external_feeds": {
     "forebet_cfb": {
       "date": "2026-09-10",
@@ -618,29 +614,29 @@
     },
     "scores24_cfb": {
       "date": "2026-09-10",
-      "generatedAt": "2026-09-10T14:22:38.804819Z",
+      "generatedAt": "2026-09-10T19:12:03.928064Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-10T14:22:38.804819Z",
+      "lastAttemptAt": "2026-09-10T19:12:03.928064Z",
       "lastAttemptDate": "2026-09-10",
-      "lastSuccessAt": "2026-09-10T14:22:38.804819Z",
+      "lastSuccessAt": "2026-09-10T19:12:03.928064Z",
       "meta": {
-        "attemptedUrls": 1,
+        "attemptedUrls": 0,
         "blockRetryRounds": 0,
         "blockedUrls": 0,
-        "checkpointedPicks": 0,
+        "checkpointedPicks": 1,
         "date": "2026-09-10",
         "expectedMatchups": 1,
         "feed": "scores24_cfb",
         "from": "local",
         "leagues": "mlb,wnba,cfb,nfl",
-        "listingLinks": 17,
-        "listingResolved": true,
-        "listingUrlsAttempted": 3,
+        "listingLinks": 0,
+        "listingResolved": false,
+        "listingUrlsAttempted": 0,
         "matchedPicks": 1,
         "missingMatchups": [],
         "officialMatchups": 1,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-10T14:22:38.804819Z"
+        "updatedAt": "2026-09-10T19:12:03.928064Z"
       },
       "note": "Scores24CFB matched 1 published editorial choice(s) against 1 official 2026-09-10 matchup(s).",
       "ok": true,
@@ -669,7 +665,7 @@
       ],
       "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-10T14:22:38.804819Z"
+      "updatedAt": "2026-09-10T19:12:03.928064Z"
     },
     "scores24_fifa_world_cup": {
       "date": "2026-09-09",
@@ -702,11 +698,11 @@
     },
     "scores24_mlb": {
       "date": "2026-09-10",
-      "generatedAt": "2026-09-10T14:19:26.600881Z",
+      "generatedAt": "2026-09-10T19:08:52.770654Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-10T14:19:26.600881Z",
+      "lastAttemptAt": "2026-09-10T19:08:52.770654Z",
       "lastAttemptDate": "2026-09-10",
-      "lastSuccessAt": "2026-09-10T14:19:26.600881Z",
+      "lastSuccessAt": "2026-09-10T19:08:52.770654Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -724,7 +720,7 @@
         "missingMatchups": [],
         "officialMatchups": 5,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-10T14:19:26.600881Z"
+        "updatedAt": "2026-09-10T19:08:52.770654Z"
       },
       "note": "Scores24MLB matched 5 published editorial choice(s) against 5 official 2026-09-10 matchup(s).",
       "ok": true,
@@ -837,7 +833,7 @@
       ],
       "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-10T14:19:26.600881Z"
+      "updatedAt": "2026-09-10T19:08:52.770654Z"
     },
     "scores24_nba_summer": {
       "date": "2026-09-09",
@@ -870,29 +866,29 @@
     },
     "scores24_nfl": {
       "date": "2026-09-10",
-      "generatedAt": "2026-09-10T14:24:59.184492Z",
+      "generatedAt": "2026-09-10T19:13:39.558145Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-10T14:24:59.184492Z",
+      "lastAttemptAt": "2026-09-10T19:13:39.558145Z",
       "lastAttemptDate": "2026-09-10",
-      "lastSuccessAt": "2026-09-10T14:24:59.184492Z",
+      "lastSuccessAt": "2026-09-10T19:13:39.558145Z",
       "meta": {
-        "attemptedUrls": 1,
+        "attemptedUrls": 0,
         "blockRetryRounds": 0,
         "blockedUrls": 0,
-        "checkpointedPicks": 0,
+        "checkpointedPicks": 1,
         "date": "2026-09-10",
         "expectedMatchups": 1,
         "feed": "scores24_nfl",
         "from": "local",
         "leagues": "mlb,wnba,cfb,nfl",
-        "listingLinks": 17,
-        "listingResolved": true,
-        "listingUrlsAttempted": 3,
+        "listingLinks": 0,
+        "listingResolved": false,
+        "listingUrlsAttempted": 0,
         "matchedPicks": 1,
         "missingMatchups": [],
         "officialMatchups": 1,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-10T14:24:59.184492Z"
+        "updatedAt": "2026-09-10T19:13:39.558145Z"
       },
       "note": "Scores24NFL matched 1 published editorial choice(s) against 1 official 2026-09-10 matchup(s).",
       "ok": true,
@@ -921,7 +917,7 @@
       ],
       "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-10T14:24:59.184492Z"
+      "updatedAt": "2026-09-10T19:13:39.558145Z"
     },
     "scores24_tennis": {
       "date": "2026-08-31",
@@ -1090,11 +1086,11 @@
     },
     "scores24_wnba": {
       "date": "2026-09-10",
-      "generatedAt": "2026-09-10T14:21:02.530980Z",
+      "generatedAt": "2026-09-10T19:10:28.230359Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-10T14:21:02.530980Z",
+      "lastAttemptAt": "2026-09-10T19:10:28.230359Z",
       "lastAttemptDate": "2026-09-10",
-      "lastSuccessAt": "2026-09-10T14:21:02.530980Z",
+      "lastSuccessAt": "2026-09-10T19:10:28.230359Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -1109,13 +1105,13 @@
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-10T14:21:02.530980Z"
+        "updatedAt": "2026-09-10T19:10:28.230359Z"
       },
       "note": "Scores24WNBA has no official 2026-09-10 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-10T14:21:02.530980Z"
+      "updatedAt": "2026-09-10T19:10:28.230359Z"
     },
     "sportsgambler_cfb": {
       "date": "2026-09-10",
@@ -22982,29 +22978,29 @@
     },
     "scores24_cfb": {
       "date": "2026-09-10",
-      "generatedAt": "2026-09-10T14:22:38.804819Z",
+      "generatedAt": "2026-09-10T19:12:03.928064Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-10T14:22:38.804819Z",
+      "lastAttemptAt": "2026-09-10T19:12:03.928064Z",
       "lastAttemptDate": "2026-09-10",
-      "lastSuccessAt": "2026-09-10T14:22:38.804819Z",
+      "lastSuccessAt": "2026-09-10T19:12:03.928064Z",
       "meta": {
-        "attemptedUrls": 1,
+        "attemptedUrls": 0,
         "blockRetryRounds": 0,
         "blockedUrls": 0,
-        "checkpointedPicks": 0,
+        "checkpointedPicks": 1,
         "date": "2026-09-10",
         "expectedMatchups": 1,
         "feed": "scores24_cfb",
         "from": "local",
         "leagues": "mlb,wnba,cfb,nfl",
-        "listingLinks": 17,
-        "listingResolved": true,
-        "listingUrlsAttempted": 3,
+        "listingLinks": 0,
+        "listingResolved": false,
+        "listingUrlsAttempted": 0,
         "matchedPicks": 1,
         "missingMatchups": [],
         "officialMatchups": 1,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-10T14:22:38.804819Z"
+        "updatedAt": "2026-09-10T19:12:03.928064Z"
       },
       "note": "Scores24CFB matched 1 published editorial choice(s) against 1 official 2026-09-10 matchup(s).",
       "ok": true,
@@ -23054,15 +23050,15 @@
       ],
       "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-10T14:22:38.804819Z"
+      "updatedAt": "2026-09-10T19:12:03.928064Z"
     },
     "scores24_mlb": {
       "date": "2026-09-10",
-      "generatedAt": "2026-09-10T14:19:26.600881Z",
+      "generatedAt": "2026-09-10T19:08:52.770654Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-10T14:19:26.600881Z",
+      "lastAttemptAt": "2026-09-10T19:08:52.770654Z",
       "lastAttemptDate": "2026-09-10",
-      "lastSuccessAt": "2026-09-10T14:19:26.600881Z",
+      "lastSuccessAt": "2026-09-10T19:08:52.770654Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -23080,7 +23076,7 @@
         "missingMatchups": [],
         "officialMatchups": 5,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-10T14:19:26.600881Z"
+        "updatedAt": "2026-09-10T19:08:52.770654Z"
       },
       "note": "Scores24MLB matched 5 published editorial choice(s) against 5 official 2026-09-10 matchup(s).",
       "ok": true,
@@ -23314,33 +23310,33 @@
       ],
       "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-10T14:19:26.600881Z"
+      "updatedAt": "2026-09-10T19:08:52.770654Z"
     },
     "scores24_nfl": {
       "date": "2026-09-10",
-      "generatedAt": "2026-09-10T14:24:59.184492Z",
+      "generatedAt": "2026-09-10T19:13:39.558145Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-10T14:24:59.184492Z",
+      "lastAttemptAt": "2026-09-10T19:13:39.558145Z",
       "lastAttemptDate": "2026-09-10",
-      "lastSuccessAt": "2026-09-10T14:24:59.184492Z",
+      "lastSuccessAt": "2026-09-10T19:13:39.558145Z",
       "meta": {
-        "attemptedUrls": 1,
+        "attemptedUrls": 0,
         "blockRetryRounds": 0,
         "blockedUrls": 0,
-        "checkpointedPicks": 0,
+        "checkpointedPicks": 1,
         "date": "2026-09-10",
         "expectedMatchups": 1,
         "feed": "scores24_nfl",
         "from": "local",
         "leagues": "mlb,wnba,cfb,nfl",
-        "listingLinks": 17,
-        "listingResolved": true,
-        "listingUrlsAttempted": 3,
+        "listingLinks": 0,
+        "listingResolved": false,
+        "listingUrlsAttempted": 0,
         "matchedPicks": 1,
         "missingMatchups": [],
         "officialMatchups": 1,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-10T14:24:59.184492Z"
+        "updatedAt": "2026-09-10T19:13:39.558145Z"
       },
       "note": "Scores24NFL matched 1 published editorial choice(s) against 1 official 2026-09-10 matchup(s).",
       "ok": true,
@@ -23390,15 +23386,15 @@
       ],
       "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-10T14:24:59.184492Z"
+      "updatedAt": "2026-09-10T19:13:39.558145Z"
     },
     "scores24_wnba": {
       "date": "2026-09-10",
-      "generatedAt": "2026-09-10T14:21:02.530980Z",
+      "generatedAt": "2026-09-10T19:10:28.230359Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-10T14:21:02.530980Z",
+      "lastAttemptAt": "2026-09-10T19:10:28.230359Z",
       "lastAttemptDate": "2026-09-10",
-      "lastSuccessAt": "2026-09-10T14:21:02.530980Z",
+      "lastSuccessAt": "2026-09-10T19:10:28.230359Z",
       "meta": {
         "attemptedUrls": 0,
         "blockRetryRounds": 0,
@@ -23413,13 +23409,13 @@
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-10T14:21:02.530980Z"
+        "updatedAt": "2026-09-10T19:10:28.230359Z"
       },
       "note": "Scores24WNBA has no official 2026-09-10 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-10T14:21:02.530980Z"
+      "updatedAt": "2026-09-10T19:10:28.230359Z"
     },
     "sportsgambler_cfb": {
       "date": "2026-09-10",
@@ -25410,29 +25406,29 @@
   },
   "scores24_cfb": {
     "date": "2026-09-10",
-    "generatedAt": "2026-09-10T14:22:38.804819Z",
+    "generatedAt": "2026-09-10T19:12:03.928064Z",
     "generatedBy": "local:external-feed-refresh",
-    "lastAttemptAt": "2026-09-10T14:22:38.804819Z",
+    "lastAttemptAt": "2026-09-10T19:12:03.928064Z",
     "lastAttemptDate": "2026-09-10",
-    "lastSuccessAt": "2026-09-10T14:22:38.804819Z",
+    "lastSuccessAt": "2026-09-10T19:12:03.928064Z",
     "meta": {
-      "attemptedUrls": 1,
+      "attemptedUrls": 0,
       "blockRetryRounds": 0,
       "blockedUrls": 0,
-      "checkpointedPicks": 0,
+      "checkpointedPicks": 1,
       "date": "2026-09-10",
       "expectedMatchups": 1,
       "feed": "scores24_cfb",
       "from": "local",
       "leagues": "mlb,wnba,cfb,nfl",
-      "listingLinks": 17,
-      "listingResolved": true,
-      "listingUrlsAttempted": 3,
+      "listingLinks": 0,
+      "listingResolved": false,
+      "listingUrlsAttempted": 0,
       "matchedPicks": 1,
       "missingMatchups": [],
       "officialMatchups": 1,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-10T14:22:38.804819Z"
+      "updatedAt": "2026-09-10T19:12:03.928064Z"
     },
     "note": "Scores24CFB matched 1 published editorial choice(s) against 1 official 2026-09-10 matchup(s).",
     "ok": true,
@@ -25461,15 +25457,15 @@
     ],
     "refreshStatus": "ok",
     "scraped_tip_feed": true,
-    "updatedAt": "2026-09-10T14:22:38.804819Z"
+    "updatedAt": "2026-09-10T19:12:03.928064Z"
   },
   "scores24_mlb": {
     "date": "2026-09-10",
-    "generatedAt": "2026-09-10T14:19:26.600881Z",
+    "generatedAt": "2026-09-10T19:08:52.770654Z",
     "generatedBy": "local:external-feed-refresh",
-    "lastAttemptAt": "2026-09-10T14:19:26.600881Z",
+    "lastAttemptAt": "2026-09-10T19:08:52.770654Z",
     "lastAttemptDate": "2026-09-10",
-    "lastSuccessAt": "2026-09-10T14:19:26.600881Z",
+    "lastSuccessAt": "2026-09-10T19:08:52.770654Z",
     "meta": {
       "attemptedUrls": 0,
       "blockRetryRounds": 0,
@@ -25487,7 +25483,7 @@
       "missingMatchups": [],
       "officialMatchups": 5,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-10T14:19:26.600881Z"
+      "updatedAt": "2026-09-10T19:08:52.770654Z"
     },
     "note": "Scores24MLB matched 5 published editorial choice(s) against 5 official 2026-09-10 matchup(s).",
     "ok": true,
@@ -25600,33 +25596,33 @@
     ],
     "refreshStatus": "ok",
     "scraped_tip_feed": true,
-    "updatedAt": "2026-09-10T14:19:26.600881Z"
+    "updatedAt": "2026-09-10T19:08:52.770654Z"
   },
   "scores24_nfl": {
     "date": "2026-09-10",
-    "generatedAt": "2026-09-10T14:24:59.184492Z",
+    "generatedAt": "2026-09-10T19:13:39.558145Z",
     "generatedBy": "local:external-feed-refresh",
-    "lastAttemptAt": "2026-09-10T14:24:59.184492Z",
+    "lastAttemptAt": "2026-09-10T19:13:39.558145Z",
     "lastAttemptDate": "2026-09-10",
-    "lastSuccessAt": "2026-09-10T14:24:59.184492Z",
+    "lastSuccessAt": "2026-09-10T19:13:39.558145Z",
     "meta": {
-      "attemptedUrls": 1,
+      "attemptedUrls": 0,
       "blockRetryRounds": 0,
       "blockedUrls": 0,
-      "checkpointedPicks": 0,
+      "checkpointedPicks": 1,
       "date": "2026-09-10",
       "expectedMatchups": 1,
       "feed": "scores24_nfl",
       "from": "local",
       "leagues": "mlb,wnba,cfb,nfl",
-      "listingLinks": 17,
-      "listingResolved": true,
-      "listingUrlsAttempted": 3,
+      "listingLinks": 0,
+      "listingResolved": false,
+      "listingUrlsAttempted": 0,
       "matchedPicks": 1,
       "missingMatchups": [],
       "officialMatchups": 1,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-10T14:24:59.184492Z"
+      "updatedAt": "2026-09-10T19:13:39.558145Z"
     },
     "note": "Scores24NFL matched 1 published editorial choice(s) against 1 official 2026-09-10 matchup(s).",
     "ok": true,
@@ -25655,15 +25651,15 @@
     ],
     "refreshStatus": "ok",
     "scraped_tip_feed": true,
-    "updatedAt": "2026-09-10T14:24:59.184492Z"
+    "updatedAt": "2026-09-10T19:13:39.558145Z"
   },
   "scores24_wnba": {
     "date": "2026-09-10",
-    "generatedAt": "2026-09-10T14:21:02.530980Z",
+    "generatedAt": "2026-09-10T19:10:28.230359Z",
     "generatedBy": "local:external-feed-refresh",
-    "lastAttemptAt": "2026-09-10T14:21:02.530980Z",
+    "lastAttemptAt": "2026-09-10T19:10:28.230359Z",
     "lastAttemptDate": "2026-09-10",
-    "lastSuccessAt": "2026-09-10T14:21:02.530980Z",
+    "lastSuccessAt": "2026-09-10T19:10:28.230359Z",
     "meta": {
       "attemptedUrls": 0,
       "blockRetryRounds": 0,
@@ -25678,13 +25674,13 @@
       "missingMatchups": [],
       "officialMatchups": 0,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-10T14:21:02.530980Z"
+      "updatedAt": "2026-09-10T19:10:28.230359Z"
     },
     "note": "Scores24WNBA has no official 2026-09-10 matchups.",
     "ok": true,
     "picks": [],
     "refreshStatus": "ok",
-    "updatedAt": "2026-09-10T14:21:02.530980Z"
+    "updatedAt": "2026-09-10T19:10:28.230359Z"
   },
   "sportsgambler_cfb": {
     "date": "2026-09-10",
@@ -26345,7 +26341,7 @@
     "scraped_tip_feed": true,
     "updatedAt": "2026-09-10T19:01:33.094552Z"
   },
-  "updatedAt": "2026-09-10T19:01:33.094552Z",
+  "updatedAt": "2026-09-10T19:13:39.558145Z",
   "wnba": {
     "date": "2026-09-10",
     "note": "No WNBA picks today \u2014 off-season or no edge found.",
