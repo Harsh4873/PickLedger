@@ -127,7 +127,7 @@
         "updatedAt": "2026-09-09T18:27:37.940559Z"
       },
       "rawModelProbabilityIgnored": 0.5651,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -145,6 +145,14 @@
         "value_insufficient_source_samples"
       ],
       "canonicalGame": "2026-09-09:mlb:chicago white sox|pittsburgh pirates",
+      "closing": {
+        "capturedAt": "2026-09-09T15:08:41.139685Z",
+        "clv": 0.0,
+        "decimalOdds": 2.01,
+        "noVigProbability": 0.475151,
+        "oddsAmerican": 101,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-09",
       "decimalOdds": 2.01,
@@ -263,7 +271,7 @@
         "updatedAt": "2026-09-09T15:08:41.139685Z"
       },
       "rawModelProbabilityIgnored": 0.6145,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -547,7 +555,7 @@
         "updatedAt": "2026-09-09T18:27:37.940559Z"
       },
       "rawModelProbabilityIgnored": 0.97,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -572,6 +580,14 @@
         "value_probability_positive_ev_below_0.70"
       ],
       "canonicalGame": "2026-09-09:mls:cf montr\u00e9al|charlotte fc",
+      "closing": {
+        "capturedAt": "2026-09-09T23:28:39.793383Z",
+        "clv": 0.011792,
+        "decimalOdds": 1.606061,
+        "noVigProbability": 0.588829,
+        "oddsAmerican": -165,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-09",
       "decimalOdds": 1.625,
@@ -697,7 +713,7 @@
         "updatedAt": "2026-09-09T18:27:37.940559Z"
       },
       "rawModelProbabilityIgnored": 0.66,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -722,6 +738,14 @@
         "value_probability_positive_ev_below_0.70"
       ],
       "canonicalGame": "2026-09-09:mls:fc dallas|minnesota united fc",
+      "closing": {
+        "capturedAt": "2026-09-09T23:28:39.793383Z",
+        "clv": -0.011099,
+        "decimalOdds": 1.606061,
+        "noVigProbability": 0.588829,
+        "oddsAmerican": -165,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-09",
       "decimalOdds": 1.588235,
@@ -847,7 +871,7 @@
         "updatedAt": "2026-09-09T18:27:37.940559Z"
       },
       "rawModelProbabilityIgnored": 0.6125,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -872,6 +896,14 @@
         "value_probability_positive_ev_below_0.70"
       ],
       "canonicalGame": "2026-09-09:mls:atlanta united fc|orlando city sc",
+      "closing": {
+        "capturedAt": "2026-09-09T23:28:39.793383Z",
+        "clv": -0.031056,
+        "decimalOdds": 1.769231,
+        "noVigProbability": 0.536757,
+        "oddsAmerican": -130,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-09",
       "decimalOdds": 1.714286,
@@ -997,7 +1029,7 @@
         "updatedAt": "2026-09-09T18:27:37.940559Z"
       },
       "rawModelProbabilityIgnored": 0.6315,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -1612,6 +1644,14 @@
         "value_probability_positive_ev_below_0.70"
       ],
       "canonicalGame": "2026-09-09:mls:columbus crew|d c united",
+      "closing": {
+        "capturedAt": "2026-09-09T23:28:39.793383Z",
+        "clv": 0.052049,
+        "decimalOdds": 1.606061,
+        "noVigProbability": 0.588829,
+        "oddsAmerican": -165,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-09",
       "decimalOdds": 1.689655,
@@ -1737,7 +1777,7 @@
         "updatedAt": "2026-09-09T18:27:37.940559Z"
       },
       "rawModelProbabilityIgnored": 0.5703,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -1762,6 +1802,14 @@
         "value_probability_positive_ev_below_0.70"
       ],
       "canonicalGame": "2026-09-09:mls:new england revolution|new york city fc",
+      "closing": {
+        "capturedAt": "2026-09-09T23:28:39.793383Z",
+        "clv": 0.013793,
+        "decimalOdds": 1.666667,
+        "noVigProbability": 0.563319,
+        "oddsAmerican": -150,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-09",
       "decimalOdds": 1.689655,
@@ -1887,7 +1935,7 @@
         "updatedAt": "2026-09-09T18:27:37.940559Z"
       },
       "rawModelProbabilityIgnored": 0.5391,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -2388,7 +2436,7 @@
         "updatedAt": "2026-09-09T22:52:51.263826Z"
       },
       "rawModelProbabilityIgnored": 0.5112,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -2606,7 +2654,7 @@
         "updatedAt": "2026-09-09T22:52:51.263826Z"
       },
       "rawModelProbabilityIgnored": 0.6976,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -2715,7 +2763,7 @@
         "updatedAt": "2026-09-09T22:52:51.263826Z"
       },
       "rawModelProbabilityIgnored": 0.6077,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -3042,7 +3090,7 @@
         "updatedAt": "2026-09-09T22:52:51.263826Z"
       },
       "rawModelProbabilityIgnored": 0.6195,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -3151,7 +3199,7 @@
         "updatedAt": "2026-09-09T22:52:51.263826Z"
       },
       "rawModelProbabilityIgnored": 0.5772,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -3264,7 +3312,7 @@
         "updatedAt": "2026-09-09T22:52:51.263826Z"
       },
       "rawModelProbabilityIgnored": 0.567,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -3373,7 +3421,7 @@
         "updatedAt": "2026-09-09T22:52:51.263826Z"
       },
       "rawModelProbabilityIgnored": 0.4812,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -3482,7 +3530,7 @@
         "updatedAt": "2026-09-09T22:52:51.263826Z"
       },
       "rawModelProbabilityIgnored": 0.7109,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLS Model",
       "sourceKey": "mls",
@@ -3591,7 +3639,7 @@
         "updatedAt": "2026-09-09T22:52:51.263826Z"
       },
       "rawModelProbabilityIgnored": 0.561,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -3700,7 +3748,7 @@
         "updatedAt": "2026-09-09T18:57:38.117347Z"
       },
       "rawModelProbabilityIgnored": 0.588,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -3811,7 +3859,7 @@
         "updatedAt": "2026-09-09T22:52:51.263826Z"
       },
       "rawModelProbabilityIgnored": 0.563,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
