@@ -1,37 +1,36 @@
 {
   "date": "2026-09-10",
-  "generatedAt": "2026-09-10T14:01:04.275601Z",
+  "generatedAt": "2026-09-10T18:23:41.531307Z",
   "models": {
     "mlb_player_props": {
       "abstained": true,
-      "candidate_count": 1492,
-      "consensus_rejected_count": 3760,
+      "candidate_count": 1481,
+      "consensus_rejected_count": 3757,
       "consensus_rejection_reasons": {
-        "batter_strikeouts has not cleared 70%": 174,
-        "batter_walks has not cleared 70%": 443,
-        "doubles has not cleared 70%": 328,
+        "batter_strikeouts has not cleared 70%": 172,
+        "batter_walks has not cleared 70%": 532,
+        "doubles has not cleared 70%": 316,
         "failed: season_rate": 4,
-        "hits has not cleared 70%": 643,
-        "hits_runs_rbis has not cleared 70%": 639,
-        "home_runs has not cleared 70%": 154,
-        "missing season/history player profile": 7,
+        "hits has not cleared 70%": 616,
+        "hits_runs_rbis has not cleared 70%": 607,
+        "home_runs has not cleared 70%": 152,
         "pitcher_earned_runs_allowed has not cleared 70%": 16,
         "pitcher_hits_allowed has not cleared 70%": 16,
         "pitcher_outs_recorded has not cleared 70%": 16,
-        "pitcher_walks_allowed has not cleared 70%": 28,
-        "runs has not cleared 70%": 164,
-        "singles has not cleared 70%": 328,
-        "stolen_bases has not cleared 70%": 160,
+        "pitcher_walks_allowed has not cleared 70%": 32,
+        "runs has not cleared 70%": 158,
+        "singles has not cleared 70%": 316,
+        "stolen_bases has not cleared 70%": 172,
         "strikeouts has not cleared 70%": 62,
-        "total_bases has not cleared 70%": 210,
-        "triples has not cleared 70%": 112,
-        "under price unavailable": 256
+        "total_bases has not cleared 70%": 200,
+        "triples has not cleared 70%": 118,
+        "under price unavailable": 252
       },
       "consensus_rejections": [
         {
           "id": "pp_89b5962b3d29041b2a83_season",
           "line": 3.5,
-          "odds": -124,
+          "odds": -131,
           "player_name": "Nick Martinez",
           "reason": "strikeouts has not cleared 70%",
           "selection": "Under",
@@ -40,7 +39,7 @@
         {
           "id": "pp_adb744cd93702d8c1d5b_season",
           "line": 5.5,
-          "odds": -103,
+          "odds": -113,
           "player_name": "Nick Martinez",
           "reason": "pitcher_hits_allowed has not cleared 70%",
           "selection": "Over",
@@ -49,7 +48,7 @@
         {
           "id": "pp_3327a52034379f576a88_season",
           "line": 2.5,
-          "odds": -122,
+          "odds": -112,
           "player_name": "Nick Martinez",
           "reason": "pitcher_earned_runs_allowed has not cleared 70%",
           "selection": "Under",
@@ -58,7 +57,7 @@
         {
           "id": "pp_8cce27105e2658199fbf_season",
           "line": 17.5,
-          "odds": -102,
+          "odds": -103,
           "player_name": "Nick Martinez",
           "reason": "pitcher_outs_recorded has not cleared 70%",
           "selection": "Over",
@@ -67,7 +66,7 @@
         {
           "id": "pp_4bcdffe38d520527c8c2_season",
           "line": 1.5,
-          "odds": -224,
+          "odds": -251,
           "player_name": "Nick Martinez",
           "reason": "pitcher_walks_allowed has not cleared 70%",
           "selection": "Under",
@@ -76,7 +75,7 @@
         {
           "id": "pp_314f0432cd88097cdf11_season",
           "line": 3.5,
-          "odds": -101,
+          "odds": 101,
           "player_name": "Nick Martinez",
           "reason": "strikeouts has not cleared 70%",
           "selection": "Over",
@@ -85,7 +84,7 @@
         {
           "id": "pp_80ceecbff8e755bb9bb1_season",
           "line": 0.5,
-          "odds": -199,
+          "odds": -192,
           "player_name": "Chandler Simpson",
           "reason": "singles has not cleared 70%",
           "selection": "Over",
@@ -94,7 +93,7 @@
         {
           "id": "pp_08f0a001475da55d0fbf_season",
           "line": 0.5,
-          "odds": 477,
+          "odds": 492,
           "player_name": "Chandler Simpson",
           "reason": "doubles has not cleared 70%",
           "selection": "Over",
@@ -103,16 +102,16 @@
         {
           "id": "pp_69566434b89b2f015a3f_season",
           "line": 1.5,
-          "odds": 140,
+          "odds": 149,
           "player_name": "Chandler Simpson",
           "reason": "total_bases has not cleared 70%",
           "selection": "Over",
           "stat_key": "total_bases"
         },
         {
-          "id": "pp_1ae49c1523d60bb5e58d_season",
-          "line": 1.5,
-          "odds": 197,
+          "id": "pp_c448c5decd30a268e2bf_season",
+          "line": 0.5,
+          "odds": -265,
           "player_name": "Chandler Simpson",
           "reason": "hits has not cleared 70%",
           "selection": "Over",
@@ -121,7 +120,7 @@
         {
           "id": "pp_a94d5ac09fed2b6fadc3_season",
           "line": 1.5,
-          "odds": -126,
+          "odds": -118,
           "player_name": "Chandler Simpson",
           "reason": "hits_runs_rbis has not cleared 70%",
           "selection": "Over",
@@ -130,7 +129,7 @@
         {
           "id": "pp_8681104bf51c937c2fad_season",
           "line": 0.5,
-          "odds": 303,
+          "odds": 312,
           "player_name": "Chandler Simpson",
           "reason": "stolen_bases has not cleared 70%",
           "selection": "Over",
@@ -153,8 +152,8 @@
       "note": "No MLB prop cleared the consensus publication gate.",
       "ok": true,
       "picks": [],
-      "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:fb5859e8b567730e",
-      "scored_count": 4076,
+      "ranking_epoch": "MLB:player_props_consensus_v2.0.0:published:b441c002ce01b726",
+      "scored_count": 4065,
       "sport": "MLB"
     },
     "nba_player_props": {
@@ -179,7 +178,7 @@
       "note": "No NBA prop cleared the consensus publication gate.",
       "ok": true,
       "picks": [],
-      "ranking_epoch": "NBA:player_props_consensus_v2.0.0:published:fb5859e8b567730e",
+      "ranking_epoch": "NBA:player_props_consensus_v2.0.0:published:b441c002ce01b726",
       "scored_count": 0,
       "sport": "NBA"
     },
@@ -205,10 +204,10 @@
       "note": "No WNBA prop cleared the consensus publication gate.",
       "ok": true,
       "picks": [],
-      "ranking_epoch": "WNBA:player_props_consensus_v2.0.0:published:fb5859e8b567730e",
+      "ranking_epoch": "WNBA:player_props_consensus_v2.0.0:published:b441c002ce01b726",
       "scored_count": 0,
       "sport": "WNBA"
     }
   },
-  "updatedAt": "2026-09-10T14:01:04.275601Z"
+  "updatedAt": "2026-09-10T18:23:41.531307Z"
 }
