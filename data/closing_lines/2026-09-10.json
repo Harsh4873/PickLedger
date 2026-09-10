@@ -1,0 +1,71 @@
+{
+  "date": "2026-09-10",
+  "rows": [
+    {
+      "capturedAt": "2026-09-10T23:22:05.546223Z",
+      "decimalOdds": 1.961538,
+      "marketIdentity": "market:b58cf082c41dea339e2671ec",
+      "matchup": "Pittsburgh Pirates @ Chicago White Sox",
+      "noVigProbability": 0.487997,
+      "oddsAmerican": -104,
+      "pick": "Pittsburgh Pirates ML (Pittsburgh Pirates @ Chicago White Sox)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-10T23:40Z"
+    },
+    {
+      "capturedAt": "2026-09-10T23:22:05.546223Z",
+      "decimalOdds": 1.487805,
+      "marketIdentity": "market:5923b61d2c20b48f32eb5d5a",
+      "matchup": "San Francisco 49ers @ Los Angeles Rams",
+      "noVigProbability": 0.644729,
+      "oddsAmerican": -205,
+      "pick": "Los Angeles Rams ML (San Francisco 49ers @ Los Angeles Rams)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "NFL",
+      "startTime": "2026-09-11T00:35Z"
+    },
+    {
+      "capturedAt": "2026-09-10T23:22:05.546223Z",
+      "decimalOdds": 1.869565,
+      "marketIdentity": "market:376112ea614e91aa5917dd79",
+      "matchup": "Pittsburgh Pirates @ Chicago White Sox",
+      "noVigProbability": 0.5,
+      "oddsAmerican": -115,
+      "pick": "Chicago White Sox F5 ML",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-10T23:40:00Z"
+    },
+    {
+      "capturedAt": "2026-09-10T23:22:05.546223Z",
+      "decimalOdds": 1.689655,
+      "marketIdentity": "market:da545e31cd7c3eae050ad184",
+      "matchup": "Pittsburgh Pirates @ Chicago White Sox",
+      "noVigProbability": 0.558797,
+      "oddsAmerican": -145,
+      "pick": "Under 4.5 F5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-10T23:40:00Z"
+    },
+    {
+      "capturedAt": "2026-09-10T23:22:05.546223Z",
+      "decimalOdds": 1.869565,
+      "marketIdentity": "market:c44a813794d26e211330a538",
+      "matchup": "",
+      "noVigProbability": 0.512003,
+      "oddsAmerican": -115,
+      "pick": "White Sox ML (Pirates vs White Sox)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-10T23:40:00Z"
+    }
+  ],
+  "updatedAt": "2026-09-10T23:22:05.550306Z"
+}
