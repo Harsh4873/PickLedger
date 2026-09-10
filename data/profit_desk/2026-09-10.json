@@ -152,6 +152,14 @@
         "value_insufficient_source_samples"
       ],
       "canonicalGame": "2026-09-10:mlb:atlanta braves|tampa bay rays",
+      "closing": {
+        "capturedAt": "2026-09-10T15:46:19.234266Z",
+        "clv": 0.0,
+        "decimalOdds": 1.877193,
+        "noVigProbability": 0.509817,
+        "oddsAmerican": -114,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-10",
       "decimalOdds": 1.877193,
@@ -273,7 +281,7 @@
         "updatedAt": "2026-09-10T15:46:19.234266Z"
       },
       "rawModelProbabilityIgnored": 0.567,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -608,7 +616,7 @@
         "updatedAt": "2026-09-10T13:28:06.122154Z"
       },
       "rawModelProbabilityIgnored": 0.574,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -731,7 +739,7 @@
   "date": "2026-09-10",
   "engineVersion": "profit_desk_v2_live",
   "firstLiveDate": "2026-07-11",
-  "generatedAt": "2026-09-10T19:01:33.094552Z",
+  "generatedAt": "2026-09-10T19:17:09.105417Z",
   "notices": [
     "Qualified picks carry real flat stakes: EDGE 1.0u, VALUE 0.5u; everything else stays 0u.",
     "The market price is the baseline; historical residual alpha is shrunk and uncertainty-adjusted.",
