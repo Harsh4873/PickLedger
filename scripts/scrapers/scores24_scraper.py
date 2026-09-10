@@ -310,11 +310,16 @@ def fetch_daily_matchups(
     """
     config = config or SPORT_CONFIG[sport]
     url = _espn_scoreboard_url(config, date_iso)
-    client = session or requests.Session()
     matchups: dict[tuple[str, str], dict[str, str]] = {}
     espn_resolved = False
     try:
-        payload = fetch_scoreboard_json(url, session=client)
+        # Pass through an injected session (tests/mocks). When none is given,
+        # leave session unset so fetch_scoreboard_json can use curl_cffi after
+        # ESPN 403s plain requests from datacenter IPs.
+        if session is None:
+            payload = fetch_scoreboard_json(url)
+        else:
+            payload = fetch_scoreboard_json(url, session=session)
         espn_resolved = True
     except (requests.RequestException, ValueError):
         payload = {}
