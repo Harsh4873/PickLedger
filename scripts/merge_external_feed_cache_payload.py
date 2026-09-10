@@ -41,6 +41,8 @@ EXTERNAL_FEED_MODEL_KEYS = {
     "forebet_mls",
     "forebet_mlb",
     "forebet_wnba",
+    "forebet_cfb",
+    "forebet_nfl",
     "tennistonic_tennis",
     "scores24_tennis",
 }

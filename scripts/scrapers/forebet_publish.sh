@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Publish Forebet MLB/WNBA/MLS feeds from a non-GitHub-Actions IP.
+# Publish Forebet MLB/WNBA/MLS/CFB/NFL feeds from a non-GitHub-Actions IP.
 # GitHub-hosted runners get Cloudflare-challenged on Forebet listings;
-# local (and Cursor Automations) IPs usually do not — same pattern as Scores24.
+# local IPs usually do not — same pattern as Scores24.
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -23,7 +23,7 @@ if [[ -z "${GH_BIN}" ]]; then
 fi
 
 DATE_ISO="${FOREBET_DATE:-$(TZ=America/Chicago date +%F)}"
-PUBLISH_FEEDS="${FOREBET_PUBLISH_FEEDS:-forebet_mlb,forebet_wnba,forebet_mls}"
+PUBLISH_FEEDS="${FOREBET_PUBLISH_FEEDS:-forebet_mlb,forebet_wnba,forebet_mls,forebet_cfb,forebet_nfl}"
 FEED_COOLDOWN="${FOREBET_PUBLISH_FEED_COOLDOWN_SECONDS:-5}"
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -83,11 +83,18 @@ for raw_feed_key in "${FEED_KEYS[@]}"; do
     sleep "${FEED_COOLDOWN}"
   fi
   echo "Refreshing ${feed_key} for ${DATE_ISO}."
-  "${PYTHON_BIN}" "${TEMP_REPO}/scripts/refresh_external_feeds.py" \
+  if ! "${PYTHON_BIN}" "${TEMP_REPO}/scripts/refresh_external_feeds.py" \
     --date "${DATE_ISO}" \
     --feeds "${feed_key}" \
-    --sports "mlb,wnba" \
-    --skip-firestore
+    --sports "mlb,wnba,mls,cfb,nfl" \
+    --skip-firestore; then
+    case "${feed_key}" in
+      forebet_cfb|forebet_nfl)
+        echo "Optional ${feed_key} failed; publishing diagnostics with the other feeds." >&2
+        ;;
+      *) exit 1 ;;
+    esac
+  fi
   feed_index=$((feed_index + 1))
 done
 
@@ -112,7 +119,7 @@ required = tuple(
     feed.strip()
     for feed in os.environ.get(
         "PUBLISH_FEEDS",
-        "forebet_mlb,forebet_wnba,forebet_mls",
+        "forebet_mlb,forebet_wnba,forebet_mls,forebet_cfb,forebet_nfl",
     ).split(",")
     if feed.strip()
 )
@@ -129,6 +136,9 @@ for key in required:
     blocked = int(meta.get("blockedUrls") or 0)
     bucket_date = str(bucket.get("date") or meta.get("date") or "").strip()
     error = str(bucket.get("error") or "")
+    if key in {"forebet_cfb", "forebet_nfl"} and bucket.get("ok") is not True:
+        print(f"Optional {key}: {error or 'no successful refresh'}", file=sys.stderr)
+        continue
     if bucket.get("ok") is not True:
         reason = error or f"missingMatchups={missing!r} blockedUrls={blocked}"
         failures.append(f"{key}: {reason}")

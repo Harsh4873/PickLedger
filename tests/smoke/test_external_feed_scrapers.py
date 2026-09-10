@@ -2922,3 +2922,37 @@ def test_local_scores24_publisher_registers_separate_models():
     assert "steps.commit-feeds.outputs.deployable == 'true'" in workflow
     assert 'cron: "10,40 14 * * *"' in workflow
     assert 'cron: "10 20 * * *"' in workflow
+
+
+def test_sportsgambler_football_short_names_resolve_from_full_team_slugs(monkeypatch):
+    module = _load_module('sportsgambler_football_short_names_test', ROOT / 'scripts/scrapers/sportsgambler_scraper.py')
+    for sport, short_names, slug, official in (
+        ('nfl', '49ers vs Rams', 'san-francisco-49ers-vs-los-angeles-rams', 'San Francisco 49ers @ Los Angeles Rams'),
+        ('cfb', 'Rutgers vs Boston College', 'rutgers-scarlet-knights-vs-boston-college-eagles', 'Rutgers Scarlet Knights @ Boston College Eagles'),
+    ):
+        path = 'nfl' if sport == 'nfl' else 'ncaaf'
+        detail_url = f'https://www.sportsgambler.com/betting-tips/{path}/{slug}-prediction-odds-2026-09-11/'
+        off_slate_url = f'https://www.sportsgambler.com/betting-tips/{path}/unlisted-team-vs-another-team-prediction-odds-2026-09-11/'
+        listing = {'itemListElement': [
+            {'item': {'@type': 'SportsEvent', 'name': short_names, 'url': detail_url, 'startDate': '2026-09-11T23:00:00Z'}},
+            {'item': {'@type': 'SportsEvent', 'name': short_names, 'url': off_slate_url, 'startDate': '2026-09-11T23:00:00Z'}},
+        ]}
+        requested = []
+
+        def fake_get(url, **kwargs):
+            from types import SimpleNamespace
+            requested.append(url)
+            if url == detail_url:
+                html = '<div class="tpbot_container"><a class="tpbot_tip"><span>Over 48.5 Points @ -110</span></a></div>'
+            else:
+                html = f'<script type="application/ld+json">{json.dumps(listing)}</script>'
+            return SimpleNamespace(status_code=200, text=html)
+
+        monkeypatch.setattr(module.requests, 'get', fake_get)
+        runner = module.scrape_nfl if sport == 'nfl' else module.scrape_cfb
+        rows = runner(date(2026, 9, 11), [official])
+        assert len(rows) == 1
+        assert rows[0]['matchup'] == official
+        assert rows[0]['tip'] == 'Over 48.5 Points'
+        assert rows[0]['odds'] == '-110'
+        assert off_slate_url not in requested

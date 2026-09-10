@@ -277,6 +277,7 @@ def _scoreboard_event(*, state="pre", odds=None):
 
 def _mock_scoreboard(monkeypatch, payload):
     from CFBPredictionModel import cfb_core
+    from scripts.scrapers import espn_scoreboard
 
     class Response:
         def raise_for_status(self):
@@ -286,6 +287,8 @@ def _mock_scoreboard(monkeypatch, payload):
             return payload
 
     monkeypatch.setattr(cfb_core.requests, "get", lambda *_args, **_kwargs: Response())
+    monkeypatch.setattr(espn_scoreboard, "_fetch_via_curl_cffi", lambda _url: None)
+    monkeypatch.setattr(espn_scoreboard.time, "sleep", lambda _seconds: None)
 
 
 def test_cfb_scoreboard_preserves_unpriced_pregame_games_and_explains_started_games(monkeypatch):

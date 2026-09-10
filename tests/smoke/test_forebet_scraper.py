@@ -264,3 +264,96 @@ def test_forebet_feeds_are_registered_across_the_pipeline():
 
     workflow = (ROOT / ".github" / "workflows" / "external-feed-refresh.yml").read_text(encoding="utf-8")
     assert "forebet_mls,forebet_mlb,forebet_wnba" in workflow
+
+
+def test_football_feeds_match_official_names_and_keep_missing_odds(monkeypatch):
+    module = _module()
+    for sport, home, away, official_home, official_away in (
+        ('nfl', 'Los Angeles Rams', 'San Francisco 49ers', 'Los Angeles Rams', 'San Francisco 49ers'),
+        ('cfb', 'Miami', 'Florida A&M', 'Miami Hurricanes', 'Florida A&M Rattlers'),
+    ):
+        slate = [{'home': official_home, 'away': official_away, 'start_time': '2026-09-11T00:20Z'}]
+        monkeypatch.setattr(module, 'fetch_daily_matchups', lambda *args, **kwargs: (slate, True))
+        html = ''.join([
+            _forebet_row(home, away, '2', '40 60', ('-110', '+100'), kickoff='04/09/2026 02:20', two_way=True),
+            _forebet_row(home, away, 'X', '30 40 30', ('+100', '+200', '+300'), kickoff='11/09/2026 02:20'),
+            _forebet_row(home, away, '1', '56 44', ('-', '-'), kickoff='11/09/2026 02:20', two_way=True),
+            _forebet_row(away, home, '2', '40 60', ('-110', '+100'), kickoff='11/09/2026 02:20', two_way=True),
+        ])
+        result = module.scrape_forebet(sport, '2026-09-10', html=html)
+        assert result['ok'] is True
+        assert len(result['picks']) == 1
+        pick = result['picks'][0]
+        assert pick['tip'] == f'{official_home} ML'
+        assert pick['sport'] == sport.upper()
+        assert pick['source'] == f'Forebet{sport.upper()}'
+        assert pick['probability'] == 0.56
+        assert pick['odds'] is None
+        assert pick['date'] == '2026-09-10'
+        assert pick['start_time'] == slate[0]['start_time']
+        assert result['meta']['unpublishedMatchups'] == []
+
+
+def test_forebet_missing_kickoff_cannot_match_a_dated_game(monkeypatch):
+    module = _module()
+    slate = [{'home': 'Los Angeles Rams', 'away': 'San Francisco 49ers', 'start_time': '2026-09-11T00:20Z'}]
+    monkeypatch.setattr(module, 'fetch_daily_matchups', lambda *args, **kwargs: (slate, True))
+    html = _forebet_row('Los Angeles Rams', 'San Francisco 49ers', '1', '56 44', ('-', '-'), kickoff='', two_way=True)
+    result = module.scrape_forebet('nfl', '2026-09-10', html=html)
+    assert result['picks'] == []
+    assert result['meta']['unpublishedMatchups'] == ['San Francisco 49ers @ Los Angeles Rams']
+
+
+def test_forebet_retries_challenged_html_and_reports_persistent_block(monkeypatch):
+    from types import SimpleNamespace
+    module = _module()
+    blocked = SimpleNamespace(status_code=403, text='Just a moment: Cloudflare')
+    monkeypatch.setattr(module.requests, 'get', lambda *args, **kwargs: blocked)
+    calls = []
+    delivered_html = FIXTURE_HTML + '<script src="https://static.cloudflareinsights.com/beacon.min.js"></script><script src="/cdn-cgi/challenge-platform/scripts/jsd/main.js"></script>'
+
+    def retry(url, **kwargs):
+        calls.append((url, kwargs))
+        return SimpleNamespace(status_code=200, text=delivered_html)
+
+    monkeypatch.setattr(module.browser_requests, 'get', retry)
+    url = module.SPORT_CONFIG['nfl']['listing_url']
+    assert module._fetch_listing_html(url) == (delivered_html, '')
+    assert calls[0][0] == url
+    assert calls[0][1]['impersonate'] == 'chrome'
+    monkeypatch.setattr(module.browser_requests, 'get', lambda *args, **kwargs: blocked)
+    html, error = module._fetch_listing_html(url)
+    assert not html
+    assert 'blocked' in error
+
+
+def test_football_feeds_merge_as_research_without_hiding_model_pass(tmp_path):
+    import json
+    refresh = _load_module('refresh_forebet_football_test', ROOT / 'scripts' / 'refresh_external_feeds.py')
+    merge = _load_module('merge_forebet_football_test', ROOT / 'scripts' / 'merge_external_feed_cache_payload.py')
+    date = '2026-09-10'
+    models = {}
+    for sport in ('cfb', 'nfl'):
+        key = f'forebet_{sport}'
+        assert key in refresh.FEED_RUNNERS
+        assert key in merge.EXTERNAL_FEED_MODEL_KEYS
+        models[key] = {'ok': True, 'date': date, 'picks': [
+            {'sport': sport.upper(), 'pick': 'Home ML', 'decision': 'BET', 'units': 1},
+        ]}
+        models[sport] = {'ok': True, 'shadow_mode': False, 'picks': [
+            {'sport': sport.upper(), 'pick': 'Home ML', 'decision': 'PASS', 'units': 0},
+        ]}
+    (tmp_path / f'{date}.json').write_text(json.dumps({'date': date, 'models': models}))
+    result = merge.merge_payload({'date': date, 'models': models}, tmp_path)
+    for sport in ('cfb', 'nfl'):
+        research = result['models'][f'forebet_{sport}']['picks'][0]
+        assert research['decision'] == 'PASS'
+        assert research['units'] == 0
+        assert research['scraped_tip_demoted'] is True
+        assert result['models'][sport]['shadow_mode'] is False
+        assert len(result['models'][sport]['picks']) == 1
+    workflow = (ROOT / '.github/workflows/external-feed-refresh.yml').read_text()
+    publisher = (ROOT / 'scripts/scrapers/forebet_publish.sh').read_text()
+    for key in ('forebet_cfb', 'forebet_nfl'):
+        assert key in workflow
+        assert key in publisher

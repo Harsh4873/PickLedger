@@ -10,7 +10,7 @@ Each row decodes as:
   .haodd  American odds [home, draw, away] ("no"/"-" when unposted)
   .lmin_td match status (minute/FT/Postp.)  .lscr_td live/final score
 
-Two-way sports (baseball/basketball) use the same layout with a `bsk`-classed
+Two-way sports (baseball/basketball/American football) use a `bsk`-classed
 probability cell holding just "56 44" = P(home/away), signs limited to 1/2,
 and a two-entry odds list.
 
@@ -33,6 +33,7 @@ from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
+from curl_cffi import requests as browser_requests
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
@@ -80,6 +81,25 @@ SPORT_CONFIG = {
         "source": "ForebetWNBA",
         "label": "WNBA",
         "cache_keys": ("wnba",),
+        "market": "two_way",
+    },
+    "cfb": {
+        "espn_sport": "football",
+        "espn_league": "college-football",
+        "espn_query": "groups=80&limit=200",
+        "listing_url": f"{BASE_URL}/en/american-football/usa/ncaa",
+        "source": "ForebetCFB",
+        "label": "CFB",
+        "cache_keys": ("cfb",),
+        "market": "two_way",
+    },
+    "nfl": {
+        "espn_sport": "football",
+        "espn_league": "nfl",
+        "listing_url": f"{BASE_URL}/en/american-football/usa/nfl",
+        "source": "ForebetNFL",
+        "label": "NFL",
+        "cache_keys": ("nfl",),
         "market": "two_way",
     },
 }
@@ -174,14 +194,25 @@ def parse_forebet_rows(html: str) -> list[dict[str, Any]]:
     return rows
 
 
+def _listing_is_blocked(html: str) -> bool:
+    # Successful listings include Cloudflare analytics and challenge-platform
+    # scripts too. Only visible challenge text signals a blocked page.
+    visible = BeautifulSoup(html, "html.parser").get_text(" ", strip=True).lower()
+    return any(signal in visible for signal in CLOUDFLARE_SIGNALS)
+
+
 def _fetch_listing_html(url: str) -> tuple[str, str]:
-    """Return (html, error). Forebet is server-rendered; a plain fetch suffices."""
+    """Return (html, error), retrying challenged listings with browser TLS."""
     try:
         response = requests.get(url, headers=HEADERS, timeout=30)
     except requests.RequestException as exc:
         return "", f"listing fetch failed: {exc}"
-    lowered = response.text.lower()
-    if any(signal in lowered for signal in CLOUDFLARE_SIGNALS):
+    if response.status_code == 403 or _listing_is_blocked(response.text):
+        try:
+            response = browser_requests.get(url, headers=HEADERS, impersonate="chrome", timeout=30)
+        except Exception as exc:
+            return "", f"listing browser-TLS retry failed: {exc}"
+    if _listing_is_blocked(response.text):
         return "", "listing fetch blocked by Cloudflare"
     if response.status_code != 200:
         return "", f"listing fetch returned HTTP {response.status_code}"
@@ -211,8 +242,10 @@ def _match_row(matchup: dict[str, str], rows: list[dict[str, Any]]) -> dict[str,
         return None
     slate_start = _parse_slate_start(matchup.get("start_time"))
     timed = [row for row in candidates if row["kickoff_dt"] is not None]
-    if slate_start is None or not timed:
+    if slate_start is None:
         return candidates[0]
+    if not timed:
+        return None
     # League pages list weeks of history and series opponents repeat daily;
     # only the row nearest the official start (within the window) is the game.
     best = min(timed, key=lambda row: abs((row["kickoff_dt"] - slate_start).total_seconds()))
@@ -315,6 +348,8 @@ def scrape_forebet(sport: str, date_iso: str, *, html: str | None = None) -> dic
             }
 
     rows = parse_forebet_rows(html)
+    if config["market"] == "two_way":
+        rows = [row for row in rows if row["two_way"]]
     picks: list[dict[str, Any]] = []
     unpublished: list[str] = []
     for matchup in expected:
@@ -357,8 +392,16 @@ def run_forebet_wnba(date_iso: str, _sports: list[str] | None = None) -> dict[st
     return scrape_forebet("wnba", date_iso)
 
 
+def run_forebet_cfb(date_iso: str, _sports: list[str] | None = None) -> dict[str, Any]:
+    return scrape_forebet("cfb", date_iso)
+
+
+def run_forebet_nfl(date_iso: str, _sports: list[str] | None = None) -> dict[str, Any]:
+    return scrape_forebet("nfl", date_iso)
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Scrape Forebet 1X2 predictions by official matchup.")
+    parser = argparse.ArgumentParser(description="Scrape Forebet predictions by official matchup.")
     parser.add_argument("--sport", default="mls", choices=sorted(SPORT_CONFIG))
     parser.add_argument("--date", default=datetime.now().strftime("%Y-%m-%d"))
     parser.add_argument("--html-file", default="", help="Parse a saved listing page instead of fetching.")

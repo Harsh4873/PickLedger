@@ -349,3 +349,23 @@ test('CFB health distinguishes an empty official slate from excluded or incomple
   const incomplete = await publishCoverage({ official_games: 1, pregame_games: 0, incomplete_games: 1 });
   assert.match(incomplete?.detail || '', /slate details are incomplete/);
 });
+
+test('all active football scraper sources publish research rows with league labels', { concurrency: false }, async () => {
+  const date = '2026-09-10';
+  const models = Object.fromEntries(['sportytrader', 'sportsgambler', 'scores24', 'forebet'].flatMap(provider =>
+    ['cfb', 'nfl'].map(sport => [`${provider}_${sport}`, { ok: true, date, picks: [
+      { id: `${provider}_${sport}`, sport: sport.toUpperCase(), pick: 'Home ML', decision: 'PASS', units: 0 },
+    ] }]),
+  ));
+  installFetch(new Map([['./data/model_cache/latest.json', { date, models }]]));
+  await loadAllData({ includeHistory: false });
+  assert.equal(getTeamPicks().filter(pick => pick.date === date).length, 0);
+  assert.equal(getResearchPicks(date).length, 8);
+  const statuses = new Map(getSourceStatuses(date).map(status => [status.key, status]));
+  for (const key of Object.keys(models)) {
+    assert.equal(statuses.get(key)?.researchCount, 1);
+    assert.equal(statuses.get(key)?.pickCount, 0);
+  }
+  assert.equal(getResearchPicks(date).find(pick => pick.id === 'forebet_cfb')?.source, 'ForebetCFB');
+  assert.equal(getResearchPicks(date).find(pick => pick.id === 'forebet_nfl')?.source, 'ForebetNFL');
+});

@@ -20,7 +20,7 @@ on:
       feeds:
         description: "Comma-separated GitHub-safe feeds (Scores24 is local-only)"
         required: false
-        default: "sportytrader,sportsgambler,forebet_mls,forebet_mlb,forebet_wnba,tennistonic_tennis"
+        default: "sportytrader,sportsgambler,forebet_mls,forebet_mlb,forebet_wnba,tennistonic_tennis,forebet_cfb,forebet_nfl"
 
 permissions:
   contents: write
@@ -61,7 +61,7 @@ jobs:
       - name: Select GitHub-safe feeds
         id: feeds
         env:
-          REQUESTED_FEEDS: ${{ github.event.inputs.feeds || 'sportytrader,sportsgambler,forebet_mls,forebet_mlb,forebet_wnba,tennistonic_tennis' }}
+          REQUESTED_FEEDS: ${{ github.event.inputs.feeds || 'sportytrader,sportsgambler,forebet_mls,forebet_mlb,forebet_wnba,tennistonic_tennis,forebet_cfb,forebet_nfl' }}
         run: |
           set -euo pipefail
           FEEDS=$(printf '%s' "$REQUESTED_FEEDS" | tr '[:upper:]' '[:lower:]' | tr -d '[:space:]')

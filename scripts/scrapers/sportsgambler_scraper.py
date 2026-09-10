@@ -161,6 +161,17 @@ def scrape_basketball(
                 if href_contains and href_contains not in detail_url:
                     continue
                 matchup_key = _matchup_key(matchup)
+                if matchup_key not in expected and href_contains in {CFB_DETAIL_PATH, NFL_DETAIL_PATH}:
+                    # Football cards abbreviate names ("49ers vs Rams",
+                    # "Rutgers vs Boston College"); detail slugs retain the
+                    # full teams. Require an exact official pair from that
+                    # slug instead of accepting ambiguous mascot matches.
+                    slug = re.search(r"/(?:nfl|ncaaf)/(.+?)-vs-(.+?)-prediction-", detail_url)
+                    if slug:
+                        full_matchup = " vs ".join(team.replace("-", " ") for team in slug.groups())
+                        matchup_key = _matchup_key(full_matchup)
+                        if matchup_key in expected:
+                            matchup = expected[matchup_key]
                 if matchup_key not in expected:
                     continue
                 seen.add(detail_url)

@@ -22,8 +22,10 @@ from scripts.market_odds import apply_market_odds_to_payload  # noqa: E402
 from scripts.merge_external_feed_cache_payload import merge_payload  # noqa: E402
 from scripts.pick_calibration import apply_calibration_to_payload  # noqa: E402
 from scripts.scrapers.forebet_scraper import (  # noqa: E402
+    run_forebet_cfb,
     run_forebet_mlb,
     run_forebet_mls,
+    run_forebet_nfl,
     run_forebet_wnba,
 )
 from scripts.scrapers.scores24_scraper import (  # noqa: E402
@@ -52,6 +54,8 @@ FEED_RUNNERS: dict[str, Callable[[str, list[str]], dict[str, Any]]] = {
     "forebet_mls": run_forebet_mls,
     "forebet_mlb": run_forebet_mlb,
     "forebet_wnba": run_forebet_wnba,
+    "forebet_cfb": run_forebet_cfb,
+    "forebet_nfl": run_forebet_nfl,
     "tennistonic_tennis": run_tennistonic_tennis,
     "scores24_tennis": run_scores24_tennis,
 }

@@ -444,6 +444,8 @@ const SOURCE_LABELS: Record<string, string> = {
   forebet_mls: 'ForebetMLS',
   forebet_mlb: 'ForebetMLB',
   forebet_wnba: 'ForebetWNBA',
+  forebet_cfb: 'ForebetCFB',
+  forebet_nfl: 'ForebetNFL',
   scores24_tennis: 'Scores24Tennis',
   tennistonic_tennis: 'TennisTonic',
   tennis: 'Tennis Model',
