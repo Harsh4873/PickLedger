@@ -51,9 +51,10 @@ REQUIRED_SCORES24_FEED_KEYS = {
     "scores24_mlb",
     "scores24_wnba",
 }
-# scores24_cfb is scraped on the same local Scores24 run as MLB+WNBA but is
-# not a freshness/upcheck requirement. Incomplete or blocked CFB must not
-# fail the site the way a missing MLB/WNBA bucket does (soft-fail like tennis).
+# scores24_cfb and scores24_nfl are scraped on the same local Scores24 run as
+# MLB+WNBA but are not freshness/upcheck requirements. Incomplete or blocked
+# CFB/NFL must not fail the site the way a missing MLB/WNBA bucket does
+# (soft-fail like tennis).
 TEAM_VISIBLE_DECISIONS = {"BET", "LEAN"}
 PLAYER_VISIBLE_DECISIONS = {"BET", "LEAN", "PASS"}
 LEGACY_PUBLIC_PLAYER_PROP_SUFFIXES = (

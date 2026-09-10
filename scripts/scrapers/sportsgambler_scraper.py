@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""SportsGambler scraper for NBA, NBA Summer, WNBA, MLB, FIFA, and CFB picks."""
+"""SportsGambler scraper for NBA, NBA Summer, WNBA, MLB, FIFA, CFB, and NFL picks."""
 from __future__ import annotations
 import argparse, json, re, sys, unicodedata
 from datetime import date, datetime
@@ -30,6 +30,15 @@ CFB_URLS = (
     "https://www.sportsgambler.com/betting-tips/american-football/",
 )
 CFB_DETAIL_PATH = "/ncaaf/"
+# Dedicated NFL listing. Detail pages live under `/betting-tips/nfl/...` —
+# that path is the strict league filter when a mixed American-football listing
+# is reused, so NCAAF cards cannot leak into the NFL bucket.
+NFL_URLS = (
+    "https://www.sportsgambler.com/betting-tips/american-football/nfl-predictions/",
+    "https://www.sportsgambler.com/betting-tips/nfl/",
+    "https://www.sportsgambler.com/betting-tips/american-football/",
+)
+NFL_DETAIL_PATH = "/nfl/"
 BLOCK_SIGNALS = (
     "attention required",
     "just a moment",
@@ -225,6 +234,17 @@ def scrape_cfb(target: date | None, expected_matchups: list[str] | None = None) 
         require_complete_listings=False,
     )
 
+def scrape_nfl(target: date | None, expected_matchups: list[str] | None = None) -> list[dict]:
+    """NFL tip cards from the dedicated NFL listing, never NCAAF."""
+    return scrape_basketball(
+        target,
+        NFL_URLS,
+        "NFL",
+        expected_matchups,
+        href_contains=NFL_DETAIL_PATH,
+        require_complete_listings=False,
+    )
+
 def scrape_mlb(target: date | None, expected_matchups: list[str] | None = None) -> list[dict]:
     expected = _expected_matchup_whitelist(expected_matchups)
     html = requests.get(MLB_URL, headers=HEADERS, timeout=30).text
@@ -283,10 +303,12 @@ def main() -> None:
             rows = scrape_fifa_world_cup(target, expected_matchups)
         elif sport in ("cfb", "ncaaf", "college_football", "ncaa"):
             rows = scrape_cfb(target, expected_matchups)
+        elif sport == "nfl":
+            rows = scrape_nfl(target, expected_matchups)
         else:
             raise ValueError(
                 "supported sports: nba/basketball, nba_summer, wnba, mlb/baseball, "
-                "fifa_world_cup/soccer, cfb/ncaaf/college_football"
+                "fifa_world_cup/soccer, cfb/ncaaf/college_football, nfl"
             )
     except Exception as exc:
         print(f"Error: {exc}", file=sys.stderr)

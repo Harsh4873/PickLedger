@@ -131,6 +131,12 @@ const activeFilters = new Set<string>();
 // tag silently rewrite the leaderboard.
 const rankingSportFilters = new Set<string>();
 const rankingSourceFilters = new Set<string>();
+type HomeDecisionFilter = 'ALL' | 'BET' | 'LEAN' | 'PASS';
+type RankingDecisionFilter = 'STAKED' | 'BET' | 'LEAN' | 'PASS';
+const HOME_DECISION_FILTERS: HomeDecisionFilter[] = ['ALL', 'BET', 'LEAN', 'PASS'];
+const RANKING_DECISION_FILTERS: RankingDecisionFilter[] = ['STAKED', 'BET', 'LEAN', 'PASS'];
+let homeDecisionFilter: HomeDecisionFilter = 'ALL';
+let rankingDecisionFilter: RankingDecisionFilter = 'STAKED';
 let activePickMode: PickMode = 'team';
 let homeMode: ResultMode = 'pending';
 let dailyView: DailyView = 'featured';
@@ -443,7 +449,7 @@ function isUnsupportedPendingPick(pick: Pick): boolean {
 }
 
 function isOpenPick(pick: Pick): boolean {
-  return pick.result === 'pending' && !isUnsupportedPendingPick(pick) && isPublishedDailyPick(pick);
+  return pick.result === 'pending' && !isUnsupportedPendingPick(pick) && isPostedDecision(pick);
 }
 
 function isTeamRankingWindowPick(pick: Pick): boolean {
@@ -515,8 +521,35 @@ function matchesRankingSources(pick: Pick): boolean {
 }
 
 function rankingScopedPicks(comparablePicks: Pick[]): Pick[] {
-  if (!rankingSportFilters.size && !rankingSourceFilters.size) return comparablePicks;
-  return comparablePicks.filter(pick => matchesRankingSports(pick) && matchesRankingSources(pick));
+  return comparablePicks.filter(pick => (
+    matchesRankingSports(pick) && matchesRankingSources(pick) && matchesRankingDecision(pick)
+  ));
+}
+
+function matchesRankingDecision(pick: Pick): boolean {
+  const decision = dailyDecision(pick);
+  if (rankingDecisionFilter === 'STAKED') return decision === 'BET' || decision === 'LEAN';
+  return decision === rankingDecisionFilter;
+}
+
+function rankingDecisionCounts(pool: Pick[]): Record<RankingDecisionFilter, number> {
+  let bet = 0;
+  let lean = 0;
+  let pass = 0;
+  pool.forEach(pick => {
+    const decision = dailyDecision(pick);
+    if (decision === 'BET') bet += 1;
+    else if (decision === 'LEAN') lean += 1;
+    else if (decision === 'PASS') pass += 1;
+  });
+  return { STAKED: bet + lean, BET: bet, LEAN: lean, PASS: pass };
+}
+
+function setRankingDecisionFilter(value: string): void {
+  if (value === 'STAKED' || value === 'BET' || value === 'LEAN' || value === 'PASS') {
+    rankingDecisionFilter = value;
+    renderRankings();
+  }
 }
 
 // Faceted counts: each row is counted with the *other* row's selection applied
@@ -824,13 +857,100 @@ function filteredResearchPicks(): Pick[] {
   ));
 }
 
-function boardPicks(): Pick[] {
+function datedModePicks(): Pick[] {
   return filteredPicks().filter(pick => {
     if (pickDateKey(pick) !== selectedDate) return false;
     if (homeMode === 'pending') return isOpenPick(pick);
     if (homeMode === 'settled') return pick.result !== 'pending';
     return true;
   });
+}
+
+function matchesHomeDecision(pick: Pick): boolean {
+  if (homeDecisionFilter === 'ALL') return isPostedDecision(pick);
+  return dailyDecision(pick) === homeDecisionFilter;
+}
+
+function boardPicks(): Pick[] {
+  return datedModePicks().filter(matchesHomeDecision);
+}
+
+function setHomeDecisionFilter(value: string): void {
+  if (value === 'ALL' || value === 'BET' || value === 'LEAN' || value === 'PASS') {
+    homeDecisionFilter = value;
+    renderHome();
+  }
+}
+
+function homeDecisionCounts(picks: Pick[]): Record<HomeDecisionFilter, number> {
+  let bet = 0;
+  let lean = 0;
+  let pass = 0;
+  picks.forEach(pick => {
+    const decision = dailyDecision(pick);
+    if (decision === 'BET') bet += 1;
+    else if (decision === 'LEAN') lean += 1;
+    else if (decision === 'PASS') pass += 1;
+  });
+  return { ALL: picks.length, BET: bet, LEAN: lean, PASS: pass };
+}
+
+function renderDecisionFilters(datedPicks: Pick[]): void {
+  const container = document.getElementById('decision-filter-bar');
+  if (!container) return;
+  const counts = homeDecisionCounts(datedPicks);
+  container.innerHTML = HOME_DECISION_FILTERS.map(filter => (
+    `<button type="button" class="filter-btn ${homeDecisionFilter === filter ? 'active' : ''}" data-home-decision="${escapeHtml(filter)}" aria-pressed="${homeDecisionFilter === filter}" onclick="setHomeDecisionFilter('${filter}')">${filter}<span class="board-filter-count">${counts[filter]}</span></button>`
+  )).join('');
+}
+
+function groupBoardGames(picks: Pick[]): Array<[string, Pick[]]> {
+  const groups = new Map<string, Pick[]>();
+  picks.forEach(pick => groups.set(gameKey(pick), [...(groups.get(gameKey(pick)) || []), pick]));
+  return [...groups.entries()].sort((left, right) => compareGameStartAsc(left[1], right[1]));
+}
+
+function renderSportFeedHtml(picks: Pick[], itemLabel: string): string {
+  const bySport = new Map<string, Array<[string, Pick[]]>>();
+  groupBoardGames(picks).forEach(entry => {
+    const sport = entry[1][0]?.sport || 'OTHER';
+    bySport.set(sport, [...(bySport.get(sport) || []), entry]);
+  });
+  return [...bySport.entries()]
+    .sort((left, right) => compareGameStartAsc(left[1][0]?.[1] || [], right[1][0]?.[1] || []))
+    .map(([sport, games]) => `
+    <section class="home-feed-section">
+      <div class="home-feed-section-head"><div><div class="home-feed-section-title">${escapeHtml(sport)}</div><div class="home-feed-section-meta">${games.reduce((sum, game) => sum + game[1].length, 0)} ${itemLabel} | ${games.length} matchups</div></div></div>
+      <div class="home-feed-grid">${games.map(([, gamePicks]) => renderGameCard(gamePicks)).join('')}</div>
+    </section>`).join('');
+}
+
+function homeDecisionSectionMeta(decision: string, count: number, itemLabel: string): string {
+  if (decision === 'PASS') return `${count} ${itemLabel} · 0u · labeled PASS`;
+  return `${count} ${itemLabel}`;
+}
+
+function renderDecisionBoardHtml(picks: Pick[], itemLabel: string): string {
+  const tiers: Array<'BET' | 'LEAN' | 'PASS'> = homeDecisionFilter === 'ALL'
+    ? (['BET', 'LEAN', 'PASS'] as const).filter(decision => picks.some(pick => dailyDecision(pick) === decision))
+    : homeDecisionFilter === 'BET' || homeDecisionFilter === 'LEAN' || homeDecisionFilter === 'PASS'
+      ? [homeDecisionFilter]
+      : [];
+  return tiers.map(decision => {
+    const sectionPicks = picks.filter(pick => dailyDecision(pick) === decision);
+    if (!sectionPicks.length) return '';
+    return `<section class="home-decision-board home-decision-${decision.toLowerCase()}" data-home-decision="${decision}">
+      <div class="home-decision-head">
+        <div>
+          <div class="home-decision-kicker">POSTED AS ${decision}</div>
+          <div class="home-decision-title">${decision}</div>
+          <div class="home-decision-meta">${escapeHtml(homeDecisionSectionMeta(decision, sectionPicks.length, itemLabel))}</div>
+        </div>
+        <div class="home-decision-count">${sectionPicks.length}</div>
+      </div>
+      ${renderSportFeedHtml(sectionPicks, itemLabel)}
+    </section>`;
+  }).join('');
 }
 
 function setRefreshStatus(message: string, state = ''): void {
@@ -978,12 +1098,14 @@ function renderHome(): void {
   renderFilters();
   renderSourceStatus();
   renderResearchBoard();
+  const datedPicks = datedModePicks();
+  renderDecisionFilters(datedPicks);
   const picks = boardPicks();
   const stats = statsFor(picks);
   const selectedAll = filteredPicks().filter(pick => pickDateKey(pick) === selectedDate);
+  const decisionCounts = homeDecisionCounts(datedPicks);
   const groups = new Map<string, Pick[]>();
   picks.forEach(pick => groups.set(gameKey(pick), [...(groups.get(gameKey(pick)) || []), pick]));
-  const sortedGames = [...groups.entries()].sort((left, right) => compareGameStartAsc(left[1], right[1]));
 
   const title = document.getElementById('home-title');
   const eyebrow = document.getElementById('home-eyebrow');
@@ -997,7 +1119,10 @@ function renderHome(): void {
     ? `${dateLabel(selectedDate, true)} Player Props`
     : `${dateLabel(selectedDate, true)} Picks`;
   const researchCount = filteredResearchPicks().filter(pick => pickDateKey(pick) === selectedDate).length;
-  if (sub) sub.textContent = `${selectedAll.length} ${activePickMode === 'player' ? 'player props' : 'tracked picks'} from ${new Set(selectedAll.map(sourceName)).size} sources${researchCount ? ` · ${researchCount} research forecasts below` : ''}. Updated automatically.`;
+  if (sub) {
+    const decisionSummary = `${decisionCounts.BET} BET · ${decisionCounts.LEAN} LEAN · ${decisionCounts.PASS} PASS`;
+    sub.textContent = `${selectedAll.length} ${activePickMode === 'player' ? 'player props' : 'tracked picks'} from ${new Set(selectedAll.map(sourceName)).size} sources · ${decisionSummary}${researchCount ? ` · ${researchCount} research forecasts below` : ''}. Updated automatically.`;
+  }
   if (triggerValue) triggerValue.textContent = dateLabel(selectedDate, true);
   if (triggerMeta) triggerMeta.textContent = selectedDate === centralDateKey() ? 'Today | CT' : `${selectedAll.length} picks`;
   document.querySelectorAll<HTMLElement>('[data-home-mode]').forEach(button => {
@@ -1031,22 +1156,13 @@ function renderHome(): void {
       ? `${researchCount} published forecasts are available in Research below. These sources have not qualified for the tracked picks board.`
       : selectedAll.length && homeMode === 'pending'
         ? 'The tracked picks for this date have finished. Open Results to see how they did.'
-        : 'No tracked picks match this selection. Check source status for missing updates, or choose another sport or date.';
-    feed.innerHTML = `<div class="pick-feed-empty"><div class="home-empty-kicker">${homeMode === 'pending' ? `OPEN ${itemLabel.toUpperCase()}` : homeMode === 'settled' ? 'RESULTS' : `ALL ${itemLabel.toUpperCase()}`} | ${escapeHtml(dateLabel(selectedDate).toUpperCase())}</div><div class="home-empty-title">No ${modeLabel} ${itemLabel} in this view</div><div class="home-empty-sub">${escapeHtml(explanation)}</div><div class="board-empty-actions">${selectedAll.length && homeMode === 'pending' ? '<button type="button" onclick="setHomeResultMode(\'settled\')">View results</button>' : ''}${activeFilters.size ? '<button type="button" onclick="clearBoardFilters()">Clear filters</button>' : ''}${researchCount ? '<a href="#research-board">View research</a>' : ''}</div></div>`;
+        : homeDecisionFilter !== 'ALL' && datedPicks.length
+          ? `No ${homeDecisionFilter} ${itemLabel} in this view. Choose ALL, BET, LEAN, or PASS above.`
+          : 'No tracked picks match this selection. Check source status for missing updates, or choose another sport or date.';
+    feed.innerHTML = `<div class="pick-feed-empty"><div class="home-empty-kicker">${homeMode === 'pending' ? `OPEN ${itemLabel.toUpperCase()}` : homeMode === 'settled' ? 'RESULTS' : `ALL ${itemLabel.toUpperCase()}`} | ${escapeHtml(dateLabel(selectedDate).toUpperCase())}</div><div class="home-empty-title">No ${modeLabel} ${itemLabel} in this view</div><div class="home-empty-sub">${escapeHtml(explanation)}</div><div class="board-empty-actions">${selectedAll.length && homeMode === 'pending' ? '<button type="button" onclick="setHomeResultMode(\'settled\')">View results</button>' : ''}${homeDecisionFilter !== 'ALL' ? '<button type="button" onclick="setHomeDecisionFilter(\'ALL\')">Show all decisions</button>' : ''}${activeFilters.size ? '<button type="button" onclick="clearBoardFilters()">Clear filters</button>' : ''}${researchCount ? '<a href="#research-board">View research</a>' : ''}</div></div>`;
     return;
   }
-  const bySport = new Map<string, Array<[string, Pick[]]>>();
-  sortedGames.forEach(entry => {
-    const sport = entry[1][0]?.sport || 'OTHER';
-    bySport.set(sport, [...(bySport.get(sport) || []), entry]);
-  });
-  feed.innerHTML = [...bySport.entries()]
-    .sort((left, right) => compareGameStartAsc(left[1][0]?.[1] || [], right[1][0]?.[1] || []))
-    .map(([sport, games]) => `
-    <section class="home-feed-section">
-      <div class="home-feed-section-head"><div><div class="home-feed-section-title">${escapeHtml(sport)}</div><div class="home-feed-section-meta">${games.reduce((sum, game) => sum + game[1].length, 0)} ${itemLabel} | ${games.length} matchups</div></div></div>
-      <div class="home-feed-grid">${games.map(([, gamePicks]) => renderGameCard(gamePicks)).join('')}</div>
-    </section>`).join('');
+  feed.innerHTML = renderDecisionBoardHtml(picks, itemLabel);
   bindPickCards(feed);
 }
 
@@ -1089,8 +1205,8 @@ function renderResearchBoard(): void {
   if (activePickMode !== 'team') return;
   const groups = new Map<string, Pick[]>();
   picks.forEach(pick => groups.set(gameKey(pick), [...(groups.get(gameKey(pick)) || []), pick]));
-  container.innerHTML = `<div class="research-board-head"><div><div class="home-eyebrow">PUBLISHED RESEARCH</div><h2>Source picks &amp; college football</h2></div><span class="research-count">${picks.length} forecasts</span></div>
-    <p class="research-board-note">External source picks and CFB model forecasts, published for comparison while their performance is evaluated. No suggested stake; excluded from Best Bets, parlays and tracked profit. All forecasts shown for this date.</p>
+  container.innerHTML = `<div class="research-board-head"><div><div class="home-eyebrow">PUBLISHED RESEARCH</div><h2>Scraped source picks</h2></div><span class="research-count">${picks.length} forecasts</span></div>
+    <p class="research-board-note">External feed PASS rows, published for comparison. No suggested stake; excluded from Best Bets, parlays and tracked profit. In-house CFB and NFL model rows, including PASS, appear on the board above.</p>
     <div class="research-grid">${[...groups.values()].sort(compareGameStartAsc).map(gamePicks => `<article class="research-game"><div class="research-game-head"><span class="home-sport-pill">${escapeHtml(gamePicks[0].sport)}</span>${homeScoreChipHtml(homeScores.get(gameKey(gamePicks[0])), gamePicks[0].start_time, gameName(gamePicks[0]))}</div><h3>${escapeHtml(gameName(gamePicks[0]))}</h3>${gamePicks.map(pick => `<div class="research-forecast"><div class="research-forecast-source">${escapeHtml(sourceName(pick))}<span>Research only</span></div><div class="research-forecast-pick">${escapeHtml(pickSelectionText(pick))}</div>${pick.reason || pick.rationale ? `<details class="research-reason"><summary>Why this forecast</summary><p>${escapeHtml(pick.reason || pick.rationale)}</p></details>` : ''}</div>`).join('')}</article>`).join('') || `<div class="research-empty">${getHideScrapedPicks() ? 'Feeds are hidden. Use Show feeds above to include external forecasts.' : 'No research forecasts published for this selection. Source status above shows whether feeds are awaiting an update or have no picks.'}</div>`}</div>`;
 }
 
@@ -1585,7 +1701,11 @@ function bindPickCards(container: HTMLElement): void {
 }
 
 function updateOverallStats(): void {
-  const stats = statsFor(activePickMode === 'player' ? rankingComparablePicks(getAllPicks()) : getAllPicks());
+  const stats = statsFor(
+    activePickMode === 'player'
+      ? rankingComparablePicks(getAllPicks())
+      : getAllPicks().filter(isPublishedDailyPick),
+  );
   const values: Record<string, string | number> = {
     'stat-picks': stats.total,
     'stat-wins': stats.wins,
@@ -1603,7 +1723,7 @@ function updateOverallStats(): void {
 }
 
 function rankingFilterButton(
-  kind: 'sport' | 'source',
+  kind: 'sport' | 'source' | 'decision',
   value: string,
   label: string,
   count: number | null,
@@ -1616,7 +1736,7 @@ function rankingFilterButton(
 function renderRankingFilters(comparablePicks: Pick[], scopedPicks: Pick[]): void {
   const container = document.getElementById('rank-filter-groups');
   if (!container) return;
-  const pool = rankingPoolPicks(comparablePicks);
+  const pool = rankingPoolPicks(comparablePicks).filter(matchesRankingDecision);
   const { sports, sources } = rankingFacetCounts(pool);
   // Busiest tag first: the models carrying real sample size are the ones worth
   // ranking, and alphabetical order buried them behind the scraper feeds.
@@ -1628,13 +1748,29 @@ function renderRankingFilters(comparablePicks: Pick[], scopedPicks: Pick[]): voi
   const sportNames = byCount(sports, rankingSportFilters);
   const sourceNames = byCount(sources, rankingSourceFilters);
   const isPlayer = activePickMode === 'player';
+  const decisionPool = rankingPoolPicks(comparablePicks).filter(pick => (
+    matchesRankingSports(pick) && matchesRankingSources(pick)
+  ));
+  const decisionCounts = rankingDecisionCounts(decisionPool);
 
   const sub = document.getElementById('rank-filter-sub');
   if (sub) {
-    sub.textContent = `Pick a sport, then one or more ${rankingSourceNoun(true)}. Overall Stats above always stay all-time; the three boards below follow this selection.`;
+    sub.textContent = `Pick a sport, then one or more ${rankingSourceNoun(true)}. Overall Stats stay BET+LEAN all-time; the boards below follow sport, source, and BET / LEAN / PASS.`;
   }
 
   container.innerHTML = `<div class="rank-filter-row">
+      <div class="rank-filter-row-label">Decision</div>
+      <div class="rank-filter-pills">
+        ${RANKING_DECISION_FILTERS.map(filter => rankingFilterButton(
+          'decision',
+          filter,
+          filter === 'STAKED' ? 'Staked' : filter,
+          decisionCounts[filter],
+          rankingDecisionFilter === filter,
+        )).join('')}
+      </div>
+    </div>
+    <div class="rank-filter-row">
       <div class="rank-filter-row-label">Sport</div>
       <div class="rank-filter-pills">
         ${rankingFilterButton('sport', 'ALL', 'All Sports', null, rankingSportFilters.size === 0)}
@@ -1663,17 +1799,24 @@ function renderRankingFilters(comparablePicks: Pick[], scopedPicks: Pick[]): voi
       renderRankings();
     });
   });
+  container.querySelectorAll<HTMLButtonElement>('[data-rank-decision]').forEach(button => {
+    button.addEventListener('click', () => {
+      setRankingDecisionFilter(button.dataset.rankDecision || 'STAKED');
+    });
+  });
 
   const summary = document.getElementById('rank-scope-summary');
   if (!summary) return;
   const scopedPool = rankingPoolPicks(scopedPicks);
   const scopedSources = new Set<string>();
   scopedPool.forEach(pick => rankingBucketNames(pick).forEach(name => scopedSources.add(name)));
+  const decisionLabel = rankingDecisionFilter === 'STAKED' ? 'Staked (BET+LEAN)' : rankingDecisionFilter;
   const tags = [
+    decisionLabel,
     ...[...rankingSportFilters].sort().map(filterLabel),
     ...[...rankingSourceFilters].sort(),
   ];
-  const scopeText = tags.length ? tags.join(' + ') : `All sports · all ${rankingSourceNoun(true)}`;
+  const scopeText = tags.join(' · ');
   summary.innerHTML = `<span class="rank-scope-eyebrow">Showing</span>
     <span class="rank-scope-value">${escapeHtml(scopeText)}</span>
     <span class="rank-scope-meta">${scopedPool.length} ranked pick${scopedPool.length === 1 ? '' : 's'} · ${scopedSources.size} ${rankingSourceNoun(scopedSources.size !== 1)}</span>`;
@@ -1683,7 +1826,7 @@ function renderRankings(): void {
   const allPicks = getAllPicks();
   const comparablePicks = rankingComparablePicks(allPicks);
   const scopedPicks = rankingScopedPicks(comparablePicks);
-  const scoped = rankingSportFilters.size > 0 || rankingSourceFilters.size > 0;
+  const scoped = rankingSportFilters.size > 0 || rankingSourceFilters.size > 0 || rankingDecisionFilter !== 'STAKED';
   renderRankingFilters(comparablePicks, scopedPicks);
   const rankingPicks = scopedPicks.filter(isSettledPick);
   const rankingTitle = document.getElementById('source-rankings-title');
@@ -1805,7 +1948,7 @@ function renderDayOfWeekTable(comparablePicks: Pick[]): void {
 
   const sources = [...bySource.keys()].sort((a, b) => a.localeCompare(b));
   if (!sources.length) {
-    const scoped = rankingSportFilters.size > 0 || rankingSourceFilters.size > 0;
+    const scoped = rankingSportFilters.size > 0 || rankingSourceFilters.size > 0 || rankingDecisionFilter !== 'STAKED';
     container.innerHTML = `<div class="empty-state">${scoped ? 'No decided picks match this filter yet' : 'No decided picks yet'}</div>`;
     return;
   }
@@ -1969,6 +2112,11 @@ function pickEdgePercent(pick: Pick): number | null {
 
 function dailyDecision(pick: Pick): string {
   return String(pick.decision || 'WATCH').trim().toUpperCase();
+}
+
+function isPostedDecision(pick: Pick): boolean {
+  const decision = dailyDecision(pick);
+  return decision === 'BET' || decision === 'LEAN' || decision === 'PASS';
 }
 
 function isPublishedDailyPick(pick: Pick): boolean {
@@ -4151,7 +4299,9 @@ function switchPickMode(mode: PickMode): void {
   activeFilters.clear();
   rankingSportFilters.clear();
   rankingSourceFilters.clear();
+  rankingDecisionFilter = 'STAKED';
   homeMode = 'pending';
+  homeDecisionFilter = 'ALL';
   dailyView = 'featured';
   profitView = 'card';
   profitDeskSport = 'ALL';
@@ -4247,6 +4397,8 @@ Object.assign(window, {
   toggleTennisPicks,
   goHome,
   setHomeResultMode,
+  setHomeDecisionFilter,
+  setRankingDecisionFilter,
   setDailyView,
   setProfitView,
   setProfitDeskSport,

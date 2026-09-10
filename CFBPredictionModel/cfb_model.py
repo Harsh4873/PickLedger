@@ -1,4 +1,4 @@
-"""Daily CFB moneyline, spread, and total shadow publisher."""
+"""Daily CFB moneyline, spread, and total publisher."""
 from __future__ import annotations
 
 import json
@@ -113,8 +113,8 @@ def _base(game: dict[str, Any], date_iso: str, model_version: str) -> dict[str, 
         "game_start_time": game["start_time"],
         "neutral_site": game.get("neutral_site") is True,
         "model_version": model_version,
-        "shadow_mode": True,
-        "actionability": "research_signal",
+        "shadow_mode": False,
+        "actionability": "bet_signal",
         "calibration_excluded": True,
         "grade_supported": True,
     }
@@ -138,6 +138,7 @@ def _row(
 ) -> dict[str, Any]:
     expected_value = _ev(probability, push_probability, odds) if odds is not None else None
     decision = _decision(expected_value, probability) if expected_value is not None else "PASS"
+    units = 0.5 if decision == "BET" else 0.25 if decision == "LEAN" else 0.0
     return {
         **base,
         "source": source,
@@ -155,8 +156,8 @@ def _row(
         "edge": round((probability - market_probability) * 100.0, 3) if market_probability is not None else None,
         "expected_value": round(expected_value, 6) if expected_value is not None else None,
         "source_decision": decision,
-        "decision": "PASS",
-        "units": 0.0,
+        "decision": decision,
+        "units": units,
         "pricing_type": "market" if price_observed else "unpriced",
         "odds_source": base.get("odds_source") if price_observed else None,
         "market_priced": price_observed,
@@ -171,8 +172,8 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
         return {
             "ok": False,
             "date": date_iso,
-            "model": "CFBShadow",
-            "shadow_mode": True,
+            "model": "CFB Model",
+            "shadow_mode": False,
             "games": [],
             "picks": [],
             "error": "CFB model artifacts are missing or unreadable; forecasts could not run.",
@@ -184,9 +185,9 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
         return {
             "ok": True,
             "date": date_iso,
-            "model": "CFBShadow",
+            "model": "CFB Model",
             "model_version": metadata["model_version"],
-            "shadow_mode": True,
+            "shadow_mode": False,
             "games": [],
             "picks": [],
             "coverage": coverage,
@@ -349,12 +350,12 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
     return {
         "ok": True,
         "date": date_iso,
-        "model": "CFBShadow",
+        "model": "CFB Model",
         "model_version": model_version,
-        "shadow_mode": True,
-        "actionability": "research_signal",
+        "shadow_mode": False,
+        "actionability": "bet_signal",
         "coverage": coverage,
         "games": games,
         "picks": picks,
-        "note": f"CFB research forecasts: {len(games)} game(s), {len(picks)} market row(s). Not qualified for live staking.",
+        "note": f"CFB active slate: {len(games)} game(s), {len(picks)} row(s).",
     }

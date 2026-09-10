@@ -188,6 +188,36 @@ test('publishes scraped passes and CFB shadow forecasts only as zero-stake resea
   assert.equal(getSourceStatuses(date).find(source => source.key === 'scores24_cfb')?.researchCount, 1);
 });
 
+test('posts in-house model PASS on the team board and keeps scraped PASS as research', { concurrency: false }, async () => {
+  const date = '2026-09-13';
+  installFetch(new Map([
+    ['./data/model_cache/latest.json', { date, models: {
+      nfl: { ok: true, shadow_mode: false, picks: [
+        { id: 'nfl-pass', sport: 'NFL', pick: 'Seahawks ML (Patriots @ Seahawks)', decision: 'PASS', units: 0, matchup: 'Patriots @ Seahawks' },
+        { id: 'nfl-bet', sport: 'NFL', pick: 'Seahawks -3 (Patriots @ Seahawks)', decision: 'BET', units: 0.5, matchup: 'Patriots @ Seahawks' },
+      ] },
+      cfb: { ok: true, shadow_mode: false, picks: [
+        { id: 'cfb-pass', sport: 'CFB', pick: 'Home State ML', decision: 'PASS', units: 0 },
+        { id: 'cfb-lean', sport: 'CFB', pick: 'Home State -3.5', decision: 'LEAN', units: 0.25 },
+      ] },
+      scores24_nfl: { ok: true, picks: [
+        { id: 'scraped-nfl-pass', sport: 'NFL', pick: 'Chiefs -3.5', decision: 'PASS', units: 0 },
+      ] },
+    } }],
+  ]));
+  await loadAllData({ includeHistory: false });
+  const team = getTeamPicks().filter(pick => pick.date === date).map(pick => pick.id).sort();
+  assert.deepEqual(team, ['cfb-lean', 'cfb-pass', 'nfl-bet', 'nfl-pass']);
+  assert.deepEqual(getResearchPicks(date).map(pick => pick.id), ['scraped-nfl-pass']);
+  assert.ok(getResearchPicks(date).every(pick => pick.research === true && pick.decision === 'PASS' && pick.units === 0));
+  const statuses = new Map(getSourceStatuses(date).map(status => [status.key, status]));
+  assert.equal(statuses.get('nfl')?.pickCount, 2);
+  assert.equal(statuses.get('cfb')?.pickCount, 2);
+  assert.equal(statuses.get('cfb')?.researchCount, 0);
+  assert.equal(statuses.get('scores24_nfl')?.researchCount, 1);
+  assert.equal(statuses.get('scores24_nfl')?.pickCount, 0);
+});
+
 test('source health distinguishes blocked, stale, missing, no-games, and unqualified results', { concurrency: false }, async () => {
   const date = '2026-09-08';
   const forecast = { id: 'health-research', sport: 'MLB', pick: 'Research only', decision: 'PASS' };
@@ -218,7 +248,8 @@ test('source health distinguishes blocked, stale, missing, no-games, and unquali
   assert.equal(byKey.get('sportytrader_wnba')?.detail, 'No games scheduled for this date.');
   assert.equal(byKey.get('sportytrader_mlb')?.state, 'empty');
   assert.equal(byKey.get('sportytrader_cfb')?.state, 'error');
-  assert.equal(byKey.get('mlb_first_five')?.detail, 'Refresh completed; no picks met the qualification rules.');
+  assert.equal(byKey.get('mlb_first_five')?.detail, '1 tracked pick published.');
+  assert.equal(byKey.get('mlb_first_five')?.pickCount, 1);
   assert.equal(byKey.get('mlb_new')?.state, 'error');
   assert.equal(byKey.get('tennistonic_tennis')?.state, 'error');
   assert.match(byKey.get('tennistonic_tennis')?.detail || '', /blocked/);

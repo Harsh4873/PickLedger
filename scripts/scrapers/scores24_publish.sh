@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Publish Scores24 MLB/WNBA (required) plus CFB (soft-fail optional) from a
+# Publish Scores24 MLB/WNBA (required) plus CFB/NFL (soft-fail optional) from a
 # non-GitHub-Actions IP. FIFA and NBA Summer stay archived from the daily run.
 set -euo pipefail
 
@@ -22,13 +22,14 @@ if [[ -z "${GH_BIN}" ]]; then
 fi
 
 DATE_ISO="${SCORES24_DATE:-$(TZ=America/Chicago date +%F)}"
-# MLB+WNBA remain the publish gate. CFB rides the same weekday morning/afternoon
-# Scores24 run as a soft-fail optional feed: scrape when the slate exists, but
-# incomplete/blocked/hung CFB must not prevent publishing a complete MLB+WNBA
-# slate, and must not gate latestUpdated / site_upcheck.
+# MLB+WNBA remain the publish gate. CFB and NFL ride the same weekday
+# morning/afternoon Scores24 run as soft-fail optional feeds: scrape when the
+# slate exists, but incomplete/blocked/hung CFB or NFL must not prevent
+# publishing a complete MLB+WNBA slate, and must not gate latestUpdated /
+# site_upcheck.
 PUBLISH_FEEDS="${SCORES24_PUBLISH_FEEDS:-scores24_mlb,scores24_wnba}"
-OPTIONAL_FEEDS="${SCORES24_OPTIONAL_FEEDS:-scores24_cfb}"
-PUBLISH_SPORTS="${SCORES24_PUBLISH_SPORTS:-mlb,wnba,cfb}"
+OPTIONAL_FEEDS="${SCORES24_OPTIONAL_FEEDS:-scores24_cfb,scores24_nfl}"
+PUBLISH_SPORTS="${SCORES24_PUBLISH_SPORTS:-mlb,wnba,cfb,nfl}"
 OPTIONAL_FEED_TIMEOUT="${SCORES24_OPTIONAL_FEED_TIMEOUT_SECONDS:-900}"
 REQUEST_INTERVAL="${SCORES24_REQUEST_INTERVAL_SECONDS:-12}"
 REQUEST_ATTEMPTS="${SCORES24_REQUEST_ATTEMPTS:-1}"
@@ -158,7 +159,8 @@ from pathlib import Path
 
 date_iso = os.environ["DATE_ISO"]
 # Completeness gate is PUBLISH_FEEDS only (default MLB+WNBA). Optional feeds
-# such as scores24_cfb are scraped after this check and must never fail it.
+# such as scores24_cfb and scores24_nfl are scraped after this check and must
+# never fail it.
 required = tuple(
     feed.strip()
     for feed in os.environ.get(
@@ -186,8 +188,8 @@ if failures:
     raise SystemExit("Scores24 refresh incomplete; refusing to publish:\n- " + "\n- ".join(failures))
 PY
 
-# MLB+WNBA are complete. CFB (and any other OPTIONAL_FEEDS) is best-effort:
-# a hang, Cloudflare block, or incomplete college slate must not prevent
+# MLB+WNBA are complete. CFB/NFL (and any other OPTIONAL_FEEDS) are best-effort:
+# a hang, Cloudflare block, or incomplete football slate must not prevent
 # publishing the required feeds. Timeout so a stuck Camoufox session cannot
 # wedge the morning/afternoon commit.
 IFS=',' read -r -a OPTIONAL_KEYS <<< "${OPTIONAL_FEEDS}"

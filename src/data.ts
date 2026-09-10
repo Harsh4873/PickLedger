@@ -426,6 +426,7 @@ const SOURCE_LABELS: Record<string, string> = {
   sportytrader_wnba: 'SportyTraderWNBA',
   sportytrader_fifa_world_cup: 'SportyTraderFIFAWorldCup',
   sportytrader_cfb: 'SportyTraderCFB',
+  sportytrader_nfl: 'SportyTraderNFL',
   sportsgambler: 'SportsGambler',
   sportsgambler_nba: 'SportsGamblerNBA',
   sportsgambler_nba_summer: 'SportsGamblerNBASummer',
@@ -433,11 +434,13 @@ const SOURCE_LABELS: Record<string, string> = {
   sportsgambler_wnba: 'SportsGamblerWNBA',
   sportsgambler_fifa_world_cup: 'SportsGamblerFIFAWorldCup',
   sportsgambler_cfb: 'SportsGamblerCFB',
+  sportsgambler_nfl: 'SportsGamblerNFL',
   scores24_nba_summer: 'Scores24NBASummer',
   scores24_wnba: 'Scores24WNBA',
   scores24_mlb: 'Scores24MLB',
   scores24_fifa_world_cup: 'Scores24FIFAWorldCup',
   scores24_cfb: 'Scores24CFB',
+  scores24_nfl: 'Scores24NFL',
   forebet_mls: 'ForebetMLS',
   forebet_mlb: 'ForebetMLB',
   forebet_wnba: 'ForebetWNBA',
@@ -716,7 +719,10 @@ function normalizePick(
 
 function isTrackedPick(pick: Pick): boolean {
   const decision = String(pick.decision || '').trim().toUpperCase();
-  return decision === 'BET' || decision === 'LEAN';
+  if (decision === 'BET' || decision === 'LEAN') return true;
+  // In-house PASS still belongs on the public board. Scraped PASS stays
+  // research-only so a demoted tip cannot look like a model post.
+  return decision === 'PASS' && pick.scraped !== true;
 }
 
 function isTrackedPlayerProp(pick: Pick): boolean {

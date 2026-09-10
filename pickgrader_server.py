@@ -3062,12 +3062,14 @@ _MODEL_CACHE_KEY_ALIASES: dict[str, tuple[str, ...]] = {
     "sportytrader_wnba": ("sportytrader_wnba",),
     "sportytrader_fifa_world_cup": ("sportytrader_fifa_world_cup",),
     "sportytrader_cfb": ("sportytrader_cfb",),
+    "sportytrader_nfl": ("sportytrader_nfl",),
     "sportsgambler": ("sportsgambler",),
     "sportsgambler_nba": ("sportsgambler_nba",),
     "sportsgambler_mlb": ("sportsgambler_mlb",),
     "sportsgambler_wnba": ("sportsgambler_wnba",),
     "sportsgambler_fifa_world_cup": ("sportsgambler_fifa_world_cup",),
     "sportsgambler_cfb": ("sportsgambler_cfb",),
+    "sportsgambler_nfl": ("sportsgambler_nfl",),
 }
 
 
@@ -4518,6 +4520,8 @@ _SPORTYTRADER_SPORT_ALIAS = {
     "NCAA FOOTBALL": "CFB",
     "NCAA COLLEGE FOOTBALL": "CFB",
     "CFB": "CFB",
+    "USA - NFL": "NFL",
+    "NFL": "NFL",
 }
 
 
@@ -5038,7 +5042,7 @@ else:
 
 
 def run_nfl_model(date_str: str | None = None) -> dict[str, Any]:
-    """Execute the NFL shadow model (site display suppressed until go-live)."""
+    """Execute the in-house NFL model and publish ML, spread, and total rows."""
     target_iso, _ = _parse_model_date_arg(date_str)
     nfl_dir = os.path.join(BASE_DIR, "NFLPredictionModel")
     if not os.path.exists(nfl_dir):
@@ -5056,7 +5060,7 @@ def run_nfl_model(date_str: str | None = None) -> dict[str, Any]:
 
 
 def run_cfb_model(date_str: str | None = None) -> dict[str, Any]:
-    """Execute the in-house CFB shadow model."""
+    """Execute the in-house CFB model and publish ML, spread, and total rows."""
     target_iso, _ = _parse_model_date_arg(date_str)
     cfb_dir = os.path.join(BASE_DIR, "CFBPredictionModel")
     if not os.path.exists(cfb_dir):
@@ -5725,6 +5729,7 @@ _EXTERNAL_FEED_SPORT_CONFIG = {
     "mlb": {"label": "MLB", "model_keys": ("mlb_first_five", "mlb_inning", "mlb_new", "mlb_team_total")},
     "fifa_world_cup": {"label": "FIFA WC", "model_keys": ("fifa_world_cup",)},
     "cfb": {"label": "CFB", "model_keys": ("cfb",)},
+    "nfl": {"label": "NFL", "model_keys": ("nfl",)},
 }
 
 _EXTERNAL_FEED_SPORT_KEY_BY_LABEL = {
@@ -5734,6 +5739,7 @@ _EXTERNAL_FEED_SPORT_KEY_BY_LABEL = {
     "MLB": "mlb",
     "FIFA WC": "fifa_world_cup",
     "CFB": "cfb",
+    "NFL": "nfl",
 }
 _EXTERNAL_FEED_SPORT_LABEL_BY_KEY = {
     key: str(config["label"])
@@ -5746,6 +5752,7 @@ _EXTERNAL_FEED_SPORT_SOURCE_SUFFIX = {
     "MLB": "MLB",
     "FIFA WC": "FIFAWorldCup",
     "CFB": "CFB",
+    "NFL": "NFL",
 }
 _EXTERNAL_FEED_PROVIDER_LABEL = {
     "sportytrader": "SportyTrader",
@@ -5772,6 +5779,7 @@ def _canonical_external_feed_sport(value: Any) -> str:
         "college_football": "cfb",
         "ncaa": "cfb",
         "ncaa_football": "cfb",
+        "nfl": "nfl",
     }
     sport_key = aliases.get(normalized, normalized)
     if sport_key in _EXTERNAL_FEED_SPORT_LABEL_BY_KEY:
@@ -5969,9 +5977,9 @@ def _external_feed_slate_whitelists(
     return expected_by_sport, zero_slate_sports, errors
 
 
-# CFB (and future optional sports) must not fail an otherwise successful
-# MLB/WNBA provider refresh. Tennis is a separate feed with the same idea.
-_EXTERNAL_FEED_OPTIONAL_SPORTS = frozenset({"cfb"})
+# CFB and NFL must not fail an otherwise successful MLB/WNBA provider refresh.
+# Tennis is a separate feed with the same idea.
+_EXTERNAL_FEED_OPTIONAL_SPORTS = frozenset({"cfb", "nfl"})
 
 
 def _partition_external_feed_errors(
@@ -6211,8 +6219,9 @@ def run_sportytrader_scraper(
         "ncaaf": "cfb",
         "college_football": "cfb",
         "ncaa": "cfb",
+        "nfl": "nfl",
     }
-    default_sports = ["nba", "nba_summer", "mlb", "wnba", "fifa_world_cup", "cfb"]
+    default_sports = ["nba", "nba_summer", "mlb", "wnba", "fifa_world_cup", "cfb", "nfl"]
     selected = [sport_map.get(str(s).strip().lower(), "") for s in (sports or default_sports)]
     selected = [sport for sport in selected if sport]
     if not selected:
@@ -6234,7 +6243,7 @@ def run_sportytrader_scraper(
         command = [python_bin, scraper_path, "--sport", sport_code, "--date", target_date]
         for matchup in expected_by_sport.get(sport_code, []):
             command.extend(["--expected-matchup", matchup])
-        sport_timeout = 300 if sport_code == "cfb" else timeout_s
+        sport_timeout = 300 if sport_code in {"cfb", "nfl"} else timeout_s
         return _subprocess_run(
             command,
             cwd=BASE_DIR,
@@ -6254,7 +6263,7 @@ def run_sportytrader_scraper(
             try:
                 result = _invoke(sport_code)
             except subprocess.TimeoutExpired:
-                sport_timeout = 300 if sport_code == "cfb" else timeout_s
+                sport_timeout = 300 if sport_code in {"cfb", "nfl"} else timeout_s
                 errors.append(f"{sport_code}: timed out after {sport_timeout}s")
                 continue
             output = (result.stdout or "") + (result.stderr or "")
@@ -6265,7 +6274,7 @@ def run_sportytrader_scraper(
                 try:
                     result = _invoke(sport_code)
                 except subprocess.TimeoutExpired:
-                    sport_timeout = 300 if sport_code == "cfb" else timeout_s
+                    sport_timeout = 300 if sport_code in {"cfb", "nfl"} else timeout_s
                     errors.append(f"{sport_code}: timed out after {sport_timeout}s after Playwright install")
                     continue
                 output = (result.stdout or "") + (result.stderr or "")
@@ -6367,8 +6376,9 @@ def run_sportsgambler_scraper(
         "ncaaf": "cfb",
         "college_football": "cfb",
         "ncaa": "cfb",
+        "nfl": "nfl",
     }
-    default_sports = ["nba", "nba_summer", "mlb", "wnba", "fifa_world_cup", "cfb"]
+    default_sports = ["nba", "nba_summer", "mlb", "wnba", "fifa_world_cup", "cfb", "nfl"]
     selected = [sport_map.get(str(s).strip().lower(), "") for s in (sports or default_sports)]
     selected = [sport for sport in selected if sport]
     if not selected:
@@ -6390,7 +6400,7 @@ def run_sportsgambler_scraper(
         command = [python_bin, scraper_path, "--sport", sport_code, "--date", target_date]
         for matchup in expected_by_sport.get(sport_code, []):
             command.extend(["--expected-matchup", matchup])
-        sport_timeout = 300 if sport_code == "cfb" else timeout_s
+        sport_timeout = 300 if sport_code in {"cfb", "nfl"} else timeout_s
         return _subprocess_run(
             command,
             cwd=BASE_DIR,
@@ -6409,7 +6419,7 @@ def run_sportsgambler_scraper(
             try:
                 result = _invoke(sport_code)
             except subprocess.TimeoutExpired:
-                sport_timeout = 300 if sport_code == "cfb" else timeout_s
+                sport_timeout = 300 if sport_code in {"cfb", "nfl"} else timeout_s
                 errors.append(f"{sport_code}: timed out after {sport_timeout}s")
                 continue
             output = (result.stdout or "") + (result.stderr or "")
@@ -6432,7 +6442,7 @@ def run_sportsgambler_scraper(
 
                 league = league_m.group(1).strip() if league_m else ""
                 sport = (league or expected_sport).upper()
-                if sport not in {"NBA", "NBA SUMMER", "WNBA", "MLB", "FIFA WC", "CFB"}:
+                if sport not in {"NBA", "NBA SUMMER", "WNBA", "MLB", "FIFA WC", "CFB", "NFL"}:
                     sport = expected_sport
 
                 odds_val = None
