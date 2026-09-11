@@ -138,8 +138,8 @@
         "calibrated_probability": 0.655172,
         "calibration_excluded": true,
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -217,8 +217,8 @@
         "calibrated_probability": 0.655172,
         "calibration_excluded": true,
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -294,8 +294,8 @@
         "calibrated_probability": 0.48814,
         "calibration_excluded": true,
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -371,8 +371,8 @@
         "calibrated_probability": 0.5,
         "calibration_excluded": true,
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -450,8 +450,8 @@
         "calibrated_probability": 0.588757,
         "calibration_excluded": true,
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -529,8 +529,8 @@
         "calibrated_probability": 0.588757,
         "calibration_excluded": true,
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -606,8 +606,8 @@
         "calibrated_probability": 0.493808,
         "calibration_excluded": true,
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -683,8 +683,8 @@
         "calibrated_probability": 0.5,
         "calibration_excluded": true,
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -3199,7 +3199,7 @@
     "refreshStatus": "ok",
     "updatedAt": "2026-09-11T12:11:43.888129Z"
   },
-  "generatedAt": "2026-09-11T14:44:44.673511Z",
+  "generatedAt": "2026-09-11T15:19:07.178127Z",
   "generatedBy": "github-actions:model-cache-refresh",
   "mlb_first_five": {
     "consensus_gate_version": "mlb_team_consensus_v1.2.0",
@@ -7479,8 +7479,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -7780,8 +7780,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -8186,8 +8186,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -8497,8 +8497,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -8900,7 +8900,7 @@
         "actionability": "research_signal",
         "assumed_odds_replaced": true,
         "away_team": "Los Angeles Angels",
-        "calibrated_edge": -16.186977777777777,
+        "calibrated_edge": -17.010894915254237,
         "calibrated_model_probability": 0.490908,
         "calibrated_probability": 0.490908,
         "calibration": {
@@ -8912,8 +8912,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -9154,7 +9154,7 @@
         "market_away_odds": 140,
         "market_home_odds": -180,
         "market_implied_probability": 0.52381,
-        "market_no_vig_probability": 0.6527777777777778,
+        "market_no_vig_probability": 0.6610169491525424,
         "market_no_vig_selected_probability": 0.606742,
         "market_odds_captured_at": "2026-09-11T12:08:31.375884Z",
         "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -9230,7 +9230,7 @@
         "raw_probability": 0.5666,
         "recommended_units": 0.0,
         "selected_odds": -180,
-        "selected_side_implied_probability": 0.6527777777777778,
+        "selected_side_implied_probability": 0.6610169491525424,
         "source": "MLB First Five",
         "sport": "MLB",
         "start_time": "2026-09-11T22:45:00Z",
@@ -9256,8 +9256,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -9693,8 +9693,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -10041,8 +10041,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -10456,8 +10456,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -10909,8 +10909,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -11244,8 +11244,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -11570,8 +11570,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -12011,8 +12011,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -12367,8 +12367,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -12797,8 +12797,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -13139,8 +13139,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -13568,8 +13568,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -14002,8 +14002,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -14336,8 +14336,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -14793,8 +14793,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -15127,8 +15127,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -15555,8 +15555,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -15890,8 +15890,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -16233,8 +16233,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -16678,8 +16678,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -17018,8 +17018,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -17447,8 +17447,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -17792,8 +17792,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -18216,8 +18216,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -18548,8 +18548,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -18968,23 +18968,23 @@
           "8": 0.5625
         },
         "edge_table": {
-          "1": -0.0542,
+          "1": -0.024,
           "2": -0.0891,
           "3": -0.0108,
-          "4": -0.1138,
+          "4": -0.0739,
           "5": -0.1386,
           "6": -0.1107,
-          "7": -0.136,
+          "7": -0.097,
           "8": -0.1473
         },
         "full_inning_table": {
-          "1": 0.33,
+          "1": 0.36,
           "2": 0.429,
           "3": 0.479,
-          "4": 0.405,
+          "4": 0.444,
           "5": 0.366,
           "6": 0.408,
-          "7": 0.412,
+          "7": 0.451,
           "8": 0.415
         },
         "game_id": "824631",
@@ -19395,20 +19395,20 @@
         "edge_table": {
           "1": 0.0232,
           "2": 0.0147,
-          "3": -0.0792,
+          "3": -0.0194,
           "4": -0.0632,
           "5": -0.0723,
-          "6": -0.0813,
+          "6": -0.0177,
           "7": -0.1756,
           "8": -0.2209
         },
         "full_inning_table": {
           "1": 0.408,
           "2": 0.533,
-          "3": 0.411,
+          "3": 0.471,
           "4": 0.455,
           "5": 0.432,
-          "6": 0.437,
+          "6": 0.501,
           "7": 0.372,
           "8": 0.342
         },
@@ -20106,20 +20106,20 @@
         "edge_table": {
           "1": 0.0646,
           "2": -0.0403,
-          "3": -0.0204,
+          "3": -0.0131,
           "4": 0.0647,
           "5": 0.094,
-          "6": -0.0917,
+          "6": -0.0856,
           "7": -0.0952,
           "8": -0.1284
         },
         "full_inning_table": {
           "1": 0.449,
           "2": 0.478,
-          "3": 0.47,
+          "3": 0.477,
           "4": 0.583,
           "5": 0.598,
-          "6": 0.427,
+          "6": 0.433,
           "7": 0.452,
           "8": 0.434
         },
@@ -20702,23 +20702,23 @@
         },
         "edge_table": {
           "1": -0.0958,
-          "2": -0.121,
+          "2": -0.0755,
           "3": -0.0348,
           "4": -0.1323,
-          "5": -0.0965,
+          "5": -0.0404,
           "6": -0.1136,
           "7": -0.0923,
-          "8": -0.186
+          "8": -0.131
         },
         "full_inning_table": {
           "1": 0.289,
-          "2": 0.397,
+          "2": 0.443,
           "3": 0.455,
           "4": 0.386,
-          "5": 0.408,
+          "5": 0.464,
           "6": 0.405,
           "7": 0.455,
-          "8": 0.376
+          "8": 0.431
         },
         "game_id": "824954",
         "game_order": 12,
@@ -20844,23 +20844,23 @@
         },
         "edge_table": {
           "1": -0.0197,
-          "2": -0.1299,
+          "2": -0.0804,
           "3": -0.0985,
           "4": -0.0401,
-          "5": -0.0869,
+          "5": -0.0279,
           "6": -0.0838,
           "7": -0.1436,
-          "8": -0.1367
+          "8": -0.0801
         },
         "full_inning_table": {
           "1": 0.365,
-          "2": 0.389,
+          "2": 0.438,
           "3": 0.392,
           "4": 0.478,
-          "5": 0.417,
+          "5": 0.476,
           "6": 0.435,
           "7": 0.404,
-          "8": 0.426
+          "8": 0.482
         },
         "game_id": "825036",
         "game_order": 13,
@@ -21115,8 +21115,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -21213,8 +21213,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -21238,7 +21238,7 @@
         "model_epoch": "mlb_inning_v2_2026-08-25",
         "model_prediction": "58.3%",
         "model_version": "mlb_inning_v2_2026-08-25",
-        "notes": "Top no-run inning candidate (edge +6.5pp vs baseline). Full table: {\"1\": 0.449, \"2\": 0.478, \"3\": 0.47, \"4\": 0.583, \"5\": 0.598, \"6\": 0.427, \"7\": 0.452, \"8\": 0.434}",
+        "notes": "Top no-run inning candidate (edge +6.5pp vs baseline). Full table: {\"1\": 0.449, \"2\": 0.478, \"3\": 0.477, \"4\": 0.583, \"5\": 0.598, \"6\": 0.433, \"7\": 0.452, \"8\": 0.434}",
         "odds": -120,
         "odds_source": "user_assumed_no_run_inning_-120",
         "pick": "Inning 4 - No Run Scored",
@@ -21311,8 +21311,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -21336,7 +21336,7 @@
         "model_epoch": "mlb_inning_v2_2026-08-25",
         "model_prediction": "59.8%",
         "model_version": "mlb_inning_v2_2026-08-25",
-        "notes": "Top no-run inning candidate (edge +9.4pp vs baseline). Full table: {\"1\": 0.449, \"2\": 0.478, \"3\": 0.47, \"4\": 0.583, \"5\": 0.598, \"6\": 0.427, \"7\": 0.452, \"8\": 0.434}",
+        "notes": "Top no-run inning candidate (edge +9.4pp vs baseline). Full table: {\"1\": 0.449, \"2\": 0.478, \"3\": 0.477, \"4\": 0.583, \"5\": 0.598, \"6\": 0.433, \"7\": 0.452, \"8\": 0.434}",
         "odds": -120,
         "odds_source": "user_assumed_no_run_inning_-120",
         "pick": "Inning 5 - No Run Scored",
@@ -21409,8 +21409,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -21507,8 +21507,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -21651,8 +21651,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -21828,8 +21828,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -22011,8 +22011,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -22188,8 +22188,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -22373,8 +22373,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -22550,8 +22550,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -22733,8 +22733,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -22924,8 +22924,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -23101,8 +23101,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -23279,8 +23279,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -23464,8 +23464,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -23641,8 +23641,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -23831,8 +23831,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -24008,8 +24008,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -24191,8 +24191,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -24369,8 +24369,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -24552,8 +24552,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -24729,8 +24729,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -24912,8 +24912,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -25103,8 +25103,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -25280,8 +25280,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -25458,8 +25458,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -25643,8 +25643,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -25822,8 +25822,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -26033,8 +26033,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -26211,8 +26211,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -26394,8 +26394,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -26571,8 +26571,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -26756,8 +26756,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -26934,8 +26934,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -27970,8 +27970,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -28193,8 +28193,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -28416,8 +28416,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -28650,8 +28650,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -28873,8 +28873,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -29118,8 +29118,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -29363,8 +29363,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -29597,8 +29597,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -29855,8 +29855,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -30075,6 +30075,7 @@
       },
       {
         "actionability": "research_signal",
+        "assumed_odds": -110,
         "assumed_odds_replaced": true,
         "away_team": "Baltimore Orioles",
         "calibrated_edge": -10.167473469387755,
@@ -30089,8 +30090,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -30323,8 +30324,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -30546,8 +30547,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -30804,8 +30805,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -31049,8 +31050,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -31294,8 +31295,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -31528,8 +31529,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -31751,8 +31752,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -31974,8 +31975,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -32221,8 +32222,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -32455,8 +32456,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -32678,8 +32679,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -32912,8 +32913,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -33146,8 +33147,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -33404,8 +33405,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -33627,8 +33628,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -33850,8 +33851,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -34095,8 +34096,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -34331,8 +34332,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -34554,8 +34555,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -34798,8 +34799,8 @@
           "version": "cal-v2-6404-2026-08-25"
         },
         "certification_timing": {
-          "data_as_of": "2026-09-11T14:44:44.673511Z",
-          "published_at": "2026-09-11T14:44:44.673511Z",
+          "data_as_of": "2026-09-11T15:19:07.178127Z",
+          "published_at": "2026-09-11T15:19:07.178127Z",
           "source": "model-cache-refresh",
           "trusted": true
         },
@@ -35196,8 +35197,8 @@
           "calibrated_probability": 0.655172,
           "calibration_excluded": true,
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -35275,8 +35276,8 @@
           "calibrated_probability": 0.655172,
           "calibration_excluded": true,
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -35352,8 +35353,8 @@
           "calibrated_probability": 0.48814,
           "calibration_excluded": true,
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -35429,8 +35430,8 @@
           "calibrated_probability": 0.5,
           "calibration_excluded": true,
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -35508,8 +35509,8 @@
           "calibrated_probability": 0.588757,
           "calibration_excluded": true,
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -35587,8 +35588,8 @@
           "calibrated_probability": 0.588757,
           "calibration_excluded": true,
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -35664,8 +35665,8 @@
           "calibrated_probability": 0.493808,
           "calibration_excluded": true,
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -35741,8 +35742,8 @@
           "calibrated_probability": 0.5,
           "calibration_excluded": true,
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -40614,8 +40615,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -40915,8 +40916,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -41321,8 +41322,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -41632,8 +41633,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -42035,7 +42036,7 @@
           "actionability": "research_signal",
           "assumed_odds_replaced": true,
           "away_team": "Los Angeles Angels",
-          "calibrated_edge": -16.186977777777777,
+          "calibrated_edge": -17.010894915254237,
           "calibrated_model_probability": 0.490908,
           "calibrated_probability": 0.490908,
           "calibration": {
@@ -42047,8 +42048,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -42289,7 +42290,7 @@
           "market_away_odds": 140,
           "market_home_odds": -180,
           "market_implied_probability": 0.52381,
-          "market_no_vig_probability": 0.6527777777777778,
+          "market_no_vig_probability": 0.6610169491525424,
           "market_no_vig_selected_probability": 0.606742,
           "market_odds_captured_at": "2026-09-11T12:08:31.375884Z",
           "market_odds_provider": "espn_scoreboard:DraftKings",
@@ -42365,7 +42366,7 @@
           "raw_probability": 0.5666,
           "recommended_units": 0.0,
           "selected_odds": -180,
-          "selected_side_implied_probability": 0.6527777777777778,
+          "selected_side_implied_probability": 0.6610169491525424,
           "source": "MLB First Five",
           "sport": "MLB",
           "start_time": "2026-09-11T22:45:00Z",
@@ -42391,8 +42392,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -42828,8 +42829,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -43176,8 +43177,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -43591,8 +43592,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -44044,8 +44045,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -44379,8 +44380,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -44705,8 +44706,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -45146,8 +45147,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -45502,8 +45503,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -45932,8 +45933,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -46274,8 +46275,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -46703,8 +46704,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -47137,8 +47138,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -47471,8 +47472,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -47928,8 +47929,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -48262,8 +48263,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -48690,8 +48691,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -49025,8 +49026,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -49368,8 +49369,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -49813,8 +49814,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -50153,8 +50154,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -50582,8 +50583,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -50927,8 +50928,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -51351,8 +51352,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -51683,8 +51684,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -52103,23 +52104,23 @@
             "8": 0.5625
           },
           "edge_table": {
-            "1": -0.0542,
+            "1": -0.024,
             "2": -0.0891,
             "3": -0.0108,
-            "4": -0.1138,
+            "4": -0.0739,
             "5": -0.1386,
             "6": -0.1107,
-            "7": -0.136,
+            "7": -0.097,
             "8": -0.1473
           },
           "full_inning_table": {
-            "1": 0.33,
+            "1": 0.36,
             "2": 0.429,
             "3": 0.479,
-            "4": 0.405,
+            "4": 0.444,
             "5": 0.366,
             "6": 0.408,
-            "7": 0.412,
+            "7": 0.451,
             "8": 0.415
           },
           "game_id": "824631",
@@ -52530,20 +52531,20 @@
           "edge_table": {
             "1": 0.0232,
             "2": 0.0147,
-            "3": -0.0792,
+            "3": -0.0194,
             "4": -0.0632,
             "5": -0.0723,
-            "6": -0.0813,
+            "6": -0.0177,
             "7": -0.1756,
             "8": -0.2209
           },
           "full_inning_table": {
             "1": 0.408,
             "2": 0.533,
-            "3": 0.411,
+            "3": 0.471,
             "4": 0.455,
             "5": 0.432,
-            "6": 0.437,
+            "6": 0.501,
             "7": 0.372,
             "8": 0.342
           },
@@ -53241,20 +53242,20 @@
           "edge_table": {
             "1": 0.0646,
             "2": -0.0403,
-            "3": -0.0204,
+            "3": -0.0131,
             "4": 0.0647,
             "5": 0.094,
-            "6": -0.0917,
+            "6": -0.0856,
             "7": -0.0952,
             "8": -0.1284
           },
           "full_inning_table": {
             "1": 0.449,
             "2": 0.478,
-            "3": 0.47,
+            "3": 0.477,
             "4": 0.583,
             "5": 0.598,
-            "6": 0.427,
+            "6": 0.433,
             "7": 0.452,
             "8": 0.434
           },
@@ -53837,23 +53838,23 @@
           },
           "edge_table": {
             "1": -0.0958,
-            "2": -0.121,
+            "2": -0.0755,
             "3": -0.0348,
             "4": -0.1323,
-            "5": -0.0965,
+            "5": -0.0404,
             "6": -0.1136,
             "7": -0.0923,
-            "8": -0.186
+            "8": -0.131
           },
           "full_inning_table": {
             "1": 0.289,
-            "2": 0.397,
+            "2": 0.443,
             "3": 0.455,
             "4": 0.386,
-            "5": 0.408,
+            "5": 0.464,
             "6": 0.405,
             "7": 0.455,
-            "8": 0.376
+            "8": 0.431
           },
           "game_id": "824954",
           "game_order": 12,
@@ -53979,23 +53980,23 @@
           },
           "edge_table": {
             "1": -0.0197,
-            "2": -0.1299,
+            "2": -0.0804,
             "3": -0.0985,
             "4": -0.0401,
-            "5": -0.0869,
+            "5": -0.0279,
             "6": -0.0838,
             "7": -0.1436,
-            "8": -0.1367
+            "8": -0.0801
           },
           "full_inning_table": {
             "1": 0.365,
-            "2": 0.389,
+            "2": 0.438,
             "3": 0.392,
             "4": 0.478,
-            "5": 0.417,
+            "5": 0.476,
             "6": 0.435,
             "7": 0.404,
-            "8": 0.426
+            "8": 0.482
           },
           "game_id": "825036",
           "game_order": 13,
@@ -54250,8 +54251,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -54348,8 +54349,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -54373,7 +54374,7 @@
           "model_epoch": "mlb_inning_v2_2026-08-25",
           "model_prediction": "58.3%",
           "model_version": "mlb_inning_v2_2026-08-25",
-          "notes": "Top no-run inning candidate (edge +6.5pp vs baseline). Full table: {\"1\": 0.449, \"2\": 0.478, \"3\": 0.47, \"4\": 0.583, \"5\": 0.598, \"6\": 0.427, \"7\": 0.452, \"8\": 0.434}",
+          "notes": "Top no-run inning candidate (edge +6.5pp vs baseline). Full table: {\"1\": 0.449, \"2\": 0.478, \"3\": 0.477, \"4\": 0.583, \"5\": 0.598, \"6\": 0.433, \"7\": 0.452, \"8\": 0.434}",
           "odds": -120,
           "odds_source": "user_assumed_no_run_inning_-120",
           "pick": "Inning 4 - No Run Scored",
@@ -54446,8 +54447,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -54471,7 +54472,7 @@
           "model_epoch": "mlb_inning_v2_2026-08-25",
           "model_prediction": "59.8%",
           "model_version": "mlb_inning_v2_2026-08-25",
-          "notes": "Top no-run inning candidate (edge +9.4pp vs baseline). Full table: {\"1\": 0.449, \"2\": 0.478, \"3\": 0.47, \"4\": 0.583, \"5\": 0.598, \"6\": 0.427, \"7\": 0.452, \"8\": 0.434}",
+          "notes": "Top no-run inning candidate (edge +9.4pp vs baseline). Full table: {\"1\": 0.449, \"2\": 0.478, \"3\": 0.477, \"4\": 0.583, \"5\": 0.598, \"6\": 0.433, \"7\": 0.452, \"8\": 0.434}",
           "odds": -120,
           "odds_source": "user_assumed_no_run_inning_-120",
           "pick": "Inning 5 - No Run Scored",
@@ -54544,8 +54545,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -54642,8 +54643,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -54786,8 +54787,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -54963,8 +54964,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -55146,8 +55147,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -55323,8 +55324,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -55508,8 +55509,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -55685,8 +55686,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -55868,8 +55869,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -56059,8 +56060,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -56236,8 +56237,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -56414,8 +56415,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -56599,8 +56600,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -56776,8 +56777,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -56966,8 +56967,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -57143,8 +57144,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -57326,8 +57327,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -57504,8 +57505,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -57687,8 +57688,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -57864,8 +57865,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -58047,8 +58048,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -58238,8 +58239,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -58415,8 +58416,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -58593,8 +58594,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -58778,8 +58779,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -58957,8 +58958,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -59168,8 +59169,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -59346,8 +59347,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -59529,8 +59530,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -59706,8 +59707,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -59891,8 +59892,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -60069,8 +60070,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -61105,8 +61106,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -61328,8 +61329,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -61551,8 +61552,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -61785,8 +61786,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -62008,8 +62009,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -62253,8 +62254,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -62498,8 +62499,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -62732,8 +62733,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -62990,8 +62991,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -63210,6 +63211,7 @@
         },
         {
           "actionability": "research_signal",
+          "assumed_odds": -110,
           "assumed_odds_replaced": true,
           "away_team": "Baltimore Orioles",
           "calibrated_edge": -10.167473469387755,
@@ -63224,8 +63226,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -63458,8 +63460,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -63681,8 +63683,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -63939,8 +63941,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -64184,8 +64186,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -64429,8 +64431,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -64663,8 +64665,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -64886,8 +64888,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -65109,8 +65111,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -65356,8 +65358,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -65590,8 +65592,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -65813,8 +65815,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -66047,8 +66049,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -66281,8 +66283,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -66539,8 +66541,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -66762,8 +66764,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -66985,8 +66987,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -67230,8 +67232,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -67466,8 +67468,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -67689,8 +67691,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -67933,8 +67935,8 @@
             "version": "cal-v2-6404-2026-08-25"
           },
           "certification_timing": {
-            "data_as_of": "2026-09-11T14:44:44.673511Z",
-            "published_at": "2026-09-11T14:44:44.673511Z",
+            "data_as_of": "2026-09-11T15:19:07.178127Z",
+            "published_at": "2026-09-11T15:19:07.178127Z",
             "source": "model-cache-refresh",
             "trusted": true
           },
@@ -70042,7 +70044,7 @@
     },
     "tennis": {
       "date": "2026-09-11",
-      "generatedAt": "2026-09-11T14:35:18.448695Z",
+      "generatedAt": "2026-09-11T15:10:11.807566Z",
       "matches": [
         {
           "assumed_tournament_meta": false,
@@ -72416,7 +72418,7 @@
     "scraped_tip_feed": true,
     "updatedAt": "2026-09-11T12:11:43.888129Z"
   },
-  "updatedAt": "2026-09-11T14:44:44.673511Z",
+  "updatedAt": "2026-09-11T15:19:07.178127Z",
   "wnba": {
     "date": "2026-09-11",
     "note": "No WNBA picks today \u2014 off-season or no edge found.",
