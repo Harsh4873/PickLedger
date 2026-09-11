@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 import json
+import os
+import sys
+import time
 from types import SimpleNamespace
 
 from scripts import refresh_external_feeds as refresh
@@ -52,6 +55,224 @@ def test_refresh_publishes_outage_diagnostics_without_redating_last_good_picks(m
     assert "Cloudflare" in bucket["lastError"]
     assert published["external_feed_errors"] == ["forebet_mlb: Listing blocked by Cloudflare"]
     assert "| forebet_mlb | error | 2026-09-05 | 1 |" in summary.read_text()
+
+
+def test_refresh_publishes_todays_partial_scores24_cfb_instead_of_yesterday(monkeypatch, tmp_path):
+    yesterday = {
+        "ok": True,
+        "date": "2026-09-10",
+        "updatedAt": "2026-09-10T19:12:03Z",
+        "picks": [{"pick": "Miami Under", "date": "2026-09-10", "decision": "PASS", "units": 0}],
+    }
+    (tmp_path / "latest.json").write_text(
+        json.dumps({"date": "2026-09-10", "models": {}, "external_feeds": {"scores24_cfb": yesterday}})
+    )
+    _configure(
+        monkeypatch,
+        tmp_path,
+        {
+            "scores24_cfb": lambda *_args: {
+                "ok": False,
+                "date": "2026-09-11",
+                "error": "Scores24CFB scrape timed out after 180s with 4 matched pick(s) of 5 official matchup(s)",
+                "picks": [
+                    {"pick": "Louisville ML", "date": "2026-09-11", "source": "Scores24CFB"},
+                    {"pick": "Stanford ML", "date": "2026-09-11", "source": "Scores24CFB"},
+                    {"pick": "Ole Miss ML", "date": "2026-09-11", "source": "Scores24CFB"},
+                    {"pick": "Alabama ML", "date": "2026-09-11", "source": "Scores24CFB"},
+                ],
+            }
+        },
+        date="2026-09-11",
+    )
+
+    assert refresh.main() == 1
+
+    published = json.loads((tmp_path / "latest.json").read_text())
+    bucket = published["external_feeds"]["scores24_cfb"]
+    assert bucket["date"] == "2026-09-11"
+    assert bucket["ok"] is False
+    assert bucket["refreshStatus"] == "error"
+    assert bucket["lastAttemptDate"] == "2026-09-11"
+    assert len(bucket["picks"]) == 4
+    assert all(pick["date"] == "2026-09-11" for pick in bucket["picks"])
+    assert "timed out" in bucket["lastError"]
+
+
+def test_optional_timeout_salvages_checkpoint_instead_of_redating_yesterday(tmp_path):
+    from scripts.scrapers import scores24_optional_publish as optional
+
+    checkpoint_dir = tmp_path / "state"
+    checkpoint_dir.mkdir()
+    (checkpoint_dir / "scores24-cfb-2026-09-11.json").write_text(
+        json.dumps(
+            {
+                "sport": "cfb",
+                "date": "2026-09-11",
+                "picks": [
+                    {
+                        "source": "Scores24CFB",
+                        "pick": "Louisville ML",
+                        "date": "2026-09-11",
+                        "away_team": "Villanova Wildcats",
+                        "home_team": "Louisville Cardinals",
+                    },
+                    {
+                        "source": "Scores24CFB",
+                        "pick": "Stanford ML",
+                        "date": "2026-09-11",
+                        "away_team": "Miami Hurricanes",
+                        "home_team": "Stanford Cardinal",
+                    },
+                    {
+                        "source": "Scores24CFB",
+                        "pick": "Ole Miss ML",
+                        "date": "2026-09-11",
+                        "away_team": "Kentucky Wildcats",
+                        "home_team": "Ole Miss Rebels",
+                    },
+                    {
+                        "source": "Scores24CFB",
+                        "pick": "Alabama ML",
+                        "date": "2026-09-11",
+                        "away_team": "South Florida Bulls",
+                        "home_team": "Alabama Crimson Tide",
+                    },
+                ],
+            }
+        )
+    )
+    yesterday = {
+        "ok": True,
+        "date": "2026-09-10",
+        "updatedAt": "2026-09-10T19:12:03Z",
+        "picks": [{"pick": "Miami Under", "date": "2026-09-10", "source": "Scores24CFB"}],
+    }
+    cache_path = tmp_path / "2026-09-11.json"
+    cache_path.write_text(
+        json.dumps(
+            {
+                "date": "2026-09-11",
+                "models": {"scores24_mlb": {"ok": True, "date": "2026-09-11", "picks": [{"pick": "Cubs ML"}]}},
+                "external_feeds": {
+                    "scores24_mlb": {"ok": True, "date": "2026-09-11", "picks": [{"pick": "Cubs ML"}]},
+                    "scores24_cfb": yesterday,
+                },
+            }
+        )
+    )
+
+    bucket = optional.apply_optional_timeout_to_cache(
+        cache_path,
+        "scores24_cfb",
+        "2026-09-11",
+        180,
+        checkpoint_dir=str(checkpoint_dir),
+        now_iso="2026-09-11T12:00:00Z",
+    )
+    published = json.loads(cache_path.read_text())
+    assert bucket["date"] == "2026-09-11"
+    assert bucket["ok"] is False
+    assert bucket["refreshStatus"] == "error"
+    assert len(bucket["picks"]) == 4
+    assert published["external_feeds"]["scores24_mlb"]["ok"] is True
+    assert published["external_feeds"]["scores24_cfb"]["picks"][0]["pick"] == "Louisville ML"
+
+
+def test_optional_timeout_without_checkpoint_keeps_yesterday_date(tmp_path):
+    from scripts.scrapers import scores24_optional_publish as optional
+
+    yesterday = {
+        "ok": True,
+        "date": "2026-09-10",
+        "updatedAt": "2026-09-10T19:12:03Z",
+        "picks": [{"pick": "Miami Under", "date": "2026-09-10", "source": "Scores24CFB"}],
+    }
+    cache_path = tmp_path / "2026-09-11.json"
+    cache_path.write_text(
+        json.dumps({"date": "2026-09-11", "models": {}, "external_feeds": {"scores24_cfb": yesterday}})
+    )
+
+    bucket = optional.apply_optional_timeout_to_cache(
+        cache_path,
+        "scores24_cfb",
+        "2026-09-11",
+        180,
+        checkpoint_dir=str(tmp_path / "empty"),
+        now_iso="2026-09-11T12:00:00Z",
+    )
+    assert bucket["date"] == "2026-09-10"
+    assert bucket["picks"] == yesterday["picks"]
+    assert bucket["lastAttemptDate"] == "2026-09-11"
+    assert bucket["refreshStatus"] == "error"
+    assert "timed out" in bucket["lastError"]
+
+
+def test_optional_feed_hard_timeout_kills_child_and_returns_soft_fail(tmp_path):
+    from scripts.scrapers import scores24_optional_publish as optional
+
+    repo = tmp_path / "repo"
+    (repo / "scripts").mkdir(parents=True)
+    (repo / "scripts" / "refresh_external_feeds.py").write_text("import time\ntime.sleep(30)\n")
+    cache_path = tmp_path / "2026-09-11.json"
+    cache_path.write_text(json.dumps({"date": "2026-09-11", "models": {}, "external_feeds": {}}))
+
+    started = time.monotonic()
+    rc = optional.run_optional_scores24_feed(
+        python_bin=sys.executable,
+        repo=str(repo),
+        date_iso="2026-09-11",
+        feed_key="scores24_cfb",
+        sports="cfb",
+        timeout_seconds=0.5,
+        cache_path=str(cache_path),
+        checkpoint_dir=str(tmp_path / "state"),
+    )
+    elapsed = time.monotonic() - started
+    assert rc == 0
+    assert elapsed < 8
+    bucket = json.loads(cache_path.read_text())["external_feeds"]["scores24_cfb"]
+    assert bucket["refreshStatus"] == "error"
+    assert bucket["lastAttemptDate"] == "2026-09-11"
+    assert bucket["ok"] is False
+    assert "timed out" in bucket["lastError"]
+
+
+def test_optional_timeout_salvage_does_not_leak_checkpoint_env(monkeypatch, tmp_path):
+    monkeypatch.delenv("SCORES24_CHECKPOINT_DIR", raising=False)
+    from scripts.scrapers import scores24_optional_publish as optional
+
+    checkpoint_dir = tmp_path / "state"
+    checkpoint_dir.mkdir()
+    (checkpoint_dir / "scores24-cfb-2026-09-11.json").write_text(
+        json.dumps(
+            {
+                "sport": "cfb",
+                "date": "2026-09-11",
+                "picks": [
+                    {
+                        "source": "Scores24CFB",
+                        "pick": "Louisville ML",
+                        "date": "2026-09-11",
+                    }
+                ],
+            }
+        )
+    )
+    cache_path = tmp_path / "2026-09-11.json"
+    cache_path.write_text(json.dumps({"date": "2026-09-11", "models": {}, "external_feeds": {}}))
+
+    optional.apply_optional_timeout_to_cache(
+        cache_path,
+        "scores24_cfb",
+        "2026-09-11",
+        180,
+        checkpoint_dir=str(checkpoint_dir),
+        now_iso="2026-09-11T12:00:00Z",
+    )
+    assert os.environ.get("SCORES24_CHECKPOINT_DIR") in {None, ""}
+    published = json.loads(cache_path.read_text())
+    assert len(published["external_feeds"]["scores24_cfb"]["picks"]) == 1
 
 
 def test_refresh_recovers_and_clears_previous_source_error(monkeypatch, tmp_path):

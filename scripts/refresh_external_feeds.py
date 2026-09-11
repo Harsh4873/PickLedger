@@ -277,28 +277,74 @@ def _split_provider_result(
     return buckets
 
 
+def _today_result_picks(result: dict[str, Any], date_iso: str) -> list[dict[str, Any]]:
+    result_date = str(result.get("date") or date_iso).strip()
+    picks: list[dict[str, Any]] = []
+    for pick in result.get("picks") if isinstance(result.get("picks"), list) else []:
+        if not isinstance(pick, dict) or not pick.get("pick"):
+            continue
+        if str(pick.get("date") or result_date) != date_iso:
+            continue
+        picks.append(pick)
+    return picks
+
+
 def _record_feed_attempt(
     previous: Any,
     result: dict[str, Any],
     date_iso: str,
     now_iso: str,
 ) -> dict[str, Any]:
-    """Retain the last successful snapshot without hiding a later failure."""
+    """Retain the last successful snapshot without hiding a later failure.
+
+    Same-day failed retries keep the last good same-day rows. A newer day's
+    partial scrape (matched picks for date_iso, even when ok=False) replaces
+    yesterday's successful snapshot so an optional CFB hang cannot leave
+    yesterday's bucket as the live research feed.
+    """
     if result.get("ok"):
         bucket = dict(result)
         bucket.pop("lastError", None)
         bucket["lastSuccessAt"] = now_iso
         bucket["refreshStatus"] = "ok"
-    else:
-        # A failed fetch must not erase already published picks, or redatestamp
-        # yesterday's rows as today's. Attempt freshness is separate from the
-        # date and time of the last successfully collected source snapshot.
-        has_previous = isinstance(previous, dict) and previous.get("ok")
-        bucket = dict(previous if has_previous else result)
-        if has_previous:
-            bucket.setdefault("lastSuccessAt", previous.get("updatedAt") or previous.get("generatedAt"))
+        bucket["lastAttemptAt"] = now_iso
+        bucket["lastAttemptDate"] = date_iso
+        return bucket
+
+    today_picks = _today_result_picks(result, date_iso)
+    previous_date = str((previous or {}).get("date") or "").strip() if isinstance(previous, dict) else ""
+    previous_picks = previous.get("picks") if isinstance(previous, dict) else []
+    previous_same_day_ok = (
+        isinstance(previous, dict)
+        and previous.get("ok")
+        and previous_date == date_iso
+        and isinstance(previous_picks, list)
+        and len(previous_picks) >= len(today_picks)
+    )
+    if (
+        str(result.get("date") or date_iso).strip() == date_iso
+        and today_picks
+        and not previous_same_day_ok
+    ):
+        bucket = dict(result)
+        bucket["picks"] = today_picks
+        bucket["date"] = date_iso
+        bucket["ok"] = False
         bucket["refreshStatus"] = "error"
-        bucket["lastError"] = str(result.get("error") or "Source refresh failed")
+        bucket["lastError"] = str(result.get("error") or "Source refresh incomplete")
+        bucket["lastAttemptAt"] = now_iso
+        bucket["lastAttemptDate"] = date_iso
+        return bucket
+
+    # A failed fetch must not erase already published picks, or redatestamp
+    # yesterday's rows as today's. Attempt freshness is separate from the
+    # date and time of the last successfully collected source snapshot.
+    has_previous = isinstance(previous, dict) and previous.get("ok")
+    bucket = dict(previous if has_previous else result)
+    if has_previous:
+        bucket.setdefault("lastSuccessAt", previous.get("updatedAt") or previous.get("generatedAt"))
+    bucket["refreshStatus"] = "error"
+    bucket["lastError"] = str(result.get("error") or "Source refresh failed")
     bucket["lastAttemptAt"] = now_iso
     bucket["lastAttemptDate"] = date_iso
     return bucket

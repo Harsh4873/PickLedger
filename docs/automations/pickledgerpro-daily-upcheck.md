@@ -48,6 +48,13 @@ scripts/scrapers/tennis_publish_local.sh --date "$TARGET_DATE"
 
 Safely sync `main` after each publisher. Scores24 defaults include MLB/WNBA plus optional CFB/NFL. Forebet defaults include MLB/WNBA/MLS/CFB/NFL. Tennis retains TennisTonic/Scores24Tennis. A failed optional football or tennis feed must not block other published picks. Preserve the most recent successful same-day rows after a failed retry and expose the failure in source health.
 
+Scores24 CFB/NFL are scraped after the MLB+WNBA completeness gate. They stay off `REQUIRED_SCORES24_FEED_KEYS` (soft-fail, like tennis). Morning and afternoon local publishes behave as follows:
+
+- **Required MLB+WNBA:** still use the full-slate gate and the longer block-retry budget. Incomplete MLB or WNBA still refuses the commit.
+- **Optional CFB/NFL success:** today's matched editorial picks publish with `ok` / `refreshStatus=ok` and today's date. A resolved empty official slate is a dated off-day `ok` bucket.
+- **Optional timeout or hang:** each optional feed has a hard timeout (default 180s via `SCORES24_OPTIONAL_FEED_TIMEOUT_SECONDS`) that kills the Camoufox process group. That wait cannot stall MLB+WNBA publish beyond the timeout. If `SCORES24_CHECKPOINT_DIR` already holds today's matched CFB/NFL picks, those rows publish as today's incomplete bucket (`ok=false`, `refreshStatus=error`, `lastAttemptDate=today`). If there is no same-day checkpoint, yesterday's snapshot keeps yesterday's date; only `lastAttemptDate` / `lastError` move to today. Never stamp yesterday's one-pick CFB bucket as today.
+- **Afternoon rerun:** the same checkpoint is the resume point, so a morning timeout can still finish the slate later without refetching already-matched games.
+
 For each provider, report the bucket date, latest attempt status, official matchup count, published count, and missing/unpublished reasons where available. Scores24/Forebet external failures remain non-blocking for Pages when required in-house data is ready. Never classify a missing external feed as proof that no games exist.
 
 ## Other models, props, and derived boards

@@ -2402,6 +2402,10 @@ def test_scores24_cfb_is_wired_soft_fail_across_the_pipeline():
     assert 'PUBLISH_FEEDS="${SCORES24_PUBLISH_FEEDS:-scores24_mlb,scores24_wnba}"' in publisher
     assert "will not block MLB+WNBA publish" in publisher
     assert "OPTIONAL_FEED_TIMEOUT" in publisher
+    assert 'SCORES24_OPTIONAL_FEED_TIMEOUT_SECONDS:-180' in publisher
+    assert "scores24_optional_publish.py" in publisher
+    assert "SCORES24_OPTIONAL_BLOCK_RETRY_ROUNDS" in publisher
+    assert "yesterday's rows are never" in publisher
 
 
 def test_scores24_nfl_config_listing_urls_and_official_matchup_scrape():
@@ -2529,6 +2533,7 @@ def test_scores24_nfl_is_wired_soft_fail_across_the_pipeline():
     assert 'OPTIONAL_FEEDS="${SCORES24_OPTIONAL_FEEDS:-scores24_cfb,scores24_nfl}"' in publisher
     assert 'PUBLISH_FEEDS="${SCORES24_PUBLISH_FEEDS:-scores24_mlb,scores24_wnba}"' in publisher
     assert "will not block MLB+WNBA publish" in publisher
+    assert "scores24_optional_publish.py" in publisher
 
 
 def test_scores24_retries_blocked_matchup_without_hammering_candidates(monkeypatch):
@@ -2746,6 +2751,65 @@ def test_scores24_checkpoint_resumes_without_refetching_resolved(monkeypatch, tm
     assert second["meta"]["matchedPicks"] == 2
     assert second["meta"]["checkpointedPicks"] == 1
     assert all("tampa-bay-rays" not in url for url in second_client.urls)
+
+
+def test_scores24_scrape_timeout_returns_todays_partial_picks(monkeypatch, tmp_path):
+    module = _load_module(
+        "scores24_scrape_timeout_partial_test",
+        ROOT / "scripts" / "scrapers" / "scores24_scraper.py",
+    )
+    monkeypatch.setenv("SCORES24_CHECKPOINT_DIR", str(tmp_path))
+    monkeypatch.setenv("SCORES24_BLOCK_RETRY_ROUNDS", "0")
+    monkeypatch.setenv("SCORES24_SCRAPE_TIMEOUT_SECONDS", "60")
+    orig_save = module._save_checkpoint
+
+    def save_then_expire(*args, **kwargs):
+        orig_save(*args, **kwargs)
+        monkeypatch.setattr(module, "scrape_timed_out", lambda: True)
+
+    monkeypatch.setattr(module, "_save_checkpoint", save_then_expire)
+    rays_detail = """
+    <html><head><title>Los Angeles Angels vs Tampa Bay Rays Prediction</title></head>
+    <body><div><div>Our choice</div><div>Tampa Bay Rays Win at odds of -179*</div></div></body>
+    </html>
+    """
+    matchups = [
+        {"away": "Tampa Bay Rays", "home": "Los Angeles Angels", "start_time": ""},
+        {"away": "San Francisco Giants", "home": "Miami Marlins", "start_time": ""},
+        {"away": "New York Yankees", "home": "Boston Red Sox", "start_time": ""},
+    ]
+
+    class PartialThenTimeoutClient:
+        def get_html(self, url: str, attempts: int = 3):
+            if module.scrape_timed_out():
+                return "", 0, False
+            if url.endswith("/l-usa-mlb/predictions"):
+                return (
+                    '<a href="/en/baseball/m-12-06-2026-los-angeles-angels-tampa-bay-rays-prediction">'
+                    "Los Angeles Angels Tampa Bay Rays Prediction</a>",
+                    200,
+                    False,
+                )
+            if "tampa-bay-rays" in url:
+                return rays_detail, 200, False
+            raise AssertionError(f"timeout should skip remaining URLs, got {url}")
+
+        def close(self):
+            return None
+
+    result = module.scrape_scores24(
+        "mlb",
+        "2026-06-12",
+        client=PartialThenTimeoutClient(),
+        matchups=matchups,
+    )
+    assert result["ok"] is False
+    assert result["meta"]["timedOut"] is True
+    assert result["meta"]["matchedPicks"] == 1
+    assert result["picks"][0]["date"] == "2026-06-12"
+    assert "timed out" in result["error"]
+    checkpoint = json.loads((tmp_path / "scores24-mlb-2026-06-12.json").read_text(encoding="utf-8"))
+    assert len(checkpoint["picks"]) == 1
 
 
 def test_scores24_historical_url_hints_use_committed_slug_and_date_offset(monkeypatch, tmp_path):

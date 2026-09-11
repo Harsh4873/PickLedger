@@ -170,6 +170,97 @@ def _env_float(name: str, default: float, minimum: float = 0.0) -> float:
     return max(minimum, value)
 
 
+# Optional Scores24 feeds (CFB/NFL) set SCORES24_SCRAPE_TIMEOUT_SECONDS so a
+# hung Camoufox challenge cannot burn the publisher's outer kill-switch. The
+# timer starts at scrape_scores24() after the official slate is resolved.
+_SCRAPE_MONOTONIC_START: float | None = None
+
+
+def begin_scrape_timer() -> None:
+    global _SCRAPE_MONOTONIC_START
+    _SCRAPE_MONOTONIC_START = time.monotonic()
+
+
+def scrape_timeout_seconds() -> float:
+    return _env_float("SCORES24_SCRAPE_TIMEOUT_SECONDS", 0.0)
+
+
+def scrape_seconds_remaining() -> float | None:
+    timeout = scrape_timeout_seconds()
+    if timeout <= 0:
+        return None
+    start = _SCRAPE_MONOTONIC_START
+    if start is None:
+        begin_scrape_timer()
+        start = _SCRAPE_MONOTONIC_START
+    assert start is not None
+    return max(0.0, timeout - (time.monotonic() - start))
+
+
+def scrape_timed_out() -> bool:
+    remaining = scrape_seconds_remaining()
+    return remaining is not None and remaining <= 0.0
+
+
+def _capped_timeout_ms(default_ms: int) -> int:
+    remaining = scrape_seconds_remaining()
+    if remaining is None:
+        return max(1, default_ms)
+    return max(1, min(default_ms, int(remaining * 1000)))
+
+
+def sport_key_for_feed(feed_key: str) -> str | None:
+    key = str(feed_key or "").strip().lower()
+    if key.startswith("scores24_"):
+        sport = key.removeprefix("scores24_")
+        if sport in SPORT_CONFIG:
+            return sport
+    return None
+
+
+def load_checkpoint_picks(
+    sport_key: str,
+    date_iso: str,
+    *,
+    checkpoint_dir: str | Path | None = None,
+) -> list[dict[str, Any]]:
+    """Same-day checkpoint rows without requiring the official slate in-process.
+
+    The local publisher's outer timeout kills refresh_external_feeds before it
+    can write the cache. Checkpoint files are the only durable copy of the
+    matchups that already matched. Slate filtering is skipped here: the file is
+    already scoped to sport+date, and ESPN may be unreachable at salvage time.
+
+    Pass checkpoint_dir explicitly instead of mutating SCORES24_CHECKPOINT_DIR;
+    that env flag also enables historical URL hints and same-day resume for
+    every later scrape in the process (required MLB/WNBA included).
+    """
+    if checkpoint_dir is not None:
+        path = Path(checkpoint_dir).expanduser() / f"scores24-{sport_key}-{date_iso}.json"
+    else:
+        path = _checkpoint_path(sport_key, date_iso)
+    if path is None or not path.exists():
+        return []
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+    if (
+        not isinstance(payload, dict)
+        or payload.get("date") != date_iso
+        or payload.get("sport") != sport_key
+    ):
+        return []
+    picks: list[dict[str, Any]] = []
+    for row in payload.get("picks") if isinstance(payload.get("picks"), list) else []:
+        if not isinstance(row, dict) or not row.get("pick") or not row.get("source"):
+            continue
+        if str(row.get("date") or date_iso) != date_iso:
+            continue
+        picks.append(row)
+    return picks
+
+
 def _norm_space(value: Any) -> str:
     return re.sub(r"\s+", " ", str(value or "")).strip()
 
@@ -603,6 +694,11 @@ class Scores24Client:
 
     def _pace(self) -> None:
         remaining = self.interval_seconds - (time.monotonic() - self._last_request_at)
+        scrape_remaining = scrape_seconds_remaining()
+        if scrape_remaining is not None:
+            if scrape_remaining <= 0:
+                return
+            remaining = min(remaining, scrape_remaining) if remaining > 0 else remaining
         if remaining > 0:
             time.sleep(remaining)
         self._last_request_at = time.monotonic()
@@ -635,8 +731,10 @@ class Scores24Client:
                 )
             page = self._context.new_page()
             try:
-                response = page.goto(url, timeout=45000, wait_until="domcontentloaded")
-                page.wait_for_timeout(3500)
+                response = page.goto(
+                    url, timeout=_capped_timeout_ms(45000), wait_until="domcontentloaded"
+                )
+                page.wait_for_timeout(min(3500, _capped_timeout_ms(3500)))
                 html = page.content()
                 status = response.status if response else 0
                 return html, status
@@ -692,18 +790,31 @@ class Scores24Client:
                     )
             page = self._camoufox_context.new_page()
             try:
-                response = page.goto(url, timeout=90000, wait_until="domcontentloaded")
+                if scrape_timed_out():
+                    return "", 0
+                response = page.goto(
+                    url, timeout=_capped_timeout_ms(90000), wait_until="domcontentloaded"
+                )
                 status = response.status if response else 0
                 html = ""
                 challenge_waits = int(_env_float("SCORES24_CAMOUFOX_CHALLENGE_WAITS", 24, 1))
+                remaining = scrape_seconds_remaining()
+                if remaining is not None:
+                    challenge_waits = max(1, min(challenge_waits, int(remaining // 5) or 1))
                 for attempt in range(challenge_waits):
-                    page.wait_for_timeout(5000)
+                    if scrape_timed_out():
+                        return html, status
+                    page.wait_for_timeout(min(5000, _capped_timeout_ms(5000)))
                     html = page.content()
                     title = _norm_space(page.title()).lower()
                     if status == 200 and not _looks_blocked(status, html) and "just a moment" not in title:
                         return html, status
                     if attempt < challenge_waits - 1 and attempt % 4 == 3:
-                        response = page.reload(timeout=90000, wait_until="domcontentloaded")
+                        if scrape_timed_out():
+                            return html, status
+                        response = page.reload(
+                            timeout=_capped_timeout_ms(90000), wait_until="domcontentloaded"
+                        )
                         status = response.status if response else status
                 return html, status
             finally:
@@ -729,6 +840,8 @@ class Scores24Client:
             return "", 0
 
     def get_html(self, url: str, attempts: int | None = None) -> tuple[str, int, bool]:
+        if scrape_timed_out():
+            return "", 0, False
         max_attempts = (
             int(_env_float("SCORES24_REQUEST_ATTEMPTS", 3, 1))
             if attempts is None
@@ -746,12 +859,16 @@ class Scores24Client:
         last_html = ""
         last_status = 0
         blocked = False
+        remaining = scrape_seconds_remaining()
+        http_timeout = 35.0 if remaining is None else max(1.0, min(35.0, remaining))
         for attempt in range(max_attempts):
+            if scrape_timed_out():
+                return last_html, last_status, blocked
             self._pace()
             last_html, last_status = self._impersonated_html(url)
             if not last_status:
                 try:
-                    response = self.session.get(url, timeout=35)
+                    response = self.session.get(url, timeout=http_timeout)
                     last_html = response.text
                     last_status = response.status_code
                 except requests.RequestException:
@@ -765,6 +882,9 @@ class Scores24Client:
                 return last_html, last_status, False
             if attempt + 1 < max_attempts:
                 sleep_seconds = (4.0 if blocked else 2.0) * (attempt + 1) * attempt_retry_delay
+                remaining = scrape_seconds_remaining()
+                if remaining is not None:
+                    sleep_seconds = min(sleep_seconds, remaining)
                 if sleep_seconds > 0:
                     time.sleep(sleep_seconds)
 
@@ -1214,11 +1334,14 @@ def scrape_scores24(
         if _matchup_key(matchup["away"], matchup["home"]) not in checkpointed
     ]
     unresolved: list[tuple[dict[str, str], list[str]]] = []
+    begin_scrape_timer()
     try:
         if remaining:
             configured_listing_urls = config.get("listing_urls") or (config["listing_url"],)
             seen_listing_links: set[str] = set()
             for listing_url in dict.fromkeys(configured_listing_urls):
+                if scrape_timed_out():
+                    break
                 listing_urls_attempted += 1
                 listing_html, listing_status, listing_blocked = scores_client.get_html(listing_url)
                 if listing_blocked:
@@ -1245,6 +1368,8 @@ def scrape_scores24(
             ) -> dict[str, Any] | None:
                 nonlocal attempted_urls
                 for url in candidates[:candidate_limit]:
+                    if scrape_timed_out():
+                        return None
                     attempted_urls += 1
                     html, status, blocked = scores_client.get_html(url)
                     if blocked:
@@ -1296,7 +1421,11 @@ def scrape_scores24(
                 # slate as possible.
                 (listed_queue if listing_urls else unlisted_queue).append((matchup, candidates))
 
-            for matchup, candidates in [*listed_queue, *unlisted_queue]:
+            queued = [*listed_queue, *unlisted_queue]
+            for index, (matchup, candidates) in enumerate(queued):
+                if scrape_timed_out():
+                    unresolved.extend(queued[index:])
+                    break
                 pick = resolve_candidates(matchup, candidates, max_candidates)
                 if not pick:
                     unresolved.append((matchup, candidates))
@@ -1307,6 +1436,8 @@ def scrape_scores24(
             max_retry_rounds = int(_env_float("SCORES24_BLOCK_RETRY_ROUNDS", 3, 0))
             retry_delay = _env_float("SCORES24_BLOCK_RETRY_DELAY_SECONDS", 45.0)
             while unresolved and block_retry_rounds < max_retry_rounds:
+                if scrape_timed_out():
+                    break
                 unresolved_blocked = any(
                     _matchup_key(matchup["away"], matchup["home"]) in blocked_matchups
                     for matchup, _ in unresolved
@@ -1314,7 +1445,12 @@ def scrape_scores24(
                 if not unresolved_blocked:
                     break
                 block_retry_rounds += 1
-                time.sleep(retry_delay)
+                remaining_sleep = scrape_seconds_remaining()
+                sleep_for = retry_delay if remaining_sleep is None else min(retry_delay, remaining_sleep)
+                if sleep_for > 0:
+                    time.sleep(sleep_for)
+                if scrape_timed_out():
+                    break
                 if owns_client:
                     # A blocked Camoufox/Playwright transport is intentionally marked
                     # failed for the rest of its client lifetime. Reusing that client
@@ -1326,6 +1462,9 @@ def scrape_scores24(
                     scores_client = Scores24Client()
                 still_unresolved: list[tuple[dict[str, str], list[str]]] = []
                 for matchup, candidates in unresolved:
+                    if scrape_timed_out():
+                        still_unresolved.append((matchup, candidates))
+                        continue
                     pick = resolve_candidates(matchup, candidates, min(max_candidates, 6))
                     if pick:
                         picks.append(pick)
@@ -1338,6 +1477,45 @@ def scrape_scores24(
             scores_client.close()
 
     unresolved_matchups = [f"{matchup['away']} @ {matchup['home']}" for matchup, _ in unresolved]
+    picked_keys = {
+        key
+        for pick in picks
+        if isinstance(pick, dict)
+        for key in (
+            _matchup_key(str(pick.get("away_team") or ""), str(pick.get("home_team") or "")),
+        )
+        if key
+    }
+    timeout_missing = [
+        f"{matchup['away']} @ {matchup['home']}"
+        for matchup in expected
+        if _matchup_key(matchup["away"], matchup["home"]) not in picked_keys
+    ]
+    if scrape_timed_out() and timeout_missing:
+        timeout_s = scrape_timeout_seconds()
+        return {
+            "ok": False,
+            "date": date_iso,
+            "picks": picks,
+            "error": (
+                f"{config['source']} scrape timed out after {timeout_s:.0f}s "
+                f"with {len(picks)} matched pick(s) of {len(expected)} official matchup(s)"
+            ),
+            "meta": {
+                "officialMatchups": len(expected),
+                "expectedMatchups": len(expected),
+                "matchedPicks": len(picks),
+                "missingMatchups": timeout_missing,
+                "unpublishedMatchups": [],
+                "attemptedUrls": attempted_urls,
+                "blockedUrls": len(set(blocked_urls)),
+                "blockRetryRounds": block_retry_rounds,
+                "checkpointedPicks": len(checkpointed),
+                "listingResolved": listing_resolved,
+                "listingUrlsAttempted": listing_urls_attempted,
+                "timedOut": True,
+            },
+        }
     blocked_missing = [
         f"{matchup['away']} @ {matchup['home']}"
         for matchup, _ in unresolved
