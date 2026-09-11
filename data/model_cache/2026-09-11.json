@@ -537,7 +537,7 @@
   },
   "date": "2026-09-11",
   "errors": [],
-  "externalFeedsUpdatedAt": "2026-09-11T18:41:52.913785Z",
+  "externalFeedsUpdatedAt": "2026-09-11T18:42:35.884118Z",
   "external_feed_errors": [],
   "external_feeds": {
     "forebet_cfb": {
@@ -2637,11 +2637,11 @@
     },
     "tennistonic_tennis": {
       "date": "2026-09-11",
-      "generatedAt": "2026-09-11T18:31:20.869041Z",
-      "generatedBy": "github-actions:external-feed-refresh",
-      "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+      "generatedAt": "2026-09-11T18:42:35.884118Z",
+      "generatedBy": "local:external-feed-refresh",
+      "lastAttemptAt": "2026-09-11T18:42:35.884118Z",
       "lastAttemptDate": "2026-09-11",
-      "lastSuccessAt": "2026-09-11T18:31:20.869041Z",
+      "lastSuccessAt": "2026-09-11T18:42:35.884118Z",
       "meta": {
         "attemptedUrls": 20,
         "blockedUrls": 0,
@@ -2649,8 +2649,8 @@
         "expectedMatchups": 4,
         "failedUrls": 0,
         "feed": "tennistonic_tennis",
-        "from": "github-actions",
-        "leagues": "nba,mlb,wnba,cfb,nfl",
+        "from": "local",
+        "leagues": "tennis",
         "matchedPicks": 4,
         "missingMatchups": [],
         "officialMatchups": 12,
@@ -2665,7 +2665,7 @@
           "Alevtina Ibragimova vs Aurora Zantedeschi",
           "Eva Bennemann vs Alicia Herrero Linana"
         ],
-        "updatedAt": "2026-09-11T18:31:20.869041Z"
+        "updatedAt": "2026-09-11T18:42:35.884118Z"
       },
       "note": "TennisTonic matched 4 tennis prediction(s) against 12 official 2026-09-11 singles matchup(s).",
       "ok": true,
@@ -2785,7 +2785,7 @@
       ],
       "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-11T18:31:20.869041Z"
+      "updatedAt": "2026-09-11T18:42:35.884118Z"
     }
   },
   "forebet_cfb": {
@@ -72341,11 +72341,11 @@
     },
     "tennistonic_tennis": {
       "date": "2026-09-11",
-      "generatedAt": "2026-09-11T18:31:20.869041Z",
-      "generatedBy": "github-actions:external-feed-refresh",
-      "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+      "generatedAt": "2026-09-11T18:42:35.884118Z",
+      "generatedBy": "local:external-feed-refresh",
+      "lastAttemptAt": "2026-09-11T18:42:35.884118Z",
       "lastAttemptDate": "2026-09-11",
-      "lastSuccessAt": "2026-09-11T18:31:20.869041Z",
+      "lastSuccessAt": "2026-09-11T18:42:35.884118Z",
       "meta": {
         "attemptedUrls": 20,
         "blockedUrls": 0,
@@ -72353,8 +72353,8 @@
         "expectedMatchups": 4,
         "failedUrls": 0,
         "feed": "tennistonic_tennis",
-        "from": "github-actions",
-        "leagues": "nba,mlb,wnba,cfb,nfl",
+        "from": "local",
+        "leagues": "tennis",
         "matchedPicks": 4,
         "missingMatchups": [],
         "officialMatchups": 12,
@@ -72369,7 +72369,7 @@
           "Alevtina Ibragimova vs Aurora Zantedeschi",
           "Eva Bennemann vs Alicia Herrero Linana"
         ],
-        "updatedAt": "2026-09-11T18:31:20.869041Z"
+        "updatedAt": "2026-09-11T18:42:35.884118Z"
       },
       "note": "TennisTonic matched 4 tennis prediction(s) against 12 official 2026-09-11 singles matchup(s).",
       "ok": true,
@@ -72489,7 +72489,7 @@
       ],
       "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-11T18:31:20.869041Z"
+      "updatedAt": "2026-09-11T18:42:35.884118Z"
     },
     "wnba": {
       "date": "2026-09-11",
@@ -73694,11 +73694,11 @@
   },
   "tennistonic_tennis": {
     "date": "2026-09-11",
-    "generatedAt": "2026-09-11T18:31:20.869041Z",
-    "generatedBy": "github-actions:external-feed-refresh",
-    "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+    "generatedAt": "2026-09-11T18:42:35.884118Z",
+    "generatedBy": "local:external-feed-refresh",
+    "lastAttemptAt": "2026-09-11T18:42:35.884118Z",
     "lastAttemptDate": "2026-09-11",
-    "lastSuccessAt": "2026-09-11T18:31:20.869041Z",
+    "lastSuccessAt": "2026-09-11T18:42:35.884118Z",
     "meta": {
       "attemptedUrls": 20,
       "blockedUrls": 0,
@@ -73706,8 +73706,8 @@
       "expectedMatchups": 4,
       "failedUrls": 0,
       "feed": "tennistonic_tennis",
-      "from": "github-actions",
-      "leagues": "nba,mlb,wnba,cfb,nfl",
+      "from": "local",
+      "leagues": "tennis",
       "matchedPicks": 4,
       "missingMatchups": [],
       "officialMatchups": 12,
@@ -73722,7 +73722,7 @@
         "Alevtina Ibragimova vs Aurora Zantedeschi",
         "Eva Bennemann vs Alicia Herrero Linana"
       ],
-      "updatedAt": "2026-09-11T18:31:20.869041Z"
+      "updatedAt": "2026-09-11T18:42:35.884118Z"
     },
     "note": "TennisTonic matched 4 tennis prediction(s) against 12 official 2026-09-11 singles matchup(s).",
     "ok": true,
@@ -73842,9 +73842,9 @@
     ],
     "refreshStatus": "ok",
     "scraped_tip_feed": true,
-    "updatedAt": "2026-09-11T18:31:20.869041Z"
+    "updatedAt": "2026-09-11T18:42:35.884118Z"
   },
-  "updatedAt": "2026-09-11T18:41:52.913785Z",
+  "updatedAt": "2026-09-11T18:42:35.884118Z",
   "wnba": {
     "date": "2026-09-11",
     "note": "No WNBA picks today \u2014 off-season or no edge found.",
