@@ -287,13 +287,13 @@
         "alpha": 0.0,
         "alphaStdError": 0.1,
         "breakEvenProbability": 0.618321,
-        "conservativeExpectedValue": -0.247616,
-        "expectedValue": -0.040352,
-        "lowerProbability": 0.465215,
-        "marketProbability": 0.59337,
+        "conservativeExpectedValue": -0.237477,
+        "expectedValue": -0.030213,
+        "lowerProbability": 0.471484,
+        "marketProbability": 0.599639,
         "method": "market_baseline_plus_hierarchically_shrunk_prior_residual",
-        "probability": 0.59337,
-        "probabilityPositiveEv": 0.401485,
+        "probability": 0.599639,
+        "probabilityPositiveEv": 0.425902,
         "sourceAlpha": 0.0,
         "value": {
           "alpha": 0.0,
@@ -368,7 +368,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 6.597,
+        "ageHours": 5.148,
         "breakEvenProbability": 0.618321,
         "decimalOdds": 1.617284,
         "eligibleForAlphaEstimate": true,
@@ -379,7 +379,7 @@
           "field": "market_no_vig_selected_probability"
         },
         "noVigMethod": "explicit:pick.market_no_vig_selected_probability",
-        "noVigProbability": 0.59337,
+        "noVigProbability": 0.599639,
         "noVigVerified": true,
         "observedExecutable": true,
         "oddsAmerican": -162,
@@ -389,10 +389,10 @@
         "startTime": "2026-09-11T23:30Z",
         "tier": "A",
         "tierLabel": "certified_executable",
-        "timestamp": "2026-09-11T16:54:11.328345Z",
+        "timestamp": "2026-09-11T18:21:07.852508Z",
         "timestampField": "pick.market_updated_at",
         "twoSided": true,
-        "updatedAt": "2026-09-11T16:54:11.328345Z"
+        "updatedAt": "2026-09-11T18:21:07.852508Z"
       },
       "rawModelProbabilityIgnored": 0.657998,
       "result": "pending",
@@ -514,7 +514,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 7.097,
+        "ageHours": 5.648,
         "breakEvenProbability": 0.357143,
         "decimalOdds": 2.8,
         "eligibleForAlphaEstimate": true,
@@ -535,10 +535,10 @@
         "startTime": "2026-09-12T00:00Z",
         "tier": "A",
         "tierLabel": "certified_executable",
-        "timestamp": "2026-09-11T16:54:11.328345Z",
+        "timestamp": "2026-09-11T18:21:07.852508Z",
         "timestampField": "pick.market_updated_at",
         "twoSided": true,
-        "updatedAt": "2026-09-11T16:54:11.328345Z"
+        "updatedAt": "2026-09-11T18:21:07.852508Z"
       },
       "rawModelProbabilityIgnored": 0.609905,
       "result": "pending",
@@ -1669,7 +1669,7 @@
   "date": "2026-09-11",
   "engineVersion": "profit_desk_v2_live",
   "firstLiveDate": "2026-07-11",
-  "generatedAt": "2026-09-11T18:11:32.513396Z",
+  "generatedAt": "2026-09-11T18:23:09.777968Z",
   "notices": [
     "Qualified picks carry real flat stakes: EDGE 1.0u, VALUE 0.5u; everything else stays 0u.",
     "The market price is the baseline; historical residual alpha is shrunk and uncertainty-adjusted.",
