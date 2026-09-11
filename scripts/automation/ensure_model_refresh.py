@@ -94,6 +94,7 @@ def main():
     parser.add_argument("--dispatch", action="store_true", help="Dispatch recovery when needed; otherwise read only")
     parser.add_argument("--remote", action="store_true", help="Request the serialized hosted guard without touching the working tree")
     parser.add_argument("--local-clock", action="store_true", help="Only check during the Central daytime publishing window")
+    parser.add_argument("--external-feeds", action="store_true", help="Recover local-only Forebet/Scores24/Tennis feeds")
     parser.add_argument("--date", default="", help="Skip historical publisher runs")
     args = parser.parse_args()
     now = datetime.now(timezone.utc)
@@ -113,6 +114,12 @@ def main():
             print("Requested freshness guard; it will recover only missing refreshes")
         else:
             print("Would request the freshness guard")
+        # Existing installations only pass --local-clock. Keep them useful
+        # after upgrading so a reinstall is not required to recover the
+        # Cloudflare-blocked source feeds.
+        if args.external_feeds or args.local_clock:
+            external = Path(__file__).with_name("ensure_external_feeds.py")
+            subprocess.run([sys.executable, str(external), "--date", target], check=False)
         return 0
     try:
         payload = json.loads((Path(__file__).resolve().parents[2] / "data/model_cache/latest.json").read_text())

@@ -241,6 +241,34 @@ timeout = float(os.environ.get("OPTIONAL_FEED_TIMEOUT") or "900")
 try:
     result = subprocess.run(cmd, timeout=timeout)
 except subprocess.TimeoutExpired:
+    # Keep the optional feed's failure visible. Previously a timeout exited
+    # before refresh_external_feeds could write its diagnostics, so the old
+    # successful (often yesterday's) bucket looked healthy forever.
+    cache_path = os.path.join(os.environ["TEMP_REPO"], "data", "model_cache", f"{os.environ['DATE_ISO']}.json")
+    if not os.path.exists(cache_path):
+        cache_path = os.path.join(os.environ["TEMP_REPO"], "data", "model_cache", "latest.json")
+    try:
+        import json
+        from datetime import datetime, timezone
+        with open(cache_path, encoding="utf-8") as handle:
+            payload = json.load(handle)
+        feeds = payload.setdefault("external_feeds", {})
+        key = os.environ["OPTIONAL_FEED_KEY"]
+        bucket = dict(feeds.get(key) or {})
+        now = datetime.now(timezone.utc).isoformat()
+        bucket.update({
+            "date": os.environ["DATE_ISO"],
+            "refreshStatus": "error",
+            "lastError": f"Optional source refresh timed out after {timeout:.0f}s",
+            "lastAttemptAt": now,
+            "lastAttemptDate": os.environ["DATE_ISO"],
+        })
+        feeds[key] = bucket
+        with open(cache_path, "w", encoding="utf-8") as handle:
+            json.dump(payload, handle, indent=2)
+            handle.write("\n")
+    except (OSError, ValueError) as exc:
+        print(f"Could not record optional timeout diagnostics: {exc}", file=sys.stderr)
     print(
         f"Optional {os.environ['OPTIONAL_FEED_KEY']} scrape timed out after {timeout:.0f}s; "
         "continuing with MLB+WNBA publish.",

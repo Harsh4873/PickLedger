@@ -5911,7 +5911,16 @@ def _known_external_slate_matchups(target_date: str, sport_code: str) -> list[st
     except (KeyError, ValueError):
         scoreboard = None
     if isinstance(scoreboard, dict):
-        for event in scoreboard.get("events") if isinstance(scoreboard.get("events"), list) else []:
+        # The official response is authoritative, including a confirmed
+        # zero-event off-day. Discard cache-derived rows before adding current
+        # events so aliases and stale games cannot expand the whitelist.
+        # Archived specialty feeds (FIFA WC/NBA Summer) can return an empty
+        # placeholder from ESPN even when their in-house slate is the only
+        # supported source; retain that explicit cache fallback.
+        events = scoreboard.get("events") if isinstance(scoreboard.get("events"), list) else []
+        if events or str(sport_code).strip().lower() not in {"fifa_world_cup", "nba_summer"}:
+            matchups = {}
+        for event in events:
             if _central_date(event.get("date")) not in {None, target_date}:
                 continue
             competitions = event.get("competitions") if isinstance(event, dict) else []

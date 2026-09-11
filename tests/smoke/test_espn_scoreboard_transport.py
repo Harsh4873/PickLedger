@@ -54,6 +54,25 @@ def test_valid_empty_scoreboard_is_off_day(monkeypatch, tmp_path):
     assert scores24.fetch_daily_matchups("wnba", "2026-09-09", session=Session([{"events": []}])) == ([], True)
 
 
+def test_resolved_scoreboard_drops_stale_cached_aliases(monkeypatch, tmp_path):
+    monkeypatch.setattr(scores24, "MODEL_CACHE_DIR", tmp_path)
+    (tmp_path / "2026-09-09.json").write_text(
+        '{"date":"2026-09-09","models":{"mlb_first_five":{"games":['
+        '{"away_team":"Old Away","home_team":"Old Home"}]}}}',
+        encoding="utf-8",
+    )
+    payload = {"events": [{
+        "date": "2026-09-09T18:00:00Z",
+        "competitions": [{"date": "2026-09-09T18:00:00Z", "competitors": [
+            {"homeAway": "away", "team": {"displayName": "New Away"}},
+            {"homeAway": "home", "team": {"displayName": "New Home"}},
+        ]}],
+    }]}
+    matchups, resolved = scores24.fetch_daily_matchups("mlb", "2026-09-09", session=Session([payload]))
+    assert resolved is True
+    assert matchups == [{"away": "New Away", "home": "New Home", "start_time": "2026-09-09T18:00:00Z"}]
+
+
 def test_tennis_requires_both_tours_to_confirm_off_day():
     def partial(url):
         if "/wta/" in url:

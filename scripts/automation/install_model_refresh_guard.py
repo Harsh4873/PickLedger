@@ -24,7 +24,7 @@ def main():
     path.parent.mkdir(parents=True, exist_ok=True)
     config = {
         "Label": label,
-        "ProgramArguments": [sys.executable, str(script), "--remote", "--dispatch", "--local-clock"],
+        "ProgramArguments": [sys.executable, str(script), "--remote", "--dispatch", "--local-clock", "--external-feeds"],
         "StartInterval": 900,
         "RunAtLoad": True,
         "ProcessType": "Background",

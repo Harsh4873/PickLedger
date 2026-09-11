@@ -351,12 +351,17 @@ def fetch_daily_matchups(
                 "start_time": _norm_space(event.get("date") or competition.get("date")),
             }
 
-    cached = _cache_matchups(sport, date_iso, config=config)
-    for matchup in cached:
-        key = _matchup_key(matchup["away"], matchup["home"])
-        if key:
-            matchups.setdefault(key, matchup)
-    return list(matchups.values()), espn_resolved or bool(cached)
+    # A resolved official scoreboard is authoritative, including an empty
+    # off-day. Merging committed model/cache rows into a successful response
+    # reintroduced stale aliases (for example short and full CFB school names)
+    # and made providers scrape yesterday's or duplicate games. Use the cache
+    # only when the official scoreboard could not be resolved at all.
+    if not espn_resolved:
+        for matchup in _cache_matchups(sport, date_iso, config=config):
+            key = _matchup_key(matchup["away"], matchup["home"])
+            if key:
+                matchups.setdefault(key, matchup)
+    return list(matchups.values()), espn_resolved or bool(matchups)
 
 
 def _checkpoint_dir() -> Path | None:
