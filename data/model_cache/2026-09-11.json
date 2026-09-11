@@ -537,17 +537,16 @@
   },
   "date": "2026-09-11",
   "errors": [],
-  "externalFeedsUpdatedAt": "2026-09-11T18:39:54.374529Z",
+  "externalFeedsUpdatedAt": "2026-09-11T18:41:52.913785Z",
   "external_feed_errors": [],
   "external_feeds": {
     "forebet_cfb": {
       "date": "2026-09-11",
-      "generatedAt": "2026-09-11T16:54:05.888760Z",
+      "generatedAt": "2026-09-11T18:41:34.159728Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+      "lastAttemptAt": "2026-09-11T18:41:34.159728Z",
       "lastAttemptDate": "2026-09-11",
-      "lastError": "ForebetCFB: listing fetch blocked by Cloudflare",
-      "lastSuccessAt": "2026-09-11T16:54:05.888760Z",
+      "lastSuccessAt": "2026-09-11T18:41:34.159728Z",
       "meta": {
         "attemptedUrls": 1,
         "blockedUrls": 0,
@@ -555,13 +554,13 @@
         "expectedMatchups": 5,
         "feed": "forebet_cfb",
         "from": "local",
-        "leagues": "mlb,wnba,cfb,nfl,tennis",
+        "leagues": "mlb,wnba,mls,cfb,nfl",
         "listedRows": 336,
         "matchedPicks": 5,
         "missingMatchups": [],
         "officialMatchups": 5,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-11T16:54:05.888760Z"
+        "updatedAt": "2026-09-11T18:41:34.159728Z"
       },
       "note": "ForebetCFB matched 5 published prediction(s) against 5 official 2026-09-11 matchup(s).",
       "ok": true,
@@ -697,18 +696,17 @@
           "units": 0
         }
       ],
-      "refreshStatus": "error",
+      "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-11T16:54:05.888760Z"
+      "updatedAt": "2026-09-11T18:41:34.159728Z"
     },
     "forebet_mlb": {
       "date": "2026-09-11",
-      "generatedAt": "2026-09-11T16:54:05.888760Z",
+      "generatedAt": "2026-09-11T18:40:35.661366Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+      "lastAttemptAt": "2026-09-11T18:40:35.661366Z",
       "lastAttemptDate": "2026-09-11",
-      "lastError": "ForebetMLB: listing fetch blocked by Cloudflare",
-      "lastSuccessAt": "2026-09-11T16:54:05.888760Z",
+      "lastSuccessAt": "2026-09-11T18:40:35.661366Z",
       "meta": {
         "attemptedUrls": 1,
         "blockedUrls": 0,
@@ -716,13 +714,13 @@
         "expectedMatchups": 15,
         "feed": "forebet_mlb",
         "from": "local",
-        "leagues": "mlb,wnba,cfb,nfl,tennis",
+        "leagues": "mlb,wnba,mls,cfb,nfl",
         "listedRows": 2214,
         "matchedPicks": 15,
         "missingMatchups": [],
         "officialMatchups": 15,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-11T16:54:05.888760Z"
+        "updatedAt": "2026-09-11T18:40:35.661366Z"
       },
       "note": "ForebetMLB matched 15 published prediction(s) against 15 official 2026-09-11 matchup(s).",
       "ok": true,
@@ -1118,90 +1116,90 @@
           "units": 0
         }
       ],
-      "refreshStatus": "error",
+      "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-11T16:54:05.888760Z"
+      "updatedAt": "2026-09-11T18:40:35.661366Z"
     },
     "forebet_mls": {
       "date": "2026-09-11",
-      "generatedAt": "2026-09-11T18:31:20.869041Z",
-      "generatedBy": "github-actions:external-feed-refresh",
-      "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+      "generatedAt": "2026-09-11T18:41:19.076649Z",
+      "generatedBy": "local:external-feed-refresh",
+      "lastAttemptAt": "2026-09-11T18:41:19.076649Z",
       "lastAttemptDate": "2026-09-11",
-      "lastSuccessAt": "2026-09-11T18:31:20.869041Z",
+      "lastSuccessAt": "2026-09-11T18:41:19.076649Z",
       "meta": {
         "attemptedUrls": 0,
         "blockedUrls": 0,
         "date": "2026-09-11",
         "expectedMatchups": 0,
         "feed": "forebet_mls",
-        "from": "github-actions",
-        "leagues": "nba,mlb,wnba,cfb,nfl",
+        "from": "local",
+        "leagues": "mlb,wnba,mls,cfb,nfl",
         "matchedPicks": 0,
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-11T18:31:20.869041Z"
+        "updatedAt": "2026-09-11T18:41:19.076649Z"
       },
       "note": "ForebetMLS has no official 2026-09-11 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-11T18:31:20.869041Z"
+      "updatedAt": "2026-09-11T18:41:19.076649Z"
     },
     "forebet_nfl": {
       "date": "2026-09-11",
-      "generatedAt": "2026-09-11T18:31:20.869041Z",
-      "generatedBy": "github-actions:external-feed-refresh",
-      "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+      "generatedAt": "2026-09-11T18:41:52.913785Z",
+      "generatedBy": "local:external-feed-refresh",
+      "lastAttemptAt": "2026-09-11T18:41:52.913785Z",
       "lastAttemptDate": "2026-09-11",
-      "lastSuccessAt": "2026-09-11T18:31:20.869041Z",
+      "lastSuccessAt": "2026-09-11T18:41:52.913785Z",
       "meta": {
         "attemptedUrls": 0,
         "blockedUrls": 0,
         "date": "2026-09-11",
         "expectedMatchups": 0,
         "feed": "forebet_nfl",
-        "from": "github-actions",
-        "leagues": "nba,mlb,wnba,cfb,nfl",
+        "from": "local",
+        "leagues": "mlb,wnba,mls,cfb,nfl",
         "matchedPicks": 0,
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-11T18:31:20.869041Z"
+        "updatedAt": "2026-09-11T18:41:52.913785Z"
       },
       "note": "ForebetNFL has no official 2026-09-11 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-11T18:31:20.869041Z"
+      "updatedAt": "2026-09-11T18:41:52.913785Z"
     },
     "forebet_wnba": {
       "date": "2026-09-11",
-      "generatedAt": "2026-09-11T18:31:20.869041Z",
-      "generatedBy": "github-actions:external-feed-refresh",
-      "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+      "generatedAt": "2026-09-11T18:41:03.772103Z",
+      "generatedBy": "local:external-feed-refresh",
+      "lastAttemptAt": "2026-09-11T18:41:03.772103Z",
       "lastAttemptDate": "2026-09-11",
-      "lastSuccessAt": "2026-09-11T18:31:20.869041Z",
+      "lastSuccessAt": "2026-09-11T18:41:03.772103Z",
       "meta": {
         "attemptedUrls": 0,
         "blockedUrls": 0,
         "date": "2026-09-11",
         "expectedMatchups": 0,
         "feed": "forebet_wnba",
-        "from": "github-actions",
-        "leagues": "nba,mlb,wnba,cfb,nfl",
+        "from": "local",
+        "leagues": "mlb,wnba,mls,cfb,nfl",
         "matchedPicks": 0,
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-11T18:31:20.869041Z"
+        "updatedAt": "2026-09-11T18:41:03.772103Z"
       },
       "note": "ForebetWNBA has no official 2026-09-11 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-11T18:31:20.869041Z"
+      "updatedAt": "2026-09-11T18:41:03.772103Z"
     },
     "scores24_cfb": {
       "date": "2026-09-11",
@@ -2792,12 +2790,11 @@
   },
   "forebet_cfb": {
     "date": "2026-09-11",
-    "generatedAt": "2026-09-11T16:54:05.888760Z",
+    "generatedAt": "2026-09-11T18:41:34.159728Z",
     "generatedBy": "local:external-feed-refresh",
-    "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+    "lastAttemptAt": "2026-09-11T18:41:34.159728Z",
     "lastAttemptDate": "2026-09-11",
-    "lastError": "ForebetCFB: listing fetch blocked by Cloudflare",
-    "lastSuccessAt": "2026-09-11T16:54:05.888760Z",
+    "lastSuccessAt": "2026-09-11T18:41:34.159728Z",
     "meta": {
       "attemptedUrls": 1,
       "blockedUrls": 0,
@@ -2805,13 +2802,13 @@
       "expectedMatchups": 5,
       "feed": "forebet_cfb",
       "from": "local",
-      "leagues": "mlb,wnba,cfb,nfl,tennis",
+      "leagues": "mlb,wnba,mls,cfb,nfl",
       "listedRows": 336,
       "matchedPicks": 5,
       "missingMatchups": [],
       "officialMatchups": 5,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-11T16:54:05.888760Z"
+      "updatedAt": "2026-09-11T18:41:34.159728Z"
     },
     "note": "ForebetCFB matched 5 published prediction(s) against 5 official 2026-09-11 matchup(s).",
     "ok": true,
@@ -2947,18 +2944,17 @@
         "units": 0
       }
     ],
-    "refreshStatus": "error",
+    "refreshStatus": "ok",
     "scraped_tip_feed": true,
-    "updatedAt": "2026-09-11T16:54:05.888760Z"
+    "updatedAt": "2026-09-11T18:41:34.159728Z"
   },
   "forebet_mlb": {
     "date": "2026-09-11",
-    "generatedAt": "2026-09-11T16:54:05.888760Z",
+    "generatedAt": "2026-09-11T18:40:35.661366Z",
     "generatedBy": "local:external-feed-refresh",
-    "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+    "lastAttemptAt": "2026-09-11T18:40:35.661366Z",
     "lastAttemptDate": "2026-09-11",
-    "lastError": "ForebetMLB: listing fetch blocked by Cloudflare",
-    "lastSuccessAt": "2026-09-11T16:54:05.888760Z",
+    "lastSuccessAt": "2026-09-11T18:40:35.661366Z",
     "meta": {
       "attemptedUrls": 1,
       "blockedUrls": 0,
@@ -2966,13 +2962,13 @@
       "expectedMatchups": 15,
       "feed": "forebet_mlb",
       "from": "local",
-      "leagues": "mlb,wnba,cfb,nfl,tennis",
+      "leagues": "mlb,wnba,mls,cfb,nfl",
       "listedRows": 2214,
       "matchedPicks": 15,
       "missingMatchups": [],
       "officialMatchups": 15,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-11T16:54:05.888760Z"
+      "updatedAt": "2026-09-11T18:40:35.661366Z"
     },
     "note": "ForebetMLB matched 15 published prediction(s) against 15 official 2026-09-11 matchup(s).",
     "ok": true,
@@ -3368,90 +3364,90 @@
         "units": 0
       }
     ],
-    "refreshStatus": "error",
+    "refreshStatus": "ok",
     "scraped_tip_feed": true,
-    "updatedAt": "2026-09-11T16:54:05.888760Z"
+    "updatedAt": "2026-09-11T18:40:35.661366Z"
   },
   "forebet_mls": {
     "date": "2026-09-11",
-    "generatedAt": "2026-09-11T18:31:20.869041Z",
-    "generatedBy": "github-actions:external-feed-refresh",
-    "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+    "generatedAt": "2026-09-11T18:41:19.076649Z",
+    "generatedBy": "local:external-feed-refresh",
+    "lastAttemptAt": "2026-09-11T18:41:19.076649Z",
     "lastAttemptDate": "2026-09-11",
-    "lastSuccessAt": "2026-09-11T18:31:20.869041Z",
+    "lastSuccessAt": "2026-09-11T18:41:19.076649Z",
     "meta": {
       "attemptedUrls": 0,
       "blockedUrls": 0,
       "date": "2026-09-11",
       "expectedMatchups": 0,
       "feed": "forebet_mls",
-      "from": "github-actions",
-      "leagues": "nba,mlb,wnba,cfb,nfl",
+      "from": "local",
+      "leagues": "mlb,wnba,mls,cfb,nfl",
       "matchedPicks": 0,
       "missingMatchups": [],
       "officialMatchups": 0,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-11T18:31:20.869041Z"
+      "updatedAt": "2026-09-11T18:41:19.076649Z"
     },
     "note": "ForebetMLS has no official 2026-09-11 matchups.",
     "ok": true,
     "picks": [],
     "refreshStatus": "ok",
-    "updatedAt": "2026-09-11T18:31:20.869041Z"
+    "updatedAt": "2026-09-11T18:41:19.076649Z"
   },
   "forebet_nfl": {
     "date": "2026-09-11",
-    "generatedAt": "2026-09-11T18:31:20.869041Z",
-    "generatedBy": "github-actions:external-feed-refresh",
-    "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+    "generatedAt": "2026-09-11T18:41:52.913785Z",
+    "generatedBy": "local:external-feed-refresh",
+    "lastAttemptAt": "2026-09-11T18:41:52.913785Z",
     "lastAttemptDate": "2026-09-11",
-    "lastSuccessAt": "2026-09-11T18:31:20.869041Z",
+    "lastSuccessAt": "2026-09-11T18:41:52.913785Z",
     "meta": {
       "attemptedUrls": 0,
       "blockedUrls": 0,
       "date": "2026-09-11",
       "expectedMatchups": 0,
       "feed": "forebet_nfl",
-      "from": "github-actions",
-      "leagues": "nba,mlb,wnba,cfb,nfl",
+      "from": "local",
+      "leagues": "mlb,wnba,mls,cfb,nfl",
       "matchedPicks": 0,
       "missingMatchups": [],
       "officialMatchups": 0,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-11T18:31:20.869041Z"
+      "updatedAt": "2026-09-11T18:41:52.913785Z"
     },
     "note": "ForebetNFL has no official 2026-09-11 matchups.",
     "ok": true,
     "picks": [],
     "refreshStatus": "ok",
-    "updatedAt": "2026-09-11T18:31:20.869041Z"
+    "updatedAt": "2026-09-11T18:41:52.913785Z"
   },
   "forebet_wnba": {
     "date": "2026-09-11",
-    "generatedAt": "2026-09-11T18:31:20.869041Z",
-    "generatedBy": "github-actions:external-feed-refresh",
-    "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+    "generatedAt": "2026-09-11T18:41:03.772103Z",
+    "generatedBy": "local:external-feed-refresh",
+    "lastAttemptAt": "2026-09-11T18:41:03.772103Z",
     "lastAttemptDate": "2026-09-11",
-    "lastSuccessAt": "2026-09-11T18:31:20.869041Z",
+    "lastSuccessAt": "2026-09-11T18:41:03.772103Z",
     "meta": {
       "attemptedUrls": 0,
       "blockedUrls": 0,
       "date": "2026-09-11",
       "expectedMatchups": 0,
       "feed": "forebet_wnba",
-      "from": "github-actions",
-      "leagues": "nba,mlb,wnba,cfb,nfl",
+      "from": "local",
+      "leagues": "mlb,wnba,mls,cfb,nfl",
       "matchedPicks": 0,
       "missingMatchups": [],
       "officialMatchups": 0,
       "unpublishedMatchups": [],
-      "updatedAt": "2026-09-11T18:31:20.869041Z"
+      "updatedAt": "2026-09-11T18:41:03.772103Z"
     },
     "note": "ForebetWNBA has no official 2026-09-11 matchups.",
     "ok": true,
     "picks": [],
     "refreshStatus": "ok",
-    "updatedAt": "2026-09-11T18:31:20.869041Z"
+    "updatedAt": "2026-09-11T18:41:03.772103Z"
   },
   "generatedAt": "2026-09-11T18:11:32.513396Z",
   "generatedBy": "github-actions:model-cache-refresh",
@@ -35832,12 +35828,11 @@
     },
     "forebet_cfb": {
       "date": "2026-09-11",
-      "generatedAt": "2026-09-11T16:54:05.888760Z",
+      "generatedAt": "2026-09-11T18:41:34.159728Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+      "lastAttemptAt": "2026-09-11T18:41:34.159728Z",
       "lastAttemptDate": "2026-09-11",
-      "lastError": "ForebetCFB: listing fetch blocked by Cloudflare",
-      "lastSuccessAt": "2026-09-11T16:54:05.888760Z",
+      "lastSuccessAt": "2026-09-11T18:41:34.159728Z",
       "meta": {
         "attemptedUrls": 1,
         "blockedUrls": 0,
@@ -35845,13 +35840,13 @@
         "expectedMatchups": 5,
         "feed": "forebet_cfb",
         "from": "local",
-        "leagues": "mlb,wnba,cfb,nfl,tennis",
+        "leagues": "mlb,wnba,mls,cfb,nfl",
         "listedRows": 336,
         "matchedPicks": 5,
         "missingMatchups": [],
         "officialMatchups": 5,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-11T16:54:05.888760Z"
+        "updatedAt": "2026-09-11T18:41:34.159728Z"
       },
       "note": "ForebetCFB matched 5 published prediction(s) against 5 official 2026-09-11 matchup(s).",
       "ok": true,
@@ -36220,18 +36215,17 @@
           "units": 0.0
         }
       ],
-      "refreshStatus": "error",
+      "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-11T16:54:05.888760Z"
+      "updatedAt": "2026-09-11T18:41:34.159728Z"
     },
     "forebet_mlb": {
       "date": "2026-09-11",
-      "generatedAt": "2026-09-11T16:54:05.888760Z",
+      "generatedAt": "2026-09-11T18:40:35.661366Z",
       "generatedBy": "local:external-feed-refresh",
-      "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+      "lastAttemptAt": "2026-09-11T18:40:35.661366Z",
       "lastAttemptDate": "2026-09-11",
-      "lastError": "ForebetMLB: listing fetch blocked by Cloudflare",
-      "lastSuccessAt": "2026-09-11T16:54:05.888760Z",
+      "lastSuccessAt": "2026-09-11T18:40:35.661366Z",
       "meta": {
         "attemptedUrls": 1,
         "blockedUrls": 0,
@@ -36239,13 +36233,13 @@
         "expectedMatchups": 15,
         "feed": "forebet_mlb",
         "from": "local",
-        "leagues": "mlb,wnba,cfb,nfl,tennis",
+        "leagues": "mlb,wnba,mls,cfb,nfl",
         "listedRows": 2214,
         "matchedPicks": 15,
         "missingMatchups": [],
         "officialMatchups": 15,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-11T16:54:05.888760Z"
+        "updatedAt": "2026-09-11T18:40:35.661366Z"
       },
       "note": "ForebetMLB matched 15 published prediction(s) against 15 official 2026-09-11 matchup(s).",
       "ok": true,
@@ -37436,90 +37430,90 @@
           "units": 0.0
         }
       ],
-      "refreshStatus": "error",
+      "refreshStatus": "ok",
       "scraped_tip_feed": true,
-      "updatedAt": "2026-09-11T16:54:05.888760Z"
+      "updatedAt": "2026-09-11T18:40:35.661366Z"
     },
     "forebet_mls": {
       "date": "2026-09-11",
-      "generatedAt": "2026-09-11T18:31:20.869041Z",
-      "generatedBy": "github-actions:external-feed-refresh",
-      "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+      "generatedAt": "2026-09-11T18:41:19.076649Z",
+      "generatedBy": "local:external-feed-refresh",
+      "lastAttemptAt": "2026-09-11T18:41:19.076649Z",
       "lastAttemptDate": "2026-09-11",
-      "lastSuccessAt": "2026-09-11T18:31:20.869041Z",
+      "lastSuccessAt": "2026-09-11T18:41:19.076649Z",
       "meta": {
         "attemptedUrls": 0,
         "blockedUrls": 0,
         "date": "2026-09-11",
         "expectedMatchups": 0,
         "feed": "forebet_mls",
-        "from": "github-actions",
-        "leagues": "nba,mlb,wnba,cfb,nfl",
+        "from": "local",
+        "leagues": "mlb,wnba,mls,cfb,nfl",
         "matchedPicks": 0,
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-11T18:31:20.869041Z"
+        "updatedAt": "2026-09-11T18:41:19.076649Z"
       },
       "note": "ForebetMLS has no official 2026-09-11 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-11T18:31:20.869041Z"
+      "updatedAt": "2026-09-11T18:41:19.076649Z"
     },
     "forebet_nfl": {
       "date": "2026-09-11",
-      "generatedAt": "2026-09-11T18:31:20.869041Z",
-      "generatedBy": "github-actions:external-feed-refresh",
-      "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+      "generatedAt": "2026-09-11T18:41:52.913785Z",
+      "generatedBy": "local:external-feed-refresh",
+      "lastAttemptAt": "2026-09-11T18:41:52.913785Z",
       "lastAttemptDate": "2026-09-11",
-      "lastSuccessAt": "2026-09-11T18:31:20.869041Z",
+      "lastSuccessAt": "2026-09-11T18:41:52.913785Z",
       "meta": {
         "attemptedUrls": 0,
         "blockedUrls": 0,
         "date": "2026-09-11",
         "expectedMatchups": 0,
         "feed": "forebet_nfl",
-        "from": "github-actions",
-        "leagues": "nba,mlb,wnba,cfb,nfl",
+        "from": "local",
+        "leagues": "mlb,wnba,mls,cfb,nfl",
         "matchedPicks": 0,
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-11T18:31:20.869041Z"
+        "updatedAt": "2026-09-11T18:41:52.913785Z"
       },
       "note": "ForebetNFL has no official 2026-09-11 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-11T18:31:20.869041Z"
+      "updatedAt": "2026-09-11T18:41:52.913785Z"
     },
     "forebet_wnba": {
       "date": "2026-09-11",
-      "generatedAt": "2026-09-11T18:31:20.869041Z",
-      "generatedBy": "github-actions:external-feed-refresh",
-      "lastAttemptAt": "2026-09-11T18:31:20.869041Z",
+      "generatedAt": "2026-09-11T18:41:03.772103Z",
+      "generatedBy": "local:external-feed-refresh",
+      "lastAttemptAt": "2026-09-11T18:41:03.772103Z",
       "lastAttemptDate": "2026-09-11",
-      "lastSuccessAt": "2026-09-11T18:31:20.869041Z",
+      "lastSuccessAt": "2026-09-11T18:41:03.772103Z",
       "meta": {
         "attemptedUrls": 0,
         "blockedUrls": 0,
         "date": "2026-09-11",
         "expectedMatchups": 0,
         "feed": "forebet_wnba",
-        "from": "github-actions",
-        "leagues": "nba,mlb,wnba,cfb,nfl",
+        "from": "local",
+        "leagues": "mlb,wnba,mls,cfb,nfl",
         "matchedPicks": 0,
         "missingMatchups": [],
         "officialMatchups": 0,
         "unpublishedMatchups": [],
-        "updatedAt": "2026-09-11T18:31:20.869041Z"
+        "updatedAt": "2026-09-11T18:41:03.772103Z"
       },
       "note": "ForebetWNBA has no official 2026-09-11 matchups.",
       "ok": true,
       "picks": [],
       "refreshStatus": "ok",
-      "updatedAt": "2026-09-11T18:31:20.869041Z"
+      "updatedAt": "2026-09-11T18:41:03.772103Z"
     },
     "mlb_first_five": {
       "consensus_gate_version": "mlb_team_consensus_v1.2.0",
@@ -73850,7 +73844,7 @@
     "scraped_tip_feed": true,
     "updatedAt": "2026-09-11T18:31:20.869041Z"
   },
-  "updatedAt": "2026-09-11T18:39:54.374529Z",
+  "updatedAt": "2026-09-11T18:41:52.913785Z",
   "wnba": {
     "date": "2026-09-11",
     "note": "No WNBA picks today \u2014 off-season or no edge found.",
