@@ -384,7 +384,7 @@
         "observedExecutable": true,
         "oddsAmerican": -162,
         "quality": "verified_no_vig",
-        "source": "espn_scoreboard:DraftKings",
+        "source": "espn_scoreboard:Draft Kings",
         "sourceField": "pick.odds_source",
         "startTime": "2026-09-11T23:30Z",
         "tier": "A",
@@ -530,7 +530,7 @@
         "observedExecutable": true,
         "oddsAmerican": 180,
         "quality": "verified_no_vig",
-        "source": "espn_scoreboard:DraftKings",
+        "source": "espn_scoreboard:Draft Kings",
         "sourceField": "pick.odds_source",
         "startTime": "2026-09-12T00:00Z",
         "tier": "A",
@@ -627,7 +627,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 7.931,
+        "ageHours": 5.058,
         "breakEvenProbability": 0.52381,
         "decimalOdds": 1.909091,
         "eligibleForAlphaEstimate": false,
@@ -648,10 +648,10 @@
         "startTime": "2026-09-11T23:15Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-11T15:19:07.178127Z",
+        "timestamp": "2026-09-11T18:11:32.513396Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": true,
-        "updatedAt": "2026-09-11T15:19:07.178127Z"
+        "updatedAt": "2026-09-11T18:11:32.513396Z"
       },
       "rawModelProbabilityIgnored": 0.6003,
       "result": "pending",
@@ -740,7 +740,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 7.848,
+        "ageHours": 4.974,
         "breakEvenProbability": 0.52381,
         "decimalOdds": 1.909091,
         "eligibleForAlphaEstimate": false,
@@ -761,10 +761,10 @@
         "startTime": "2026-09-11T23:10Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-11T15:19:07.178127Z",
+        "timestamp": "2026-09-11T18:11:32.513396Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": true,
-        "updatedAt": "2026-09-11T15:19:07.178127Z"
+        "updatedAt": "2026-09-11T18:11:32.513396Z"
       },
       "rawModelProbabilityIgnored": 0.566,
       "result": "pending",
@@ -853,7 +853,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 7.431,
+        "ageHours": 4.558,
         "breakEvenProbability": 0.52381,
         "decimalOdds": 1.909091,
         "eligibleForAlphaEstimate": false,
@@ -874,10 +874,10 @@
         "startTime": "2026-09-11T22:45Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-11T15:19:07.178127Z",
+        "timestamp": "2026-09-11T18:11:32.513396Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": true,
-        "updatedAt": "2026-09-11T15:19:07.178127Z"
+        "updatedAt": "2026-09-11T18:11:32.513396Z"
       },
       "rawModelProbabilityIgnored": 0.567,
       "result": "pending",
@@ -966,7 +966,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 3.015,
+        "ageHours": 0.141,
         "breakEvenProbability": 0.52381,
         "decimalOdds": 1.909091,
         "eligibleForAlphaEstimate": false,
@@ -987,10 +987,10 @@
         "startTime": "2026-09-11T18:20Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-11T15:19:07.178127Z",
+        "timestamp": "2026-09-11T18:11:32.513396Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": true,
-        "updatedAt": "2026-09-11T15:19:07.178127Z"
+        "updatedAt": "2026-09-11T18:11:32.513396Z"
       },
       "rawModelProbabilityIgnored": 0.594,
       "result": "pending",
@@ -1077,7 +1077,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 7.848,
+        "ageHours": 4.974,
         "breakEvenProbability": 0.545455,
         "decimalOdds": 1.833333,
         "eligibleForAlphaEstimate": false,
@@ -1096,10 +1096,10 @@
         "startTime": "2026-09-11T23:10Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-11T15:19:07.178127Z",
+        "timestamp": "2026-09-11T18:11:32.513396Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-11T15:19:07.178127Z"
+        "updatedAt": "2026-09-11T18:11:32.513396Z"
       },
       "rawModelProbabilityIgnored": 0.585,
       "result": "pending",
@@ -1188,7 +1188,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 10.348,
+        "ageHours": 7.474,
         "breakEvenProbability": 0.52381,
         "decimalOdds": 1.909091,
         "eligibleForAlphaEstimate": false,
@@ -1209,10 +1209,10 @@
         "startTime": "2026-09-12T01:40Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-11T15:19:07.178127Z",
+        "timestamp": "2026-09-11T18:11:32.513396Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": true,
-        "updatedAt": "2026-09-11T15:19:07.178127Z"
+        "updatedAt": "2026-09-11T18:11:32.513396Z"
       },
       "rawModelProbabilityIgnored": 0.556,
       "result": "pending",
@@ -1299,7 +1299,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 10.931,
+        "ageHours": 8.058,
         "breakEvenProbability": 0.545455,
         "decimalOdds": 1.833333,
         "eligibleForAlphaEstimate": false,
@@ -1318,10 +1318,10 @@
         "startTime": "2026-09-12T02:15Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-11T15:19:07.178127Z",
+        "timestamp": "2026-09-11T18:11:32.513396Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-11T15:19:07.178127Z"
+        "updatedAt": "2026-09-11T18:11:32.513396Z"
       },
       "rawModelProbabilityIgnored": 0.566,
       "result": "pending",
@@ -1408,7 +1408,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 7.931,
+        "ageHours": 5.058,
         "breakEvenProbability": 0.545455,
         "decimalOdds": 1.833333,
         "eligibleForAlphaEstimate": false,
@@ -1427,10 +1427,10 @@
         "startTime": "2026-09-11T23:15Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-11T15:19:07.178127Z",
+        "timestamp": "2026-09-11T18:11:32.513396Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-11T15:19:07.178127Z"
+        "updatedAt": "2026-09-11T18:11:32.513396Z"
       },
       "rawModelProbabilityIgnored": 0.583,
       "result": "pending",
@@ -1519,7 +1519,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 7.848,
+        "ageHours": 4.974,
         "breakEvenProbability": 0.52381,
         "decimalOdds": 1.909091,
         "eligibleForAlphaEstimate": false,
@@ -1540,127 +1540,16 @@
         "startTime": "2026-09-11T23:10Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-11T15:19:07.178127Z",
+        "timestamp": "2026-09-11T18:11:32.513396Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": true,
-        "updatedAt": "2026-09-11T15:19:07.178127Z"
+        "updatedAt": "2026-09-11T18:11:32.513396Z"
       },
       "rawModelProbabilityIgnored": 0.5633,
       "result": "pending",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
-      "sport": "MLB",
-      "stakeUnits": 0.0,
-      "tier": "avoid",
-      "valueQualified": false
-    },
-    {
-      "blockers": [
-        "assumed_or_non_executable_price",
-        "edge_no_usable_price_baseline",
-        "value_no_usable_price_baseline"
-      ],
-      "canonicalGame": "2026-09-11:mlb:colorado rockies|detroit tigers",
-      "consensusSources": [],
-      "date": "2026-09-11",
-      "decimalOdds": 1.909091,
-      "decision": "LEAN",
-      "dedupeRule": "exact_market_identity_best_executable_price",
-      "direction": "under",
-      "duplicateCount": 1,
-      "duplicateSources": [
-        "MLB Team Total"
-      ],
-      "edgeQualified": false,
-      "estimate": null,
-      "evidence": {
-        "chronologicalHalvesNonnegative": false,
-        "cutoffExclusive": "2026-09-11",
-        "distinctDates": 0,
-        "firstHalfFlatNetUnits": 0.0,
-        "flatNetUnits": 0.0,
-        "flatRoi": null,
-        "losses": 0,
-        "modelVersion": "MLB:mlb_team_consensus_v1.2.0:mlb_team_total",
-        "policyVersion": "profit_desk_policy_v2",
-        "priorOnly": true,
-        "pushes": 0,
-        "secondHalfFlatNetUnits": 0.0,
-        "segmentDistinctDates": 0,
-        "segmentEvidenceKey": null,
-        "segmentSamples": 0,
-        "sourceChronologicalHalvesNonnegative": false,
-        "sourceDistinctDates": 0,
-        "sourceEvidenceKey": "team|mlb_team_total|mlb",
-        "sourceFirstHalfFlatNetUnits": 0.0,
-        "sourceFlatNetUnits": 0.0,
-        "sourceFlatRoi": null,
-        "sourceLosses": 0,
-        "sourceSamples": 0,
-        "sourceSecondHalfFlatNetUnits": 0.0,
-        "sourceWins": 0,
-        "wins": 0
-      },
-      "game": "Detroit Tigers vs Colorado Rockies",
-      "gradeSupportSource": "repository_grader_default",
-      "gradeSupported": true,
-      "id": "profit-8506c805387af47bcd29a92b",
-      "lane": null,
-      "laneBlockers": {
-        "edge": [
-          "edge_no_usable_price_baseline"
-        ],
-        "structural": [
-          "assumed_or_non_executable_price"
-        ],
-        "value": [
-          "value_no_usable_price_baseline"
-        ]
-      },
-      "line": 4.5,
-      "liveQualified": false,
-      "market": "team_total",
-      "marketFamily": "team total",
-      "marketIdentity": "market:bed78116faef37ae662fb102",
-      "mode": "team",
-      "modelVersion": "MLB:mlb_team_consensus_v1.2.0:mlb_team_total",
-      "oddsAmerican": -110,
-      "pick": "Colorado Rockies Team Total Under 4.5",
-      "player": null,
-      "policyVersion": "profit_desk_policy_v2",
-      "price": {
-        "ageHours": 7.348,
-        "breakEvenProbability": 0.52381,
-        "decimalOdds": 1.909091,
-        "eligibleForAlphaEstimate": false,
-        "fresh": true,
-        "freshPregame": true,
-        "maxAgeHours": 24.0,
-        "noVigInputs": {
-          "field": "market_no_vig_probability"
-        },
-        "noVigMethod": "explicit:pick.market_no_vig_probability",
-        "noVigProbability": 0.52381,
-        "noVigVerified": true,
-        "observedExecutable": false,
-        "oddsAmerican": -110,
-        "quality": "assumed",
-        "source": "user_assumed_team_total_-110",
-        "sourceField": "pick.odds_source",
-        "startTime": "2026-09-11T22:40Z",
-        "tier": "D",
-        "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-11T15:19:07.178127Z",
-        "timestampField": "pick.certification_timing.data_as_of",
-        "twoSided": true,
-        "updatedAt": "2026-09-11T15:19:07.178127Z"
-      },
-      "rawModelProbabilityIgnored": 0.5944,
-      "result": "pending",
-      "shadowQualified": false,
-      "source": "MLB Team Total",
-      "sourceKey": "mlb_team_total",
       "sport": "MLB",
       "stakeUnits": 0.0,
       "tier": "avoid",
@@ -1741,7 +1630,7 @@
       "player": null,
       "policyVersion": "profit_desk_policy_v2",
       "price": {
-        "ageHours": 8.848,
+        "ageHours": 5.974,
         "breakEvenProbability": 0.545455,
         "decimalOdds": 1.833333,
         "eligibleForAlphaEstimate": false,
@@ -1760,10 +1649,10 @@
         "startTime": "2026-09-12T00:10Z",
         "tier": "D",
         "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-11T15:19:07.178127Z",
+        "timestamp": "2026-09-11T18:11:32.513396Z",
         "timestampField": "pick.certification_timing.data_as_of",
         "twoSided": false,
-        "updatedAt": "2026-09-11T15:19:07.178127Z"
+        "updatedAt": "2026-09-11T18:11:32.513396Z"
       },
       "rawModelProbabilityIgnored": 0.574,
       "result": "pending",
@@ -1774,235 +1663,13 @@
       "stakeUnits": 0.0,
       "tier": "avoid",
       "valueQualified": false
-    },
-    {
-      "blockers": [
-        "assumed_or_non_executable_price",
-        "edge_no_usable_price_baseline",
-        "value_no_usable_price_baseline"
-      ],
-      "canonicalGame": "2026-09-11:mlb:los angeles dodgers|miami marlins",
-      "consensusSources": [],
-      "date": "2026-09-11",
-      "decimalOdds": 1.909091,
-      "decision": "LEAN",
-      "dedupeRule": "exact_market_identity_best_executable_price",
-      "direction": "under",
-      "duplicateCount": 1,
-      "duplicateSources": [
-        "MLB Team Total"
-      ],
-      "edgeQualified": false,
-      "estimate": null,
-      "evidence": {
-        "chronologicalHalvesNonnegative": false,
-        "cutoffExclusive": "2026-09-11",
-        "distinctDates": 0,
-        "firstHalfFlatNetUnits": 0.0,
-        "flatNetUnits": 0.0,
-        "flatRoi": null,
-        "losses": 0,
-        "modelVersion": "MLB:mlb_team_consensus_v1.2.0:mlb_team_total",
-        "policyVersion": "profit_desk_policy_v2",
-        "priorOnly": true,
-        "pushes": 0,
-        "secondHalfFlatNetUnits": 0.0,
-        "segmentDistinctDates": 0,
-        "segmentEvidenceKey": null,
-        "segmentSamples": 0,
-        "sourceChronologicalHalvesNonnegative": false,
-        "sourceDistinctDates": 0,
-        "sourceEvidenceKey": "team|mlb_team_total|mlb",
-        "sourceFirstHalfFlatNetUnits": 0.0,
-        "sourceFlatNetUnits": 0.0,
-        "sourceFlatRoi": null,
-        "sourceLosses": 0,
-        "sourceSamples": 0,
-        "sourceSecondHalfFlatNetUnits": 0.0,
-        "sourceWins": 0,
-        "wins": 0
-      },
-      "game": "Miami Marlins vs Los Angeles Dodgers",
-      "gradeSupportSource": "repository_grader_default",
-      "gradeSupported": true,
-      "id": "profit-bb13c739695fbe9f68f2a051",
-      "lane": null,
-      "laneBlockers": {
-        "edge": [
-          "edge_no_usable_price_baseline"
-        ],
-        "structural": [
-          "assumed_or_non_executable_price"
-        ],
-        "value": [
-          "value_no_usable_price_baseline"
-        ]
-      },
-      "line": 4.5,
-      "liveQualified": false,
-      "market": "team_total",
-      "marketFamily": "team total",
-      "marketIdentity": "market:a4d974caad8a3e6ddcaf4775",
-      "mode": "team",
-      "modelVersion": "MLB:mlb_team_consensus_v1.2.0:mlb_team_total",
-      "oddsAmerican": -110,
-      "pick": "Los Angeles Dodgers Team Total Under 4.5",
-      "player": null,
-      "policyVersion": "profit_desk_policy_v2",
-      "price": {
-        "ageHours": 7.848,
-        "breakEvenProbability": 0.52381,
-        "decimalOdds": 1.909091,
-        "eligibleForAlphaEstimate": false,
-        "fresh": true,
-        "freshPregame": true,
-        "maxAgeHours": 24.0,
-        "noVigInputs": {
-          "field": "market_no_vig_probability"
-        },
-        "noVigMethod": "explicit:pick.market_no_vig_probability",
-        "noVigProbability": 0.52381,
-        "noVigVerified": true,
-        "observedExecutable": false,
-        "oddsAmerican": -110,
-        "quality": "assumed",
-        "source": "user_assumed_team_total_-110",
-        "sourceField": "pick.odds_source",
-        "startTime": "2026-09-11T23:10Z",
-        "tier": "D",
-        "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-11T15:19:07.178127Z",
-        "timestampField": "pick.certification_timing.data_as_of",
-        "twoSided": true,
-        "updatedAt": "2026-09-11T15:19:07.178127Z"
-      },
-      "rawModelProbabilityIgnored": 0.5928,
-      "result": "pending",
-      "shadowQualified": false,
-      "source": "MLB Team Total",
-      "sourceKey": "mlb_team_total",
-      "sport": "MLB",
-      "stakeUnits": 0.0,
-      "tier": "avoid",
-      "valueQualified": false
-    },
-    {
-      "blockers": [
-        "assumed_or_non_executable_price",
-        "edge_no_usable_price_baseline",
-        "value_no_usable_price_baseline"
-      ],
-      "canonicalGame": "2026-09-11:mlb:new york mets|new york yankees",
-      "consensusSources": [],
-      "date": "2026-09-11",
-      "decimalOdds": 1.909091,
-      "decision": "LEAN",
-      "dedupeRule": "exact_market_identity_best_executable_price",
-      "direction": "under",
-      "duplicateCount": 1,
-      "duplicateSources": [
-        "MLB Team Total"
-      ],
-      "edgeQualified": false,
-      "estimate": null,
-      "evidence": {
-        "chronologicalHalvesNonnegative": false,
-        "cutoffExclusive": "2026-09-11",
-        "distinctDates": 0,
-        "firstHalfFlatNetUnits": 0.0,
-        "flatNetUnits": 0.0,
-        "flatRoi": null,
-        "losses": 0,
-        "modelVersion": "MLB:mlb_team_consensus_v1.2.0:mlb_team_total",
-        "policyVersion": "profit_desk_policy_v2",
-        "priorOnly": true,
-        "pushes": 0,
-        "secondHalfFlatNetUnits": 0.0,
-        "segmentDistinctDates": 0,
-        "segmentEvidenceKey": null,
-        "segmentSamples": 0,
-        "sourceChronologicalHalvesNonnegative": false,
-        "sourceDistinctDates": 0,
-        "sourceEvidenceKey": "team|mlb_team_total|mlb",
-        "sourceFirstHalfFlatNetUnits": 0.0,
-        "sourceFlatNetUnits": 0.0,
-        "sourceFlatRoi": null,
-        "sourceLosses": 0,
-        "sourceSamples": 0,
-        "sourceSecondHalfFlatNetUnits": 0.0,
-        "sourceWins": 0,
-        "wins": 0
-      },
-      "game": "New York Yankees vs New York Mets",
-      "gradeSupportSource": "repository_grader_default",
-      "gradeSupported": true,
-      "id": "profit-e9d575a9b2990552db3e7d6a",
-      "lane": null,
-      "laneBlockers": {
-        "edge": [
-          "edge_no_usable_price_baseline"
-        ],
-        "structural": [
-          "assumed_or_non_executable_price"
-        ],
-        "value": [
-          "value_no_usable_price_baseline"
-        ]
-      },
-      "line": 5.5,
-      "liveQualified": false,
-      "market": "team_total",
-      "marketFamily": "team total",
-      "marketIdentity": "market:a4a9939667d24179c82a4b09",
-      "mode": "team",
-      "modelVersion": "MLB:mlb_team_consensus_v1.2.0:mlb_team_total",
-      "oddsAmerican": -110,
-      "pick": "New York Mets Team Total Under 5.5",
-      "player": null,
-      "policyVersion": "profit_desk_policy_v2",
-      "price": {
-        "ageHours": 7.765,
-        "breakEvenProbability": 0.52381,
-        "decimalOdds": 1.909091,
-        "eligibleForAlphaEstimate": false,
-        "fresh": true,
-        "freshPregame": true,
-        "maxAgeHours": 24.0,
-        "noVigInputs": {
-          "field": "market_no_vig_probability"
-        },
-        "noVigMethod": "explicit:pick.market_no_vig_probability",
-        "noVigProbability": 0.52381,
-        "noVigVerified": true,
-        "observedExecutable": false,
-        "oddsAmerican": -110,
-        "quality": "assumed",
-        "source": "user_assumed_team_total_-110",
-        "sourceField": "pick.odds_source",
-        "startTime": "2026-09-11T23:05Z",
-        "tier": "D",
-        "tierLabel": "assumed_proxy_or_synthetic",
-        "timestamp": "2026-09-11T15:19:07.178127Z",
-        "timestampField": "pick.certification_timing.data_as_of",
-        "twoSided": true,
-        "updatedAt": "2026-09-11T15:19:07.178127Z"
-      },
-      "rawModelProbabilityIgnored": 0.5972,
-      "result": "pending",
-      "shadowQualified": false,
-      "source": "MLB Team Total",
-      "sourceKey": "mlb_team_total",
-      "sport": "MLB",
-      "stakeUnits": 0.0,
-      "tier": "avoid",
-      "valueQualified": false
     }
   ],
   "cutoverDate": "2026-07-10",
   "date": "2026-09-11",
   "engineVersion": "profit_desk_v2_live",
   "firstLiveDate": "2026-07-11",
-  "generatedAt": "2026-09-11T16:54:05.888760Z",
+  "generatedAt": "2026-09-11T18:11:32.513396Z",
   "notices": [
     "Qualified picks carry real flat stakes: EDGE 1.0u, VALUE 0.5u; everything else stays 0u.",
     "The market price is the baseline; historical residual alpha is shrunk and uncertainty-adjusted.",
@@ -4099,52 +3766,6 @@
       "wins": 0
     },
     {
-      "alpha": 0.0,
-      "candidatesToday": 3,
-      "distinctDates": 0,
-      "evidenceQualified": false,
-      "flatNetUnits": 0,
-      "flatRoi": null,
-      "gates": {
-        "distinctPriorDates": {
-          "actual": 0,
-          "passed": false,
-          "required": 15
-        },
-        "positiveFlatRoi": {
-          "actual": null,
-          "passed": false,
-          "required": 0.0
-        },
-        "probabilityPositiveEv": {
-          "actual": 0.5,
-          "passed": false,
-          "required": 0.7
-        },
-        "sourceSamples": {
-          "actual": 0,
-          "passed": false,
-          "required": 150
-        },
-        "stableChronologicalHalves": {
-          "actual": true,
-          "passed": false,
-          "required": true
-        }
-      },
-      "gatesPassed": 0,
-      "gatesTotal": 5,
-      "liveToday": 0,
-      "losses": 0,
-      "mode": "team",
-      "probabilityPositiveEv": 0.5,
-      "samples": 0,
-      "source": "MLB Team Total",
-      "sourceKey": "mlb_team_total",
-      "sport": "mlb",
-      "wins": 0
-    },
-    {
       "alpha": -0.007823,
       "candidatesToday": 0,
       "distinctDates": 8,
@@ -4468,13 +4089,13 @@
     }
   ],
   "summary": {
-    "avoid": 13,
-    "candidateCount": 17,
-    "candidatesEvaluated": 17,
+    "avoid": 10,
+    "candidateCount": 14,
+    "candidatesEvaluated": 14,
     "deduplicatedPicks": 1,
     "edgeQualified": 0,
     "evidenceRows": 3452,
-    "inputPicks": 18,
+    "inputPicks": 15,
     "livePortfolioCandidates": 2,
     "liveQualified": 2,
     "liveRecord": {
@@ -4521,10 +4142,10 @@
         "watchlist": 0
       },
       "team": {
-        "avoid": 13,
-        "candidateCount": 15,
-        "candidates": 15,
-        "candidatesEvaluated": 15,
+        "avoid": 10,
+        "candidateCount": 12,
+        "candidates": 12,
+        "candidatesEvaluated": 12,
         "edgeQualified": 0,
         "evidenceRows": 2697,
         "liveQualified": 0,
@@ -4567,7 +4188,7 @@
       "stakedUnits": 0.0,
       "wins": 0
     },
-    "sourcesTracked": 35,
+    "sourcesTracked": 34,
     "valueQualified": 2,
     "watchlist": 2
   }
