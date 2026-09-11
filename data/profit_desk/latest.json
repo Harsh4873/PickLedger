@@ -1669,7 +1669,7 @@
   "date": "2026-09-11",
   "engineVersion": "profit_desk_v2_live",
   "firstLiveDate": "2026-07-11",
-  "generatedAt": "2026-09-11T15:31:42.901891Z",
+  "generatedAt": "2026-09-11T15:40:28.741121Z",
   "notices": [
     "Qualified picks carry real flat stakes: EDGE 1.0u, VALUE 0.5u; everything else stays 0u.",
     "The market price is the baseline; historical residual alpha is shrunk and uncertainty-adjusted.",
