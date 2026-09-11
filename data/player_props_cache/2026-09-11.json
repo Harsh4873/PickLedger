@@ -196,6 +196,7 @@
           "edge_basis": "no_vig",
           "full_kelly": 0.2,
           "game_id": "823173",
+          "game_start_time": "2026-09-12T02:15Z",
           "h2h": {
             "at_bats": 0,
             "available": false,
@@ -285,7 +286,7 @@
           "selection": "Under",
           "source": "MLBPlayerProps",
           "sport": "MLB",
-          "start_time": "2026-09-12T02:15:00Z",
+          "start_time": "2026-09-12T02:15Z",
           "stat_key": "rbis",
           "stat_label": "RBIs",
           "supporting_variant": "all_time",
@@ -342,6 +343,7 @@
           "edge_basis": "no_vig",
           "full_kelly": 0.1942,
           "game_id": "822684",
+          "game_start_time": "2026-09-11T22:45Z",
           "h2h": {
             "at_bats": 0,
             "available": false,
@@ -431,7 +433,7 @@
           "selection": "Under",
           "source": "MLBPlayerProps",
           "sport": "MLB",
-          "start_time": "2026-09-11T22:45:00Z",
+          "start_time": "2026-09-11T22:45Z",
           "stat_key": "rbis",
           "stat_label": "RBIs",
           "supporting_variant": "all_time",
