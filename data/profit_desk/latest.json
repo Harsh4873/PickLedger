@@ -11,6 +11,14 @@
         "value_insufficient_source_samples"
       ],
       "canonicalGame": "2026-09-10:mlb:colorado rockies|new york yankees",
+      "closing": {
+        "capturedAt": "2026-09-10T21:07:51.768802Z",
+        "clv": 0.0,
+        "decimalOdds": 1.327869,
+        "noVigProbability": 0.720323,
+        "oddsAmerican": -305,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-10",
       "decimalOdds": 1.327869,
@@ -131,7 +139,7 @@
         "updatedAt": "2026-09-10T21:07:51.768802Z"
       },
       "rawModelProbabilityIgnored": 0.97,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -509,7 +517,7 @@
         "updatedAt": "2026-09-10T20:51:59.856378Z"
       },
       "rawModelProbabilityIgnored": 0.5715,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",

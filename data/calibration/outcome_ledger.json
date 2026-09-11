@@ -543638,7 +543638,7 @@
       "model_key": "mlb_new",
       "model_version": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
       "odds": -330.0,
-      "outcome": null,
+      "outcome": 1,
       "pick": "Yankees ML (Rockies vs Yankees)",
       "pregame_snapshot": {
         "assumed_odds_replaced": true,
@@ -543679,12 +543679,12 @@
         "units": 1.5
       },
       "probability": 0.8643,
-      "profit": null,
+      "profit": 0.15151515151515152,
       "raw_decision": "BET",
       "raw_edge": 47.0,
       "raw_probability": 0.97,
       "raw_units": 0.5,
-      "result": "pending",
+      "result": "win",
       "source": "MLB Model",
       "sport": "MLB",
       "stake_units": 0.5,
@@ -543776,7 +543776,7 @@
       "model_key": "mlb_new",
       "model_version": "MLB:mlb_team_consensus_v1.2.0:mlb_new",
       "odds": -301.0,
-      "outcome": null,
+      "outcome": 1,
       "pick": "Yankees ML (Rockies vs Yankees)",
       "pregame_snapshot": {
         "assumed_odds_replaced": true,
@@ -543817,12 +543817,12 @@
         "units": 1.5
       },
       "probability": 0.8643,
-      "profit": null,
+      "profit": 0.16611295681063123,
       "raw_decision": "BET",
       "raw_edge": 47.0,
       "raw_probability": 0.97,
       "raw_units": 0.5,
-      "result": "pending",
+      "result": "win",
       "source": "MLB Model",
       "sport": "MLB",
       "stake_units": 0.5,
@@ -543975,9 +543975,9 @@
   ],
   "schema_version": 1,
   "summary": {
-    "decided_picks": 6787,
-    "pending_picks": 102,
+    "decided_picks": 6789,
+    "pending_picks": 100,
     "total_picks": 7102,
-    "trainable_decided_picks": 809
+    "trainable_decided_picks": 811
   }
 }

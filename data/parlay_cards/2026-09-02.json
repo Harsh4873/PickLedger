@@ -137,7 +137,7 @@
   ],
   "date": "2026-09-02",
   "engineVersion": "parlay_cards_v6_proven_legs",
-  "generatedAt": "2026-09-11T00:34:07.584907Z",
+  "generatedAt": "2026-09-11T05:16:57.880120Z",
   "notices": [
     "Leg probabilities are anchored to market prices and adjusted only by each source's proven trailing excess.",
     "No same-game, same-player, or same-side duplicate legs are allowed; game keys are canonicalized across sources.",
