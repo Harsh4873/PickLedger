@@ -1,3 +1,4 @@
+import { fetchJsonWithTimeout } from './http';
 import { initMobileMode, initPickMode, initSettingsUI, initTheme, type PickMode } from './settings';
 import {
   getAllPicks,
@@ -11,6 +12,8 @@ import {
   setHideTennisPicks,
   initHideTennisPicks,
   getCacheStatus,
+  didLatestCacheLoad,
+  getPlayerSourceStatuses,
   isPickHistoryLoading,
   getParlayCardsPayload,
   getParlayCardPayloads,
@@ -1008,14 +1011,14 @@ function calendarHtml(): string {
     const date = new Date(gridStart.getFullYear(), gridStart.getMonth(), gridStart.getDate() + index);
     const key = calendarDateKey(date);
     const count = counts.get(key) || 0;
-    return `<button class="home-calendar-day ${date.getMonth() !== monthDate.getMonth() ? 'is-outside' : ''} ${key === centralDateKey() ? 'is-today' : ''} ${key === selectedDate ? 'is-selected' : ''} ${count ? 'has-picks' : ''}" data-date="${key}">
+    return `<button class="home-calendar-day ${date.getMonth() !== monthDate.getMonth() ? 'is-outside' : ''} ${key === centralDateKey() ? 'is-today' : ''} ${key === selectedDate ? 'is-selected' : ''} ${count ? 'has-picks' : ''}" data-date="${key}" aria-label="${escapeHtml(dateLabel(key, true))}, ${count} picks" aria-pressed="${key === selectedDate}">
       <span class="home-calendar-day-num">${date.getDate()}</span>
       <span class="home-calendar-day-count">${count || '&middot;'}</span>
     </button>`;
   }).join('');
   return `<div class="home-date-popover-top">
     <div><div class="home-date-popover-label">Calendar View</div><div class="home-date-popover-month">${monthDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</div></div>
-    <div class="home-date-nav-wrap"><button class="home-date-nav" data-month-shift="-1">&#8249;</button><button class="home-date-nav" data-month-shift="1">&#8250;</button></div>
+    <div class="home-date-nav-wrap"><button class="home-date-nav" data-month-shift="-1" aria-label="Previous month">&#8249;</button><button class="home-date-nav" data-month-shift="1" aria-label="Next month">&#8250;</button></div>
   </div>
   <div class="home-date-weekdays">${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => `<div class="home-date-weekday">${day}</div>`).join('')}</div>
   <div class="home-calendar-grid">${days}</div>`;
@@ -1174,22 +1177,19 @@ function clearBoardFilters(): void {
 function renderSourceStatus(): void {
   const container = document.getElementById('source-status');
   if (!container) return;
-  if (activePickMode !== 'team') {
-    container.innerHTML = '';
-    return;
-  }
-  const statuses = getSourceStatuses(selectedDate).filter(source => (
+  const statuses = (activePickMode === 'player'
+    ? getPlayerSourceStatuses(selectedDate) : getSourceStatuses(selectedDate)).filter(source => (
     !activeFilters.size || activeFilters.has(source.sport)
     || source.filterLabels.some(label => activeFilters.has(label))
   ));
   const issues = statuses.filter(source => ['error', 'stale', 'missing'].includes(source.state));
   const published = statuses.filter(source => source.pickCount + source.researchCount > 0 && source.date === selectedDate);
   const stateLabels = { ready: 'Published', empty: 'No picks', stale: 'Stale', error: 'Refresh failed', missing: 'Awaiting update' };
-  const hidden = getHideScrapedPicks();
+  const hidden = activePickMode === 'team' && getHideScrapedPicks();
   container.innerHTML = `${hidden ? '<div class="board-feed-notice"><span>External feed picks are hidden by your saved filter.</span><button type="button" onclick="toggleScrapedPicks()">Show feeds</button></div>' : ''}
     <details class="source-health" ${sourceStatusOpen ? 'open' : ''}>
       <summary><span><strong>Source status</strong><span class="source-health-summary">${published.length} publishing · ${issues.length ? `${issues.length} need attention` : 'no reported feed issues'}</span></span><span class="source-health-indicator ${issues.length ? 'needs-attention' : ''}">${issues.length ? 'Check updates' : 'Details'} <span aria-hidden="true">↗</span></span></summary>
-      <p class="source-health-intro">Last published updates for ${escapeHtml(dateLabel(selectedDate, true))}. A research forecast is visible below even when a source has not qualified for tracked betting.</p>
+      <p class="source-health-intro">Last published updates for ${escapeHtml(dateLabel(selectedDate, true))}. ${activePickMode === 'player' ? 'A completed refresh may publish no props when none meet the quality rules.' : 'A research forecast is visible below even when a source has not qualified for tracked betting.'}</p>
       <div class="source-health-grid">${statuses.map(source => `<article class="source-health-card state-${source.state}"><div class="source-health-card-top"><strong>${escapeHtml(source.label)}</strong><span>${stateLabels[source.state]}</span></div><p>${escapeHtml(source.detail)}</p><div class="source-health-meta">${escapeHtml(source.sport)} · ${source.pickCount} tracked · ${source.researchCount} research${source.updatedAt ? ` · Updated ${escapeHtml(updatedAgoLabel(source.updatedAt))}` : ''}${source.date && source.date !== selectedDate ? ` · Slate ${escapeHtml(source.date)}` : ''}</div></article>`).join('') || '<p class="source-health-intro">No source update is available for this selection yet.</p>'}</div>
     </details>`;
   container.querySelector('details')?.addEventListener('toggle', event => {
@@ -3782,9 +3782,8 @@ async function refreshHomeScores(date: string, picks: Pick[]): Promise<void> {
     for (const [sport, sportPicks] of bySport) {
       const endpoint = ESPN_ENDPOINTS[sport];
       try {
-        const response = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${endpoint[0]}/${endpoint[1]}/scoreboard?dates=${date.replace(/-/g, '')}${sport === 'CFB' ? '&groups=80&limit=1000' : ''}`, { cache: 'no-store' });
-        if (!response.ok) continue;
-        const payload = await response.json() as { events?: unknown[] };
+        const payload = await fetchJsonWithTimeout<{ events?: unknown[] }>(`https://site.api.espn.com/apis/site/v2/sports/${endpoint[0]}/${endpoint[1]}/scoreboard?dates=${date.replace(/-/g, '')}${sport === 'CFB' ? '&groups=80&limit=1000' : ''}`);
+        if (!payload) continue;
         sportPicks.forEach(pick => {
           const matched = findEspnEventForPick(pick, payload.events || []);
           if (!matched) return;
@@ -4109,13 +4108,8 @@ function gradeMlbPlayerValue(descriptor: PlayerPropDescriptor, feed: Record<stri
   return 'pending';
 }
 
-async function fetchRemoteJson(url: string): Promise<Record<string, unknown> | null> {
-  try {
-    const response = await fetch(url, { cache: 'no-store' });
-    return response.ok ? await response.json() as Record<string, unknown> : null;
-  } catch {
-    return null;
-  }
+function fetchRemoteJson(url: string): Promise<Record<string, unknown> | null> {
+  return fetchJsonWithTimeout<Record<string, unknown>>(url);
 }
 
 function findMlbGamePk(schedule: Record<string, unknown>, pick: Pick): string {
@@ -4156,9 +4150,8 @@ async function gradeDate(date: string, picks: Pick[]): Promise<number> {
     const sportPicks = picks.filter(pick => pick.sport === sport && isOpenPick(pick));
     if (!sportPicks.length) continue;
     try {
-      const response = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${endpoint[0]}/${endpoint[1]}/scoreboard?dates=${dateParam}${sport === 'CFB' ? '&groups=80&limit=1000' : ''}`, { cache: 'no-store' });
-      if (!response.ok) continue;
-      const payload = await response.json() as { events?: unknown[] };
+      const payload = await fetchJsonWithTimeout<{ events?: unknown[] }>(`https://site.api.espn.com/apis/site/v2/sports/${endpoint[0]}/${endpoint[1]}/scoreboard?dates=${dateParam}${sport === 'CFB' ? '&groups=80&limit=1000' : ''}`);
+      if (!payload) continue;
       for (const pick of sportPicks) {
         const matched = findEspnEventForPick(pick, payload.events || []);
         if (!matched) continue;
@@ -4241,6 +4234,8 @@ async function refreshAutoGrades(): Promise<void> {
   try {
     await loadAllData({ includeHistory: false });
     updateSyncStatus();
+    render();
+    if (!didLatestCacheLoad()) return;
     const pending = getAllPicks().filter(isOpenPick);
     const byDate = new Map<string, Pick[]>();
     pending.forEach(pick => byDate.set(pickDateKey(pick), [...(byDate.get(pickDateKey(pick)) || []), pick]));
@@ -4250,7 +4245,7 @@ async function refreshAutoGrades(): Promise<void> {
     render();
     setRefreshStatus(graded
       ? `Updated ${graded} finished pick${graded === 1 ? '' : 's'}`
-      : activePickMode === 'player' ? 'Player props refreshed' : 'You’re up to date — no new final scores', 'ok');
+      : activePickMode === 'player' ? 'Player props refreshed' : 'Picks refreshed — no additional results confirmed', 'ok');
   } catch {
     setRefreshStatus('Couldn’t check for updates right now', 'error');
   } finally {
@@ -4284,11 +4279,18 @@ function updatedAgoLabel(value: string): string {
 function updateSyncStatus(): void {
   const status = getCacheStatus();
   latestPicksUpdatedAt = status.updatedAt;
+  if (!didLatestCacheLoad()) {
+    setRefreshStatus(status.date
+      ? `Couldn’t load fresh picks — showing saved data for ${dateLabel(status.date)}`
+      : 'Couldn’t load picks. Use Refresh to try again.', 'error');
+    return;
+  }
   const syncStatus = document.getElementById('sync-status');
   if (!syncStatus) return;
   const base = status.updatedAt
     ? `Picks updated ${updatedAgoLabel(status.updatedAt)}${status.runTime ? ` • ${status.runTime}` : ''}`
     : 'Latest pick update time unavailable';
+  syncStatus.classList.remove('ok', 'error');
   syncStatus.textContent = isPickHistoryLoading() ? `${base} • loading records` : base;
 }
 

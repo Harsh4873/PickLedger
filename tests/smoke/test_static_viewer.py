@@ -43,7 +43,7 @@ def test_viewer_paints_latest_picks_before_history_archive():
 
     assert "?v=${Date.now()}" not in data
     assert "cache: 'no-store'" not in data
-    assert "cache: 'no-cache'" in data
+    assert "fetchJsonWithTimeout<T>(path, 'no-cache')" in data
     assert "await loadLatestCaches();" in data
     assert "void ensureHistory()" in data
     assert "./data/model_cache/latest.json" in data
@@ -885,7 +885,7 @@ def test_refresh_timing_and_pages_deploy_are_deterministic():
     assert 'official_mlb_games = max(' in guard
     assert 'str(pick.get("probability_source") or "").strip() != "player_props_ml_v1"' in guard
     assert 'pick.get("preserved_from_prior_refresh")' in guard
-    assert 'key == "mlb_player_props" or bucket.get("abstained") is not True' in guard
+    assert 'not documented_abstention(bucket) if key == "mlb_player_props"' in guard
     assert 'DISPATCHES_TODAY="$(gh run list' in guard
     assert '--json createdAt,displayTitle,event' in guard
     assert '"Player Props Refresh $TARGET_DATE"' in guard

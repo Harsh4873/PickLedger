@@ -56,6 +56,7 @@ jobs:
           from datetime import datetime
           from pathlib import Path
           from zoneinfo import ZoneInfo
+          from scripts.site_upcheck import _mlb_player_props_documented_abstention as documented_abstention
 
           required = {
               "nba_player_props",
@@ -157,7 +158,8 @@ jobs:
               ):
                   healthy = False
               if games > 0 and not picks and (
-                  key == "mlb_player_props" or bucket.get("abstained") is not True
+                  not documented_abstention(bucket) if key == "mlb_player_props"
+                  else bucket.get("abstained") is not True
               ):
                   healthy = False
           print("true" if healthy else "false")

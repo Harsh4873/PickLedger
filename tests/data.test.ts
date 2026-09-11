@@ -369,3 +369,37 @@ test('all active football scraper sources publish research rows with league labe
   assert.equal(getResearchPicks(date).find(pick => pick.id === 'forebet_cfb')?.source, 'ForebetCFB');
   assert.equal(getResearchPicks(date).find(pick => pick.id === 'forebet_nfl')?.source, 'ForebetNFL');
 });
+
+test('failed refresh retains loaded picks while reporting download failure', { concurrency: false }, async () => {
+  const { didLatestCacheLoad } = await import('../src/data.ts');
+  setPickMode('team');
+  installFetch(new Map([['./data/model_cache/latest.json', { date: '2026-09-13', models: {
+    nfl: { ok: true, picks: [{ id: 'offline-retain', sport: 'NFL', pick: 'Home ML', decision: 'BET' }] },
+  } }]]));
+  await loadAllData({ includeHistory: false });
+  assert.equal(didLatestCacheLoad(), true);
+  installFetch(new Map());
+  await loadAllData({ includeHistory: false });
+  assert.equal(didLatestCacheLoad(), false);
+  assert.ok(getTeamPicks().some(pick => pick.id === 'offline-retain'));
+});
+
+test('player source status distinguishes abstention, missing data, failure and stale slates', { concurrency: false }, async () => {
+  const { getPlayerSourceStatuses } = await import('../src/data.ts');
+  const date = '2026-09-14';
+  const responses = new Map<string, CachePayload>();
+  installFetch(responses);
+  const publish = async (bucket: CachePayload) => {
+    responses.set('./data/player_props_cache/latest.json', { date, models: { mlb_player_props: bucket } });
+    await loadAllData({ includeHistory: false });
+    return getPlayerSourceStatuses(date).find(source => source.key === 'mlb_player_props')!;
+  };
+  const abstained = await publish({ ok: true, games: 5, picks: [], abstained: true, candidate_count: 1445 });
+  assert.equal(abstained.state, 'empty');
+  assert.match(abstained.detail, /did not clear/);
+  assert.equal((await publish({ ok: true, games: 5, picks: [], abstained: true })).state, 'error');
+  assert.equal((await publish({ ok: false, games: 5, picks: [] })).state, 'error');
+  assert.equal((await publish({ ok: true, games: 0, picks: [] })).detail, 'No games scheduled for this date.');
+  assert.equal(getPlayerSourceStatuses('2026-09-15')[0].state, 'stale');
+  assert.equal(getPlayerSourceStatuses(date).find(source => source.key === 'wnba_player_props')?.state, 'missing');
+});

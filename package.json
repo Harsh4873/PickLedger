@@ -8,7 +8,7 @@
     "build": "tsc --noEmit && vite build",
     "upcheck": "npm run build && python3 scripts/site_upcheck.py",
     "preview": "vite preview",
-    "test": "tsx --test tests/theme.test.ts tests/data.test.ts",
+    "test": "tsx --test tests/theme.test.ts tests/data.test.ts tests/http.test.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

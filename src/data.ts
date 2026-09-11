@@ -1,3 +1,4 @@
+import { fetchJsonWithTimeout } from './http';
 export type PickResult = 'pending' | 'win' | 'loss' | 'push';
 export type PickMode = 'team' | 'player';
 
@@ -892,17 +893,15 @@ const PROFIT_CACHE_INDEX = './data/profit_desk/index.json';
 const PROFIT_CACHE_LATEST = './data/profit_desk/latest.json';
 const PROFIT_CACHE_DIR = './data/profit_desk';
 
-async function fetchJson<T>(path: string): Promise<T | null> {
-  try {
-    // Revalidate so auto-grader edits to dated files still land, but allow
-    // 304s. Never cache-bust with Date.now(): that forced a 200MB+ download
-    // on every launch and blocked first paint.
-    const response = await fetch(path, { cache: 'no-cache' });
-    if (!response.ok) return null;
-    return await response.json() as T;
-  } catch {
-    return null;
-  }
+function fetchJson<T>(path: string): Promise<T | null> {
+  // Revalidate dated files so grading updates arrive without cache busting.
+  return fetchJsonWithTimeout<T>(path, 'no-cache');
+}
+
+const latestLoadAvailable: Record<PickMode, boolean> = { team: false, player: false };
+
+export function didLatestCacheLoad(): boolean {
+  return latestLoadAvailable[activePickMode];
 }
 
 function mergePayloadsByDate<T>(
@@ -1008,6 +1007,8 @@ async function loadLatestCaches(): Promise<void> {
     loadLatestOrLastDated<ParlayCardsPayload>(PARLAY_CACHE_LATEST, PARLAY_CACHE_INDEX, PARLAY_CACHE_DIR),
     loadLatestOrLastDated<ProfitDeskPayload>(PROFIT_CACHE_LATEST, PROFIT_CACHE_INDEX, PROFIT_CACHE_DIR),
   ]);
+  latestLoadAvailable.team = teamPayloads.some(payload => Boolean(payload.date && payload.models));
+  latestLoadAvailable.player = Boolean((player?.date || player?.slate_date) && player?.models);
   if (teamPayloads.length) {
     teamCachePayloads = mergePayloadsByDate(
       teamCachePayloads,
@@ -1270,6 +1271,49 @@ function sourceErrorText(payload: ModelCachePayload, key: string, bucket: ModelB
   };
   return [bucket.error, bucket.lastError, ...errors, ...scopedErrors, sportErrors[bucketSport(key).toLowerCase()]]
     .filter(error => Boolean(error) && belongsToSource(error)).map(String).join(' ');
+}
+
+/** Explain empty player slates using the same published diagnostics as the jobs. */
+export function getPlayerSourceStatuses(date: string): SourceStatus[] {
+  const payload = playerCachePayloads.filter(item => String(item.date || item.slate_date || '') <= date).at(-1);
+  return ['mlb_player_props', 'wnba_player_props', 'nba_player_props'].map(key => {
+    const bucket = recordValue(payload?.models?.[key]);
+    const sport = key.split('_')[0].toUpperCase();
+    const label = `${sport} Player Props`;
+    const sourceDate = String(bucket.date || payload?.date || payload?.slate_date || '');
+    const count = Array.isArray(bucket.picks) ? bucket.picks.length : 0;
+    const status: SourceStatus = {
+      key, label, sport, filterLabels: [label, String(bucket.model || '')], scraped: false,
+      date: sourceDate, updatedAt: String(bucket.updatedAt || payload?.updatedAt || payload?.generatedAt || '') || null,
+      pickCount: count, researchCount: 0, state: 'missing', detail: 'No refresh published for this date.',
+    };
+    const errors = Array.isArray(bucket.errors) ? bucket.errors.filter(Boolean) : [];
+    if (!Object.keys(bucket).length) return status;
+    if (sourceDate !== date) {
+      status.state = 'stale';
+      status.detail = 'Awaiting a player-prop refresh for this date.';
+    } else if (bucket.ok === false || bucket.error || errors.length) {
+      status.state = 'error';
+      status.detail = 'Player-prop refresh reported an error; coverage may be incomplete.';
+    } else if (bucket.ok === true && count) {
+      status.state = 'ready';
+      status.detail = `${count} player props published.`;
+    } else if (bucket.ok === true) {
+      status.state = 'empty';
+      const evaluated = Math.max(Number(bucket.candidate_count) || 0, Number(bucket.scored_count) || 0,
+        Number(bucket.consensus_rejected_count) || 0);
+      const games = Array.isArray(bucket.games) ? bucket.games.length : Number(bucket.games) || 0;
+      if (bucket.abstained === true && evaluated > 0) {
+        status.detail = 'Refresh completed; evaluated candidates did not clear the publication rules.';
+      } else if (games > 0) {
+        status.state = 'error';
+        status.detail = 'Games are scheduled, but no evaluated props were published. Check the next refresh.';
+      } else {
+        status.detail = 'No games scheduled for this date.';
+      }
+    }
+    return status;
+  });
 }
 
 /** Source health is based on published cache evidence, independent of view filters. */

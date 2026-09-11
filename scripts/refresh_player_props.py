@@ -17,6 +17,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "data" / "player_props_cache"
 sys.path.insert(0, str(REPO_ROOT))
 
+from scripts.site_upcheck import _mlb_player_props_documented_abstention as documented_abstention
 from player_props import generate_payload  # noqa: E402
 from scripts.merge_player_props_cache_payload import PUBLIC_PLAYER_PROP_MODEL_KEYS  # noqa: E402
 from scripts.pick_calibration import apply_calibration_to_payload  # noqa: E402
@@ -126,7 +127,7 @@ def _publication_contract_errors(
             errors.append(f"required bucket {model_name} is not ok")
     mlb = models.get("mlb_player_props") if isinstance(models.get("mlb_player_props"), dict) else {}
     scheduled_games = max(_scheduled_game_count(mlb, target_date=target_date), official_mlb_games)
-    if scheduled_games > 0 and not (mlb.get("picks") or []):
+    if scheduled_games > 0 and not (mlb.get("picks") or []) and not documented_abstention(mlb):
         errors.append(f"scheduled MLB games ({scheduled_games}) have zero published picks")
     return errors
 

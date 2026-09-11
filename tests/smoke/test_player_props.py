@@ -1196,3 +1196,23 @@ def test_untyped_competitions_are_never_treated_as_exhibitions():
     assert _is_exhibition({}) is False
     assert _is_exhibition({"competitions": [{"type": {"abbreviation": "STD"}}]}) is False
     assert _is_exhibition({"competitions": [{"type": {"abbreviation": "allstar"}}]}) is True
+
+
+def test_refresh_publication_contract_accepts_documented_abstention():
+    models = _public_prop_buckets()
+    models['mlb_player_props'].update({
+        'games': 5, 'abstained': True, 'candidate_count': 1445,
+        'scored_count': 3969, 'consensus_rejected_count': 3673,
+        'consensus_rejection_reasons': {'hits has not cleared the gate': 603},
+    })
+    assert _publication_contract_errors(models, official_mlb_games=5) == []
+    models['mlb_player_props']['ok'] = False
+    assert _publication_contract_errors(models, official_mlb_games=5)
+
+
+def test_guard_and_publication_share_documented_abstention_rule():
+    from scripts.site_upcheck import _mlb_player_props_documented_abstention as documented_abstention
+    from scripts.site_upcheck import _mlb_player_props_documented_abstention
+    assert documented_abstention is _mlb_player_props_documented_abstention
+    assert not documented_abstention({'ok': True, 'abstained': True, 'picks': []})
+    assert not documented_abstention({'ok': False, 'abstained': True, 'candidate_count': 10})
