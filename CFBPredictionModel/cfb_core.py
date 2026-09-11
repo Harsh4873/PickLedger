@@ -396,7 +396,12 @@ def features_for_slate(history: list[dict[str, Any]], slate: list[dict[str, Any]
     """Build target-slate features from completed games strictly before kickoff."""
 
     target_ids = {_text(game.get("game_id")) for game in slate}
-    combined = [*history, *slate]
+    # The season schedule already contains upcoming games. The live slate is
+    # authoritative for each target event, including its current names/prices.
+    # Deduplicate history too so a repeated game cannot update team state twice.
+    by_event = {_text(game.get("game_id")): game for game in [*history, *slate]
+                if _text(game.get("game_id"))}
+    combined = list(by_event.values())
     combined.sort(key=lambda row: (_text(row.get("start_time")), _text(row.get("game_id"))))
     states: dict[str, TeamState] = {}
     output: list[dict[str, Any]] = []

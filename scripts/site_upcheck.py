@@ -146,6 +146,24 @@ def _pick_text(pick: dict[str, Any]) -> str:
 
 
 def _team_pick_key(pick: dict[str, Any], fallback_source: str) -> tuple[str, ...]:
+    event = str(pick.get("espn_event_id") or pick.get("event_id") or pick.get("game_id") or "").strip()
+    market = str(pick.get("market") or pick.get("market_type") or "").strip().lower()
+    market = {"moneyline": "h2h", "money_line": "h2h", "total": "totals"}.get(market, market)
+    side = str(pick.get("side") or pick.get("direction") or "").strip().lower()
+    line = pick.get("line", pick.get("market_line"))
+    if (event and market in {"h2h", "spread", "totals"}
+            and side in {"home", "away", "over", "under"}
+            and not (pick.get("player_id") or pick.get("player_name") or pick.get("player"))
+            and (market == "h2h" or line is not None)):
+        try:
+            line_key = "" if market == "h2h" else str(float(line))
+        except (TypeError, ValueError):
+            line_key = str(line)
+        return tuple(str(value or "").strip().lower() for value in (
+            "@event", pick.get("source") or fallback_source, pick.get("sport"),
+            pick.get("date") or pick.get("game_date") or pick.get("slate_date"),
+            event, market, side, line_key, pick.get("period") or pick.get("inning"),
+        ))
     return tuple(
         str(value or "").strip().lower()
         for value in (
@@ -350,6 +368,7 @@ def _cache_contract_messages(cache_dir: Path, *, player_props: bool, today: str)
         models = payload.get("models") if isinstance(payload.get("models"), dict) else {}
         id_counts: dict[tuple[str, str], int] = {}
         duplicate_keys = 0
+        duplicate_event_keys = 0
         missing_dates = 0
         for model_key, bucket in models.items():
             picks = _bucket_picks(bucket)
@@ -365,6 +384,8 @@ def _cache_contract_messages(cache_dir: Path, *, player_props: bool, today: str)
                 if any(key):
                     market_counts[key] = market_counts.get(key, 0) + 1
             duplicate_keys += sum(1 for count in market_counts.values() if count > 1)
+            duplicate_event_keys += sum(1 for key, count in market_counts.items()
+                                        if key[0] == "@event" and count > 1)
         duplicate_ids = sum(1 for count in id_counts.values() if count > 1)
         if duplicate_ids:
             message = f"{cache_dir.name}/{file} has {duplicate_ids} duplicate date/id pair(s)"
@@ -372,6 +393,8 @@ def _cache_contract_messages(cache_dir: Path, *, player_props: bool, today: str)
                 failures.append(message)
             else:
                 warnings.append(message)
+        if duplicate_event_keys and date_iso == today:
+            failures.append(f"{cache_dir.name}/{file} has {duplicate_event_keys} duplicate event/source/market selections")
         if duplicate_keys:
             warnings.append(f"{cache_dir.name}/{file} has {duplicate_keys} duplicate market key(s)")
         if missing_dates:

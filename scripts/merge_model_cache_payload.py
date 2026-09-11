@@ -11,6 +11,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from site_upcheck import _team_pick_key
 from cache_manifest import write_cache_manifest  # noqa: E402
 from merge_external_feed_cache_payload import _demote_scraped_feed_picks  # noqa: E402
 
@@ -313,14 +314,12 @@ def _merged_models(current: dict[str, Any], generated: dict[str, Any]) -> dict[s
 
 
 def _pick_key(pick: dict[str, Any]) -> tuple[str, ...]:
-    return tuple(
-        str(pick.get(key) or "").strip().lower()
-        for key in ("source", "sport", "date", "pick", "matchup", "game")
-    )
+    return _team_pick_key(pick, "")
 
 
 def _replacement_key(pick: dict[str, Any]) -> tuple[str, ...]:
-    matchup = str(pick.get("matchup") or pick.get("game") or "").strip().lower()
+    event = str(pick.get("espn_event_id") or pick.get("event_id") or pick.get("game_id") or "").strip()
+    matchup = f"event:{event}" if event else str(pick.get("matchup") or pick.get("game") or "").strip().lower()
     market = str(pick.get("market") or pick.get("market_type") or "").strip().lower()
     return tuple(
         str(value or "").strip().lower()

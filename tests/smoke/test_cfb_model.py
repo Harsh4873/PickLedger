@@ -382,3 +382,61 @@ def test_cfb_no_game_day_has_explicit_coverage(monkeypatch):
     assert payload["ok"] is True
     assert payload["coverage"]["official_games"] == 0
     assert "No FBS games" in payload["note"]
+
+
+def test_live_slate_replaces_same_event_in_history_and_duplicate_history():
+    from CFBPredictionModel.cfb_core import features_for_slate
+    prior = _game('g1', '2025-08-30', 70, 0)
+    live = {**_game('g2', '2025-09-06', 0, 0), 'completed': False,
+            'home_team': 'Boston College Eagles', 'away_team': 'Rutgers Scarlet Knights',
+            'home_moneyline': -162, 'away_moneyline': 136}
+    scheduled = {**live, 'home_team': 'Boston College', 'away_team': 'Rutgers',
+                 'home_moneyline': None, 'away_moneyline': None,
+                 'start_time': '2025-09-06T17:00:00.000Z'}
+    expected = features_for_slate([prior], [live])
+    actual = features_for_slate([prior, prior, scheduled], [live, live])
+    assert actual == expected
+    assert len(actual) == 1
+    assert actual[0]['game']['home_moneyline'] == -162
+    assert actual[0]['game']['home_team'] == 'Boston College Eagles'
+
+
+def test_alias_refresh_replaces_old_decision_and_preserves_same_selection_grade(tmp_path):
+    from scripts.merge_model_cache_payload import merge_payload
+    date = '2026-09-11'
+    old = {'source': 'CFB ML', 'sport': 'CFB', 'date': date, 'event_id': '401858214',
+           'market': 'h2h', 'side': 'home', 'pick': 'Boston College ML',
+           'matchup': 'Rutgers @ Boston College', 'decision': 'PASS', 'units': 0}
+    fresh = {**old, 'pick': 'Boston College Eagles ML',
+             'matchup': 'Rutgers Scarlet Knights @ Boston College Eagles',
+             'decision': 'BET', 'units': 0.5}
+    current = {'date': date, 'models': {'cfb': {'ok': True, 'picks': [old]}}}
+    (tmp_path / f'{date}.json').write_text(json.dumps(current))
+    generated = {'date': date, 'models': {'cfb': {'ok': True, 'picks': [fresh]}}}
+    result = merge_payload(generated, tmp_path)
+    assert result['models']['cfb']['picks'] == [fresh]
+    old['result'] = 'win'
+    (tmp_path / f'{date}.json').write_text(json.dumps(current))
+    result = merge_payload(generated, tmp_path)
+    assert len(result['models']['cfb']['picks']) == 1
+    assert result['models']['cfb']['picks'][0]['result'] == 'win'
+
+
+def test_publication_rejects_alias_duplicate_but_keeps_distinct_markets(tmp_path):
+    from scripts.site_upcheck import _cache_contract_messages, _team_pick_key
+    date = '2026-09-11'
+    base = {'source': 'CFB ML', 'sport': 'CFB', 'date': date, 'event_id': '401858214',
+            'market': 'h2h', 'side': 'home', 'pick': 'Boston College ML', 'decision': 'PASS'}
+    duplicate = {**base, 'pick': 'Boston College Eagles ML', 'decision': 'BET'}
+    assert _team_pick_key(base, 'cfb') == _team_pick_key(duplicate, 'cfb')
+    for changes in ({'event_id': 'different'}, {'source': 'Different provider'}, {'side': 'away'},
+                    {'date': '2026-09-12'}, {'market': 'spread', 'line': -3.5}, {'period': 'first_half'}):
+        assert _team_pick_key(base, 'cfb') != _team_pick_key({**base, **changes}, 'cfb')
+    spread = {**base, 'market': 'spread', 'line': 0}
+    assert _team_pick_key(spread, 'cfb') != _team_pick_key({**spread, 'line': 1}, 'cfb')
+    (tmp_path / 'index.json').write_text(json.dumps({'files': [f'{date}.json']}))
+    (tmp_path / f'{date}.json').write_text(json.dumps({'date': date, 'models': {
+        'cfb': {'ok': True, 'picks': [base, duplicate]},
+    }}))
+    failures, _ = _cache_contract_messages(tmp_path, player_props=False, today=date)
+    assert any('duplicate event/source/market' in failure for failure in failures)
