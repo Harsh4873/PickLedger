@@ -995,7 +995,7 @@
         "updatedAt": "2026-09-11T20:56:00.817824Z"
       },
       "rawModelProbabilityIgnored": 0.594,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
