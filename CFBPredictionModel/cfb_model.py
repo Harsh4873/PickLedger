@@ -214,7 +214,7 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
         model_margin = float(model_margin_raw)
         model_total = float(model_total_raw)
         base = _base(game, date_iso, model_version)
-        base["odds_source"] = game["odds_source"]
+        base["odds_source"] = game.get("odds_source")
 
         raw_home, _, raw_away = _probabilities(model_margin, 0.0, sigma_margin, push_possible=False)
         home_probability = _calibrated_probability(calibrators["moneyline"], raw_home, 0.0)
