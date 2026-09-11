@@ -28,16 +28,20 @@ DATE_ISO="${SCORES24_DATE:-$(TZ=America/Chicago date +%F)}"
 # CFB and NFL ride the same weekday morning/afternoon Scores24 run as soft-fail
 # optional feeds: scrape when the slate exists, but incomplete/blocked/hung
 # CFB or NFL must not prevent publishing a complete MLB+WNBA slate, and must
-# not gate latestUpdated.
+# not gate latestUpdated. Optional feeds get a hard timeout (default 180s) and
+# no block-retry sleep budget so a Camoufox hang cannot delay MLB+WNBA publish
+# for 900s. Afternoon reruns resume from SCORES24_CHECKPOINT_DIR.
 PUBLISH_FEEDS="${SCORES24_PUBLISH_FEEDS:-scores24_mlb,scores24_wnba}"
 OPTIONAL_FEEDS="${SCORES24_OPTIONAL_FEEDS:-scores24_cfb,scores24_nfl}"
 PUBLISH_SPORTS="${SCORES24_PUBLISH_SPORTS:-mlb,wnba,cfb,nfl}"
-OPTIONAL_FEED_TIMEOUT="${SCORES24_OPTIONAL_FEED_TIMEOUT_SECONDS:-900}"
+OPTIONAL_FEED_TIMEOUT="${SCORES24_OPTIONAL_FEED_TIMEOUT_SECONDS:-180}"
 REQUEST_INTERVAL="${SCORES24_REQUEST_INTERVAL_SECONDS:-12}"
 REQUEST_ATTEMPTS="${SCORES24_REQUEST_ATTEMPTS:-1}"
 ATTEMPT_RETRY_DELAY="${SCORES24_ATTEMPT_RETRY_DELAY_SECONDS:-0}"
 BLOCK_RETRY_DELAY="${SCORES24_BLOCK_RETRY_DELAY_SECONDS:-90}"
 BLOCK_RETRY_ROUNDS="${SCORES24_BLOCK_RETRY_ROUNDS:-4}"
+OPTIONAL_BLOCK_RETRY_ROUNDS="${SCORES24_OPTIONAL_BLOCK_RETRY_ROUNDS:-0}"
+OPTIONAL_CHALLENGE_WAITS="${SCORES24_OPTIONAL_CAMOUFOX_CHALLENGE_WAITS:-4}"
 HOST_BLOCK_COOLDOWN="${SCORES24_HOST_BLOCK_COOLDOWN_SECONDS:-90}"
 CURL_SESSION_MAX_REQUESTS="${SCORES24_CURL_SESSION_MAX_REQUESTS:-1}"
 FEED_COOLDOWN="${SCORES24_PUBLISH_FEED_COOLDOWN_SECONDS:-90}"
@@ -192,8 +196,9 @@ PY
 
 # MLB+WNBA are complete. CFB/NFL (and any other OPTIONAL_FEEDS) are best-effort:
 # a hang, Cloudflare block, or incomplete football slate must not prevent
-# publishing the required feeds. Timeout so a stuck Camoufox session cannot
-# wedge the morning/afternoon commit.
+# publishing the required feeds. A hard timeout kills the Camoufox process
+# group and promotes any same-day checkpoint; yesterday's rows are never
+# redatestamped as today.
 IFS=',' read -r -a OPTIONAL_KEYS <<< "${OPTIONAL_FEEDS}"
 required_csv=",$(printf '%s' "${PUBLISH_FEEDS}" | tr -d '[:space:]'),"
 for raw_feed_key in "${OPTIONAL_KEYS[@]}"; do
@@ -215,7 +220,8 @@ for raw_feed_key in "${OPTIONAL_KEYS[@]}"; do
   SCORES24_REQUEST_ATTEMPTS="${REQUEST_ATTEMPTS}" \
   SCORES24_ATTEMPT_RETRY_DELAY_SECONDS="${ATTEMPT_RETRY_DELAY}" \
   SCORES24_BLOCK_RETRY_DELAY_SECONDS="${BLOCK_RETRY_DELAY}" \
-  SCORES24_BLOCK_RETRY_ROUNDS="${BLOCK_RETRY_ROUNDS}" \
+  SCORES24_BLOCK_RETRY_ROUNDS="${OPTIONAL_BLOCK_RETRY_ROUNDS}" \
+  SCORES24_CAMOUFOX_CHALLENGE_WAITS="${OPTIONAL_CHALLENGE_WAITS}" \
   SCORES24_HOST_BLOCK_COOLDOWN_SECONDS="${HOST_BLOCK_COOLDOWN}" \
   SCORES24_CURL_SESSION_MAX_REQUESTS="${CURL_SESSION_MAX_REQUESTS}" \
   OPTIONAL_FEED_KEY="${feed_key}" \
@@ -224,59 +230,9 @@ for raw_feed_key in "${OPTIONAL_KEYS[@]}"; do
   PUBLISH_SPORTS="${PUBLISH_SPORTS}" \
   TEMP_REPO="${TEMP_REPO}" \
   PYTHON_BIN="${PYTHON_BIN}" \
-  "${PYTHON_BIN}" - <<'PY'
-import os
-import subprocess
-import sys
-
-cmd = [
-    os.environ["PYTHON_BIN"],
-    os.path.join(os.environ["TEMP_REPO"], "scripts/refresh_external_feeds.py"),
-    "--date", os.environ["DATE_ISO"],
-    "--feeds", os.environ["OPTIONAL_FEED_KEY"],
-    "--sports", os.environ["PUBLISH_SPORTS"],
-    "--skip-firestore",
-]
-timeout = float(os.environ.get("OPTIONAL_FEED_TIMEOUT") or "900")
-try:
-    result = subprocess.run(cmd, timeout=timeout)
-except subprocess.TimeoutExpired:
-    # Keep the optional feed's failure visible. Previously a timeout exited
-    # before refresh_external_feeds could write its diagnostics, so the old
-    # successful (often yesterday's) bucket looked healthy forever.
-    cache_path = os.path.join(os.environ["TEMP_REPO"], "data", "model_cache", f"{os.environ['DATE_ISO']}.json")
-    if not os.path.exists(cache_path):
-        cache_path = os.path.join(os.environ["TEMP_REPO"], "data", "model_cache", "latest.json")
-    try:
-        import json
-        from datetime import datetime, timezone
-        with open(cache_path, encoding="utf-8") as handle:
-            payload = json.load(handle)
-        feeds = payload.setdefault("external_feeds", {})
-        key = os.environ["OPTIONAL_FEED_KEY"]
-        bucket = dict(feeds.get(key) or {})
-        now = datetime.now(timezone.utc).isoformat()
-        bucket.update({
-            "date": os.environ["DATE_ISO"],
-            "refreshStatus": "error",
-            "lastError": f"Optional source refresh timed out after {timeout:.0f}s",
-            "lastAttemptAt": now,
-            "lastAttemptDate": os.environ["DATE_ISO"],
-        })
-        feeds[key] = bucket
-        with open(cache_path, "w", encoding="utf-8") as handle:
-            json.dump(payload, handle, indent=2)
-            handle.write("\n")
-    except (OSError, ValueError) as exc:
-        print(f"Could not record optional timeout diagnostics: {exc}", file=sys.stderr)
-    print(
-        f"Optional {os.environ['OPTIONAL_FEED_KEY']} scrape timed out after {timeout:.0f}s; "
-        "continuing with MLB+WNBA publish.",
-        file=sys.stderr,
-    )
-    raise SystemExit(0)
-raise SystemExit(result.returncode)
-PY
+  SCORES24_CACHE_FILE="${SCORES24_CACHE_FILE}" \
+  SCORES24_CHECKPOINT_DIR="${SCORES24_CHECKPOINT_DIR}" \
+  "${PYTHON_BIN}" "${REPO_ROOT}/scripts/scrapers/scores24_optional_publish.py"
   optional_rc=$?
   set -e
   if [[ "${optional_rc}" -ne 0 ]]; then
