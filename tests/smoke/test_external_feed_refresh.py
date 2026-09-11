@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 import time
 from types import SimpleNamespace
@@ -235,6 +236,43 @@ def test_optional_feed_hard_timeout_kills_child_and_returns_soft_fail(tmp_path):
     assert bucket["lastAttemptDate"] == "2026-09-11"
     assert bucket["ok"] is False
     assert "timed out" in bucket["lastError"]
+
+
+def test_optional_timeout_salvage_does_not_leak_checkpoint_env(monkeypatch, tmp_path):
+    monkeypatch.delenv("SCORES24_CHECKPOINT_DIR", raising=False)
+    from scripts.scrapers import scores24_optional_publish as optional
+
+    checkpoint_dir = tmp_path / "state"
+    checkpoint_dir.mkdir()
+    (checkpoint_dir / "scores24-cfb-2026-09-11.json").write_text(
+        json.dumps(
+            {
+                "sport": "cfb",
+                "date": "2026-09-11",
+                "picks": [
+                    {
+                        "source": "Scores24CFB",
+                        "pick": "Louisville ML",
+                        "date": "2026-09-11",
+                    }
+                ],
+            }
+        )
+    )
+    cache_path = tmp_path / "2026-09-11.json"
+    cache_path.write_text(json.dumps({"date": "2026-09-11", "models": {}, "external_feeds": {}}))
+
+    optional.apply_optional_timeout_to_cache(
+        cache_path,
+        "scores24_cfb",
+        "2026-09-11",
+        180,
+        checkpoint_dir=str(checkpoint_dir),
+        now_iso="2026-09-11T12:00:00Z",
+    )
+    assert os.environ.get("SCORES24_CHECKPOINT_DIR") in {None, ""}
+    published = json.loads(cache_path.read_text())
+    assert len(published["external_feeds"]["scores24_cfb"]["picks"]) == 1
 
 
 def test_refresh_recovers_and_clears_previous_source_error(monkeypatch, tmp_path):

@@ -218,15 +218,27 @@ def sport_key_for_feed(feed_key: str) -> str | None:
     return None
 
 
-def load_checkpoint_picks(sport_key: str, date_iso: str) -> list[dict[str, Any]]:
+def load_checkpoint_picks(
+    sport_key: str,
+    date_iso: str,
+    *,
+    checkpoint_dir: str | Path | None = None,
+) -> list[dict[str, Any]]:
     """Same-day checkpoint rows without requiring the official slate in-process.
 
     The local publisher's outer timeout kills refresh_external_feeds before it
     can write the cache. Checkpoint files are the only durable copy of the
     matchups that already matched. Slate filtering is skipped here: the file is
     already scoped to sport+date, and ESPN may be unreachable at salvage time.
+
+    Pass checkpoint_dir explicitly instead of mutating SCORES24_CHECKPOINT_DIR;
+    that env flag also enables historical URL hints and same-day resume for
+    every later scrape in the process (required MLB/WNBA included).
     """
-    path = _checkpoint_path(sport_key, date_iso)
+    if checkpoint_dir is not None:
+        path = Path(checkpoint_dir).expanduser() / f"scores24-{sport_key}-{date_iso}.json"
+    else:
+        path = _checkpoint_path(sport_key, date_iso)
     if path is None or not path.exists():
         return []
     try:

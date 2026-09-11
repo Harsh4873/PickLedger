@@ -105,12 +105,14 @@ def apply_optional_timeout_to_cache(
     bucket. Otherwise lastAttemptDate moves to today and the previous snapshot
     keeps its own date.
     """
-    if checkpoint_dir:
-        os.environ["SCORES24_CHECKPOINT_DIR"] = checkpoint_dir
     payload = _read_json(cache_path) or {"date": date_iso, "models": {}, "external_feeds": {}}
     previous = _previous_feed_bucket(payload, feed_key)
     sport_key = sport_key_for_feed(feed_key)
-    checkpoint_picks = load_checkpoint_picks(sport_key, date_iso) if sport_key else []
+    checkpoint_picks = (
+        load_checkpoint_picks(sport_key, date_iso, checkpoint_dir=checkpoint_dir)
+        if sport_key
+        else []
+    )
     result = timeout_result(feed_key, date_iso, timeout_seconds, checkpoint_picks)
     now = now_iso or datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     bucket = _record_feed_attempt(previous, result, date_iso, now)
