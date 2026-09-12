@@ -462,3 +462,25 @@ test('player source status distinguishes abstention, missing data, failure and s
   assert.equal(getPlayerSourceStatuses(date).find(source => source.key === 'nfl_player_props')?.state, 'missing');
   assert.equal(getPlayerSourceStatuses(date).find(source => source.key === 'cfb_player_props')?.state, 'missing');
 });
+
+test('CFB baseline projections stay visible with PASS and explain unvalidated status', { concurrency: false }, async () => {
+  const { getPlayerSourceStatuses, getAllPicks } = await import('../src/data.ts');
+  const date = '2026-09-14';
+  const responses = new Map<string, CachePayload>();
+  installFetch(responses);
+  responses.set('./data/player_props_cache/latest.json', { date, models: { cfb_player_props: {
+    ok: true, games: 1, football_baseline: true, picks: [{
+      id: 'cfb-baseline', sport: 'CFB', date, scope: 'player', decision: 'PASS', units: 0,
+      baseline_only: true, probability_calibrated: false, ml_model_active: false,
+      pick: 'Marcel Reed Under 235.5 Passing Yards', projection: 234,
+    }],
+  } } });
+  await loadAllData({ includeHistory: false });
+  const status = getPlayerSourceStatuses(date).find(source => source.key === 'cfb_player_props')!;
+  assert.equal(status.state, 'ready');
+  assert.equal(status.pickCount, 1);
+  assert.match(status.detail, /PASS.*unvalidated/);
+  setPickMode('player');
+  assert.ok(getAllPicks().some(pick => pick.id === 'cfb-baseline' && pick.units === 0));
+  setPickMode('team');
+});

@@ -1046,6 +1046,16 @@ def build_variant_buckets(
     base_model: dict[str, Any],
 ) -> dict[str, dict[str, Any]]:
     sport = str(sport or "").upper()
+    if sport == "CFB" and base_model.get("football_baseline") is True:
+        # Show honest statistical projections even before a native betting model
+        # is calibrated. PASS rows never satisfy the BET/LEAN staking gates.
+        picks = sorted(base_model.get("picks") or [], key=lambda p: (str(p.get("start_time")), str(p.get("player_name")), str(p.get("stat_key"))))
+        return {"cfb_player_props": {
+            **base_model, "picks": picks, "model": "CFBPlayerProps", "model_key": "cfb_player_props",
+            "candidate_count": len(picks), "scored_count": len(picks), "model_variants": ["historical_baseline"],
+            "consensus_required": True, "consensus_qualified": False, "abstained": True,
+            "publication_status": "baseline_projections" if picks else "missing_inputs",
+        }}
     keys = player_prop_variant_keys(sport)
     raw_candidates = [
         pick for pick in (base_model.get("picks") or [])
@@ -1123,6 +1133,6 @@ def build_variant_buckets(
         "consensus_rejection_reasons": rejection_reasons,
         "consensus_rejections": rejection_examples,
         "abstained": bool(candidates and not picks),
-        "note": "" if picks else f"No {sport} prop cleared the consensus publication gate.",
+        "note": "" if picks else (str(base_model.get("note") or "") if not candidates else "") or f"No {sport} prop cleared the consensus publication gate.",
     }
     return {model_key: bucket}

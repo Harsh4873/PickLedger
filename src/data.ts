@@ -763,6 +763,12 @@ function isMlEraPlayerProp(pick: Pick): boolean {
   return Number.isFinite(timestamp) && timestamp >= PLAYER_PROPS_ML_FIRST_SNAPSHOT_AT;
 }
 
+function isCfbBaselineProjection(pick: Pick): boolean {
+  return pick.sport === 'CFB' && pick.baseline_only === true
+    && pick.probability_calibrated === false && pick.ml_model_active === false
+    && pick.decision === 'PASS' && pick.units === 0;
+}
+
 function recordValue(value: unknown): Record<string, unknown> {
   return value && typeof value === 'object' && !Array.isArray(value)
     ? value as Record<string, unknown> : {};
@@ -1008,7 +1014,7 @@ function rebuildPicks(): void {
   // in Player mode alongside the in-house ML-era props; the
   // scope routing above already keeps them out of Team mode and rankings.
   playerPicks = sortPicks([...playerById.values()].filter(
-    pick => !ARCHIVED_SPORTS.has(pick.sport) && (isMlEraPlayerProp(pick) || pick.external_player_feed === true),
+    pick => !ARCHIVED_SPORTS.has(pick.sport) && (isMlEraPlayerProp(pick) || isCfbBaselineProjection(pick) || pick.external_player_feed === true),
   ));
 }
 
@@ -1314,7 +1320,9 @@ export function getPlayerSourceStatuses(date: string): SourceStatus[] {
       status.detail = 'Player-prop refresh reported an error; coverage may be incomplete.';
     } else if (bucket.ok === true && count) {
       status.state = 'ready';
-      status.detail = `${count} player props published.`;
+      status.detail = bucket.football_baseline === true
+        ? `${count} historical projections published as PASS; betting probabilities are unvalidated.`
+        : `${count} player props published.`;
     } else if (bucket.ok === true) {
       status.state = 'empty';
       const evaluated = Math.max(Number(bucket.candidate_count) || 0, Number(bucket.scored_count) || 0,
@@ -1324,7 +1332,9 @@ export function getPlayerSourceStatuses(date: string): SourceStatus[] {
         status.detail = 'Refresh completed; evaluated candidates did not clear the publication rules.';
       } else if (games > 0) {
         status.state = 'error';
-        status.detail = 'Games are scheduled, but no evaluated props were published. Check the next refresh.';
+        status.detail = bucket.football_baseline === true && bucket.note
+          ? String(bucket.note)
+          : 'Games are scheduled, but no evaluated props were published. Check the next refresh.';
       } else {
         status.detail = 'No games scheduled for this date.';
       }

@@ -52,6 +52,7 @@ from player_props.schema import american_implied_probability, safe_float  # noqa
 
 
 DEFAULT_OUTPUT = REPO_ROOT / "data" / "player_props_training" / "market_history_2026.jsonl"
+DEFAULT_SNAPSHOTS = REPO_ROOT / "data" / "player_props_snapshots"
 DEFAULT_MAX_OUTPUT_BYTES = 90_000_000
 SPORT_CONFIG = {
     "MLB": {"segment": "baseball", "league": "mlb"},
@@ -556,6 +557,61 @@ def _write_rows(
     return ordered
 
 
+def _cfb_snapshot_rows(client: Any, start: str, end: str, snapshot_dir: Path = DEFAULT_SNAPSHOTS) -> list[dict[str, Any]]:
+    """Grade immutable pregame quotes so CFB calibration can accrue real data.
+
+    Never reconstruct historical odds from today's provider response. Only
+    pre-kickoff snapshots with a recorded retrieval time may enter training.
+    """
+    from player_props.cfb import _time
+
+    captured: dict[tuple, dict] = {}
+    for path in sorted(snapshot_dir.glob("*/*.json")):
+        if not start <= path.parent.name <= end:
+            continue
+        try:
+            payload = json.loads(path.read_text())
+        except (OSError, ValueError):
+            continue
+        archived = _time(payload.get("generatedAt"))
+        bucket = (payload.get("models") or {}).get("cfb_player_props") or {}
+        for pick in bucket.get("picks") or []:
+            kickoff = _time(pick.get("start_time"))
+            observed = _time(pick.get("market_retrieved_at"))
+            if (not pick.get("baseline_only") or not kickoff or not observed or not archived
+                    or observed >= kickoff or archived >= kickoff or observed > archived
+                    or not start <= str(pick.get("date") or "") <= end):
+                continue
+            key = (pick.get("game_id"), pick.get("player_id"), pick.get("stat_key"), pick.get("line"))
+            if not all(key[:3]):
+                continue
+            captured.setdefault(key, pick)
+    summaries = {}
+    output = []
+    for (event_id, athlete_id, stat_key, line), pick in captured.items():
+        if event_id not in summaries:
+            summaries[event_id] = client.football_espn_summary("college-football", event_id)
+        summary = summaries[event_id]
+        if not _completed(summary.get("header") or {}):
+            continue
+        actual = _football_actuals(summary).get((str(athlete_id), str(stat_key)))
+        over_odds, under_odds = pick.get("market_over_odds"), pick.get("market_under_odds")
+        po, pu = american_implied_probability(over_odds), american_implied_probability(under_odds)
+        if actual is None or actual == line or po is None or pu is None:
+            continue
+        output.append({
+            "sport": "CFB", "season": int(pick["date"][:4]), "date": pick["date"],
+            "start_time": pick["start_time"], "event_id": str(event_id), "athlete_id": str(athlete_id),
+            "stat_key": stat_key, "market_type": stat_key, "market_format": "total", "line": line,
+            "over_odds": over_odds, "under_odds": under_odds, "over_implied": round(po, 6),
+            "under_implied": round(pu, 6), "no_vig_over": round(po / (po + pu), 6),
+            "actual": actual, "over_outcome": int(actual > line),
+            "market_updated_at": pick["market_retrieved_at"], "provider": pick.get("market_source"),
+            "provenance": "immutable_pregame_snapshot",
+        })
+    return output
+
+
 def main() -> int:
     args = _parse_args()
     start = date.fromisoformat(args.start)
@@ -567,6 +623,14 @@ def main() -> int:
     existing, completed_dates = _load_existing(args.output) if not args.no_resume else ([], set())
     rows = list(existing)
     failures: list[str] = []
+    if "CFB" in sports:
+        try:
+            archived_rows = _cfb_snapshot_rows(DirectApiClient(), start.isoformat(), end.isoformat())
+            rows.extend(archived_rows)
+            rows = _write_rows(args.output, rows, max_bytes=max(0, int(args.max_output_bytes)))
+            print(f"[market-history] CFB immutable snapshots: {len(archived_rows)} graded market(s)")
+        except Exception as exc:
+            failures.append(f"CFB snapshot grading: {exc}")
     workers = max(1, int(args.max_workers))
     for target in _dates(start, end):
         date_iso = target.isoformat()

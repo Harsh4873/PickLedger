@@ -93,8 +93,9 @@ forces evaluation against a clean identity champion.
 
 ## NFL/CFB player props
 
-Football player props reuse the MLB/NBA/WNBA consensus path (ESPN scoreboard +
-posted DraftKings `propBets` + gamelogs). Public cache keys are
+NFL player props use the ESPN posted-market consensus path. CFB uses the public
+Action Network scoreboard, book registry and two-sided player markets, joined to
+ESPN by both teams, kickoff and an unambiguous roster name. Public cache keys are
 `nfl_player_props` and `cfb_player_props`. Covered markets:
 
 - passing yards / TDs / completions, interceptions
@@ -102,9 +103,25 @@ posted DraftKings `propBets` + gamelogs). Public cache keys are
 - receiving yards / receptions / TDs
 
 There is no synthetic-line fallback and no basketball-artifact borrowing.
-Until native NFL/CFB consensus joblibs exist, the board fail-closes empty
-(`abstained`) rather than inventing picks. An off-day, unpriced slate, or ESPN
-outage is a soft-fail: MLB/NBA/WNBA props and Pages deploy still proceed.
+Until native NFL consensus joblibs exist, that board remains empty. CFB publishes
+historical baseline projections as PASS with zero stake and explicit uncalibrated
+status. They use up to 12 dated games from the current and prior season, weighted
+by 0.85 per game of age, with at least four observations. A rolling historical MAE
+is reported separately from betting calibration; it is not evidence of a betting
+edge. Opponent strength, transfer role changes and participation probabilities
+are not modeled. The board says so in each row. Zero catches and zero rushing
+yards are retained; passing priors exclude games without a passing attempt.
+
+CFB rejects ambiguous player/game joins, mismatched line/side/book pairs, opening
+or consensus prices, live games, and undated or same-day/future outcomes. Rows
+retain ESPN game/player IDs for grading and provider IDs plus retrieval time for
+source inspection. The existing refresh, merge, immutable archive and grading
+pipeline carries these rows; baseline PASS rows are not limited by staking caps.
+The market-history job grades immutable pregame CFB snapshots against final ESPN
+box scores, feeding the existing native training corpus without relying on the
+missing ESPN `propBets` endpoint. Post-kickoff captures never enter that corpus.
+Per-game diagnostics distinguish unavailable markets, unmatched players and
+insufficient history. An outage is a soft-fail: other sports and Pages proceed.
 Dates stamp `America/Chicago`. CFB scoreboards use ESPN FBS `groups=80`.
 
 ## Deployment Contract

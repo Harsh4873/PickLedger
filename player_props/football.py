@@ -678,6 +678,9 @@ def generate_football_candidate_model(
 ) -> dict[str, Any]:
     """Generate the market-priced NFL/CFB candidate pool. Failures stay empty-ok."""
     sport = str(sport or "").upper()
+    if sport == "CFB" and callable(getattr(client, "cfb_market_json", None)):
+        from .cfb import generate_cfb_candidate_model
+        return generate_cfb_candidate_model(client, date_iso, max_workers=max_workers)
     league = str(league or LEAGUE_SLUGS.get(sport) or "").strip()
     try:
         events, injuries, season, schedule_errors = _football_schedule(client, league, sport, date_iso)

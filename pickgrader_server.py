@@ -2285,18 +2285,22 @@ def _extract_player_label_values(summary: dict[str, Any], player_name: str) -> d
     return values
 
 
-def _extract_football_player_stat(summary: dict[str, Any], player_name: str, stat_key: str) -> float | None:
+def _extract_football_player_stat(summary: dict[str, Any], player_name: str, stat_key: str, player_ids: tuple[Any, ...] = ()) -> float | None:
     boxscore = summary.get("boxscore", {}) if isinstance(summary, dict) else {}
     players = boxscore.get("players", []) if isinstance(boxscore, dict) else []
     passing: dict[str, float] = {}
     rushing: dict[str, float] = {}
     receiving: dict[str, float] = {}
+    wanted_ids = {str(value) for value in player_ids if value is not None and str(value)}
 
     def merge(target: dict[str, float], labels: list[str], stats: list[Any]) -> None:
         for idx, label in enumerate(labels):
             if idx >= len(stats):
                 continue
-            value = _summary_stat_value_to_float(str(stats[idx]).split("-", 1)[0])
+            text = str(stats[idx])
+            # Only completions/attempts are a hyphenated pair; negative yards
+            # are a signed number and must retain their sign.
+            value = _summary_stat_value_to_float(text.split("-", 1)[0] if label in {"C/ATT", "CMP-ATT", "C-A"} else text)
             if value is not None:
                 target[label] = value
 
@@ -2314,7 +2318,7 @@ def _extract_football_player_stat(summary: dict[str, Any], player_name: str, sta
                     continue
                 athlete_info = athlete.get("athlete", {}) if isinstance(athlete.get("athlete"), dict) else {}
                 display_name = str(athlete_info.get("displayName", "")).strip()
-                if not _person_names_match_loose(player_name, display_name):
+                if (str(athlete_info.get("id") or "") not in wanted_ids if wanted_ids else not _person_names_match_loose(player_name, display_name)):
                     continue
                 stats = athlete.get("stats", []) if isinstance(athlete.get("stats"), list) else []
                 if "pass" in category_name:
@@ -2556,8 +2560,8 @@ def grade_player_prop_pick(
     if actual is None and summary:
         sport = str(pick.get("sport") or "").strip().upper()
         if sport in {"NFL", "CFB"}:
-            actual = _extract_football_player_stat(summary, str(prop["player_name"]), str(prop["stat_key"]))
-        if actual is None:
+            actual = _extract_football_player_stat(summary, str(prop["player_name"]), str(prop["stat_key"]), player_ids)
+        elif actual is None:
             actual = _extract_nba_player_stat(summary, str(prop["player_name"]), str(prop["stat_key"]))
     if actual is None:
         if str(pick.get("sport") or "").strip().upper() == "MLB" and _mlb_game_is_final(mlb_live_feed):

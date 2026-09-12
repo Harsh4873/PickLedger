@@ -106,6 +106,25 @@ class DirectApiClient:
             {"lang": "en", "region": "us", "limit": 1000},
         )
 
+    def cfb_market_json(self, path: str, date_iso: str = "") -> dict[str, Any]:
+        """Public Action Network market feed, cached for one refresh only."""
+        from curl_cffi import requests as browser_requests
+
+        url = f"https://api.actionnetwork.com/web/{path}"
+        params = {"period": "game", "date": date_iso.replace("-", "")} if date_iso else {}
+        key = (url, tuple(sorted(params.items())))
+        if key not in self._cache:
+            response = browser_requests.get(
+                url, params=params, impersonate="chrome124", timeout=self.timeout,
+                headers={"Accept": "application/json", "Referer": "https://www.actionnetwork.com/"},
+            )
+            response.raise_for_status()
+            payload = response.json()
+            if not isinstance(payload, dict):
+                raise ValueError("CFB market feed returned a non-object response")
+            self._cache[key] = payload
+        return self._cache[key]
+
     def football_scoreboard(self, league: str, date_iso: str) -> dict[str, Any]:
         params: dict[str, Any] = {"dates": date_iso.replace("-", ""), "limit": 1000}
         if str(league or "").strip() == "college-football":

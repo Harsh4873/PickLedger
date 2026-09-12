@@ -49,6 +49,23 @@ SOFT_PLAYER_PROP_KEYS = {
     "cfb_player_props",
 }
 ML_PLAYER_PROP_KEYS = {"mlb_player_props", "wnba_player_props"}
+
+
+def _documented_cfb_baseline(pick: dict[str, Any]) -> bool:
+    """Only explicitly uncalibrated zero-stake CFB projections bypass ML fields."""
+    return (
+        str(pick.get("sport") or "").upper() == "CFB"
+        and pick.get("baseline_only") is True
+        and pick.get("probability_calibrated") is False
+        and pick.get("ml_model_active") is False
+        and pick.get("decision") == "PASS"
+        and pick.get("units") == 0
+        and pick.get("full_kelly") == 0
+        and pick.get("quarter_kelly") == 0
+        and bool(pick.get("model_version"))
+    )
+
+
 REQUIRED_ML_PLAYER_PROP_FIELDS = (
     "ml_probability",
     "ml_edge",
@@ -563,6 +580,7 @@ def main() -> int:
             market_picks = [pick for pick in picks if isinstance(pick, dict) and pick.get("market_priced") is True]
             if key not in ML_PLAYER_PROP_KEYS and market_picks and any(
                 str(pick.get("probability_source") or "") != "player_props_ml_v1"
+                and not _documented_cfb_baseline(pick)
                 for pick in market_picks
             ):
                 failures.append(f"player-props bucket {key} has market-priced picks without player_props_ml_v1 probability")

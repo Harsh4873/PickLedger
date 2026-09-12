@@ -51,6 +51,8 @@ def generate_payload(
         **build_variant_buckets(sport="NFL", date_iso=date_iso, base_model=nfl_candidates),
         **build_variant_buckets(sport="CFB", date_iso=date_iso, base_model=cfb_candidates),
     }
+    # Timestamp the completed refresh, after every quoted market was observed.
+    timestamp = generated_at or datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     payload = {
         "date": date_iso,
         "generatedAt": timestamp,
@@ -60,6 +62,11 @@ def generate_payload(
     for model in payload["models"].values():
         picks = model.get("picks")
         if not isinstance(picks, list) or not picks:
+            continue
+        if model.get("football_baseline") is True:
+            for index, pick in enumerate(picks, 1):
+                pick["rank"] = index
+                pick["ranking_updated_at"] = timestamp
             continue
         model["picks"] = assign_ml_ranks([pick for pick in picks if isinstance(pick, dict)])
         for pick in model["picks"]:
