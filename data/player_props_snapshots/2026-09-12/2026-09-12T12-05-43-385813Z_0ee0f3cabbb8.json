@@ -187,32 +187,13 @@
           "closing_line_movement": null,
           "closing_line_source": "not_tracked",
           "confidence": "Medium",
-          "consensus_applicable_models": [
-            "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-            "mlb_season: 2026 market classifier"
-          ],
           "consensus_conservative_validation_accuracy": 0.7317073170731707,
           "consensus_evaluated": true,
           "consensus_history_probability": 0.6452465057373047,
           "consensus_history_projection": null,
           "consensus_holdout_accuracy": 0.8076923076923077,
           "consensus_model_agreement": true,
-          "consensus_model_count": 8,
-          "consensus_models": [
-            "cfb_history: 2024-26 roster-aware outcome-history classifiers",
-            "cfb_season: 2026 market classifier",
-            "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-            "mlb_season: 2026 market classifier",
-            "nfl_history: 2024-26 roster-aware outcome-history classifiers",
-            "nfl_season: 2026 market classifier",
-            "wnba_history: 2024-26 workload-aware market/count models",
-            "wnba_season: 2026 market/count models"
-          ],
           "consensus_qualified": true,
-          "consensus_record_models": [
-            "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-            "mlb_season: 2026 market classifier"
-          ],
           "consensus_rejection_reason": null,
           "consensus_required": true,
           "consensus_score": 0.649987922038561,
@@ -235,7 +216,6 @@
           "home_team": "New York Yankees",
           "id": "pp_58f1964ffc1f7af7461e_consensus",
           "key_factors": [
-            "Four-model consensus suite active: cfb_history, cfb_season, mlb_history, mlb_season, nfl_history, nfl_season, wnba_history, wnba_season",
             "Active four-model consensus gate qualified publication",
             "All Time model signal",
             "History model over probability 35.5%",
@@ -337,32 +317,13 @@
           "closing_line_movement": null,
           "closing_line_source": "not_tracked",
           "confidence": "Medium",
-          "consensus_applicable_models": [
-            "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-            "mlb_season: 2026 market classifier"
-          ],
           "consensus_conservative_validation_accuracy": 0.7317073170731707,
           "consensus_evaluated": true,
           "consensus_history_probability": 0.8487172722816467,
           "consensus_history_projection": null,
           "consensus_holdout_accuracy": 0.8076923076923077,
           "consensus_model_agreement": true,
-          "consensus_model_count": 8,
-          "consensus_models": [
-            "cfb_history: 2024-26 roster-aware outcome-history classifiers",
-            "cfb_season: 2026 market classifier",
-            "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-            "mlb_season: 2026 market classifier",
-            "nfl_history: 2024-26 roster-aware outcome-history classifiers",
-            "nfl_season: 2026 market classifier",
-            "wnba_history: 2024-26 workload-aware market/count models",
-            "wnba_season: 2026 market/count models"
-          ],
           "consensus_qualified": true,
-          "consensus_record_models": [
-            "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-            "mlb_season: 2026 market classifier"
-          ],
           "consensus_rejection_reason": null,
           "consensus_required": true,
           "consensus_score": 0.8190823832678517,
@@ -385,7 +346,6 @@
           "home_team": "Minnesota Twins",
           "id": "pp_65efb0ffe964083b425a_consensus",
           "key_factors": [
-            "Four-model consensus suite active: cfb_history, cfb_season, mlb_history, mlb_season, nfl_history, nfl_season, wnba_history, wnba_season",
             "Active four-model consensus gate qualified publication",
             "All Time model signal",
             "History model over probability 15.1%",
@@ -487,32 +447,13 @@
           "closing_line_movement": null,
           "closing_line_source": "not_tracked",
           "confidence": "Medium",
-          "consensus_applicable_models": [
-            "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-            "mlb_season: 2026 market classifier"
-          ],
           "consensus_conservative_validation_accuracy": 0.7317073170731707,
           "consensus_evaluated": true,
           "consensus_history_probability": 0.8521711975336075,
           "consensus_history_projection": null,
           "consensus_holdout_accuracy": 0.8076923076923077,
           "consensus_model_agreement": true,
-          "consensus_model_count": 8,
-          "consensus_models": [
-            "cfb_history: 2024-26 roster-aware outcome-history classifiers",
-            "cfb_season: 2026 market classifier",
-            "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-            "mlb_season: 2026 market classifier",
-            "nfl_history: 2024-26 roster-aware outcome-history classifiers",
-            "nfl_season: 2026 market classifier",
-            "wnba_history: 2024-26 workload-aware market/count models",
-            "wnba_season: 2026 market/count models"
-          ],
           "consensus_qualified": true,
-          "consensus_record_models": [
-            "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-            "mlb_season: 2026 market classifier"
-          ],
           "consensus_rejection_reason": null,
           "consensus_required": true,
           "consensus_score": 0.8389149070075591,
@@ -535,7 +476,6 @@
           "home_team": "Washington Nationals",
           "id": "pp_4ab5ca0cae93b6c85420_consensus",
           "key_factors": [
-            "Four-model consensus suite active: cfb_history, cfb_season, mlb_history, mlb_season, nfl_history, nfl_season, wnba_history, wnba_season",
             "Active four-model consensus gate qualified publication",
             "All Time model signal",
             "History model over probability 14.8%",
