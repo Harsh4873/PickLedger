@@ -1882,6 +1882,28 @@ def parse_player_prop_pick(pick: dict[str, Any] | str) -> dict[str, Any] | None:
         "totalassists": "assists",
         "totalhits": "hits",
         "totalstrikeouts": "strikeouts",
+        "passingyards": "passing_yards",
+        "passing_yards": "passing_yards",
+        "passyards": "passing_yards",
+        "passingtouchdowns": "passing_tds",
+        "passing_tds": "passing_tds",
+        "passingtds": "passing_tds",
+        "passingcompletions": "passing_completions",
+        "passing_completions": "passing_completions",
+        "interceptions": "interceptions",
+        "rushingyards": "rushing_yards",
+        "rushing_yards": "rushing_yards",
+        "rushyards": "rushing_yards",
+        "rushingattempts": "rushing_attempts",
+        "rushing_attempts": "rushing_attempts",
+        "carries": "rushing_attempts",
+        "rushingtouchdowns": "rushing_tds",
+        "rushing_tds": "rushing_tds",
+        "receivingyards": "receiving_yards",
+        "receiving_yards": "receiving_yards",
+        "receptions": "receptions",
+        "receivingtouchdowns": "receiving_tds",
+        "receiving_tds": "receiving_tds",
     }
     if isinstance(payload, dict):
         player_name = str(payload.get("player_name") or "").strip()
@@ -1907,6 +1929,9 @@ def parse_player_prop_pick(pick: dict[str, Any] | str) -> dict[str, Any] | None:
         r"points\s*\+\s*rebounds|steals\s*\+\s*blocks|hits\s*\+\s*runs\s*\+\s*rbis|"
         r"earned runs allowed|outs recorded|hits allowed|walks allowed|batter strikeouts|"
         r"stolen bases|total bases|home runs|3-?point field goals|3pm|"
+        r"passing yards|rushing yards|receiving yards|receptions|"
+        r"passing touchdowns|rushing touchdowns|receiving touchdowns|"
+        r"passing completions|interceptions|rushing attempts|"
         r"points|rebounds|assists|steals|blocks|hits|runs|rbis|walks|"
         r"strikeouts|singles|doubles|triples"
     )
@@ -2260,6 +2285,60 @@ def _extract_player_label_values(summary: dict[str, Any], player_name: str) -> d
     return values
 
 
+def _extract_football_player_stat(summary: dict[str, Any], player_name: str, stat_key: str) -> float | None:
+    boxscore = summary.get("boxscore", {}) if isinstance(summary, dict) else {}
+    players = boxscore.get("players", []) if isinstance(boxscore, dict) else []
+    passing: dict[str, float] = {}
+    rushing: dict[str, float] = {}
+    receiving: dict[str, float] = {}
+
+    def merge(target: dict[str, float], labels: list[str], stats: list[Any]) -> None:
+        for idx, label in enumerate(labels):
+            if idx >= len(stats):
+                continue
+            value = _summary_stat_value_to_float(str(stats[idx]).split("-", 1)[0])
+            if value is not None:
+                target[label] = value
+
+    for team_block in players if isinstance(players, list) else []:
+        stat_sections = team_block.get("statistics", []) if isinstance(team_block, dict) else []
+        for section in stat_sections if isinstance(stat_sections, list) else []:
+            if not isinstance(section, dict):
+                continue
+            category_name = str(section.get("name") or section.get("type") or section.get("text") or "").lower()
+            raw_labels = section.get("labels", [])
+            labels = [str(label).strip().upper() for label in raw_labels]
+            athletes = section.get("athletes", []) if isinstance(section.get("athletes"), list) else []
+            for athlete in athletes:
+                if not isinstance(athlete, dict):
+                    continue
+                athlete_info = athlete.get("athlete", {}) if isinstance(athlete.get("athlete"), dict) else {}
+                display_name = str(athlete_info.get("displayName", "")).strip()
+                if not _person_names_match_loose(player_name, display_name):
+                    continue
+                stats = athlete.get("stats", []) if isinstance(athlete.get("stats"), list) else []
+                if "pass" in category_name:
+                    merge(passing, labels, stats)
+                elif "rush" in category_name:
+                    merge(rushing, labels, stats)
+                elif "receiv" in category_name:
+                    merge(receiving, labels, stats)
+
+    mapping = {
+        "passing_yards": passing.get("YDS"),
+        "passing_tds": passing.get("TD"),
+        "passing_completions": passing.get("C/ATT", passing.get("CMP")),
+        "interceptions": passing.get("INT"),
+        "rushing_yards": rushing.get("YDS"),
+        "rushing_attempts": rushing.get("CAR"),
+        "rushing_tds": rushing.get("TD"),
+        "receiving_yards": receiving.get("YDS"),
+        "receptions": receiving.get("REC"),
+        "receiving_tds": receiving.get("TD"),
+    }
+    return mapping.get(stat_key)
+
+
 def _extract_nba_player_stat(summary: dict[str, Any], player_name: str, stat_key: str) -> float | None:
     combo_components = {
         "hits_runs_rbis": ("hits", "runs", "rbis"),
@@ -2475,7 +2554,11 @@ def grade_player_prop_pick(
             player_ids,
         )
     if actual is None and summary:
-        actual = _extract_nba_player_stat(summary, str(prop["player_name"]), str(prop["stat_key"]))
+        sport = str(pick.get("sport") or "").strip().upper()
+        if sport in {"NFL", "CFB"}:
+            actual = _extract_football_player_stat(summary, str(prop["player_name"]), str(prop["stat_key"]))
+        if actual is None:
+            actual = _extract_nba_player_stat(summary, str(prop["player_name"]), str(prop["stat_key"]))
     if actual is None:
         if str(pick.get("sport") or "").strip().upper() == "MLB" and _mlb_game_is_final(mlb_live_feed):
             participation = _mlb_live_player_participation(

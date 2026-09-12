@@ -21,6 +21,17 @@ PUBLIC_PLAYER_PROP_MODEL_KEYS = {
     "nba_player_props",
     "mlb_player_props",
     "wnba_player_props",
+    "nfl_player_props",
+    "cfb_player_props",
+}
+HARD_PLAYER_PROP_MODEL_KEYS = {
+    "nba_player_props",
+    "mlb_player_props",
+    "wnba_player_props",
+}
+SOFT_PLAYER_PROP_MODEL_KEYS = {
+    "nfl_player_props",
+    "cfb_player_props",
 }
 PICK_METADATA_FIELDS = {"result", "start_time", "game_start_time", "pregame_snapshot"}
 MARKET_METADATA_FIELDS = {"start_time", "game_start_time", "pregame_snapshot"}
@@ -125,6 +136,10 @@ def _sport_from_model_key(model_key: str) -> str:
         return "WNBA"
     if value.startswith("nba_player_props"):
         return "NBA"
+    if value.startswith("nfl_player_props"):
+        return "NFL"
+    if value.startswith("cfb_player_props"):
+        return "CFB"
     return ""
 
 

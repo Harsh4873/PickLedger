@@ -7,9 +7,26 @@ from typing import Any
 
 from .api import DirectApiClient
 from .basketball import generate_basketball_candidate_model, generate_wnba_3pm_candidate_model
+from .football import generate_football_candidate_model
 from .ml import assign_ml_ranks
 from .mlb import generate_mlb_candidate_model
 from .variants import build_variant_buckets, build_wnba_3pm_bucket
+
+
+def _soft_football_candidates(api: Any, league: str, sport: str, date_iso: str) -> dict[str, Any]:
+    """Keep NFL/CFB outages from blocking MLB/NBA/WNBA publication."""
+    try:
+        return generate_football_candidate_model(api, league, sport, date_iso)
+    except Exception as exc:
+        return {
+            "ok": True,
+            "sport": sport,
+            "date": date_iso,
+            "games": 0,
+            "picks": [],
+            "errors": [str(exc)],
+            "note": f"{sport} player-props soft-failed; empty slate so other sports can publish.",
+        }
 
 
 def generate_payload(
@@ -24,11 +41,15 @@ def generate_payload(
     wnba_candidates = generate_basketball_candidate_model(api, "wnba", "WNBA", date_iso)
     wnba_3pm_candidates = generate_wnba_3pm_candidate_model(api, date_iso)
     mlb_candidates = generate_mlb_candidate_model(api, date_iso)
+    nfl_candidates = _soft_football_candidates(api, "nfl", "NFL", date_iso)
+    cfb_candidates = _soft_football_candidates(api, "college-football", "CFB", date_iso)
     models = {
         **build_variant_buckets(sport="NBA", date_iso=date_iso, base_model=nba_candidates),
         **build_variant_buckets(sport="WNBA", date_iso=date_iso, base_model=wnba_candidates),
         **build_wnba_3pm_bucket(date_iso=date_iso, base_model=wnba_3pm_candidates),
         **build_variant_buckets(sport="MLB", date_iso=date_iso, base_model=mlb_candidates),
+        **build_variant_buckets(sport="NFL", date_iso=date_iso, base_model=nfl_candidates),
+        **build_variant_buckets(sport="CFB", date_iso=date_iso, base_model=cfb_candidates),
     }
     payload = {
         "date": date_iso,

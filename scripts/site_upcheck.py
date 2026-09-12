@@ -36,6 +36,17 @@ REQUIRED_PLAYER_PROP_KEYS = {
     "nba_player_props",
     "mlb_player_props",
     "wnba_player_props",
+    "nfl_player_props",
+    "cfb_player_props",
+}
+HARD_PLAYER_PROP_KEYS = {
+    "nba_player_props",
+    "mlb_player_props",
+    "wnba_player_props",
+}
+SOFT_PLAYER_PROP_KEYS = {
+    "nfl_player_props",
+    "cfb_player_props",
 }
 ML_PLAYER_PROP_KEYS = {"mlb_player_props", "wnba_player_props"}
 REQUIRED_ML_PLAYER_PROP_FIELDS = (
@@ -493,8 +504,13 @@ def main() -> int:
     official_mlb_scheduled_games = _official_mlb_scheduled_game_count(models, target_date=today)
     for key in sorted(REQUIRED_PLAYER_PROP_KEYS):
         bucket = player_models.get(key)
+        soft = key in SOFT_PLAYER_PROP_KEYS
         if not isinstance(bucket, dict):
-            failures.append(f"player-props bucket {key} is missing")
+            message = f"player-props bucket {key} is missing"
+            if key in HARD_PLAYER_PROP_KEYS:
+                failures.append(message)
+            else:
+                warnings.append(message + " (soft-fail; does not block Pages)")
             continue
 
         picks = _bucket_picks(bucket)
@@ -502,12 +518,21 @@ def main() -> int:
         if key == "mlb_player_props":
             scheduled_games = max(scheduled_games, official_mlb_scheduled_games)
         if bucket.get("ok") is not True:
-            failures.append(f"player-props bucket {key} failed: {bucket.get('error') or 'unknown error'}")
+            message = f"player-props bucket {key} failed: {bucket.get('error') or 'unknown error'}"
+            if soft:
+                warnings.append(message + " (soft-fail; does not block Pages)")
+            else:
+                failures.append(message)
         if scheduled_games > 0 and not picks:
             if key == "mlb_player_props" and _mlb_player_props_documented_abstention(bucket):
                 warnings.append(
                     f"player-props bucket {key} abstained with scheduled games and zero picks "
                     "(documented gate/special-event abstention; team deploy still allowed)"
+                )
+            elif soft:
+                warnings.append(
+                    f"player-props bucket {key} has scheduled games but zero picks "
+                    "(fail-closed empty football board; does not block Pages)"
                 )
             elif key == "mlb_player_props" or bucket.get("abstained") is not True:
                 failures.append(f"player-props bucket {key} has scheduled games but zero picks")

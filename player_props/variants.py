@@ -43,7 +43,7 @@ VARIANT_LABELS = {
 }
 
 VARIANT_ORDER = ("season", "all_time", "hot_l10", "matchup_h2h")
-HISTORY_WINDOWS = {"MLB": "2022-26", "WNBA": "2024-26"}
+HISTORY_WINDOWS = {"MLB": "2022-26", "WNBA": "2024-26", "NFL": "2024-26", "CFB": "2024-26"}
 WNBA_3PM_MODEL_KEY = "wnba_3pm"
 WNBA_3PM_SOURCE = "WNBA3PM"
 WNBA_3PM_VARIANT = "wnba_3pm"

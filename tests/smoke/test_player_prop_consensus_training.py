@@ -1,4 +1,4 @@
-from scripts.train_player_prop_consensus_ml import _publication_plan, _windows
+from scripts.train_player_prop_consensus_ml import POLICIES, _publication_plan, _windows
 
 
 def test_consensus_windows_roll_forward_to_latest_sport_market_date():
@@ -22,6 +22,12 @@ def test_consensus_windows_require_dated_rows_for_the_requested_sport():
         assert "WNBA" in str(exc)
     else:
         raise AssertionError("Expected missing WNBA market history to fail clearly")
+    try:
+        _windows("NFL", [{"sport": "MLB", "date": "2026-07-29"}])
+    except ValueError as exc:
+        assert "NFL" in str(exc)
+    else:
+        raise AssertionError("Expected missing NFL market history to fail clearly")
 
 
 def test_consensus_preserves_an_active_sport_when_its_candidate_fails():
@@ -46,3 +52,9 @@ def test_consensus_preserves_an_active_sport_when_its_candidate_fails():
     assert publication["sports"]["MLB"]["source"] == "new-mlb"
     assert publication["sports"]["WNBA"] == {"active": True, "source": "trusted-wnba"}
     assert publication["preserved_sports"] == ["WNBA"]
+
+
+def test_consensus_policies_register_nfl_and_cfb_volume_markets():
+    assert set(POLICIES) >= {"MLB", "WNBA", "NFL", "CFB"}
+    assert set(POLICIES["NFL"]) == {"passing_yards", "rushing_yards", "receiving_yards", "receptions"}
+    assert set(POLICIES["CFB"]) == set(POLICIES["NFL"])

@@ -22,6 +22,10 @@ MODEL_PATHS = {
     ("MLB", "history"): ARTIFACT_DIR / "mlb_player_props_history.joblib",
     ("WNBA", "season"): ARTIFACT_DIR / "wnba_player_props_season.joblib",
     ("WNBA", "history"): ARTIFACT_DIR / "wnba_player_props_history.joblib",
+    ("NFL", "season"): ARTIFACT_DIR / "nfl_player_props_season.joblib",
+    ("NFL", "history"): ARTIFACT_DIR / "nfl_player_props_history.joblib",
+    ("CFB", "season"): ARTIFACT_DIR / "cfb_player_props_season.joblib",
+    ("CFB", "history"): ARTIFACT_DIR / "cfb_player_props_history.joblib",
 }
 
 OUTCOME_FEATURES = [
@@ -49,6 +53,8 @@ OUTCOME_MARKET_FEATURES = OUTCOME_FEATURES + ["line", "over_implied", "under_imp
 TARGET_STATS = {
     "MLB": {"hits_runs_rbis", "hits", "strikeouts", "pitcher_walks_allowed", "batter_walks", "rbis"},
     "WNBA": {"points", "totalRebounds", "assists", "three_pointers_made", "points_rebounds", "points_assists"},
+    "NFL": {"passing_yards", "rushing_yards", "receiving_yards", "receptions"},
+    "CFB": {"passing_yards", "rushing_yards", "receiving_yards", "receptions"},
 }
 
 _BUNDLE: dict[str, Any] | None | bool = False
@@ -147,11 +153,19 @@ def load_consensus_bundle() -> dict[str, Any] | None:
         import joblib  # type: ignore
 
         metadata = json.loads(CONSENSUS_METADATA_PATH.read_text(encoding="utf-8"))
-        artifacts = {
-            f"{sport}:{role}": joblib.load(path)
-            for (sport, role), path in MODEL_PATHS.items()
-        }
-    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+        artifacts = {}
+        for (sport, role), path in MODEL_PATHS.items():
+            if not path.exists():
+                continue
+            try:
+                artifacts[f"{sport}:{role}"] = joblib.load(path)
+            except Exception:
+                # Football joblibs are optional until the first train; a missing
+                # native artifact must not keep MLB/WNBA from loading.
+                continue
+        if not artifacts:
+            raise OSError("no consensus artifacts are present")
+    except (OSError, ValueError, TypeError, json.JSONDecodeError, ImportError):
         _BUNDLE = None
         return None
     _BUNDLE = {"metadata": metadata, "artifacts": artifacts}

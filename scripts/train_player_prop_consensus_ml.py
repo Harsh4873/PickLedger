@@ -175,6 +175,30 @@ POLICIES: dict[str, dict[str, dict[str, Any]]] = {
     },
 }
 
+FOOTBALL_VOLUME_POLICY = {
+    "minimum_season_probability": 0.55,
+    "minimum_history_probability": 0.50,
+    "minimum_season_rate": 0.50,
+    "minimum_history_rate": 0.0,
+    "minimum_implied": 0.55,
+    "require_classifier_agreement": True,
+    "minimum_validation_samples": 8,
+    "minimum_holdout_samples": 4,
+}
+
+POLICIES["NFL"] = {
+    "passing_yards": dict(FOOTBALL_VOLUME_POLICY),
+    "rushing_yards": dict(FOOTBALL_VOLUME_POLICY),
+    "receiving_yards": dict(FOOTBALL_VOLUME_POLICY),
+    "receptions": dict(FOOTBALL_VOLUME_POLICY),
+}
+POLICIES["CFB"] = {
+    "passing_yards": dict(FOOTBALL_VOLUME_POLICY),
+    "rushing_yards": dict(FOOTBALL_VOLUME_POLICY),
+    "receiving_yards": dict(FOOTBALL_VOLUME_POLICY),
+    "receptions": dict(FOOTBALL_VOLUME_POLICY),
+}
+
 
 # Mirrors the variants.py publication path exactly: consensus picks reach the board
 # only with pick probability >= 0.52 and a LEAN-grade edge of >= 3pp over both the
@@ -782,7 +806,16 @@ def main() -> int:
     )
     args = parser.parse_args()
     market_rows = _read_jsonl(args.markets.resolve())
-    evaluation_windows = {sport: _windows(sport, market_rows) for sport in POLICIES}
+    evaluation_windows: dict[str, tuple[tuple[str, str, str], tuple[str, str, str]]] = {}
+    skipped_sports: list[str] = []
+    for sport in POLICIES:
+        try:
+            evaluation_windows[sport] = _windows(sport, market_rows)
+        except ValueError:
+            if sport in {"NFL", "CFB"}:
+                skipped_sports.append(sport)
+                continue
+            raise
     outcome_rows = [
         row for row in _read_jsonl(args.outcomes.resolve())
         if str(row.get("stat_key") or "") in TARGET_STATS.get(str(row.get("sport") or "").upper(), set())
@@ -793,6 +826,10 @@ def main() -> int:
             )
             or (
                 str(row.get("sport") or "").upper() == "WNBA"
+                and int(row.get("season") or 0) in {2024, 2025, 2026}
+            )
+            or (
+                str(row.get("sport") or "").upper() in {"NFL", "CFB"}
                 and int(row.get("season") or 0) in {2024, 2025, 2026}
             )
         )
@@ -829,251 +866,271 @@ def main() -> int:
         how="inner",
     )
 
-    validation_results: dict[str, dict[str, dict[str, Any]]] = {"MLB": {}, "WNBA": {}}
+    validation_results: dict[str, dict[str, dict[str, Any]]] = {sport: {} for sport in POLICIES}
     count_gate_models: dict[str, Any] = {}
     for sport, sport_policies in POLICIES.items():
-        validation_window, holdout_window = evaluation_windows[sport]
-        for stat_key, policy in sport_policies.items():
-            if sport == "WNBA" and stat_key in {"assists", "three_pointers_made"}:
-                prediction_frames: list[Any] = []
-                for cutoff, start, end in (validation_window, holdout_window):
-                    season_model = _fit_wnba_count(outcome_frame, stat_key, cutoff, season_only=True)
-                    history_model = _fit_wnba_count(outcome_frame, stat_key, cutoff, season_only=False)
-                    rows = _count_market_rows(
-                        outcome_market,
-                        outcome_frame,
-                        sport,
-                        stat_key,
-                        start=start,
-                        end=end,
-                    )
-                    prediction_frames.append(
-                        _count_prediction_frame(
-                            rows,
-                            season_model=season_model,
-                            history_model=history_model,
-                        )
-                    )
-                gate = _fit_count_gate(prediction_frames[0])
-                count_gate_models[stat_key] = gate
-                base_threshold = safe_float(policy.get("meta_gate_threshold"), 0.60)
-                thresholds = sorted({base_threshold, *COUNT_GATE_GRID})
-                threshold = base_threshold
-                validation = _evaluate_count_gate(prediction_frames[0], gate, base_threshold)
-                holdout = _evaluate_count_gate(prediction_frames[1], gate, base_threshold)
-                best_gate_key: tuple[float, float] | None = None
-                for candidate_threshold in thresholds:
-                    candidate_validation = _evaluate_count_gate(prediction_frames[0], gate, candidate_threshold)
-                    candidate_holdout = _evaluate_count_gate(prediction_frames[1], gate, candidate_threshold)
-                    if (
-                        candidate_validation["samples"] < int(policy["minimum_validation_samples"])
-                        or candidate_holdout["samples"] < int(policy["minimum_holdout_samples"])
-                        or safe_float(candidate_validation["accuracy"]) < TARGET_ACCURACY
-                        or safe_float(candidate_holdout["accuracy"]) < TARGET_ACCURACY
-                    ):
-                        continue
-                    key = (
-                        float(candidate_validation["samples"] + candidate_holdout["samples"]),
-                        min(
-                            safe_float(candidate_validation["accuracy"]),
-                            safe_float(candidate_holdout["accuracy"]),
-                        ),
-                    )
-                    if best_gate_key is None or key > best_gate_key:
-                        best_gate_key = key
-                        threshold = candidate_threshold
-                        validation = candidate_validation
-                        holdout = candidate_holdout
-                active = bool(
-                    validation["samples"] >= int(policy["minimum_validation_samples"])
-                    and holdout["samples"] >= int(policy["minimum_holdout_samples"])
-                    and safe_float(validation["accuracy"]) >= TARGET_ACCURACY
-                    and safe_float(holdout["accuracy"]) >= TARGET_ACCURACY
-                )
-                validation_results[sport][stat_key] = {
-                    **policy,
-                    "meta_gate_threshold": threshold,
-                    "active": active,
-                    "validation": validation,
-                    "holdout": holdout,
-                }
-                continue
-            if sport == "WNBA" and stat_key == "totalRebounds":
-                evaluations: list[dict[str, Any]] = []
-                for cutoff, start, end in (validation_window, holdout_window):
-                    season_model = _fit_wnba_count(outcome_frame, stat_key, cutoff, season_only=True)
-                    history_model = _fit_wnba_count(outcome_frame, stat_key, cutoff, season_only=False)
-                    rows = _count_market_rows(
-                        outcome_market,
-                        outcome_frame,
-                        sport,
-                        stat_key,
-                        start=start,
-                        end=end,
-                    )
-                    evaluations.append(
-                        _evaluate_count_policy(
-                            rows,
-                            season_model=season_model,
-                            history_model=history_model,
-                            policy=policy,
-                        )
-                    )
-                validation, holdout = evaluations
-                active = bool(
-                    validation["samples"] >= int(policy["minimum_validation_samples"])
-                    and holdout["samples"] >= int(policy["minimum_holdout_samples"])
-                    and safe_float(validation["accuracy"]) >= TARGET_ACCURACY
-                    and safe_float(holdout["accuracy"]) >= TARGET_ACCURACY
-                )
-                validation_results[sport][stat_key] = {
-                    **policy,
-                    "active": active,
-                    "validation": validation,
-                    "holdout": holdout,
-                }
-                continue
-            views_by_window: list[dict[str, dict[str, Any]]] = []
-            for cutoff, start, end in (validation_window, holdout_window):
-                if sport == "MLB":
-                    if stat_key == "hits_runs_rbis":
-                        season_model = _fit_market(
-                            paired_outcome[
-                                paired_outcome["sport"].eq(sport)
-                                & paired_outcome["line"].eq(1.5)
-                            ],
+        if sport not in evaluation_windows:
+            continue
+        try:
+            validation_window, holdout_window = evaluation_windows[sport]
+            for stat_key, policy in sport_policies.items():
+                if sport == "WNBA" and stat_key in {"assists", "three_pointers_made"}:
+                    prediction_frames: list[Any] = []
+                    for cutoff, start, end in (validation_window, holdout_window):
+                        season_model = _fit_wnba_count(outcome_frame, stat_key, cutoff, season_only=True)
+                        history_model = _fit_wnba_count(outcome_frame, stat_key, cutoff, season_only=False)
+                        rows = _count_market_rows(
+                            outcome_market,
+                            outcome_frame,
+                            sport,
                             stat_key,
-                            cutoff,
-                            min_child_weight=20,
+                            start=start,
+                            end=end,
                         )
-                        history_model = _fit_hrr_history(outcome_frame, cutoff)
-                        rows = paired_outcome[
-                            paired_outcome["sport"].eq(sport)
-                            & paired_outcome["stat_key"].eq(stat_key)
-                            & paired_outcome["line"].eq(1.5)
-                            & paired_outcome["date"].between(start, end)
-                        ].copy()
-                        for feature_name in OUTCOME_FEATURES:
-                            rows[feature_name] = rows[f"outcome_{feature_name}"]
-                        views_by_window.append(
-                            _classifier_views(
+                        prediction_frames.append(
+                            _count_prediction_frame(
                                 rows,
                                 season_model=season_model,
                                 history_model=history_model,
-                                hrr_history=True,
                             )
                         )
-                    else:
-                        season_model = _fit_market(
-                            outcome_market[outcome_market["sport"].eq(sport)],
-                            stat_key,
-                            cutoff,
-                            min_child_weight=15,
+                    gate = _fit_count_gate(prediction_frames[0])
+                    count_gate_models[stat_key] = gate
+                    base_threshold = safe_float(policy.get("meta_gate_threshold"), 0.60)
+                    thresholds = sorted({base_threshold, *COUNT_GATE_GRID})
+                    threshold = base_threshold
+                    validation = _evaluate_count_gate(prediction_frames[0], gate, base_threshold)
+                    holdout = _evaluate_count_gate(prediction_frames[1], gate, base_threshold)
+                    best_gate_key: tuple[float, float] | None = None
+                    for candidate_threshold in thresholds:
+                        candidate_validation = _evaluate_count_gate(prediction_frames[0], gate, candidate_threshold)
+                        candidate_holdout = _evaluate_count_gate(prediction_frames[1], gate, candidate_threshold)
+                        if (
+                            candidate_validation["samples"] < int(policy["minimum_validation_samples"])
+                            or candidate_holdout["samples"] < int(policy["minimum_holdout_samples"])
+                            or safe_float(candidate_validation["accuracy"]) < TARGET_ACCURACY
+                            or safe_float(candidate_holdout["accuracy"]) < TARGET_ACCURACY
+                        ):
+                            continue
+                        key = (
+                            float(candidate_validation["samples"] + candidate_holdout["samples"]),
+                            min(
+                                safe_float(candidate_validation["accuracy"]),
+                                safe_float(candidate_holdout["accuracy"]),
+                            ),
                         )
-                        history_model = _fit_mlb_outcome_market_history(outcome_market, stat_key, cutoff)
-                        rows = outcome_market[
-                            outcome_market["sport"].eq(sport)
-                            & outcome_market["stat_key"].eq(stat_key)
-                            & outcome_market["date"].between(start, end)
+                        if best_gate_key is None or key > best_gate_key:
+                            best_gate_key = key
+                            threshold = candidate_threshold
+                            validation = candidate_validation
+                            holdout = candidate_holdout
+                    active = bool(
+                        validation["samples"] >= int(policy["minimum_validation_samples"])
+                        and holdout["samples"] >= int(policy["minimum_holdout_samples"])
+                        and safe_float(validation["accuracy"]) >= TARGET_ACCURACY
+                        and safe_float(holdout["accuracy"]) >= TARGET_ACCURACY
+                    )
+                    validation_results[sport][stat_key] = {
+                        **policy,
+                        "meta_gate_threshold": threshold,
+                        "active": active,
+                        "validation": validation,
+                        "holdout": holdout,
+                    }
+                    continue
+                if sport == "WNBA" and stat_key == "totalRebounds":
+                    evaluations: list[dict[str, Any]] = []
+                    for cutoff, start, end in (validation_window, holdout_window):
+                        season_model = _fit_wnba_count(outcome_frame, stat_key, cutoff, season_only=True)
+                        history_model = _fit_wnba_count(outcome_frame, stat_key, cutoff, season_only=False)
+                        rows = _count_market_rows(
+                            outcome_market,
+                            outcome_frame,
+                            sport,
+                            stat_key,
+                            start=start,
+                            end=end,
+                        )
+                        evaluations.append(
+                            _evaluate_count_policy(
+                                rows,
+                                season_model=season_model,
+                                history_model=history_model,
+                                policy=policy,
+                            )
+                        )
+                    validation, holdout = evaluations
+                    active = bool(
+                        validation["samples"] >= int(policy["minimum_validation_samples"])
+                        and holdout["samples"] >= int(policy["minimum_holdout_samples"])
+                        and safe_float(validation["accuracy"]) >= TARGET_ACCURACY
+                        and safe_float(holdout["accuracy"]) >= TARGET_ACCURACY
+                    )
+                    validation_results[sport][stat_key] = {
+                        **policy,
+                        "active": active,
+                        "validation": validation,
+                        "holdout": holdout,
+                    }
+                    continue
+                views_by_window: list[dict[str, dict[str, Any]]] = []
+                for cutoff, start, end in (validation_window, holdout_window):
+                    if sport == "MLB":
+                        if stat_key == "hits_runs_rbis":
+                            season_model = _fit_market(
+                                paired_outcome[
+                                    paired_outcome["sport"].eq(sport)
+                                    & paired_outcome["line"].eq(1.5)
+                                ],
+                                stat_key,
+                                cutoff,
+                                min_child_weight=20,
+                            )
+                            history_model = _fit_hrr_history(outcome_frame, cutoff)
+                            rows = paired_outcome[
+                                paired_outcome["sport"].eq(sport)
+                                & paired_outcome["stat_key"].eq(stat_key)
+                                & paired_outcome["line"].eq(1.5)
+                                & paired_outcome["date"].between(start, end)
+                            ].copy()
+                            for feature_name in OUTCOME_FEATURES:
+                                rows[feature_name] = rows[f"outcome_{feature_name}"]
+                            views_by_window.append(
+                                _classifier_views(
+                                    rows,
+                                    season_model=season_model,
+                                    history_model=history_model,
+                                    hrr_history=True,
+                                )
+                            )
+                        else:
+                            season_model = _fit_market(
+                                outcome_market[outcome_market["sport"].eq(sport)],
+                                stat_key,
+                                cutoff,
+                                min_child_weight=15,
+                            )
+                            history_model = _fit_mlb_outcome_market_history(outcome_market, stat_key, cutoff)
+                            rows = outcome_market[
+                                outcome_market["sport"].eq(sport)
+                                & outcome_market["stat_key"].eq(stat_key)
+                                & outcome_market["date"].between(start, end)
+                            ]
+                            views_by_window.append(
+                                _classifier_views(
+                                    rows,
+                                    season_model=season_model,
+                                    history_model=history_model,
+                                    outcome_market_history=True,
+                                )
+                            )
+                    else:
+                        season_model = _fit_market(paired[paired["sport"].eq(sport)], stat_key, cutoff)
+                        history_model = _fit_paired_history(paired[paired["sport"].eq(sport)], stat_key, cutoff)
+                        rows = paired[
+                            paired["sport"].eq(sport)
+                            & paired["stat_key"].eq(stat_key)
+                            & paired["date"].between(start, end)
                         ]
                         views_by_window.append(
                             _classifier_views(
                                 rows,
                                 season_model=season_model,
                                 history_model=history_model,
-                                outcome_market_history=True,
                             )
                         )
+                near_miss: dict[str, Any] | None = None
+                if (sport, stat_key) in SEARCHED_MARKETS:
+                    searched, near_miss = _search_classifier_policy(views_by_window, policy)
                 else:
-                    season_model = _fit_market(paired[paired["sport"].eq(sport)], stat_key, cutoff)
-                    history_model = _fit_paired_history(paired[paired["sport"].eq(sport)], stat_key, cutoff)
-                    rows = paired[
-                        paired["sport"].eq(sport)
-                        & paired["stat_key"].eq(stat_key)
-                        & paired["date"].between(start, end)
-                    ]
-                    views_by_window.append(
-                        _classifier_views(
-                            rows,
-                            season_model=season_model,
-                            history_model=history_model,
-                        )
-                    )
-            near_miss: dict[str, Any] | None = None
-            if (sport, stat_key) in SEARCHED_MARKETS:
-                searched, near_miss = _search_classifier_policy(views_by_window, policy)
-            else:
-                searched = None
-            if searched is not None:
-                selected_policy, validation, holdout = searched
-            else:
-                selected_policy = policy
-                mode = str(policy.get("selection") or "") or "dynamic"
-                validation = _apply_view_policy(views_by_window[0][mode], policy)
-                holdout = _apply_view_policy(views_by_window[1][mode], policy)
-            active = bool(
-                validation["samples"] >= int(selected_policy["minimum_validation_samples"])
-                and holdout["samples"] >= int(selected_policy["minimum_holdout_samples"])
-                and safe_float(validation["accuracy"]) >= TARGET_ACCURACY
-                and safe_float(holdout["accuracy"]) >= TARGET_ACCURACY
-            )
-            validation_results[sport][stat_key] = {
-                **selected_policy,
-                "active": active,
-                "validation": validation,
-                "holdout": holdout,
-                **({"search_near_miss": near_miss} if (not active and near_miss) else {}),
-            }
+                    searched = None
+                if searched is not None:
+                    selected_policy, validation, holdout = searched
+                else:
+                    selected_policy = policy
+                    mode = str(policy.get("selection") or "") or "dynamic"
+                    validation = _apply_view_policy(views_by_window[0][mode], policy)
+                    holdout = _apply_view_policy(views_by_window[1][mode], policy)
+                active = bool(
+                    validation["samples"] >= int(selected_policy["minimum_validation_samples"])
+                    and holdout["samples"] >= int(selected_policy["minimum_holdout_samples"])
+                    and safe_float(validation["accuracy"]) >= TARGET_ACCURACY
+                    and safe_float(holdout["accuracy"]) >= TARGET_ACCURACY
+                )
+                validation_results[sport][stat_key] = {
+                    **selected_policy,
+                    "active": active,
+                    "validation": validation,
+                    "holdout": holdout,
+                    **({"search_near_miss": near_miss} if (not active and near_miss) else {}),
+                }
+
+        except Exception:
+            if sport not in {"NFL", "CFB"}:
+                raise
+            if sport not in skipped_sports:
+                skipped_sports.append(sport)
+            evaluation_windows.pop(sport, None)
+            validation_results[sport] = {}
 
     final_artifacts: dict[tuple[str, str], dict[str, Any]] = {}
-    for sport in ("MLB", "WNBA"):
+    for sport in POLICIES:
+        if sport not in evaluation_windows:
+            continue
         season_models: dict[str, Any] = {}
         history_models: dict[str, Any] = {}
         season_kinds: dict[str, str] = {}
         history_kinds: dict[str, str] = {}
         season_model_features: dict[str, list[str]] = {}
         history_model_features: dict[str, list[str]] = {}
-        for stat_key in POLICIES[sport]:
-            if sport == "WNBA" and stat_key in {"totalRebounds", "assists", "three_pointers_made"}:
-                season_models[stat_key] = _fit_wnba_count(outcome_frame, stat_key, None, season_only=True)
-                history_models[stat_key] = _fit_wnba_count(outcome_frame, stat_key, None, season_only=False)
-                season_kinds[stat_key] = "regressor"
-                history_kinds[stat_key] = "regressor"
-                season_model_features[stat_key] = [
-                    name for name in OUTCOME_FEATURES if not name.startswith("all_")
-                ]
-                history_model_features[stat_key] = OUTCOME_FEATURES
-            else:
-                season_models[stat_key] = _fit_market(
-                    (
-                        paired_outcome[
-                            paired_outcome["sport"].eq(sport)
-                            & paired_outcome["line"].eq(1.5)
-                        ]
-                        if stat_key == "hits_runs_rbis"
-                        else outcome_market[outcome_market["sport"].eq(sport)]
-                        if sport == "MLB"
-                        else paired[paired["sport"].eq(sport)]
-                    ),
-                    stat_key,
-                    min_child_weight=20 if stat_key == "hits_runs_rbis" else 15,
-                )
-                season_kinds[stat_key] = "market_classifier"
-                season_model_features[stat_key] = NUMERIC_FEATURES
-                if stat_key == "hits_runs_rbis":
-                    history_models[stat_key] = _fit_hrr_history(outcome_frame)
-                    history_kinds[stat_key] = "classifier"
+        try:
+            for stat_key in POLICIES[sport]:
+                if sport == "WNBA" and stat_key in {"totalRebounds", "assists", "three_pointers_made"}:
+                    season_models[stat_key] = _fit_wnba_count(outcome_frame, stat_key, None, season_only=True)
+                    history_models[stat_key] = _fit_wnba_count(outcome_frame, stat_key, None, season_only=False)
+                    season_kinds[stat_key] = "regressor"
+                    history_kinds[stat_key] = "regressor"
+                    season_model_features[stat_key] = [
+                        name for name in OUTCOME_FEATURES if not name.startswith("all_")
+                    ]
                     history_model_features[stat_key] = OUTCOME_FEATURES
-                elif sport == "MLB":
-                    history_models[stat_key] = _fit_mlb_outcome_market_history(outcome_market, stat_key)
-                    history_kinds[stat_key] = "outcome_market_classifier"
-                    history_model_features[stat_key] = OUTCOME_MARKET_FEATURES
                 else:
-                    history_models[stat_key] = _fit_paired_history(
-                        paired[paired["sport"].eq(sport)], stat_key
+                    season_models[stat_key] = _fit_market(
+                        (
+                            paired_outcome[
+                                paired_outcome["sport"].eq(sport)
+                                & paired_outcome["line"].eq(1.5)
+                            ]
+                            if stat_key == "hits_runs_rbis"
+                            else outcome_market[outcome_market["sport"].eq(sport)]
+                            if sport == "MLB"
+                            else paired[paired["sport"].eq(sport)]
+                        ),
+                        stat_key,
+                        min_child_weight=20 if stat_key == "hits_runs_rbis" else 15,
                     )
-                    history_kinds[stat_key] = "market_classifier"
-                    history_model_features[stat_key] = NUMERIC_FEATURES
+                    season_kinds[stat_key] = "market_classifier"
+                    season_model_features[stat_key] = NUMERIC_FEATURES
+                    if stat_key == "hits_runs_rbis":
+                        history_models[stat_key] = _fit_hrr_history(outcome_frame)
+                        history_kinds[stat_key] = "classifier"
+                        history_model_features[stat_key] = OUTCOME_FEATURES
+                    elif sport == "MLB":
+                        history_models[stat_key] = _fit_mlb_outcome_market_history(outcome_market, stat_key)
+                        history_kinds[stat_key] = "outcome_market_classifier"
+                        history_model_features[stat_key] = OUTCOME_MARKET_FEATURES
+                    else:
+                        history_models[stat_key] = _fit_paired_history(
+                            paired[paired["sport"].eq(sport)], stat_key
+                        )
+                        history_kinds[stat_key] = "market_classifier"
+                        history_model_features[stat_key] = NUMERIC_FEATURES
+        except Exception:
+            if sport in {"NFL", "CFB"}:
+                if sport not in skipped_sports:
+                    skipped_sports.append(sport)
+                continue
+            raise
         final_artifacts[(sport, "season")] = {
             "version": CONSENSUS_VERSION,
             "sport": sport,
@@ -1142,8 +1199,13 @@ def main() -> int:
         # validated markets. Inactive sports still abstain via their sport flag.
         "active": any(item.get("active") is True for item in sports_metadata.values()),
         "target_accuracy": TARGET_ACCURACY,
-        "seasons": {"MLB": [2022, 2023, 2024, 2025, 2026], "WNBA": [2024, 2025, 2026]},
-        "history_years": {"MLB": 5, "WNBA": 3},
+        "seasons": {
+            "MLB": [2022, 2023, 2024, 2025, 2026],
+            "WNBA": [2024, 2025, 2026],
+            "NFL": [2024, 2025, 2026],
+            "CFB": [2024, 2025, 2026],
+        },
+        "history_years": {"MLB": 5, "WNBA": 3, "NFL": 3, "CFB": 3},
         "history_years_by_market": {
             "MLB": {
                 "hits_runs_rbis": 5,
@@ -1161,6 +1223,18 @@ def main() -> int:
                 "points_rebounds": 3,
                 "points_assists": 3,
             },
+            "NFL": {
+                "passing_yards": 3,
+                "rushing_yards": 3,
+                "receiving_yards": 3,
+                "receptions": 3,
+            },
+            "CFB": {
+                "passing_yards": 3,
+                "rushing_yards": 3,
+                "receiving_yards": 3,
+                "receptions": 3,
+            },
         },
         "roster_aware": True,
         "roster_policy": "Current player IDs only; season features reset annually; recent 3/5/10-game workload dominates older priors.",
@@ -1169,9 +1243,14 @@ def main() -> int:
             "mlb_history": "2022-26 five-year roster-aware outcome-history classifiers",
             "wnba_season": "2026 market/count models",
             "wnba_history": "2024-26 workload-aware market/count models",
+            "nfl_season": "2026 market classifier",
+            "nfl_history": "2024-26 roster-aware outcome-history classifiers",
+            "cfb_season": "2026 market classifier",
+            "cfb_history": "2024-26 roster-aware outcome-history classifiers",
         },
         "sports": sports_metadata,
         "training_fingerprint": fingerprint,
+        "skipped_sports": skipped_sports,
         "market_rows": len(market_rows),
         "outcome_rows": len(outcome_rows),
         "evaluation_windows": {

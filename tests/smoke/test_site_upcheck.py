@@ -28,6 +28,8 @@ PLAYER_PROP_KEYS = {
     "nba_player_props",
     "mlb_player_props",
     "wnba_player_props",
+    "nfl_player_props",
+    "cfb_player_props",
 }
 SCORES24_KEYS = {
     "scores24_mlb",

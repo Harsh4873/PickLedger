@@ -60,9 +60,22 @@ WNBA_FAMILIES = [
     "stocks",
 ]
 
+FOOTBALL_FAMILIES = [
+    "passing_yards",
+    "passing_tds",
+    "passing_completions",
+    "interceptions",
+    "rushing_yards",
+    "rushing_attempts",
+    "rushing_tds",
+    "receiving_yards",
+    "receptions",
+    "receiving_tds",
+]
 
-MIN_TRAINING_SAMPLES = {"MLB": 200, "WNBA": 100}
-MIN_VALIDATION_SAMPLES = {"MLB": 100, "WNBA": 40}
+
+MIN_TRAINING_SAMPLES = {"MLB": 200, "WNBA": 100, "NFL": 100, "CFB": 100}
+MIN_VALIDATION_SAMPLES = {"MLB": 100, "WNBA": 40, "NFL": 40, "CFB": 40}
 MIN_VALIDATION_DATES = 2
 MAX_VALIDATION_CALIBRATION_GAP = 0.08
 
@@ -236,6 +249,14 @@ def _fit_artifact(
         season,
     )
     if len(rows) < 30 or len(set(labels)) < 2:
+        if sport in {"NFL", "CFB"}:
+            return {
+                "sport": sport,
+                "changed": False,
+                "skipped": True,
+                "reason": f"Not enough real {season} {sport} outcomes to train: {len(rows)}",
+                "path": str(model_path),
+            }
         raise SystemExit(f"Not enough real {season} {sport} outcomes to train: {len(rows)}")
     validation = _forward_validation(
         rows,
@@ -350,10 +371,26 @@ def main() -> int:
             force=args.force,
             dry_run=args.dry_run,
         ),
+        _fit_artifact(
+            sport="NFL",
+            families=FOOTBALL_FAMILIES,
+            repo_root=repo_root,
+            force=args.force,
+            dry_run=args.dry_run,
+        ),
+        _fit_artifact(
+            sport="CFB",
+            families=FOOTBALL_FAMILIES,
+            repo_root=repo_root,
+            force=args.force,
+            dry_run=args.dry_run,
+        ),
     ]
     for result in results:
         status = (
-            "rejected"
+            "skipped"
+            if result.get("skipped")
+            else "rejected"
             if result.get("candidate_rejected")
             else "candidate"
             if result.get("candidate")

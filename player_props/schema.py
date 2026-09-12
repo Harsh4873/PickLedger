@@ -6,11 +6,31 @@ import hashlib
 import math
 import os
 import re
+from datetime import date, datetime
 from typing import Any
+from zoneinfo import ZoneInfo
 
 
 SOURCE = "PickLedgerPro In-House Player Props"
 ODDS = -110
+CENTRAL_TZ = ZoneInfo("America/Chicago")
+
+
+def central_calendar_date(value: Any) -> date | None:
+    """Stamp and filter slates on America/Chicago, matching the live site."""
+    text = str(value or "").strip()
+    if not text:
+        return None
+    try:
+        parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        try:
+            return date.fromisoformat(text[:10])
+        except ValueError:
+            return None
+    if parsed.tzinfo is None:
+        return parsed.date()
+    return parsed.astimezone(CENTRAL_TZ).date()
 
 
 def safe_float(value: Any, default: float = 0.0) -> float:

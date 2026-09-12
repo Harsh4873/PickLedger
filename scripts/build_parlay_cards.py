@@ -151,6 +151,8 @@ PLAYER_PROP_SOURCE_LABELS: dict[str, str] = {
     "nba_player_props": "NBAPlayerProps",
     "mlb_player_props": "MLBPlayerProps",
     "wnba_player_props": "WNBAPlayerProps",
+    "nfl_player_props": "NFLPlayerProps",
+    "cfb_player_props": "CFBPlayerProps",
     "wnba_3pm": "WNBA3PM",
 }
 
@@ -180,6 +182,9 @@ _GAME_STOPWORDS = {"vs", "v", "at"}
 _PLAYER_STAT_HINTS = (
     " hits", " strikeout", " bases", " rbis", " points", " rebounds",
     " assists", " 3-point", " runs +", " hits +", " goals scored by",
+    " passing yards", " rushing yards", " receiving yards", " receptions",
+    " passing touchdowns", " rushing touchdowns", " receiving touchdowns",
+    " interceptions", " rushing attempts", " passing completions",
 )
 
 
