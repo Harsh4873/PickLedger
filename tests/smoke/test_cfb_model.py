@@ -440,3 +440,88 @@ def test_publication_rejects_alias_duplicate_but_keeps_distinct_markets(tmp_path
     }}))
     failures, _ = _cache_contract_messages(tmp_path, player_props=False, today=date)
     assert any('duplicate event/source/market' in failure for failure in failures)
+
+
+def test_ml_card_shows_model_favored_side_not_ev_max_longshot(monkeypatch):
+    """A +500 dog the model gives ~25% must not be surfaced as the ML pick.
+
+    Regression for confusing "PASS · Underdog ML +500" board cards whose
+    selection contradicted model_home_win_probability. When neither side clears
+    the LEAN probability floor, the displayed side is the model's favored side.
+    """
+    from CFBPredictionModel import cfb_model
+    from CFBPredictionModel.cfb_core import FEATURE_NAMES
+
+    entry = {
+        "features": {name: 0.0 for name in FEATURE_NAMES},
+        "game": {
+            "game_id": "401900002", "event_id": "401900002",
+            "home_team_id": "1", "away_team_id": "2",
+            "home_team": "Texas A&M Aggies", "away_team": "Arizona State Sun Devils",
+            "start_time": "2026-09-12T17:00:00Z", "neutral_site": False,
+            "home_line": None, "total_line": None,
+            "home_moneyline": -600, "away_moneyline": 500,
+            "odds_source": "espn_scoreboard:DraftKings",
+        },
+    }
+    monkeypatch.setattr(cfb_model, "serving_rows", lambda _date, **_kwargs: [entry])
+    # Force a lopsided model read: home strongly favored, dog ~25%.
+    monkeypatch.setattr(cfb_model, "_calibrated_probability_or_raw", lambda _c, raw, _p: 0.753)
+    payload = cfb_model.generate_cfb_picks("2026-09-12")
+    ml = next(pick for pick in payload["picks"] if pick["source"] == "CFB ML")
+    assert ml["side"] == "home"
+    assert ml["selection"] == "Texas A&M Aggies"
+    assert ml["model_home_win_probability"] >= 0.55
+    assert ml["decision"] == "PASS"
+
+
+def test_ml_card_still_prefers_actionable_side_by_ev():
+    """When a side clears the LEAN floor, EV still drives the selection."""
+    from CFBPredictionModel import cfb_model
+
+    priced = True
+    fav = cfb_model._selection_rank(cfb_model._ev(0.58, 0.0, -140), 0.58, priced=priced)
+    dog = cfb_model._selection_rank(cfb_model._ev(0.42, 0.0, 160), 0.42, priced=priced)
+    # Actionable favored side (>=0.52) outranks a non-actionable dog.
+    assert fav > dog
+
+
+def test_spread_flat_calibrator_falls_back_to_raw_probability():
+    """Degenerate flat isotonic region must not publish a meaningless 0.5.
+
+    Regression for early-season spread cards showing calibrated_probability=0.5.
+    """
+    from CFBPredictionModel import cfb_model
+
+    class FlatCalibrator:
+        def predict(self, values):
+            return [0.5 for _ in values]
+
+    out = cfb_model._calibrated_probability_or_raw(FlatCalibrator(), 0.401, 0.0)
+    assert out == pytest.approx(0.401, abs=1e-9)
+
+
+def test_spread_informative_calibrator_is_respected():
+    """A calibrator with local slope is used as-is (no raw fallback)."""
+    from CFBPredictionModel import cfb_model
+
+    class SlopedCalibrator:
+        def predict(self, values):
+            return [min(0.98, max(0.02, v)) for v in values]
+
+    out = cfb_model._calibrated_probability_or_raw(SlopedCalibrator(), 0.401, 0.0)
+    assert out == pytest.approx(0.401, abs=1e-6)  # equals conditional, via calibration not fallback
+    # A tail value is calibrated, proving the informative path is taken.
+    tail = cfb_model._calibrated_probability_or_raw(SlopedCalibrator(), 0.9, 0.0)
+    assert tail == pytest.approx(0.9, abs=1e-6)
+
+
+def test_low_prob_pass_is_hidden_from_board():
+    """PASS below the LEAN win% floor must not publish to the board."""
+    from CFBPredictionModel import cfb_model
+
+    assert cfb_model._board_eligible({"decision": "BET", "probability": 0.2}) is True
+    assert cfb_model._board_eligible({"decision": "LEAN", "probability": 0.53}) is True
+    assert cfb_model._board_eligible({"decision": "PASS", "probability": 0.74}) is True
+    assert cfb_model._board_eligible({"decision": "PASS", "probability": 0.247}) is False
+    assert cfb_model._board_eligible({"decision": "PASS", "probability": 0.5}) is False

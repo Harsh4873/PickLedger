@@ -193,11 +193,13 @@ test('posts in-house model PASS on the team board and keeps scraped PASS as rese
   installFetch(new Map([
     ['./data/model_cache/latest.json', { date, models: {
       nfl: { ok: true, shadow_mode: false, picks: [
-        { id: 'nfl-pass', sport: 'NFL', pick: 'Seahawks ML (Patriots @ Seahawks)', decision: 'PASS', units: 0, matchup: 'Patriots @ Seahawks' },
+        { id: 'nfl-pass', sport: 'NFL', pick: 'Seahawks ML (Patriots @ Seahawks)', decision: 'PASS', units: 0, probability: 0.61, matchup: 'Patriots @ Seahawks' },
         { id: 'nfl-bet', sport: 'NFL', pick: 'Seahawks -3 (Patriots @ Seahawks)', decision: 'BET', units: 0.5, matchup: 'Patriots @ Seahawks' },
+        { id: 'nfl-low-pass', sport: 'NFL', pick: 'Patriots ML', decision: 'PASS', units: 0, probability: 0.24 },
       ] },
       cfb: { ok: true, shadow_mode: false, picks: [
-        { id: 'cfb-pass', sport: 'CFB', pick: 'Home State ML', decision: 'PASS', units: 0 },
+        { id: 'cfb-pass', sport: 'CFB', pick: 'Home State ML', decision: 'PASS', units: 0, probability: 0.74 },
+        { id: 'cfb-low-pass', sport: 'CFB', pick: 'Away Dog ML +500', decision: 'PASS', units: 0, probability: 0.247 },
         { id: 'cfb-lean', sport: 'CFB', pick: 'Home State -3.5', decision: 'LEAN', units: 0.25 },
       ] },
       scores24_nfl: { ok: true, picks: [

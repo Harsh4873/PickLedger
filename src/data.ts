@@ -727,7 +727,17 @@ function isTrackedPick(pick: Pick): boolean {
   if (decision === 'BET' || decision === 'LEAN') return true;
   // In-house PASS still belongs on the public board. Scraped PASS stays
   // research-only so a demoted tip cannot look like a model post.
-  return decision === 'PASS' && pick.scraped !== true;
+  if (decision !== 'PASS' || pick.scraped === true) return false;
+  // CFB/NFL: hide low-win% PASS cards (same floor as LEAN). Dog-side junk at
+  // ~25% was making the board look broken even though the gate correctly PASSed.
+  const sport = String(pick.sport || pick.league || '').trim().toUpperCase();
+  if (sport === 'CFB' || sport === 'NFL') {
+    const probability = Number(
+      pick.probability ?? pick.calibrated_probability ?? Number.NaN,
+    );
+    if (!Number.isFinite(probability) || probability < 0.52) return false;
+  }
+  return true;
 }
 
 function isTrackedPlayerProp(pick: Pick): boolean {
