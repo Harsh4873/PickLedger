@@ -732,7 +732,7 @@ def test_four_model_consensus_clears_70_percent_on_validation_and_later_holdout(
     )
     assert metadata["active"] is True
     assert metadata["target_accuracy"] == 0.70
-    assert metadata["history_years"] == {"MLB": 5, "WNBA": 3}
+    assert metadata["history_years"] == {"MLB": 5, "WNBA": 3, "NFL": 3, "CFB": 3}
     assert set(metadata["history_years_by_market"]["MLB"].values()) == {5}
     assert set(metadata["history_years_by_market"]["WNBA"].values()) == {3}
     assert metadata["sports"]["MLB"]["active"] is True

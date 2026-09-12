@@ -302,7 +302,9 @@ def test_static_viewer_keeps_public_tabs_and_client_grading():
     assert "embeddedResult === 'pending' ? localResult : embeddedResult" in data
     assert "function isTrackedPick(" in data
     assert "decision === 'BET' || decision === 'LEAN'" in data
-    assert "decision === 'PASS' && pick.scraped !== true" in data
+    assert "decision !== 'PASS' || pick.scraped === true" in data
+    assert "sport === 'CFB' || sport === 'NFL'" in data
+    assert "IN_HOUSE_PASS_BOARD_MIN_PROBABILITY" in data
     assert "pick.shadow_mode !== true && isTrackedPick(pick)" in data
     assert "function renderRankings()" in main
     assert "function renderSearch()" in main

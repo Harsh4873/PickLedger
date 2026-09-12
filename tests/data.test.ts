@@ -193,11 +193,13 @@ test('posts in-house model PASS on the team board and keeps scraped PASS as rese
   installFetch(new Map([
     ['./data/model_cache/latest.json', { date, models: {
       nfl: { ok: true, shadow_mode: false, picks: [
-        { id: 'nfl-pass', sport: 'NFL', pick: 'Seahawks ML (Patriots @ Seahawks)', decision: 'PASS', units: 0, matchup: 'Patriots @ Seahawks' },
+        { id: 'nfl-pass', sport: 'NFL', pick: 'Seahawks ML (Patriots @ Seahawks)', decision: 'PASS', units: 0, probability: 0.61, matchup: 'Patriots @ Seahawks' },
         { id: 'nfl-bet', sport: 'NFL', pick: 'Seahawks -3 (Patriots @ Seahawks)', decision: 'BET', units: 0.5, matchup: 'Patriots @ Seahawks' },
+        { id: 'nfl-low-pass', sport: 'NFL', pick: 'Patriots ML', decision: 'PASS', units: 0, probability: 0.24 },
       ] },
       cfb: { ok: true, shadow_mode: false, picks: [
-        { id: 'cfb-pass', sport: 'CFB', pick: 'Home State ML', decision: 'PASS', units: 0 },
+        { id: 'cfb-pass', sport: 'CFB', pick: 'Home State ML', decision: 'PASS', units: 0, probability: 0.74 },
+        { id: 'cfb-low-pass', sport: 'CFB', pick: 'Away Dog ML +500', decision: 'PASS', units: 0, probability: 0.247 },
         { id: 'cfb-lean', sport: 'CFB', pick: 'Home State -3.5', decision: 'LEAN', units: 0.25 },
       ] },
       scores24_nfl: { ok: true, picks: [
@@ -208,6 +210,7 @@ test('posts in-house model PASS on the team board and keeps scraped PASS as rese
   await loadAllData({ includeHistory: false });
   const team = getTeamPicks().filter(pick => pick.date === date).map(pick => pick.id).sort();
   assert.deepEqual(team, ['cfb-lean', 'cfb-pass', 'nfl-bet', 'nfl-pass']);
+  assert.ok(!team.includes('cfb-low-pass') && !team.includes('nfl-low-pass'));
   assert.deepEqual(getResearchPicks(date).map(pick => pick.id), ['scraped-nfl-pass']);
   assert.ok(getResearchPicks(date).every(pick => pick.research === true && pick.decision === 'PASS' && pick.units === 0));
   const statuses = new Map(getSourceStatuses(date).map(status => [status.key, status]));
@@ -216,6 +219,60 @@ test('posts in-house model PASS on the team board and keeps scraped PASS as rese
   assert.equal(statuses.get('cfb')?.researchCount, 0);
   assert.equal(statuses.get('scores24_nfl')?.researchCount, 1);
   assert.equal(statuses.get('scores24_nfl')?.pickCount, 0);
+});
+
+test('hides the live ASU +500 PASS immediately and would post A&M ML after a favored-side refresh', { concurrency: false }, async () => {
+  const date = '2026-09-12';
+  installFetch(new Map([
+    ['./data/model_cache/latest.json', { date, models: {
+      cfb: { ok: true, shadow_mode: false, picks: [
+        {
+          id: 'asu-ml',
+          sport: 'CFB',
+          pick: 'Arizona State Sun Devils ML (Arizona State Sun Devils @ Texas A&M Aggies)',
+          decision: 'PASS',
+          units: 0,
+          probability: 0.247126,
+          calibrated_probability: 0.247126,
+          model_home_win_probability: 0.752874,
+          matchup: 'Arizona State Sun Devils @ Texas A&M Aggies',
+        },
+        {
+          id: 'tamu-spread',
+          sport: 'CFB',
+          pick: 'Texas A&M Aggies -14.5 (Arizona State Sun Devils @ Texas A&M Aggies)',
+          decision: 'PASS',
+          units: 0,
+          probability: 0.5,
+          calibrated_probability: 0.5,
+          raw_probability: 0.401103,
+        },
+        {
+          id: 'tamu-ml-after-refresh',
+          sport: 'CFB',
+          pick: 'Texas A&M Aggies ML (Arizona State Sun Devils @ Texas A&M Aggies)',
+          decision: 'PASS',
+          units: 0,
+          probability: 0.752874,
+          matchup: 'Arizona State Sun Devils @ Texas A&M Aggies',
+        },
+        {
+          id: 'cfb-lean-ok',
+          sport: 'CFB',
+          pick: 'Some Team -3.5',
+          decision: 'LEAN',
+          units: 0.25,
+          probability: 0.53,
+        },
+      ] },
+    } }],
+  ]));
+  await loadAllData({ includeHistory: false });
+  const team = getTeamPicks().filter(pick => pick.date === date).map(pick => pick.id).sort();
+  assert.deepEqual(team, ['cfb-lean-ok', 'tamu-ml-after-refresh']);
+  assert.ok(!team.includes('asu-ml'));
+  assert.ok(!team.includes('tamu-spread'));
+  assert.deepEqual(getResearchPicks(date), []);
 });
 
 test('source health distinguishes blocked, stale, missing, no-games, and unqualified results', { concurrency: false }, async () => {
