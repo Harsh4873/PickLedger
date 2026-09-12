@@ -22,6 +22,9 @@ The production viewer is intentionally static. It does not load Firebase, authen
 
 - `src/data.ts` loads every dated file listed in `data/model_cache/index.json`.
 - `src/data.ts` loads every dated file listed in `data/player_props_cache/index.json`.
+  Public buckets are `mlb_player_props`, `nba_player_props`, `wnba_player_props`,
+  `nfl_player_props`, and `cfb_player_props`. NFL/CFB boards may be empty
+  (off-day or unpriced) without blocking MLB publication.
 - `src/data.ts` loads the compact, precomputed files listed in
   `data/profit_desk/index.json`; the browser never invents a profit score from
   raw picks.
@@ -87,6 +90,22 @@ Platt layer. A training-contract change invalidates the prior mapping and
 forces evaluation against a clean identity champion.
 
 `scripts/cache_manifest.py` updates the dated-cache manifest whenever model or feed caches are written or merged.
+
+## NFL/CFB player props
+
+Football player props reuse the MLB/NBA/WNBA consensus path (ESPN scoreboard +
+posted DraftKings `propBets` + gamelogs). Public cache keys are
+`nfl_player_props` and `cfb_player_props`. Covered markets:
+
+- passing yards / TDs / completions, interceptions
+- rushing yards / attempts / TDs
+- receiving yards / receptions / TDs
+
+There is no synthetic-line fallback and no basketball-artifact borrowing.
+Until native NFL/CFB consensus joblibs exist, the board fail-closes empty
+(`abstained`) rather than inventing picks. An off-day, unpriced slate, or ESPN
+outage is a soft-fail: MLB/NBA/WNBA props and Pages deploy still proceed.
+Dates stamp `America/Chicago`. CFB scoreboards use ESPN FBS `groups=80`.
 
 ## Deployment Contract
 

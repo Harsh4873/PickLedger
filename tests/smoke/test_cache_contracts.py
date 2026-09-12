@@ -8,7 +8,13 @@ from scripts import site_upcheck
 
 
 ROOT = Path(__file__).resolve().parents[2]
-PLAYER_PROP_MODEL_KEYS = {"nba_player_props", "mlb_player_props", "wnba_player_props"}
+PLAYER_PROP_MODEL_KEYS = {
+    "nba_player_props",
+    "mlb_player_props",
+    "wnba_player_props",
+    "nfl_player_props",
+    "cfb_player_props",
+}
 
 
 def _read_json(path: Path) -> dict:
@@ -63,9 +69,10 @@ def test_latest_player_prop_records_use_one_bucket_per_sport():
     latest = _read_json(ROOT / "data" / "player_props_cache" / "latest.json")
     models = latest.get("models") if isinstance(latest.get("models"), dict) else {}
 
-    assert PLAYER_PROP_MODEL_KEYS == set(models)
-    for model_key in PLAYER_PROP_MODEL_KEYS:
-        bucket = models[model_key]
+    hard_keys = {"nba_player_props", "mlb_player_props", "wnba_player_props"}
+    assert hard_keys.issubset(set(models))
+    assert set(models).issubset(PLAYER_PROP_MODEL_KEYS)
+    for model_key, bucket in models.items():
         assert bucket["ok"] is True
         sources = {
             str(pick.get("source") or "").strip()
@@ -85,8 +92,13 @@ def test_latest_player_prop_boards_stay_ranked_and_deduped():
     latest = _read_json(ROOT / "data" / "player_props_cache" / "latest.json")
     models = latest.get("models") if isinstance(latest.get("models"), dict) else {}
 
+    hard_keys = {"nba_player_props", "mlb_player_props", "wnba_player_props"}
     for model_key in PLAYER_PROP_MODEL_KEYS:
-        picks = models[model_key].get("picks") or []
+        bucket = models.get(model_key)
+        if not isinstance(bucket, dict):
+            assert model_key not in hard_keys
+            continue
+        picks = bucket.get("picks") or []
         ranks = [int(pick["ml_rank"]) for pick in picks]
         assert ranks == list(range(1, len(picks) + 1))
         assert not any(pick.get("carried_forward") for pick in picks)

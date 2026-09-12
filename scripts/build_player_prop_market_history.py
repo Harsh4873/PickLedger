@@ -32,6 +32,13 @@ from player_props.basketball import (  # noqa: E402
     _is_milestone_market as basketball_is_milestone,
     _target_value as basketball_target_value,
 )
+from player_props.football import (  # noqa: E402
+    FOOTBALL_MARKET_TYPES,
+    _american_odds as football_american_odds,
+    _canonical_market_name as football_market_name,
+    _is_milestone_market as football_is_milestone,
+    _target_value as football_target_value,
+)
 from player_props.mlb import (  # noqa: E402
     MLB_MARKET_TYPES,
     _american_odds as mlb_american_odds,
@@ -49,6 +56,8 @@ DEFAULT_MAX_OUTPUT_BYTES = 90_000_000
 SPORT_CONFIG = {
     "MLB": {"segment": "baseball", "league": "mlb"},
     "WNBA": {"segment": "basketball", "league": "wnba"},
+    "NFL": {"segment": "football", "league": "nfl"},
+    "CFB": {"segment": "football", "league": "college-football"},
 }
 
 
@@ -57,7 +66,7 @@ def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--start", default=f"{today.year}-03-20")
     parser.add_argument("--end", default=(today - timedelta(days=1)).isoformat())
-    parser.add_argument("--sports", default="MLB,WNBA")
+    parser.add_argument("--sports", default="MLB,WNBA,NFL,CFB")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--max-output-bytes", type=int, default=DEFAULT_MAX_OUTPUT_BYTES)
     parser.add_argument("--max-workers", type=int, default=8)
@@ -220,6 +229,67 @@ def _basketball_actuals(summary: dict[str, Any]) -> dict[tuple[str, str], float]
     return result
 
 
+def _football_actuals(summary: dict[str, Any]) -> dict[tuple[str, str], float]:
+    result: dict[tuple[str, str], float] = {}
+    passing: dict[str, dict[str, float | None]] = {}
+    rushing: dict[str, dict[str, float | None]] = {}
+    receiving: dict[str, dict[str, float | None]] = {}
+    for team in _summary_players(summary):
+        for category in team.get("statistics") or []:
+            keys = [str(key) for key in category.get("keys") or []]
+            labels = [str(label) for label in category.get("labels") or []]
+            category_name = str(category.get("name") or category.get("type") or category.get("text") or "").lower()
+            for row in category.get("athletes") or []:
+                if row.get("didNotPlay") is True:
+                    continue
+                athlete_id = str((row.get("athlete") or {}).get("id") or "")
+                stats = row.get("stats") or []
+                if not athlete_id or len(stats) < max(len(keys), len(labels)):
+                    continue
+                named = {key: _number(stats[index]) for index, key in enumerate(keys)}
+                labeled = {str(label).upper(): _number(stats[index]) for index, label in enumerate(labels)}
+                if "pass" in category_name:
+                    passing[athlete_id] = {
+                        "yards": named.get("passingYards") or labeled.get("YDS"),
+                        "tds": named.get("passingTouchdowns") or labeled.get("TD"),
+                        "completions": named.get("completionAttempts") or named.get("passingCompletions") or labeled.get("C/ATT"),
+                        "ints": named.get("interceptions") or labeled.get("INT"),
+                    }
+                    combo = _number(str(labeled.get("C/ATT") or named.get("completionAttempts") or "").split("-", 1)[0])
+                    if passing[athlete_id]["completions"] is None:
+                        passing[athlete_id]["completions"] = combo
+                elif "rush" in category_name:
+                    rushing[athlete_id] = {
+                        "yards": named.get("rushingYards") or labeled.get("YDS"),
+                        "attempts": named.get("rushingAttempts") or labeled.get("CAR"),
+                        "tds": named.get("rushingTouchdowns") or labeled.get("TD"),
+                    }
+                elif "receiv" in category_name:
+                    receiving[athlete_id] = {
+                        "yards": named.get("receivingYards") or labeled.get("YDS"),
+                        "receptions": named.get("receptions") or labeled.get("REC"),
+                        "tds": named.get("receivingTouchdowns") or labeled.get("TD"),
+                    }
+    athlete_ids = set(passing) | set(rushing) | set(receiving)
+    for athlete_id in athlete_ids:
+        aliases = {
+            "passing_yards": (passing.get(athlete_id) or {}).get("yards"),
+            "passing_tds": (passing.get(athlete_id) or {}).get("tds"),
+            "passing_completions": (passing.get(athlete_id) or {}).get("completions"),
+            "interceptions": (passing.get(athlete_id) or {}).get("ints"),
+            "rushing_yards": (rushing.get(athlete_id) or {}).get("yards"),
+            "rushing_attempts": (rushing.get(athlete_id) or {}).get("attempts"),
+            "rushing_tds": (rushing.get(athlete_id) or {}).get("tds"),
+            "receiving_yards": (receiving.get(athlete_id) or {}).get("yards"),
+            "receptions": (receiving.get(athlete_id) or {}).get("receptions"),
+            "receiving_tds": (receiving.get(athlete_id) or {}).get("tds"),
+        }
+        for stat_key, actual in aliases.items():
+            if actual is not None:
+                result[(athlete_id, stat_key)] = float(actual)
+    return result
+
+
 def _side_odds(row: dict[str, Any], parser: Any) -> int | None:
     return parser((((row.get("odds") or {}).get("american") or {}).get("value")))
 
@@ -248,6 +318,15 @@ def _market_rows(
             stat_key, _, _, grade_supported = market_type
             if not grade_supported:
                 continue
+        elif sport in {"NFL", "CFB"}:
+            normalized = football_market_name(type_name)
+            market_type = FOOTBALL_MARKET_TYPES.get(normalized)
+            athlete_id = _athlete_id(item)
+            line, display = football_target_value(item)
+            milestone = football_is_milestone(type_name, display)
+            if not market_type:
+                continue
+            stat_key, _ = market_type
         else:
             normalized = basketball_market_name(type_name)
             market_type = BASKETBALL_MARKET_TYPES.get(normalized)
@@ -314,7 +393,12 @@ def _market_rows(
         }
 
     for item, athlete_id, stat_key, threshold, type_name in milestone_rows:
-        odds_parser = mlb_american_odds if sport == "MLB" else basketball_american_odds
+        if sport == "MLB":
+            odds_parser = mlb_american_odds
+        elif sport in {"NFL", "CFB"}:
+            odds_parser = football_american_odds
+        else:
+            odds_parser = basketball_american_odds
         over_odds = _side_odds(item, odds_parser)
         if over_odds is None:
             continue
@@ -334,7 +418,12 @@ def _market_rows(
     for (athlete_id, stat_key, line, type_name), sides in grouped.items():
         if len(sides) < 2:
             continue
-        odds_parser = mlb_american_odds if sport == "MLB" else basketball_american_odds
+        if sport == "MLB":
+            odds_parser = mlb_american_odds
+        elif sport in {"NFL", "CFB"}:
+            odds_parser = football_american_odds
+        else:
+            odds_parser = basketball_american_odds
         over_odds = _side_odds(sides[0], odds_parser)
         under_odds = _side_odds(sides[1], odds_parser)
         if over_odds is None or under_odds is None:
@@ -371,6 +460,9 @@ def _event_rows(sport: str, slate_date: str, event: dict[str, Any]) -> list[dict
         if sport == "MLB":
             markets = client.mlb_espn_prop_bets(event_id, provider_id)
             actuals = _mlb_actuals(summary)
+        elif sport in {"NFL", "CFB"}:
+            markets = client.football_espn_prop_bets(config["league"], event_id, provider_id)
+            actuals = _football_actuals(summary)
         else:
             markets = client.basketball_espn_prop_bets(config["league"], event_id, provider_id)
             actuals = _basketball_actuals(summary)
@@ -396,6 +488,8 @@ def _scoreboard(sport: str, date_iso: str) -> dict[str, Any]:
     config = SPORT_CONFIG[sport]
     if sport == "MLB":
         return client.mlb_espn_scoreboard(date_iso)
+    if sport in {"NFL", "CFB"}:
+        return client.football_scoreboard(config["league"], date_iso)
     return client.basketball_scoreboard(config["league"], date_iso)
 
 

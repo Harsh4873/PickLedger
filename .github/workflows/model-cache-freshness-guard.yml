@@ -63,6 +63,10 @@ jobs:
               "mlb_player_props",
               "wnba_player_props",
           }
+          soft = {
+              "nfl_player_props",
+              "cfb_player_props",
+          }
           try:
               payload = json.loads(Path("data/player_props_cache/latest.json").read_text(encoding="utf-8"))
           except Exception:

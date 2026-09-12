@@ -16,13 +16,26 @@ from scripts.refresh_player_props import _publication_contract_errors, _schedule
 ROOT = Path(__file__).resolve().parents[2]
 DATE = "2026-06-12"
 STAMP = "2026-06-12T12:00:00Z"
-PLAYER_PROP_MODEL_KEYS = {"nba_player_props", "wnba_player_props", "wnba_3pm", "mlb_player_props"}
+PLAYER_PROP_MODEL_KEYS = {
+    "nba_player_props",
+    "wnba_player_props",
+    "wnba_3pm",
+    "mlb_player_props",
+    "nfl_player_props",
+    "cfb_player_props",
+}
 
 
 def _public_prop_buckets() -> dict:
     return {
         key: {"ok": True, "games": 0, "picks": []}
-        for key in ("nba_player_props", "mlb_player_props", "wnba_player_props")
+        for key in (
+            "nba_player_props",
+            "mlb_player_props",
+            "wnba_player_props",
+            "nfl_player_props",
+            "cfb_player_props",
+        )
     }
 
 

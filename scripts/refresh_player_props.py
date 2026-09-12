@@ -19,7 +19,11 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.site_upcheck import _mlb_player_props_documented_abstention as documented_abstention
 from player_props import generate_payload  # noqa: E402
-from scripts.merge_player_props_cache_payload import PUBLIC_PLAYER_PROP_MODEL_KEYS  # noqa: E402
+from scripts.merge_player_props_cache_payload import (  # noqa: E402
+    HARD_PLAYER_PROP_MODEL_KEYS,
+    PUBLIC_PLAYER_PROP_MODEL_KEYS,
+    SOFT_PLAYER_PROP_MODEL_KEYS,
+)
 from scripts.pick_calibration import apply_calibration_to_payload  # noqa: E402
 
 
@@ -118,13 +122,22 @@ def _publication_contract_errors(
     target_date: str | None = None,
 ) -> list[str]:
     errors: list[str] = []
-    for model_name in sorted(PUBLIC_PLAYER_PROP_MODEL_KEYS):
+    for model_name in sorted(HARD_PLAYER_PROP_MODEL_KEYS):
         model = models.get(model_name)
         if not isinstance(model, dict):
             errors.append(f"required bucket {model_name} is missing")
             continue
         if model.get("ok") is not True:
             errors.append(f"required bucket {model_name} is not ok")
+    for model_name in sorted(SOFT_PLAYER_PROP_MODEL_KEYS):
+        model = models.get(model_name)
+        if not isinstance(model, dict):
+            errors.append(f"required bucket {model_name} is missing")
+            continue
+        # Football slates soft-fail: an empty or unpriced day is valid, and an
+        # upstream outage must not block MLB/NBA/WNBA publication.
+        if model.get("ok") is not True:
+            continue
     mlb = models.get("mlb_player_props") if isinstance(models.get("mlb_player_props"), dict) else {}
     scheduled_games = max(_scheduled_game_count(mlb, target_date=target_date), official_mlb_games)
     if scheduled_games > 0 and not (mlb.get("picks") or []) and not documented_abstention(mlb):

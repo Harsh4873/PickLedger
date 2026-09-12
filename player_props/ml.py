@@ -57,6 +57,16 @@ MARKET_FAMILY_NAMES = sorted({
     "strikeouts",
     "total_bases",
     "triples",
+    "passing_yards",
+    "passing_tds",
+    "passing_completions",
+    "interceptions",
+    "rushing_yards",
+    "rushing_attempts",
+    "rushing_tds",
+    "receiving_yards",
+    "receptions",
+    "receiving_tds",
 })
 FEATURE_NAMES = BASE_FEATURE_NAMES + [f"family::{family}" for family in MARKET_FAMILY_NAMES]
 
@@ -85,6 +95,17 @@ SPORT_ARTIFACTS = {
         "model": ARTIFACT_DIR / "wnba_player_props_ml.joblib",
         "metadata": ARTIFACT_DIR / "wnba_player_props_ml_metadata.json",
         "artifact_sport": "WNBA",
+    },
+    # Football stays native and fail-closed: no basketball artifact borrowing.
+    "NFL": {
+        "model": ARTIFACT_DIR / "nfl_player_props_ml.joblib",
+        "metadata": ARTIFACT_DIR / "nfl_player_props_ml_metadata.json",
+        "artifact_sport": "NFL",
+    },
+    "CFB": {
+        "model": ARTIFACT_DIR / "cfb_player_props_ml.joblib",
+        "metadata": ARTIFACT_DIR / "cfb_player_props_ml_metadata.json",
+        "artifact_sport": "CFB",
     },
 }
 

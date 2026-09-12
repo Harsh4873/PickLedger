@@ -22,6 +22,10 @@ MODEL_PATHS = {
     ("MLB", "history"): ARTIFACT_DIR / "mlb_player_props_history.joblib",
     ("WNBA", "season"): ARTIFACT_DIR / "wnba_player_props_season.joblib",
     ("WNBA", "history"): ARTIFACT_DIR / "wnba_player_props_history.joblib",
+    ("NFL", "season"): ARTIFACT_DIR / "nfl_player_props_season.joblib",
+    ("NFL", "history"): ARTIFACT_DIR / "nfl_player_props_history.joblib",
+    ("CFB", "season"): ARTIFACT_DIR / "cfb_player_props_season.joblib",
+    ("CFB", "history"): ARTIFACT_DIR / "cfb_player_props_history.joblib",
 }
 
 OUTCOME_FEATURES = [
@@ -49,6 +53,8 @@ OUTCOME_MARKET_FEATURES = OUTCOME_FEATURES + ["line", "over_implied", "under_imp
 TARGET_STATS = {
     "MLB": {"hits_runs_rbis", "hits", "strikeouts", "pitcher_walks_allowed", "batter_walks", "rbis"},
     "WNBA": {"points", "totalRebounds", "assists", "three_pointers_made", "points_rebounds", "points_assists"},
+    "NFL": {"passing_yards", "rushing_yards", "receiving_yards", "receptions"},
+    "CFB": {"passing_yards", "rushing_yards", "receiving_yards", "receptions"},
 }
 
 _BUNDLE: dict[str, Any] | None | bool = False
@@ -150,7 +156,10 @@ def load_consensus_bundle() -> dict[str, Any] | None:
         artifacts = {
             f"{sport}:{role}": joblib.load(path)
             for (sport, role), path in MODEL_PATHS.items()
+            if path.exists()
         }
+        if not artifacts:
+            raise OSError("no consensus artifacts are present")
     except (OSError, ValueError, TypeError, json.JSONDecodeError):
         _BUNDLE = None
         return None

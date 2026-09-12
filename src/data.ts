@@ -519,6 +519,8 @@ const PLAYER_PROP_SOURCE_LABELS: Record<string, string> = {
   nba_player_props: 'NBAPlayerProps',
   mlb_player_props: 'MLBPlayerProps',
   wnba_player_props: 'WNBAPlayerProps',
+  nfl_player_props: 'NFLPlayerProps',
+  cfb_player_props: 'CFBPlayerProps',
   wnba_3pm: 'WNBA3PM',
   mlb_player_props_season: 'MLB Season Props',
   mlb_player_props_all_time: 'MLB All Time Props',
@@ -1276,7 +1278,7 @@ function sourceErrorText(payload: ModelCachePayload, key: string, bucket: ModelB
 /** Explain empty player slates using the same published diagnostics as the jobs. */
 export function getPlayerSourceStatuses(date: string): SourceStatus[] {
   const payload = playerCachePayloads.filter(item => String(item.date || item.slate_date || '') <= date).at(-1);
-  return ['mlb_player_props', 'wnba_player_props', 'nba_player_props'].map(key => {
+  return ['mlb_player_props', 'wnba_player_props', 'nba_player_props', 'nfl_player_props', 'cfb_player_props'].map(key => {
     const bucket = recordValue(payload?.models?.[key]);
     const sport = key.split('_')[0].toUpperCase();
     const label = `${sport} Player Props`;

@@ -52,12 +52,13 @@ jobs:
           python scripts/build_player_prop_market_history.py \
             --start "$(date -u -d '14 days ago' +%F)" \
             --end "$(date -u -d 'yesterday' +%F)" \
-            --sports MLB,WNBA
+            --sports MLB,WNBA,NFL,CFB
 
       - name: Refresh roster-aware player outcome history
         run: |
           python scripts/build_player_prop_outcome_history.py \
             --seasons 2024,2025,2026 \
+            --sports MLB,WNBA,NFL,CFB \
             --refresh \
             --max-workers 20
 

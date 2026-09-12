@@ -402,4 +402,6 @@ test('player source status distinguishes abstention, missing data, failure and s
   assert.equal((await publish({ ok: true, games: 0, picks: [] })).detail, 'No games scheduled for this date.');
   assert.equal(getPlayerSourceStatuses('2026-09-15')[0].state, 'stale');
   assert.equal(getPlayerSourceStatuses(date).find(source => source.key === 'wnba_player_props')?.state, 'missing');
+  assert.equal(getPlayerSourceStatuses(date).find(source => source.key === 'nfl_player_props')?.state, 'missing');
+  assert.equal(getPlayerSourceStatuses(date).find(source => source.key === 'cfb_player_props')?.state, 'missing');
 });

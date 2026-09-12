@@ -33,6 +33,8 @@ DEFAULT_MAX_FAILURE_RATE = 0.02
 SPORT_CONFIG = {
     "MLB": ("baseball", "mlb"),
     "WNBA": ("basketball", "wnba"),
+    "NFL": ("football", "nfl"),
+    "CFB": ("football", "college-football"),
 }
 
 
@@ -41,7 +43,7 @@ def _arguments() -> argparse.Namespace:
     parser.add_argument("--markets", type=Path, default=DEFAULT_MARKETS)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--seasons", default="2024,2025")
-    parser.add_argument("--sports", default="MLB,WNBA")
+    parser.add_argument("--sports", default="MLB,WNBA,NFL,CFB")
     parser.add_argument("--max-workers", type=int, default=16)
     parser.add_argument("--max-failure-rate", type=float, default=DEFAULT_MAX_FAILURE_RATE)
     parser.add_argument("--refresh", action="store_true", help="Refetch profiles already present in the output.")
@@ -155,12 +157,44 @@ def _event_rows(sport: str, athlete_id: str, season: int, payload: dict[str, Any
                         stats["three_pointers_made"] = _number(value)
                     elif _canonical_stat_name(name) in {"threepointfieldgoalsattempted", "fg3a", "3pa"}:
                         stats["three_pointers_attempted"] = _number(value)
+                    football_aliases = {
+                        "passingyards": "passing_yards",
+                        "passyards": "passing_yards",
+                        "passingtouchdowns": "passing_tds",
+                        "passingtds": "passing_tds",
+                        "passingcompletions": "passing_completions",
+                        "completions": "passing_completions",
+                        "interceptions": "interceptions",
+                        "rushingyards": "rushing_yards",
+                        "rushyards": "rushing_yards",
+                        "rushingattempts": "rushing_attempts",
+                        "carries": "rushing_attempts",
+                        "rushingtouchdowns": "rushing_tds",
+                        "receivingyards": "receiving_yards",
+                        "receptions": "receptions",
+                        "receivingtouchdowns": "receiving_tds",
+                        "passingattempts": "passing_attempts",
+                        "targets": "targets",
+                    }
+                    mapped = football_aliases.get(_canonical_stat_name(name))
+                    if mapped:
+                        stats[mapped] = _number(value)
+                    if "-" in str(value) and _canonical_stat_name(name) in {"cmpatt", "completionattempts"}:
+                        made, attempted = _made_attempted(value)
+                        stats["passing_completions"] = made
+                        stats["passing_attempts"] = attempted
                 context = {
                     "minutes": stats.get("minutes"),
                     "usage": (
                         stats.get("minutes")
                         if sport == "WNBA"
-                        else stats.get("battersFaced") if "innings" in stats else stats.get("atBats")
+                        else (
+                            (stats.get("passing_attempts") or 0)
+                            + (stats.get("rushing_attempts") or 0)
+                            + (stats.get("targets") or stats.get("receptions") or 0)
+                            if sport in {"NFL", "CFB"}
+                            else stats.get("battersFaced") if "innings" in stats else stats.get("atBats")
+                        )
                     ),
                     "opponent_id": str((event.get("opponent") or {}).get("id") or ""),
                     "team_id": str((event.get("team") or {}).get("id") or ""),
@@ -187,6 +221,19 @@ def _event_rows(sport: str, athlete_id: str, season: int, payload: dict[str, Any
                         "batter_walks": stats.get("walks"),
                         "batter_strikeouts": stats.get("strikeouts"),
                         "hits_runs_rbis": hits + runs + rbis if hits is not None and runs is not None and rbis is not None else None,
+                    }
+                elif sport in {"NFL", "CFB"}:
+                    actuals = {
+                        "passing_yards": stats.get("passing_yards"),
+                        "passing_tds": stats.get("passing_tds"),
+                        "passing_completions": stats.get("passing_completions"),
+                        "interceptions": stats.get("interceptions"),
+                        "rushing_yards": stats.get("rushing_yards"),
+                        "rushing_attempts": stats.get("rushing_attempts"),
+                        "rushing_tds": stats.get("rushing_tds"),
+                        "receiving_yards": stats.get("receiving_yards"),
+                        "receptions": stats.get("receptions"),
+                        "receiving_tds": stats.get("receiving_tds"),
                     }
                 else:
                     points = stats.get("points")

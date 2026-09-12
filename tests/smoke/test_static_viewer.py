@@ -882,6 +882,8 @@ def test_refresh_timing_and_pages_deploy_are_deterministic():
     assert '"nba_player_props"' in guard
     assert '"mlb_player_props"' in guard
     assert '"wnba_player_props"' in guard
+    assert '"nfl_player_props"' in guard
+    assert '"cfb_player_props"' in guard
     assert 'official_mlb_games = max(' in guard
     assert 'str(pick.get("probability_source") or "").strip() != "player_props_ml_v1"' in guard
     assert 'pick.get("preserved_from_prior_refresh")' in guard

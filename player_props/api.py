@@ -106,6 +106,56 @@ class DirectApiClient:
             {"lang": "en", "region": "us", "limit": 1000},
         )
 
+    def football_scoreboard(self, league: str, date_iso: str) -> dict[str, Any]:
+        params: dict[str, Any] = {"dates": date_iso.replace("-", ""), "limit": 1000}
+        if str(league or "").strip() == "college-football":
+            params["groups"] = 80
+        return self._get(
+            f"http://site.api.espn.com/apis/site/v2/sports/football/{league}/scoreboard",
+            params,
+        )
+
+    def football_roster(self, league: str, team_id: str) -> dict[str, Any]:
+        return self._get(
+            f"http://site.api.espn.com/apis/site/v2/sports/football/{league}/teams/{team_id}/roster"
+        )
+
+    def football_injuries(self, league: str) -> dict[str, Any]:
+        return self._get(
+            f"http://site.api.espn.com/apis/site/v2/sports/football/{league}/injuries"
+        )
+
+    def football_team_stats(self, league: str, team_id: str) -> dict[str, Any]:
+        return self._get(
+            f"http://site.api.espn.com/apis/site/v2/sports/football/{league}/teams/{team_id}/statistics"
+        )
+
+    def football_player_gamelog(
+        self,
+        league: str,
+        player_id: str,
+        season: int,
+    ) -> dict[str, Any]:
+        return self._get(
+            f"https://site.web.api.espn.com/apis/common/v3/sports/football/{league}/athletes/{player_id}/gamelog",
+            {"season": season},
+        )
+
+    def football_espn_prop_bets(self, league: str, event_id: str, provider_id: str = "100") -> dict[str, Any]:
+        return self._get(
+            (
+                f"https://sports.core.api.espn.com/v2/sports/football/leagues/{league}/"
+                f"events/{event_id}/competitions/{event_id}/odds/{provider_id}/propBets"
+            ),
+            {"lang": "en", "region": "us", "limit": 1000},
+        )
+
+    def football_espn_summary(self, league: str, event_id: str) -> dict[str, Any]:
+        return self._get(
+            f"http://site.api.espn.com/apis/site/v2/sports/football/{league}/summary",
+            {"event": event_id},
+        )
+
     def mlb_schedule(self, date_iso: str) -> dict[str, Any]:
         return self._get(
             "https://statsapi.mlb.com/api/v1/schedule",
