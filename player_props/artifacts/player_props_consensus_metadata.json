@@ -79,7 +79,7 @@
     "wnba_history": "2024-26 workload-aware market/count models",
     "wnba_season": "2026 market/count models"
   },
-  "outcome_rows": 882964,
+  "outcome_rows": 883160,
   "preserved_sports": [
     "WNBA"
   ],
@@ -562,6 +562,6 @@
     }
   },
   "target_accuracy": 0.7,
-  "training_fingerprint": "753e190c790f6bf4f76300f6a559dcb49267e879953cf2f3ab45e60791c0c27d",
+  "training_fingerprint": "f5e02cb5b20fa58e3ab91a9ccda612d69ab70d9a1127f12d132fb6668858f6bd",
   "version": "player_props_consensus_v2.0.0"
 }
