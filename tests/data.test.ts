@@ -221,7 +221,7 @@ test('posts in-house model PASS on the team board and keeps scraped PASS as rese
   assert.equal(statuses.get('scores24_nfl')?.pickCount, 0);
 });
 
-test('hides the live ASU +500 PASS immediately and would post A&M ML after a favored-side refresh', { concurrency: false }, async () => {
+test('hides the live ASU +500 PASS immediately and posts A&M ML plus A&M -14.5 spread', { concurrency: false }, async () => {
   const date = '2026-09-12';
   installFetch(new Map([
     ['./data/model_cache/latest.json', { date, models: {
@@ -229,6 +229,7 @@ test('hides the live ASU +500 PASS immediately and would post A&M ML after a fav
         {
           id: 'asu-ml',
           sport: 'CFB',
+          market: 'h2h',
           pick: 'Arizona State Sun Devils ML (Arizona State Sun Devils @ Texas A&M Aggies)',
           decision: 'PASS',
           units: 0,
@@ -240,16 +241,18 @@ test('hides the live ASU +500 PASS immediately and would post A&M ML after a fav
         {
           id: 'tamu-spread',
           sport: 'CFB',
+          market: 'spread',
           pick: 'Texas A&M Aggies -14.5 (Arizona State Sun Devils @ Texas A&M Aggies)',
           decision: 'PASS',
           units: 0,
-          probability: 0.5,
-          calibrated_probability: 0.5,
+          probability: 0.401103,
+          calibrated_probability: 0.401103,
           raw_probability: 0.401103,
         },
         {
           id: 'tamu-ml-after-refresh',
           sport: 'CFB',
+          market: 'h2h',
           pick: 'Texas A&M Aggies ML (Arizona State Sun Devils @ Texas A&M Aggies)',
           decision: 'PASS',
           units: 0,
@@ -269,9 +272,8 @@ test('hides the live ASU +500 PASS immediately and would post A&M ML after a fav
   ]));
   await loadAllData({ includeHistory: false });
   const team = getTeamPicks().filter(pick => pick.date === date).map(pick => pick.id).sort();
-  assert.deepEqual(team, ['cfb-lean-ok', 'tamu-ml-after-refresh']);
+  assert.deepEqual(team, ['cfb-lean-ok', 'tamu-ml-after-refresh', 'tamu-spread']);
   assert.ok(!team.includes('asu-ml'));
-  assert.ok(!team.includes('tamu-spread'));
   assert.deepEqual(getResearchPicks(date), []);
 });
 

@@ -79,9 +79,10 @@ def _calibrated_probability(calibrator: Any, raw_win: float, push: float) -> flo
 # probability instead.
 #
 # Complementary construction means a raw 0.401 home cover becomes a 0.599 away
-# cover, which can clear BET/LEAN gates. Fallback is for selection and display
-# only: `_row(..., uncalibrated=True)` forces PASS so an uninformative
-# calibrator cannot mint a stake.
+# cover, which can clear BET/LEAN gates. Spread *selection* ignores that
+# complement (`_select_spread_candidate` stays on the win-aligned favorite).
+# Fallback is still display-only: `_row(..., uncalibrated=True)` forces PASS
+# so an uninformative calibrator cannot mint a stake.
 _FLAT_PLATEAU_EPS = 1e-6
 _FLAT_PROBE_DELTA = 0.05
 
@@ -125,11 +126,14 @@ def _decision(ev: float, probability: float) -> str:
 def _board_eligible(row: dict[str, Any]) -> bool:
     """Canonical public-board rule for in-house CFB PASS cards.
 
-    BET/LEAN always belong on the board. PASS belongs only when selected
-    probability clears the LEAN floor (0.52). The serving payload still includes
+    BET/LEAN always belong on the board. Moneyline (and total) PASS belongs only
+    when selected probability clears the LEAN floor (0.52), so +500 dog junk stays
+    off the board. The one published spread card per game still belongs on the
+    board even when the favorite's cover probability is under 0.5 — that card is
+    the model's side, not a longshot ML. The serving payload still includes
     ineligible PASS rows so cache merge can replace prior market cards and the
-    CFB forecast-audit ledger can score them. The viewer applies the same floor
-    in `isTrackedPick` so today's cache hides +500 dog junk before a re-run.
+    CFB forecast-audit ledger can score them. The viewer applies the same rule
+    in `isTrackedPick`.
     """
 
     decision = str(row.get("decision") or "").upper()
@@ -137,6 +141,9 @@ def _board_eligible(row: dict[str, Any]) -> bool:
         return True
     if decision != "PASS":
         return False
+    market = str(row.get("market") or row.get("market_type") or "").strip().lower()
+    if market == "spread":
+        return True
     try:
         probability = float(row.get("probability"))
     except (TypeError, ValueError):
@@ -153,6 +160,9 @@ def _selection_rank(ev: float, probability: float, *, priced: bool) -> tuple[int
     BET/LEAN, so among two such sides we show the model's more probable side
     rather than the higher-EV longshot. Only sides that could actually be staked
     are ranked by EV. Unpriced markets fall back to raw probability, unchanged.
+
+    Do not use this for CFB spreads: complementary cover% will pick the dog.
+    `_select_spread_candidate` keeps those cards on the win-aligned favorite.
     """
 
     if not priced:
@@ -161,6 +171,30 @@ def _selection_rank(ev: float, probability: float, *, priced: bool) -> tuple[int
     # For actionable sides prefer EV; for non-actionable sides prefer the model's
     # favored (higher-probability) side. Probability breaks ties in both tiers.
     return (actionable, ev if actionable else probability, probability)
+
+
+def _model_aligned_spread_side(model_margin: float) -> str:
+    """Spread side of the team the model likes to win the game, not necessarily cover."""
+
+    return "home" if model_margin >= 0.0 else "away"
+
+
+def _select_spread_candidate(
+    candidates: list[tuple[Any, ...]],
+    *,
+    model_margin: float,
+) -> tuple[Any, ...]:
+    """Publish the spread side of the team the model likes to win.
+
+    Cover probability and EV-max will flip a PASS card to the complementary
+    dog whenever the favorite is not expected to cover (home raw cover 0.401
+    → away 0.599). For CFB spreads we ignore that complement and keep the
+    win-aligned favorite: home -spread when model_margin > 0, away +spread
+    when the model likes the visitor.
+    """
+
+    aligned = _model_aligned_spread_side(model_margin)
+    return next(row for row in candidates if row[0] == aligned)
 
 
 def _load_artifacts() -> tuple[dict[str, Any], dict[str, Any]] | None:
@@ -351,11 +385,8 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
                 ("home", game["home_team"], home_line, home_win, calibrated_home_cover, home_price, away_price),
                 ("away", game["away_team"], -home_line, home_loss, calibrated_away_cover, away_price, home_price),
             ]
-            spread_side, spread_team, spread_line, spread_raw, spread_probability, spread_odds, opposite_odds = max(
-                spread_candidates,
-                key=lambda row: _selection_rank(
-                    _ev(row[4], spread_push, row[5]) if spread_priced else 0.0, row[4], priced=spread_priced
-                ),
+            spread_side, spread_team, spread_line, spread_raw, spread_probability, spread_odds, opposite_odds = (
+                _select_spread_candidate(spread_candidates, model_margin=model_margin)
             )
             picks.append(
                 _row(

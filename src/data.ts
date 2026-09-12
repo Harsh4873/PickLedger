@@ -732,9 +732,14 @@ function isTrackedPick(pick: Pick): boolean {
   if (decision !== 'PASS' || pick.scraped === true) return false;
   // CFB/NFL: hide low-win% PASS cards (same floor as LEAN). Dog-side junk at
   // ~25% was making the board look broken even though the gate correctly PASSed.
-  // Keep in sync with CFBPredictionModel.LEAN_PROBABILITY / NFL ML LEAN floor.
+  // Spreads are exempt: the one published spread per game is the model's side
+  // (favorite / win-aligned), even when cover% is under 0.5.
+  // Keep in sync with CFBPredictionModel.LEAN_PROBABILITY / NFL ML LEAN floor
+  // and `_board_eligible`.
   const sport = String(pick.sport || pick.league || '').trim().toUpperCase();
   if (sport === 'CFB' || sport === 'NFL') {
+    const market = String(pick.market || pick.market_type || '').trim().toLowerCase();
+    if (market === 'spread') return true;
     const probability = Number(
       pick.probability ?? pick.calibrated_probability ?? Number.NaN,
     );
