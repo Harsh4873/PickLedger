@@ -2032,7 +2032,7 @@
         "quality": "verified_two_sided",
         "source": "posted_market",
         "sourceField": "pick.odds_source",
-        "startTime": "2026-09-12T20:05:00Z",
+        "startTime": "2026-09-12T20:05Z",
         "tier": "B",
         "tierLabel": "posted_two_sided",
         "timestamp": "2026-09-12T20:20Z",
@@ -4073,7 +4073,7 @@
   "date": "2026-09-12",
   "engineVersion": "profit_desk_v2_live",
   "firstLiveDate": "2026-07-11",
-  "generatedAt": "2026-09-12T18:36:21.127395Z",
+  "generatedAt": "2026-09-12T18:48:48.548713Z",
   "notices": [
     "Qualified picks carry real flat stakes: EDGE 1.0u, VALUE 0.5u; everything else stays 0u.",
     "The market price is the baseline; historical residual alpha is shrunk and uncertainty-adjusted.",
