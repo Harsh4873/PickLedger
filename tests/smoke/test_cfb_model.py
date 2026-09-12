@@ -534,6 +534,100 @@ def test_spread_informative_calibrator_is_respected():
     assert out == pytest.approx(0.501, abs=1e-6)
 
 
+def test_spread_card_keeps_home_favorite_when_raw_cover_is_under_half(monkeypatch):
+    """A&M-like slate must publish home -spread, not the complementary dog.
+
+    Live 2026-09-12 TAMU: model_margin≈10.39 does not cover -14.5, so raw home
+    cover≈0.401 and the flat-calibrator complement is away≈0.599. Selection
+    rank would publish Arizona State +14.5; the spread rule keeps Texas A&M
+    -14.5 on the board as a PASS.
+    """
+    from CFBPredictionModel import cfb_model
+
+    class FlatCalibrator:
+        def predict(self, values):
+            return [0.5 for _ in values]
+
+    class FixedMargin:
+        def predict(self, X):
+            return [10.39] * len(X)
+
+    class FixedTotal:
+        def predict(self, X):
+            return [48.0] * len(X)
+
+    entry = _tamu_asu_entry(
+        home_line=-14.5,
+        total_line=50.5,
+        home_moneyline=-700,
+        away_moneyline=500,
+        home_spread_odds=-110,
+        away_spread_odds=-110,
+        over_odds=-110,
+        under_odds=-110,
+    )
+    bundle = {
+        "margin_model": FixedMargin(),
+        "total_model": FixedTotal(),
+        "calibrators": {
+            "moneyline": FlatCalibrator(),
+            "spread": FlatCalibrator(),
+            "total": FlatCalibrator(),
+        },
+    }
+    metadata = {
+        "model_version": "cfb_test",
+        "residual_distribution": {"margin_sigma": 16.399755, "total_sigma": 16.17564},
+    }
+    monkeypatch.setattr(cfb_model, "serving_rows", lambda _date, **_kwargs: [entry])
+    monkeypatch.setattr(cfb_model, "_load_artifacts", lambda: (bundle, metadata))
+
+    payload = cfb_model.generate_cfb_picks("2026-09-12")
+    ml = next(pick for pick in payload["picks"] if pick["source"] == "CFB ML")
+    spread = next(pick for pick in payload["picks"] if pick["source"] == "CFB Spread")
+
+    assert ml["side"] == "home"
+    assert ml["selection"] == "Texas A&M Aggies"
+    assert ml["decision"] == "PASS"
+    assert ml["probability"] > 0.7
+    assert cfb_model._board_eligible(ml) is True
+
+    home_cover = cfb_model._probabilities(10.39, 14.5, 16.399755, push_possible=False)[0]
+    assert home_cover == pytest.approx(0.401, abs=0.01)
+    away_rank = cfb_model._selection_rank(
+        cfb_model._ev(1.0 - home_cover, 0.0, -110), 1.0 - home_cover, priced=True
+    )
+    home_rank = cfb_model._selection_rank(
+        cfb_model._ev(home_cover, 0.0, -110), home_cover, priced=True
+    )
+    assert away_rank > home_rank
+
+    assert spread["side"] == "home"
+    assert spread["selection"] == "Texas A&M Aggies"
+    assert spread["line"] == -14.5
+    assert "Arizona State" not in spread["selection"]
+    assert spread["pick"].startswith("Texas A&M Aggies -14.5")
+    assert spread["decision"] == "PASS"
+    assert spread["probability"] == pytest.approx(home_cover, abs=1e-5)
+    assert spread["probability"] < 0.5
+    assert cfb_model._board_eligible(spread) is True
+
+
+def test_select_spread_candidate_prefers_win_aligned_favorite_on_pass():
+    """Spreads follow model_margin, not the complementary dog cover%."""
+    from CFBPredictionModel import cfb_model
+
+    home = ("home", "Texas A&M Aggies", -14.5, 0.401, 0.401, -110, -110)
+    away = ("away", "Arizona State Sun Devils", 14.5, 0.599, 0.599, -110, -110)
+    chosen = cfb_model._select_spread_candidate([home, away], model_margin=10.39)
+    assert chosen[0] == "home"
+    assert chosen[1] == "Texas A&M Aggies"
+
+    away_favored = cfb_model._select_spread_candidate([home, away], model_margin=-3.0)
+    assert away_favored[0] == "away"
+    assert away_favored[1] == "Arizona State Sun Devils"
+
+
 def test_uncalibrated_complement_cannot_mint_a_bet():
     """Raw fallback on a 0.401 cover must not BET the complementary 0.599 side."""
     from CFBPredictionModel import cfb_model
@@ -573,6 +667,9 @@ def test_low_prob_pass_is_hidden_from_board_but_kept_in_payload(monkeypatch):
     assert cfb_model._board_eligible({"decision": "PASS", "probability": 0.52}) is True
     assert cfb_model._board_eligible({"decision": "PASS", "probability": 0.247}) is False
     assert cfb_model._board_eligible({"decision": "PASS", "probability": 0.5}) is False
+    assert cfb_model._board_eligible({
+        "decision": "PASS", "probability": 0.401, "market": "spread",
+    }) is True
 
     monkeypatch.setattr(cfb_model, "serving_rows", lambda _date, **_kwargs: [_tamu_asu_entry()])
     monkeypatch.setattr(cfb_model, "_published_probability", lambda *_args, **_kwargs: (0.51, False))
@@ -590,5 +687,6 @@ def test_viewer_pass_board_floor_matches_lean_probability():
 
     data = (ROOT / "src" / "data.ts").read_text(encoding="utf-8")
     assert f"IN_HOUSE_PASS_BOARD_MIN_PROBABILITY = {LEAN_PROBABILITY}" in data
+    assert "if (market === 'spread') return true;" in data
     nfl = (ROOT / "NFLPredictionModel" / "nfl_model.py").read_text(encoding="utf-8")
     assert "probability >= 0.52" in nfl
