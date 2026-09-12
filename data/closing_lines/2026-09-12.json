@@ -1,0 +1,58 @@
+{
+  "date": "2026-09-12",
+  "rows": [
+    {
+      "capturedAt": "2026-09-12T17:44:22.513014Z",
+      "decimalOdds": 1.833333,
+      "marketIdentity": "market:33df749d2ccec51e398492df",
+      "matchup": "Pittsburgh Pirates @ Chicago Cubs",
+      "noVigProbability": 0.510121,
+      "oddsAmerican": -120,
+      "pick": "Chicago Cubs F5 ML",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-12T18:20:00Z"
+    },
+    {
+      "capturedAt": "2026-09-12T17:44:22.513014Z",
+      "decimalOdds": 1.740741,
+      "marketIdentity": "market:515fc24dbe251a2b7a1ab91a",
+      "matchup": "Pittsburgh Pirates @ Chicago Cubs",
+      "noVigProbability": 0.540791,
+      "oddsAmerican": -135,
+      "pick": "Over 4.5 F5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-12T18:20:00Z"
+    },
+    {
+      "capturedAt": "2026-09-12T17:44:22.513014Z",
+      "decimalOdds": 2.04,
+      "marketIdentity": "market:ddf25b985af0573bc3ad241a",
+      "matchup": "",
+      "noVigProbability": 0.46787,
+      "oddsAmerican": 104,
+      "pick": "Pirates ML (Pirates vs Cubs)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-12T18:20:00Z"
+    },
+    {
+      "capturedAt": "2026-09-12T17:44:22.513014Z",
+      "decimalOdds": 1.833333,
+      "marketIdentity": "market:0fdf2e0a43463cb8c836dd0b",
+      "matchup": "Chicago Cubs vs Pittsburgh Pirates",
+      "noVigProbability": 0.510121,
+      "oddsAmerican": -120,
+      "pick": "Pittsburgh Pirates Team Total Under 4.5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-12T18:20:00Z"
+    }
+  ],
+  "updatedAt": "2026-09-12T17:44:22.530634Z"
+}
