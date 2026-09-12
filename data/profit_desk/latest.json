@@ -266,7 +266,7 @@
         "updatedAt": "2026-09-11T18:21:07.852508Z"
       },
       "rawModelProbabilityIgnored": 0.657998,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "CFB ML",
       "sourceKey": "cfb",
@@ -289,6 +289,14 @@
         "value_probability_positive_ev_below_0.70"
       ],
       "canonicalGame": "2026-09-11:cfb:kansas jayhawks|missouri tigers",
+      "closing": {
+        "capturedAt": "2026-09-11T23:30:47.134150Z",
+        "clv": 0.015385,
+        "decimalOdds": 2.6,
+        "noVigProbability": 0.36906,
+        "oddsAmerican": 160,
+        "provider": "espn_scoreboard:DraftKings"
+      },
       "consensusSources": [],
       "date": "2026-09-11",
       "decimalOdds": 2.64,
@@ -412,7 +420,7 @@
         "updatedAt": "2026-09-11T18:21:07.852508Z"
       },
       "rawModelProbabilityIgnored": 0.609905,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "CFB ML",
       "sourceKey": "cfb",
@@ -525,7 +533,7 @@
         "updatedAt": "2026-09-11T20:56:00.817824Z"
       },
       "rawModelProbabilityIgnored": 0.6003,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -638,7 +646,7 @@
         "updatedAt": "2026-09-11T20:56:00.817824Z"
       },
       "rawModelProbabilityIgnored": 0.566,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -751,7 +759,7 @@
         "updatedAt": "2026-09-11T20:56:00.817824Z"
       },
       "rawModelProbabilityIgnored": 0.567,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -975,7 +983,7 @@
         "updatedAt": "2026-09-11T20:56:00.817824Z"
       },
       "rawModelProbabilityIgnored": 0.585,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -1088,7 +1096,7 @@
         "updatedAt": "2026-09-11T20:56:00.817824Z"
       },
       "rawModelProbabilityIgnored": 0.556,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -1197,7 +1205,7 @@
         "updatedAt": "2026-09-11T20:56:00.817824Z"
       },
       "rawModelProbabilityIgnored": 0.566,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -1306,7 +1314,7 @@
         "updatedAt": "2026-09-11T20:56:00.817824Z"
       },
       "rawModelProbabilityIgnored": 0.583,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -1419,7 +1427,7 @@
         "updatedAt": "2026-09-11T20:56:00.817824Z"
       },
       "rawModelProbabilityIgnored": 0.5633,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -1528,7 +1536,7 @@
         "updatedAt": "2026-09-11T20:56:00.817824Z"
       },
       "rawModelProbabilityIgnored": 0.574,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",

@@ -543987,7 +543987,7 @@
       "ml_calibration_excluded": true,
       "model_key": "mlb_player_props",
       "odds": -401.0,
-      "outcome": null,
+      "outcome": 1,
       "pick": "Andrew Knizner Under 0.5 RBIs",
       "pregame_snapshot": {
         "actionability": "consensus_qualified",
@@ -543997,28 +543997,13 @@
         "closing_line_movement": null,
         "closing_line_source": "not_tracked",
         "confidence": "Medium",
-        "consensus_applicable_models": [
-          "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-          "mlb_season: 2026 market classifier"
-        ],
         "consensus_conservative_validation_accuracy": 0.7469879518072289,
         "consensus_evaluated": true,
         "consensus_history_probability": 0.8523620367050171,
         "consensus_history_projection": null,
         "consensus_holdout_accuracy": 0.8076923076923077,
         "consensus_model_agreement": true,
-        "consensus_model_count": 4,
-        "consensus_models": [
-          "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-          "mlb_season: 2026 market classifier",
-          "wnba_history: 2024-26 workload-aware market/count models",
-          "wnba_season: 2026 market/count models"
-        ],
         "consensus_qualified": true,
-        "consensus_record_models": [
-          "mlb_history: 2022-26 five-year roster-aware outcome-history classifiers",
-          "mlb_season: 2026 market classifier"
-        ],
         "consensus_rejection_reason": null,
         "consensus_required": true,
         "consensus_score": 0.8311621554974152,
@@ -544042,7 +544027,6 @@
         "home_team": "San Francisco Giants",
         "id": "pp_5dbbcc8ac80c4cc88979_consensus",
         "key_factors": [
-          "Four-model consensus suite active: mlb_history, mlb_season, wnba_history, wnba_season",
           "Active four-model consensus gate qualified publication",
           "All Time model signal",
           "History model over probability 14.8%",
@@ -544137,12 +544121,12 @@
       },
       "probability": 0.8465,
       "probability_source": "player_props_ml_v1",
-      "profit": null,
+      "profit": 0.24937655860349128,
       "raw_decision": "LEAN",
       "raw_edge": 4.61,
       "raw_probability": 0.8465,
       "raw_units": 1.0,
-      "result": "pending",
+      "result": "win",
       "source": "MLBPlayerProps",
       "sport": "MLB",
       "stake_units": 1.0,
@@ -544297,12 +544281,12 @@
       },
       "probability": 0.8591,
       "probability_source": "player_props_ml_v1",
-      "profit": null,
+      "profit": 0.0,
       "raw_decision": "LEAN",
       "raw_edge": 3.27,
       "raw_probability": 0.8591,
       "raw_units": 1.0,
-      "result": "pending",
+      "result": "push",
       "source": "MLBPlayerProps",
       "sport": "MLB",
       "stake_units": 1.0,
@@ -544311,8 +544295,8 @@
   ],
   "schema_version": 1,
   "summary": {
-    "decided_picks": 6789,
-    "pending_picks": 102,
+    "decided_picks": 6790,
+    "pending_picks": 100,
     "total_picks": 7104,
     "trainable_decided_picks": 811
   }
