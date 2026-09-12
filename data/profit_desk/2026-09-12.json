@@ -1888,7 +1888,7 @@
         "updatedAt": "2026-09-12T17:44:22.513014Z"
       },
       "rawModelProbabilityIgnored": 0.566,
-      "result": "pending",
+      "result": "loss",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",
@@ -2324,7 +2324,7 @@
         "updatedAt": "2026-09-12T14:25:43.871498Z"
       },
       "rawModelProbabilityIgnored": 0.566,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Inning",
       "sourceKey": "mlb_inning",
@@ -3549,7 +3549,7 @@
         "updatedAt": "2026-09-12T20:35:29.435853Z"
       },
       "rawModelProbabilityIgnored": 0.5588,
-      "result": "pending",
+      "result": "win",
       "shadowQualified": false,
       "source": "MLB Model",
       "sourceKey": "mlb_new",

@@ -414,7 +414,7 @@
           "selection": "Under",
           "source": "MLBPlayerProps",
           "sport": "MLB",
-          "start_time": "2026-09-12T20:05:00Z",
+          "start_time": "2026-09-12T20:05Z",
           "stat_key": "rbis",
           "stat_label": "RBIs",
           "supporting_variant": "all_time",

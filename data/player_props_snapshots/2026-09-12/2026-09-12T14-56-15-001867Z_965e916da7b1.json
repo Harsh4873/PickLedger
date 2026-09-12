@@ -8774,7 +8774,7 @@
           "ranking_updated_at": "2026-09-12T12:05:43.385813Z",
           "reason": "The active four-model consensus gate qualifies this market at 66.0%; the All Time variant is retained as a supporting signal.",
           "research_details": "History model over probability 35.5%; Under history hit rate 384-668 (57.5%)",
-          "result": "pending",
+          "result": "win",
           "scope": "player",
           "selected_side_implied_probability": 0.6296,
           "selection": "Under",
