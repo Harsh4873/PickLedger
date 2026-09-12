@@ -429,7 +429,98 @@
       "role": "anchor",
       "sport": "MLB",
       "startTime": "2026-09-12T02:15Z"
+    },
+    {
+      "capturedAt": "2026-09-12T02:08:19.809045Z",
+      "decimalOdds": 1.613497,
+      "marketIdentity": "market:41c78335353a78e3e5530707",
+      "matchup": "San Diego Padres @ San Francisco Giants",
+      "noVigProbability": 0.591881,
+      "oddsAmerican": -163,
+      "pick": "San Diego Padres ML (San Diego Padres @ San Francisco Giants)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-12T02:15Z"
+    },
+    {
+      "capturedAt": "2026-09-12T02:08:19.809045Z",
+      "decimalOdds": 2.14,
+      "marketIdentity": "market:c0e467708ec7051fc87013fe",
+      "matchup": "San Diego Padres @ San Francisco Giants",
+      "noVigProbability": 0.441203,
+      "oddsAmerican": 114,
+      "pick": "San Francisco Giants F5 ML",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-12T02:15:00Z"
+    },
+    {
+      "capturedAt": "2026-09-12T02:08:19.809045Z",
+      "decimalOdds": 1.740741,
+      "marketIdentity": "market:15cab8809afcf61faf404b13",
+      "matchup": "San Diego Padres @ San Francisco Giants",
+      "noVigProbability": 0.540791,
+      "oddsAmerican": -135,
+      "pick": "Under 4.5 F5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-12T02:15:00Z"
+    },
+    {
+      "capturedAt": "2026-09-12T02:08:19.809045Z",
+      "decimalOdds": 1.613497,
+      "marketIdentity": "market:078c9d1774f5ad0836817f28",
+      "matchup": "",
+      "noVigProbability": 0.591881,
+      "oddsAmerican": -163,
+      "pick": "Padres ML (Padres vs Giants)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-12T02:15:00Z"
+    },
+    {
+      "capturedAt": "2026-09-12T02:08:19.809045Z",
+      "decimalOdds": 1.740741,
+      "marketIdentity": "market:ae3ffa399d7e96c500a99c1d",
+      "matchup": "San Francisco Giants vs San Diego Padres",
+      "noVigProbability": 0.540791,
+      "oddsAmerican": -135,
+      "pick": "San Diego Padres Team Total Under 4.5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-12T02:15:00Z"
+    },
+    {
+      "capturedAt": "2026-09-12T02:08:19.809045Z",
+      "decimalOdds": 1.740741,
+      "marketIdentity": "market:9a2ae7d1db612658f8b39eeb",
+      "matchup": "San Francisco Giants vs San Diego Padres",
+      "noVigProbability": 0.540791,
+      "oddsAmerican": -135,
+      "pick": "San Francisco Giants Team Total Under 3.5",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-12T02:15:00Z"
+    },
+    {
+      "capturedAt": "2026-09-12T02:08:19.809045Z",
+      "decimalOdds": 2.34,
+      "marketIdentity": "market:3e19eaee6fc8963b90209b2c",
+      "matchup": "San Diego Padres @ San Francisco Giants",
+      "noVigProbability": 0.408119,
+      "oddsAmerican": 134,
+      "pick": "San Francisco Giants ML (San Diego Padres @ San Francisco Giants)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLB",
+      "startTime": "2026-09-12T02:15Z"
     }
   ],
-  "updatedAt": "2026-09-12T01:30:30.605789Z"
+  "updatedAt": "2026-09-12T02:08:19.819804Z"
 }
