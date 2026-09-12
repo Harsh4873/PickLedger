@@ -26,7 +26,11 @@
     "family::hits",
     "family::home_runs",
     "family::hrr",
+    "family::interceptions",
     "family::pa",
+    "family::passing_completions",
+    "family::passing_tds",
+    "family::passing_yards",
     "family::pitcher_earned_runs_allowed",
     "family::pitcher_hits_allowed",
     "family::pitcher_outs_recorded",
@@ -36,7 +40,13 @@
     "family::pra",
     "family::rbis",
     "family::rebounds",
+    "family::receiving_tds",
+    "family::receiving_yards",
+    "family::receptions",
     "family::runs",
+    "family::rushing_attempts",
+    "family::rushing_tds",
+    "family::rushing_yards",
     "family::singles",
     "family::steals",
     "family::stocks",
@@ -146,7 +156,7 @@
     "2026-09-08",
     "2026-09-09"
   ],
-  "training_fingerprint": "641bcae48458fa2b8b8307e0bf3a9b2d07b09cd5a58e16fbef2ec3666fccb72a",
+  "training_fingerprint": "0e53f52b58b10a0c2095c1163bec15ad0afe1f8b44aeb08006700d0fc7c9d07e",
   "training_season": 2026,
   "training_sources": [
     "current_season_projection_features",
@@ -155,7 +165,7 @@
   "validation": {
     "actual_rate": 0.6060606060606061,
     "baseline_brier": 0.24264271100622029,
-    "calibration_gap": 0.04026338347269054,
+    "calibration_gap": 0.040263383472688874,
     "dates": [
       "2026-06-21",
       "2026-06-22",
@@ -233,8 +243,8 @@
       "2026-09-09"
     ],
     "market_brier": 0.2151167856521738,
-    "model_brier": 0.23247153762965542,
-    "predicted_rate": 0.6463239895332966,
+    "model_brier": 0.23247153762965533,
+    "predicted_rate": 0.646323989533295,
     "samples": 759
   },
   "version": "player_props_ml_v1.1.0"
