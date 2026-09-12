@@ -404,6 +404,8 @@ const GAME_TIME_STORAGE_KEY = 'pickledger_static_game_times_v2';
 // seasons ended (summer league finale + World Cup final same day).
 const ARCHIVED_SPORTS = new Set(['NBA', 'NBA SUMMER', 'FIFA WC']);
 const PLAYER_PROPS_ML_SOURCE = 'player_props_ml_v1';
+// Keep in sync with CFBPredictionModel.LEAN_PROBABILITY and the NFL ML LEAN floor.
+const IN_HOUSE_PASS_BOARD_MIN_PROBABILITY = 0.52;
 // First snapshot produced by the ML slate-engine launch in commit b6f9dbe.
 const PLAYER_PROPS_ML_FIRST_SNAPSHOT_AT = Date.parse('2026-06-16T19:04:34.909830Z');
 const PLAYER_PROPS_PUBLIC_START_DATE = '2026-06-23';
@@ -727,7 +729,20 @@ function isTrackedPick(pick: Pick): boolean {
   if (decision === 'BET' || decision === 'LEAN') return true;
   // In-house PASS still belongs on the public board. Scraped PASS stays
   // research-only so a demoted tip cannot look like a model post.
-  return decision === 'PASS' && pick.scraped !== true;
+  if (decision !== 'PASS' || pick.scraped === true) return false;
+  // CFB/NFL: hide low-win% PASS cards (same floor as LEAN). Dog-side junk at
+  // ~25% was making the board look broken even though the gate correctly PASSed.
+  // Keep in sync with CFBPredictionModel.LEAN_PROBABILITY / NFL ML LEAN floor.
+  const sport = String(pick.sport || pick.league || '').trim().toUpperCase();
+  if (sport === 'CFB' || sport === 'NFL') {
+    const probability = Number(
+      pick.probability ?? pick.calibrated_probability ?? Number.NaN,
+    );
+    if (!Number.isFinite(probability) || probability < IN_HOUSE_PASS_BOARD_MIN_PROBABILITY) {
+      return false;
+    }
+  }
+  return true;
 }
 
 function isTrackedPlayerProp(pick: Pick): boolean {

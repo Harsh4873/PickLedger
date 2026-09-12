@@ -70,6 +70,45 @@ def _calibrated_probability(calibrator: Any, raw_win: float, push: float) -> flo
     return min(non_push, max(0.0, calibrated * non_push))
 
 
+# Early-season isotonic calibrators can collapse to a flat plateau across the
+# whole mid-range (the CFB spread calibrator returns ~0.5 for every conditional
+# input from ~0.35 to ~0.65). When that happens the published probability is a
+# meaningless constant that erases the model's actual lean. We detect the
+# plateau by probing the calibrator's own output at the conditional input plus a
+# margin on each side; if it does not move, we surface the raw model
+# probability instead.
+#
+# Complementary construction means a raw 0.401 home cover becomes a 0.599 away
+# cover, which can clear BET/LEAN gates. Fallback is for selection and display
+# only: `_row(..., uncalibrated=True)` forces PASS so an uninformative
+# calibrator cannot mint a stake.
+_FLAT_PLATEAU_EPS = 1e-6
+_FLAT_PROBE_DELTA = 0.05
+
+
+def _calibrator_probes(calibrator: Any, raw_win: float, push: float) -> tuple[float, list[float]]:
+    non_push = max(1e-9, 1.0 - push)
+    conditional = min(0.999, max(0.001, raw_win / non_push))
+    low = max(0.001, conditional - _FLAT_PROBE_DELTA)
+    high = min(0.999, conditional + _FLAT_PROBE_DELTA)
+    probes = [float(value) for value in calibrator.predict([low, conditional, high])]
+    return non_push, probes
+
+
+def _published_probability(calibrator: Any, raw_win: float, push: float) -> tuple[float, bool]:
+    """Return (win probability, used_raw_fallback)."""
+
+    non_push, probes = _calibrator_probes(calibrator, raw_win, push)
+    if max(probes) - min(probes) <= _FLAT_PLATEAU_EPS:
+        return min(non_push, max(0.0, raw_win)), True
+    return min(non_push, max(0.0, probes[1] * non_push)), False
+
+
+def _calibrated_probability_or_raw(calibrator: Any, raw_win: float, push: float) -> float:
+    probability, _fallback = _published_probability(calibrator, raw_win, push)
+    return probability
+
+
 def _ev(win: float, push: float, odds: int) -> float:
     loss = max(0.0, 1.0 - win - push)
     return win * _decimal_profit(odds) - loss
@@ -81,6 +120,47 @@ def _decision(ev: float, probability: float) -> str:
     if ev >= LEAN_EV and probability >= LEAN_PROBABILITY:
         return "LEAN"
     return "PASS"
+
+
+def _board_eligible(row: dict[str, Any]) -> bool:
+    """Canonical public-board rule for in-house CFB PASS cards.
+
+    BET/LEAN always belong on the board. PASS belongs only when selected
+    probability clears the LEAN floor (0.52). The serving payload still includes
+    ineligible PASS rows so cache merge can replace prior market cards and the
+    CFB forecast-audit ledger can score them. The viewer applies the same floor
+    in `isTrackedPick` so today's cache hides +500 dog junk before a re-run.
+    """
+
+    decision = str(row.get("decision") or "").upper()
+    if decision in {"BET", "LEAN"}:
+        return True
+    if decision != "PASS":
+        return False
+    try:
+        probability = float(row.get("probability"))
+    except (TypeError, ValueError):
+        return False
+    return probability >= LEAN_PROBABILITY
+
+
+def _selection_rank(ev: float, probability: float, *, priced: bool) -> tuple[int, float, float]:
+    """Rank two market sides so the displayed pick matches the model's read.
+
+    EV-max alone surfaces longshot underdogs (e.g. a +500 dog the model gives
+    24.7%) as the board "pick", producing PASS cards whose selection contradicts
+    the model. A side that cannot clear the LEAN probability floor can never be a
+    BET/LEAN, so among two such sides we show the model's more probable side
+    rather than the higher-EV longshot. Only sides that could actually be staked
+    are ranked by EV. Unpriced markets fall back to raw probability, unchanged.
+    """
+
+    if not priced:
+        return (0, probability, probability)
+    actionable = 1 if probability >= LEAN_PROBABILITY else 0
+    # For actionable sides prefer EV; for non-actionable sides prefer the model's
+    # favored (higher-probability) side. Probability breaks ties in both tiers.
+    return (actionable, ev if actionable else probability, probability)
 
 
 def _load_artifacts() -> tuple[dict[str, Any], dict[str, Any]] | None:
@@ -135,9 +215,12 @@ def _row(
     features: dict[str, float],
     extra: dict[str, Any],
     price_observed: bool,
+    uncalibrated: bool = False,
 ) -> dict[str, Any]:
     expected_value = _ev(probability, push_probability, odds) if odds is not None else None
     decision = _decision(expected_value, probability) if expected_value is not None else "PASS"
+    if uncalibrated:
+        decision = "PASS"
     units = 0.5 if decision == "BET" else 0.25 if decision == "LEAN" else 0.0
     return {
         **base,
@@ -217,7 +300,7 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
         base["odds_source"] = game.get("odds_source")
 
         raw_home, _, raw_away = _probabilities(model_margin, 0.0, sigma_margin, push_possible=False)
-        home_probability = _calibrated_probability(calibrators["moneyline"], raw_home, 0.0)
+        home_probability, ml_uncalibrated = _published_probability(calibrators["moneyline"], raw_home, 0.0)
         away_probability = 1.0 - home_probability
         home_ml, away_ml = game.get("home_moneyline"), game.get("away_moneyline")
         ml_priced = home_ml is not None and away_ml is not None
@@ -226,7 +309,10 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
             ("away", game["away_team"], away_ml if ml_priced else None, raw_away, away_probability, _no_vig(away_ml, home_ml) if ml_priced else None),
         ]
         ml_side, ml_team, ml_odds, ml_raw, ml_probability, ml_market = max(
-            ml_candidates, key=lambda row: _ev(row[4], 0.0, row[2]) if ml_priced else row[4]
+            ml_candidates,
+            key=lambda row: _selection_rank(
+                _ev(row[4], 0.0, row[2]) if ml_priced else 0.0, row[4], priced=ml_priced
+            ),
         )
         picks.append(
             _row(
@@ -243,6 +329,7 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
                 features=features,
                 extra={"team": ml_team, "side": ml_side, "model_home_win_probability": round(home_probability, 6)},
                 price_observed=ml_priced,
+                uncalibrated=ml_uncalibrated,
             )
         )
 
@@ -254,7 +341,9 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
                 sigma_margin,
                 push_possible=_is_integer_line(home_line),
             )
-            calibrated_home_cover = _calibrated_probability(calibrators["spread"], home_win, spread_push)
+            calibrated_home_cover, spread_uncalibrated = _published_probability(
+                calibrators["spread"], home_win, spread_push
+            )
             calibrated_away_cover = max(0.0, 1.0 - spread_push - calibrated_home_cover)
             home_price, away_price = game.get("home_spread_odds"), game.get("away_spread_odds")
             spread_priced = home_price is not None and away_price is not None
@@ -264,7 +353,9 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
             ]
             spread_side, spread_team, spread_line, spread_raw, spread_probability, spread_odds, opposite_odds = max(
                 spread_candidates,
-                key=lambda row: _ev(row[4], spread_push, row[5]) if spread_priced else row[4],
+                key=lambda row: _selection_rank(
+                    _ev(row[4], spread_push, row[5]) if spread_priced else 0.0, row[4], priced=spread_priced
+                ),
             )
             picks.append(
                 _row(
@@ -287,6 +378,7 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
                         "model_margin": round(model_margin, 3),
                     },
                     price_observed=spread_priced,
+                    uncalibrated=spread_uncalibrated,
                 )
             )
 
@@ -298,7 +390,9 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
                 sigma_total,
                 push_possible=_is_integer_line(total_line),
             )
-            calibrated_over = _calibrated_probability(calibrators["total"], raw_over, total_push)
+            calibrated_over, total_uncalibrated = _published_probability(
+                calibrators["total"], raw_over, total_push
+            )
             calibrated_under = max(0.0, 1.0 - total_push - calibrated_over)
             over_odds, under_odds = game.get("over_odds"), game.get("under_odds")
             total_priced = over_odds is not None and under_odds is not None
@@ -308,7 +402,9 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
             ]
             direction, direction_label, total_raw, total_probability, total_odds, opposite_odds = max(
                 total_candidates,
-                key=lambda row: _ev(row[3], total_push, row[4]) if total_priced else row[3],
+                key=lambda row: _selection_rank(
+                    _ev(row[3], total_push, row[4]) if total_priced else 0.0, row[3], priced=total_priced
+                ),
             )
             picks.append(
                 _row(
@@ -330,6 +426,7 @@ def generate_cfb_picks(date_iso: str) -> dict[str, Any]:
                         "model_total": round(model_total, 3),
                     },
                     price_observed=total_priced,
+                    uncalibrated=total_uncalibrated,
                 )
             )
 

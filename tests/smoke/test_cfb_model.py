@@ -440,3 +440,155 @@ def test_publication_rejects_alias_duplicate_but_keeps_distinct_markets(tmp_path
     }}))
     failures, _ = _cache_contract_messages(tmp_path, player_props=False, today=date)
     assert any('duplicate event/source/market' in failure for failure in failures)
+
+
+def _tamu_asu_entry(**game_overrides):
+    from CFBPredictionModel.cfb_core import FEATURE_NAMES
+
+    game = {
+        "game_id": "401900002", "event_id": "401900002",
+        "home_team_id": "1", "away_team_id": "2",
+        "home_team": "Texas A&M Aggies", "away_team": "Arizona State Sun Devils",
+        "start_time": "2026-09-12T17:00:00Z", "neutral_site": False,
+        "home_line": None, "total_line": None,
+        "home_moneyline": -600, "away_moneyline": 500,
+        "odds_source": "espn_scoreboard:DraftKings",
+    }
+    game.update(game_overrides)
+    return {"features": {name: 0.0 for name in FEATURE_NAMES}, "game": game}
+
+
+def test_ml_card_shows_model_favored_side_not_ev_max_longshot(monkeypatch):
+    """A +500 dog the model gives ~25% must not be surfaced as the ML pick.
+
+    Live 2026-09-12 TAMU case: model_home_win_probability≈0.753, ASU +500 EV is
+    fat, but A&M is the side the model actually likes. A&M clears the LEAN
+    probability floor so it ranks as the actionable side; EV is still negative
+    so the published decision stays PASS.
+    """
+    from CFBPredictionModel import cfb_model
+
+    monkeypatch.setattr(cfb_model, "serving_rows", lambda _date, **_kwargs: [_tamu_asu_entry()])
+    monkeypatch.setattr(cfb_model, "_published_probability", lambda *_args, **_kwargs: (0.753, False))
+    payload = cfb_model.generate_cfb_picks("2026-09-12")
+    ml = next(pick for pick in payload["picks"] if pick["source"] == "CFB ML")
+    assert ml["side"] == "home"
+    assert ml["selection"] == "Texas A&M Aggies"
+    assert "Arizona State" not in ml["selection"]
+    assert ml["model_home_win_probability"] >= 0.55
+    assert ml["decision"] == "PASS"
+    assert cfb_model._board_eligible(ml) is True
+
+
+def test_ml_card_still_prefers_actionable_side_by_ev():
+    """When a side clears the LEAN floor, EV still drives the selection."""
+    from CFBPredictionModel import cfb_model
+
+    priced = True
+    fav = cfb_model._selection_rank(cfb_model._ev(0.58, 0.0, -140), 0.58, priced=priced)
+    dog = cfb_model._selection_rank(cfb_model._ev(0.42, 0.0, 160), 0.42, priced=priced)
+    # Actionable favored side (>=0.52) outranks a non-actionable dog.
+    assert fav > dog
+    high_ev = cfb_model._selection_rank(0.12, 0.55, priced=True)
+    low_ev = cfb_model._selection_rank(0.04, 0.60, priced=True)
+    assert high_ev > low_ev
+
+
+def test_non_actionable_sides_prefer_model_probability_not_plus_money_ev():
+    """When neither side clears 0.52, show the model's favorite, not the dog EV."""
+    from CFBPredictionModel import cfb_model
+
+    fav = cfb_model._selection_rank(cfb_model._ev(0.51, 0.0, -190), 0.51, priced=True)
+    dog = cfb_model._selection_rank(cfb_model._ev(0.49, 0.0, 450), 0.49, priced=True)
+    assert fav[0] == dog[0] == 0
+    assert fav > dog
+
+
+def test_spread_flat_calibrator_falls_back_to_raw_probability():
+    """Degenerate flat isotonic region must not publish a meaningless 0.5.
+
+    Regression for early-season spread cards showing calibrated_probability=0.5.
+    """
+    from CFBPredictionModel import cfb_model
+
+    class FlatCalibrator:
+        def predict(self, values):
+            return [0.5 for _ in values]
+
+    out, fallback = cfb_model._published_probability(FlatCalibrator(), 0.401, 0.0)
+    assert fallback is True
+    assert out == pytest.approx(0.401, abs=1e-9)
+    assert cfb_model._calibrated_probability_or_raw(FlatCalibrator(), 0.401, 0.0) == pytest.approx(0.401)
+
+
+def test_spread_informative_calibrator_is_respected():
+    """A calibrator with local slope is used as-is (no raw fallback)."""
+    from CFBPredictionModel import cfb_model
+
+    class ShiftCalibrator:
+        def predict(self, values):
+            return [min(0.98, max(0.02, v + 0.1)) for v in values]
+
+    out, fallback = cfb_model._published_probability(ShiftCalibrator(), 0.401, 0.0)
+    assert fallback is False
+    assert out == pytest.approx(0.501, abs=1e-6)
+
+
+def test_uncalibrated_complement_cannot_mint_a_bet():
+    """Raw fallback on a 0.401 cover must not BET the complementary 0.599 side."""
+    from CFBPredictionModel import cfb_model
+    from CFBPredictionModel.cfb_core import FEATURE_NAMES
+
+    base = {"matchup": "Arizona State Sun Devils @ Texas A&M Aggies", "odds_source": "espn"}
+    features = {name: 0.0 for name in FEATURE_NAMES}
+    kwargs = dict(
+        source="CFB Spread",
+        pick="Arizona State Sun Devils +14.5",
+        market="spread",
+        selection="Arizona State Sun Devils",
+        odds=-112,
+        raw_probability=0.599,
+        probability=0.599,
+        push_probability=0.0,
+        market_probability=0.5,
+        features=features,
+        extra={},
+        price_observed=True,
+    )
+    staked = cfb_model._row(base, **kwargs, uncalibrated=False)
+    assert staked["decision"] == "BET"
+    held = cfb_model._row(base, **kwargs, uncalibrated=True)
+    assert held["decision"] == "PASS"
+    assert held["units"] == 0
+    assert held["expected_value"] == staked["expected_value"]
+
+
+def test_low_prob_pass_is_hidden_from_board_but_kept_in_payload(monkeypatch):
+    """PASS below the LEAN win% floor stays in the cache, not on the board."""
+    from CFBPredictionModel import cfb_model
+
+    assert cfb_model._board_eligible({"decision": "BET", "probability": 0.2}) is True
+    assert cfb_model._board_eligible({"decision": "LEAN", "probability": 0.53}) is True
+    assert cfb_model._board_eligible({"decision": "PASS", "probability": 0.74}) is True
+    assert cfb_model._board_eligible({"decision": "PASS", "probability": 0.52}) is True
+    assert cfb_model._board_eligible({"decision": "PASS", "probability": 0.247}) is False
+    assert cfb_model._board_eligible({"decision": "PASS", "probability": 0.5}) is False
+
+    monkeypatch.setattr(cfb_model, "serving_rows", lambda _date, **_kwargs: [_tamu_asu_entry()])
+    monkeypatch.setattr(cfb_model, "_published_probability", lambda *_args, **_kwargs: (0.51, False))
+    payload = cfb_model.generate_cfb_picks("2026-09-12")
+    ml = next(pick for pick in payload["picks"] if pick["source"] == "CFB ML")
+    assert ml["selection"] == "Texas A&M Aggies"
+    assert ml["probability"] == pytest.approx(0.51)
+    assert ml["decision"] == "PASS"
+    assert cfb_model._board_eligible(ml) is False
+    assert payload["picks"] == [ml]
+
+
+def test_viewer_pass_board_floor_matches_lean_probability():
+    from CFBPredictionModel.cfb_model import LEAN_PROBABILITY
+
+    data = (ROOT / "src" / "data.ts").read_text(encoding="utf-8")
+    assert f"IN_HOUSE_PASS_BOARD_MIN_PROBABILITY = {LEAN_PROBABILITY}" in data
+    nfl = (ROOT / "NFLPredictionModel" / "nfl_model.py").read_text(encoding="utf-8")
+    assert "probability >= 0.52" in nfl
