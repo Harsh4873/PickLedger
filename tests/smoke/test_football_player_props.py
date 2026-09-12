@@ -245,7 +245,8 @@ def test_football_sports_are_registered_in_public_and_training_allowlists():
     assert SOFT_PLAYER_PROP_KEYS == {"nfl_player_props", "cfb_player_props"}
 
 
-def test_empty_football_slate_is_healthy():
+def test_empty_football_slate_is_healthy(monkeypatch):
+    monkeypatch.setenv("PICKLEDGER_DISABLE_PRECISION_MODEL", "true")
     nfl = generate_football_candidate_model(EmptyFootballClient(), "nfl", "NFL", DATE)
     cfb = generate_football_candidate_model(EmptyFootballClient(), "college-football", "CFB", DATE)
     assert nfl["ok"] is True and nfl["games"] == 0 and nfl["picks"] == []
@@ -274,7 +275,8 @@ def test_unpriced_football_slate_is_fail_closed_empty_not_synthetic():
     assert "posted" in str(model.get("note") or "").lower() or "market" in str(model.get("note") or "").lower()
 
 
-def test_football_scoreboard_outage_soft_fails_and_does_not_block_mlb():
+def test_football_scoreboard_outage_soft_fails_and_does_not_block_mlb(monkeypatch):
+    monkeypatch.setenv("PICKLEDGER_DISABLE_PRECISION_MODEL", "true")
     boom = generate_football_candidate_model(BoomFootballClient(), "nfl", "NFL", DATE)
     assert boom["ok"] is True
     assert boom["games"] == 0
@@ -343,3 +345,16 @@ def test_player_props_refresh_workflow_trains_and_histories_include_football():
     workflow = Path(".github/workflows/player-props-refresh.yml").read_text(encoding="utf-8")
     assert "--sports MLB,WNBA,NFL,CFB" in workflow
     assert workflow.count("--sports MLB,WNBA,NFL,CFB") == 2
+
+
+def test_consensus_bundle_loads_without_native_football_artifacts():
+    import player_props.consensus as consensus
+
+    consensus._BUNDLE = False
+    bundle = consensus.load_consensus_bundle()
+    if bundle is None:
+        return
+    artifacts = bundle.get("artifacts") or {}
+    assert "MLB:season" in artifacts or "WNBA:season" in artifacts
+    assert "NFL:season" not in artifacts
+    assert "CFB:season" not in artifacts

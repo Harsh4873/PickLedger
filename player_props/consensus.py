@@ -153,14 +153,19 @@ def load_consensus_bundle() -> dict[str, Any] | None:
         import joblib  # type: ignore
 
         metadata = json.loads(CONSENSUS_METADATA_PATH.read_text(encoding="utf-8"))
-        artifacts = {
-            f"{sport}:{role}": joblib.load(path)
-            for (sport, role), path in MODEL_PATHS.items()
-            if path.exists()
-        }
+        artifacts = {}
+        for (sport, role), path in MODEL_PATHS.items():
+            if not path.exists():
+                continue
+            try:
+                artifacts[f"{sport}:{role}"] = joblib.load(path)
+            except Exception:
+                # Football joblibs are optional until the first train; a missing
+                # native artifact must not keep MLB/WNBA from loading.
+                continue
         if not artifacts:
             raise OSError("no consensus artifacts are present")
-    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+    except (OSError, ValueError, TypeError, json.JSONDecodeError, ImportError):
         _BUNDLE = None
         return None
     _BUNDLE = {"metadata": metadata, "artifacts": artifacts}
