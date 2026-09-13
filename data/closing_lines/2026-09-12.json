@@ -325,7 +325,46 @@
       "role": "anchor",
       "sport": "MLS",
       "startTime": "2026-09-12T23:30Z"
+    },
+    {
+      "capturedAt": "2026-09-13T00:14:49.398223Z",
+      "decimalOdds": 1.769231,
+      "marketIdentity": "market:d1eb4a4f2cb13e4914ddf91e",
+      "matchup": "Portland Timbers @ FC Dallas",
+      "noVigProbability": 0.536757,
+      "oddsAmerican": -130,
+      "pick": "Under 3.5 (Portland Timbers @ FC Dallas)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLS",
+      "startTime": "2026-09-13T00:30Z"
+    },
+    {
+      "capturedAt": "2026-09-13T00:14:49.398223Z",
+      "decimalOdds": 1.625,
+      "marketIdentity": "market:cb6559b5e5269ec999466b33",
+      "matchup": "LAFC @ Sporting Kansas City",
+      "noVigProbability": 0.580645,
+      "oddsAmerican": -160,
+      "pick": "Under 3.5 (LAFC @ Sporting Kansas City)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLS",
+      "startTime": "2026-09-13T00:30Z"
+    },
+    {
+      "capturedAt": "2026-09-13T00:14:49.398223Z",
+      "decimalOdds": 1.606061,
+      "marketIdentity": "market:04271307bc48397f670498fa",
+      "matchup": "Minnesota United FC @ St. Louis CITY SC",
+      "noVigProbability": 0.588829,
+      "oddsAmerican": -165,
+      "pick": "Under 3.5 (Minnesota United FC @ St. Louis CITY SC)",
+      "provider": "espn_scoreboard:DraftKings",
+      "role": "anchor",
+      "sport": "MLS",
+      "startTime": "2026-09-13T00:30Z"
     }
   ],
-  "updatedAt": "2026-09-12T22:30:13.975373Z"
+  "updatedAt": "2026-09-13T00:14:49.403862Z"
 }
